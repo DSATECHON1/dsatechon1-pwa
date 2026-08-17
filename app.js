@@ -1,39 +1,89 @@
-// ==========================================
-// DSATECHON1 — Version 1
-// Main application JavaScript
-// ==========================================
+/* =================================
+   ON1Ecosystem — VERSION 1
+   Main JavaScript
+   ================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  console.log("DSATECHON1 PWA loaded successfully.");
+  /*
+   * GET STARTED
+   * ---------------------------------
+   * GET STARTED is now a normal link
+   * to pages/signup.html.
+   *
+   * No JavaScript alert is needed here.
+   */
 
-  // Get Started buttons
-  const getStartedButtons = document.querySelectorAll(".primary-btn");
 
-  getStartedButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      alert("DSATECHON1 account registration will be available soon.");
-    });
-  });
+  /*
+   * SIGN IN
+   * ---------------------------------
+   * Sign-in page will be connected
+   * after the signup page is completed.
+   */
 
-  // Sign In buttons
-  const signInButtons = document.querySelectorAll(".signin-btn, .secondary-btn");
+  const signInButtons = document.querySelectorAll(".secondary-btn");
 
   signInButtons.forEach((button) => {
+
     button.addEventListener("click", () => {
-      alert("DSATECHON1 Sign In will be available soon.");
+
+      alert("ON1Ecosystem Sign In will be available soon.");
+
     });
+
   });
 
-});
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js")
-      .then(() => {
-        console.log("DSATECHON1 service worker registered.");
-      })
-      .catch((error) => {
-        console.error("Service worker registration failed:", error);
+
+  /*
+   * ON1COIN MINING
+   * ---------------------------------
+   * Mining functionality will be
+   * connected to the ON1Coin area
+   * in a later stage.
+   */
+
+  const miningButtons = document.querySelectorAll(".primary-btn");
+
+  miningButtons.forEach((button) => {
+
+    if (button.textContent.trim() === "START ON1COIN MINING") {
+
+      button.addEventListener("click", () => {
+
+        alert("ON1Coin Mining will be available soon.");
+
       });
+
+    }
+
   });
-}
+
+
+  /*
+   * SERVICE WORKER
+   * ---------------------------------
+   * Keeps the PWA functionality active.
+   */
+
+  if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+      navigator.serviceWorker
+        .register("service-worker.js")
+        .then(() => {
+          console.log("ON1Ecosystem service worker registered.");
+        })
+        .catch((error) => {
+          console.error(
+            "ON1Ecosystem service worker registration failed:",
+            error
+          );
+        });
+
+    });
+
+  }
+
+});
