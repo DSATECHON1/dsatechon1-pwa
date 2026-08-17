@@ -73,15 +73,6 @@ body {
   color: #168cff;
 }
 
-.signin-btn {
-  border: 1px solid #168cff;
-  background: transparent;
-  color: #ffffff;
-  padding: 9px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
 /* =================================
    HERO
    ================================= */
@@ -331,6 +322,143 @@ body {
 }
 
 /* =================================
+   SIGN UP PAGE
+   ================================= */
+
+.signup-section {
+  min-height: calc(100vh - 170px);
+  padding: 70px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(0, 116, 255, 0.20),
+      transparent 40%
+    ),
+    linear-gradient(
+      180deg,
+      #07162b 0%,
+      #050b16 100%
+    );
+}
+
+.signup-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 45px 40px;
+  border-radius: 22px;
+
+  background: #081528;
+  border: 1px solid rgba(22, 140, 255, 0.28);
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.45),
+    0 0 35px rgba(8, 124, 255, 0.08);
+
+  text-align: center;
+}
+
+.signup-card .eyebrow {
+  margin-bottom: 12px;
+}
+
+.signup-card h1 {
+  font-size: 36px;
+  line-height: 1.15;
+  margin-bottom: 15px;
+}
+
+.signup-intro {
+  color: #a9bdd2;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+/* =================================
+   FORM
+   ================================= */
+
+#signupForm {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #dce9f5;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 15px;
+
+  border: 1px solid rgba(80, 150, 210, 0.3);
+  border-radius: 9px;
+
+  background: #050b16;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 15px;
+
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.form-group input::placeholder {
+  color: #627991;
+}
+
+.form-group input:focus {
+  border-color: #168cff;
+  box-shadow: 0 0 0 3px rgba(22, 140, 255, 0.10);
+}
+
+.signup-submit {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* =================================
+   SIGN IN LINK
+   ================================= */
+
+.signin-text {
+  margin-top: 25px;
+  color: #91a7bd;
+  font-size: 14px;
+}
+
+.signin-text a {
+  color: #168cff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.signin-text a:hover {
+  text-decoration: underline;
+}
+
+.signup-note {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(50, 150, 255, 0.12);
+
+  color: #647b91;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =================================
    FOOTER
    ================================= */
 
@@ -367,6 +495,12 @@ body {
 
   .nav {
     display: none;
+  }
+
+  .header > .primary-btn,
+  .header > .secondary-btn {
+    padding: 10px 15px;
+    font-size: 12px;
   }
 
   .hero {
@@ -408,4 +542,66 @@ body {
     margin-left: 5%;
     margin-right: 5%;
   }
+
+  .signup-section {
+    padding: 50px 5%;
+  }
+
+  .signup-card {
+    padding: 35px 25px;
+  }
+
+  .signup-card h1 {
+    font-size: 30px;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .header {
+    gap: 12px;
+  }
+
+  .header .logo span {
+    font-size: 13px;
+  }
+
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .header > .primary-btn {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-buttons .primary-btn,
+  .hero-buttons .secondary-btn {
+    width: 100%;
+  }
+
+  .coin-card h2 {
+    font-size: 36px;
+  }
+
+  .signup-card {
+    padding: 30px 20px;
+    border-radius: 18px;
+  }
+
+  .signup-card h1 {
+    font-size: 28px;
+  }
+
 }
