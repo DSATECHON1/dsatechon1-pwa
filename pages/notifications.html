@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Notifications — ON1Ecosystem</title>
+
+  <meta name="theme-color" content="#050b13">
+  <meta name="description" content="ON1Ecosystem notifications">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --bg: #050b13;
+      --surface: #0c1624;
+      --surface2: #101d2d;
+      --border: #1d3048;
+      --blue: #087cff;
+      --blue2: #3aa0ff;
+      --green: #00df88;
+      --gold: #ffc94a;
+      --red: #ff6075;
+      --text: #ffffff;
+      --muted: #8ea2b8;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(8,124,255,.17),
+          transparent 42%
+        ),
+        var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1050px;
+      min-height: 100vh;
+      margin: auto;
+      padding: 18px 20px 35px;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(29,48,72,.65);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .brand-name span {
+      color: var(--blue2);
+    }
+
+    .brand-subtitle {
+      display: block;
+      margin-top: 3px;
+      color: #61748a;
+      font-size: 8px;
+      letter-spacing: .6px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .header-btn {
+      padding: 9px 13px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: #dce8f5;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .header-btn:hover {
+      border-color: var(--blue);
+    }
+
+
+    /* =========================
+       PAGE INTRO
+    ========================== */
+
+    .intro {
+      margin: 32px 0 22px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--blue2);
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(0,223,136,.65);
+    }
+
+    h1 {
+      margin-top: 9px;
+      font-size: 31px;
+      letter-spacing: -1px;
+    }
+
+    .intro p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+
+    /* =========================
+       NOTIFICATION TOOLBAR
+    ========================== */
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface);
+    }
+
+    .notification-count {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .count-badge {
+      min-width: 23px;
+      height: 23px;
+      padding: 0 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50px;
+      background: rgba(8,124,255,.15);
+      color: var(--blue2);
+      font-weight: 800;
+    }
+
+    .mark-read {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      color: #dce8f5;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .mark-read:hover {
+      border-color: var(--blue);
+      color: white;
+    }
+
+
+    /* =========================
+       FILTERS
+    ========================== */
+
+    .filters {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+      padding-bottom: 3px;
+    }
+
+    .filter {
+      white-space: nowrap;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .filter.active {
+      background: rgba(8,124,255,.12);
+      border-color: rgba(8,124,255,.45);
+      color: var(--blue2);
+    }
+
+
+    /* =========================
+       NOTIFICATION CARD
+    ========================== */
+
+    .notification-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .notification {
+      position: relative;
+      display: flex;
+      gap: 13px;
+      padding: 17px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      transition: .2s ease;
+    }
+
+    .notification:hover {
+      border-color: rgba(8,124,255,.35);
+      transform: translateY(-1px);
+    }
+
+    .notification.unread {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(8,124,255,.07),
+          transparent
+        ),
+        var(--surface);
+    }
+
+    .notification.unread::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      right: 16px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 8px rgba(8,124,255,.7);
+    }
+
+    .notification-icon {
+      flex: 0 0 39px;
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--surface2);
+      font-size: 17px;
+    }
+
+    .notification-content {
+      min-width: 0;
+      padding-right: 10px;
+    }
+
+    .notification-title {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .notification-message {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .notification-time {
+      margin-top: 8px;
+      color: #61748a;
+      font-size: 8px;
+    }
+
+
+    /* =========================
+       CATEGORY COLORS
+    ========================== */
+
+    .notification.m
