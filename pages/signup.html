@@ -1,77 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up - DSATECHON1</title>
-  <style>
-    body{background:#0a0f1a; color:#fff; font-family:Arial; margin:0; display:flex; justify-content:center; align-items:center; min-height:100vh; padding:20px;}
-    .card{background:#111a2a; padding:40px; border-radius:15px; width:100%; max-width:450px; border:1px solid #1a2332;}
-    .logo{text-align:center; margin-bottom:20px;}
-    h2{text-align:center; color:#087cff;}
-    h3{text-align:center;}
-    input{width:100%; padding:12px; margin:10px 0; background:#0a0f1a; border:1px solid #1a2332; border-radius:8px; color:#fff; box-sizing:border-box;}
-    label{font-size:14px; color:#aaa;}
-    .btn{width:100%; padding:15px; background:#087cff; color:#fff; border:none; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:10px;}
-    .btn:hover{background:#0066cc;}
-    .link{text-align:center; margin-top:15px; font-size:14px;}
-    .link a{color:#087cff; text-decoration:none;}
-    .note{font-size:12px; color:#0f0; text-align:center; margin-top:5px;}
-  </style>
-</head>
-<body>
-
-  <div class="card">
-    <div class="logo">
-      <img src="../logo.png" alt="DSATECHON1 Logo" style="height:50px;">
-      <h2>JOIN ON1Ecosystem</h2>
-    </div>
-    
-    <h3>Create Your Account</h3>
-    <p style="text-align:center; color:#aaa; font-size:14px;">Create your account and become part of the ON1Ecosystem community.</p>
-
-    <form id="signupForm">
-      <label>Full Name *</label>
-      <input type="text" id="fullname" placeholder="Enter your full name" required>
-
-      <label>Username *</label>
-      <input type="text" id="username" placeholder="Choose unique username" required>
-      <small style="color:#aaa;">This will be your mining ID</small>
-
-      <label>Email Address *</label>
-      <input type="email" id="email" placeholder="Enter your email address" required>
-
-      <label>Password *</label>
-      <input type="password" id="password" placeholder="Create a password" required>
-
-      <label>Confirm Password *</label>
-      <input type="password" id="confirm" placeholder="Confirm your password" required>
-
-      <label>Referral Code *</label>
-      <input type="text" id="referral" placeholder="Enter referral username" required>
-      <p class="note">Don't have one? Use: DSATECHON1</p>
-
-      <button type="submit" class="btn">CREATE ACCOUNT</button>
-    </form>
-
-    <div class="link">
-      Already have an account? <a href="login.html">Sign In</a>
-    </div>
-
-    <p style="text-align:center; color:#555; font-size:12px; margin-top:20px;">
-      Account creation will be connected to database in next stage
-    </p>
-  </div>
-
 <script>
 document.getElementById('signupForm').addEventListener('submit', function(e){
   e.preventDefault();
   
   let referral = document.getElementById('referral').value.trim();
-  
-  // IF NO REFERRAL ENTERED, DEFAULT TO YOU
   if(referral === ""){
-    referral = "DSATECHON1"; // <-- CHANGE THIS TO YOUR USERNAME
+    referral = "DSATECHON1";
     document.getElementById('referral').value = "DSATECHON1";
   }
   
@@ -80,18 +13,33 @@ document.getElementById('signupForm').addEventListener('submit', function(e){
     return;
   }
 
-  // SAVE TO LOCAL STORAGE FOR NOW
-  let user = {
+  // GET EXISTING USERS OR CREATE NEW ARRAY
+  let users = JSON.parse(localStorage.getItem('on1users')) || [];
+  
+  // CHECK IF USERNAME ALREADY EXISTS
+  if(users.find(u => u.username === document.getElementById('username').value)){
+    alert("Username already taken! Choose another.");
+    return;
+  }
+
+  // CREATE NEW USER
+  let newUser = {
     fullname: document.getElementById('fullname').value,
     username: document.getElementById('username').value,
     email: document.getElementById('email').value,
-    referral: referral
+    password: document.getElementById('password').value, // In real app we will encrypt this
+    referral: referral,
+    balance: 0,
+    lastMine: 0
   };
-  localStorage.setItem('on1user', JSON.stringify(user));
+  
+  users.push(newUser);
+  localStorage.setItem('on1users', JSON.stringify(users));
+  
+  // ALSO SAVE AS "CURRENT USER"
+  localStorage.setItem('on1current', JSON.stringify(newUser));
 
   alert('Account Created! Referred by: ' + referral);
   window.location.href = 'dashboard.html';
 });
 </script>
-</body>
-</html>
