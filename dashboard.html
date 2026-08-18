@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - DSATECHON1</title>
+  <style>
+    body{background:#0a0f1a; color:#fff; font-family:Arial; margin:0; padding:20px;}
+   .header{display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid #1a2332; margin-bottom:20px;}
+   .card{background:#111a2a; padding:25px; border-radius:15px; margin:20px 0; border:1px solid #1a2332; text-align:center;}
+   .balance{font-size:55px; color:#087cff; font-weight:bold; margin:10px 0;}
+   .mine-btn{width:200px; height:200px; border-radius:50%; background:linear-gradient(135deg, #087cff, #004a99); border:none; color:#fff; font-size:20px; font-weight:bold; cursor:pointer; margin:20px auto; display:block; transition:0.2s;}
+   .mine-btn:active{transform:scale(0.95);}
+   .mine-btn:disabled{background:#333; cursor:not-allowed;}
+   .timer{color:#0f0; font-size:16px; font-weight:bold;}
+   .info{color:#aaa; font-size:14px;}
+   .logout{color:#ff4444; text-decoration:none; font-size:14px;}
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <img src="../logo.png" alt="Logo" style="height:35px; vertical-align:middle;">
+      <span style="font-weight:bold;">DSATECHON1</span>
+    </div>
+    <a href="#" class="logout" onclick="logout()">LOGOUT</a>
+  </div>
+
+  <div class="card">
+    <h2 id="welcome">Welcome</h2>
+    <p class="info">Mining ID: @<span id="username"></span></p>
+    <p class="info">Referred by: <span id="referrer" style="color:#087cff;"></span></p>
+  </div>
+
+  <div class="card">
+    <p class="info">Your ON1Coin Balance</p>
+    <div class="balance" id="balance">0.000</div>
+    <button class="mine-btn" id="mineBtn">⛏️<br>TAP TO MINE</button>
+    <p class="timer" id="timer">Checking...</p>
+    <p class="info">Mining Rate: 0.001 ON1 per 24 hours</p>
+  </div>
+
+<script>
+// LOAD CURRENT USER
+let user = JSON.parse(localStorage.getItem('on1current'));
+let users = JSON.parse(localStorage.getItem('on1users')) || [];
+
+if(!user){
+  alert("Please login first!");
+  window.location.href = "login.html";
+}
+
+// DISPLAY USER INFO
+document.getElementById('welcome').innerText = "Welcome, " + user.fullname;
+document.getElementById('username').innerText = user.username;
+document.getElementById('referrer').innerText = user.referral;
+document.getElementById('balance').innerText = user.balance.toFixed(3);
+
+function saveUserData(){
+  // UPDATE USER IN USERS ARRAY
+  let index = users.findIndex(u => u.username === user.username);
+  if(index!== -1){
+    users[index] = user;
+    localStorage.setItem('on1users', JSON.stringify(users));
+    localStorage.setItem('on1current', JSON.stringify(user));
+  }
+}
+
+function checkTimer(){
+  let now = new Date().getTime();
+  let diff = now - user.lastMine;
+  let hoursLeft = 24 - (diff / 1000 / 60 / 60);
+  
+  if(hoursLeft > 0){
+    document.getElementById('mineBtn').disabled = true;
+    document.getElementById('timer').innerText = "Next mining in: " + hoursLeft.toFixed(2) + " hours";
+  } else {
+    document.getElementById('mineBtn').disabled = false;
+    document.getElementById('timer').innerText = "✅ Ready to Mine!";
+  }
+}
+
+// MINING BUTTON CLICK
+document.getElementById('mineBtn').addEventListener('click', function(){
+  user.balance += 0.001;
+  user.lastMine = new Date().getTime();
+  
+  document.getElementById('balance').innerText = user.balance.toFixed(3);
+  this.innerText = "MINED! +0.001";
+  
+  saveUserData();
+  checkTimer();
+  
+  setTimeout(()=>{this.innerText = "⛏️\nTAP TO MINE"}, 1500);
+});
+
+// LOGOUT FUNCTION
+function logout(){
+  localStorage.removeItem('on1current');
+  alert("Logged out successfully");
+  window.location
