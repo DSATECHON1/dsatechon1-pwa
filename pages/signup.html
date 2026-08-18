@@ -9,12 +9,14 @@
     .card{background:#111a2a; padding:40px; border-radius:15px; width:100%; max-width:450px; border:1px solid #1a2332;}
     .logo{text-align:center; margin-bottom:20px;}
     h2{text-align:center; color:#087cff;}
+    h3{text-align:center;}
     input{width:100%; padding:12px; margin:10px 0; background:#0a0f1a; border:1px solid #1a2332; border-radius:8px; color:#fff; box-sizing:border-box;}
     label{font-size:14px; color:#aaa;}
     .btn{width:100%; padding:15px; background:#087cff; color:#fff; border:none; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:10px;}
     .btn:hover{background:#0066cc;}
     .link{text-align:center; margin-top:15px; font-size:14px;}
     .link a{color:#087cff; text-decoration:none;}
+    .note{font-size:12px; color:#0f0; text-align:center; margin-top:5px;}
   </style>
 </head>
 <body>
@@ -29,25 +31,25 @@
     <p style="text-align:center; color:#aaa; font-size:14px;">Create your account and become part of the ON1Ecosystem community.</p>
 
     <form id="signupForm">
-      <label>Full Name</label>
-      <input type="text" placeholder="Enter your full name" required>
+      <label>Full Name *</label>
+      <input type="text" id="fullname" placeholder="Enter your full name" required>
 
       <label>Username *</label>
-      <input type="text" placeholder="Choose unique username" required>
+      <input type="text" id="username" placeholder="Choose unique username" required>
       <small style="color:#aaa;">This will be your mining ID</small>
 
-      <label>Email Address</label>
-      <input type="email" placeholder="Enter your email address" required>
+      <label>Email Address *</label>
+      <input type="email" id="email" placeholder="Enter your email address" required>
 
-      <label>Password</label>
-      <input type="password" placeholder="Create a password" required>
+      <label>Password *</label>
+      <input type="password" id="password" placeholder="Create a password" required>
 
-      <label>Confirm Password</label>
-      <input type="password" placeholder="Confirm your password" required>
+      <label>Confirm Password *</label>
+      <input type="password" id="confirm" placeholder="Confirm your password" required>
 
-      <label>Referral Code (Optional)</label>
-      <input type="text" placeholder="Enter referral username if any">
-      <small style="color:#aaa;">Get bonus ON1Coin if referred</small>
+      <label>Referral Code *</label>
+      <input type="text" id="referral" placeholder="Enter referral username" required>
+      <p class="note">Don't have one? Use: DSATECHON1</p>
 
       <button type="submit" class="btn">CREATE ACCOUNT</button>
     </form>
@@ -64,7 +66,30 @@
 <script>
 document.getElementById('signupForm').addEventListener('submit', function(e){
   e.preventDefault();
-  alert('Account Created! Next: Mining Dashboard');
+  
+  let referral = document.getElementById('referral').value.trim();
+  
+  // IF NO REFERRAL ENTERED, DEFAULT TO YOU
+  if(referral === ""){
+    referral = "DSATECHON1"; // <-- CHANGE THIS TO YOUR USERNAME
+    document.getElementById('referral').value = "DSATECHON1";
+  }
+  
+  if(document.getElementById('password').value !== document.getElementById('confirm').value){
+    alert("Passwords do not match!");
+    return;
+  }
+
+  // SAVE TO LOCAL STORAGE FOR NOW
+  let user = {
+    fullname: document.getElementById('fullname').value,
+    username: document.getElementById('username').value,
+    email: document.getElementById('email').value,
+    referral: referral
+  };
+  localStorage.setItem('on1user', JSON.stringify(user));
+
+  alert('Account Created! Referred by: ' + referral);
   window.location.href = 'dashboard.html';
 });
 </script>
