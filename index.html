@@ -3,83 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>ON1Ecosystem — One Ecosystem. Multiple Solutions.</title>
-
+  <title>DSATECHON1 - ON1Ecosystem</title>
+  <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#087cff">
-
-  <meta
-    name="description"
-    content="ON1Ecosystem — One Ecosystem. Multiple Solutions."
-  >
-
-  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- HEADER -->
   <header class="header">
-
     <div class="logo">
-      <div class="logo-mark">D</div>
-      <span>ON1Ecosystem</span>
+      <img src="logo.png" alt="DSATECHON1 Logo" style="height:40px; width:auto; margin-right:10px; vertical-align:middle;">
+      <span>DSATECHON1</span>
     </div>
-
-    <nav class="nav">
-      <a href="#home">Home</a>
-      <a href="#features">Features</a>
-      <a href="#about">About</a>
+    <nav>
+      <a href="pages/login.html" class="secondary-btn">Login</a>
+      <a href="pages/signup.html" class="primary-btn">Start Mining</a>
     </nav>
-
-    <a href="pages/signup.html" class="primary-btn">
-      GET STARTED
-    </a>
-
   </header>
 
-
-  <!-- HERO -->
-  <main id="home">
-
-    <section class="hero">
-
-      <div class="hero-content">
-
-        <p class="eyebrow">WELCOME TO ON1Ecosystem</p>
-
-        <h1>
-          ONE ECOSYSTEM.<br>
-          <span>MULTIPLE SOLUTIONS.</span>
-        </h1>
-
-        <p class="hero-text">
-          A modern digital ecosystem designed to help you
-          earn, grow and manage your digital future.
-        </p>
-
-        <div class="hero-buttons">
-
-          <a href="pages/signup.html" class="primary-btn">
-            GET STARTED
-          </a>
-
-          <button class="secondary-btn">
-            SIGN IN
-          </button>
-
-        </div>
-
+  <main>
+    <section class="hero" style="text-align:center; padding:80px 20px;">
+      <h1 style="font-size:50px; color:#087cff;">ON1Ecosystem</h1>
+      <p class="tagline" style="font-size:18px; color:#aaa;">ONE ECOSYSTEM. MULTIPLE SOLUTIONS.</p>
+      <p style="font-size:20px; margin:20px 0;">Mine ON1Coin For Free On Your Phone</p>
+      <div class="hero-buttons" style="margin-top:30px;">
+        <a href="pages/signup.html" class="primary-btn large" style="padding:18px 40px; font-size:20px; background:#087cff; color:white; border-radius:15px; text-decoration:none; font-weight:bold;">⛏️ START MINING FREE</a>
       </div>
-
+      <p style="margin-top:15px;"><a href="pages/login.html" style="color:#087cff;">Already have account? Login</a></p>
     </section>
 
+    <section style="text-align:center; padding:40px 20px; background:#111a2a;">
+      <h2>How It Works</h2>
+      <div style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap; margin-top:20px;">
+        <div><h3>1. Sign Up Free</h3><p>Create account in 10 seconds</p></div>
+        <div><h3>2. Tap To Mine</h3><p>Earn ON1Coin every day</p></div>
+        <div><h3>3. Cash Out Soon</h3><p>Exchange for Gift Cards</p></div>
+      </div>
+    </section>
+  </main>
 
-    <!-- ON1COIN -->
-    <section class="coin-section">
+  <footer class="footer" style="text-align:center; padding:30px 20px;">
+    <div class="logo">
+      <img src="logo.png" alt="DSATECHON1 Logo" style="height:35px; width:auto; margin-right:8px; vertical-align:middle;">
+      <span>DSATECHON1</span>
+    </div>
+    <p>ONE ECOSYSTEM. MULTIPLE SOLUTIONS.</p>
+    <p class="copyright">© 2026 DSATECHON1. All rights reserved.</p>
+  </footer>
 
-      <div class="coin-card">
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+</body>
+  </html>      <div class="coin-card">
 
         <p class="small-label">ON1 ECOSYSTEM</p>
 
