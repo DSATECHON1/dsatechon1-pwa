@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Wallet — ON1Ecosystem</title>
+
+  <meta name="theme-color" content="#050b13">
+  <meta name="description" content="ON1Ecosystem Wallet">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --bg: #050b13;
+      --surface: #0c1624;
+      --surface2: #101d2d;
+      --border: #1d3048;
+      --blue: #087cff;
+      --blue2: #3aa0ff;
+      --green: #00df88;
+      --gold: #ffc94a;
+      --text: #ffffff;
+      --muted: #8ea2b8;
+      --red: #ff6075;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(8,124,255,.18),
+          transparent 42%
+        ),
+        var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1180px;
+      min-height: 100vh;
+      margin: auto;
+      padding: 18px 20px 30px;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(29,48,72,.6);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .brand-name span {
+      color: var(--blue2);
+    }
+
+    .brand-subtitle {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 8px;
+      letter-spacing: .5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-btn {
+      padding: 9px 13px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: #dce8f5;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .header-btn:hover {
+      border-color: var(--blue);
+    }
+
+
+    /* =========================
+       PAGE TITLE
+    ========================== */
+
+    .title-area {
+      margin: 32px 0 22px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--blue2);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .7px;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(0,223,136,.7);
+    }
+
+    .title-area h1 {
+      margin-top: 10px;
+      font-size: 31px;
+      letter-spacing: -1px;
+    }
+
+    .title-area p {
+      margin-top: 7px;
+      max-width: 570px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       WALLET OVERVIEW
+    ========================== */
+
+    .wallet-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 15px;
+    }
+
+
+    /* =========================
+       MAIN BALANCE
+    ========================== */
+
+    .main-wallet {
+      position: relative;
+      overflow: hidden;
+      padding: 25px;
+      border-radius: 20px;
+      border: 1px solid rgba(8,124,255,.3);
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(8,124,255,.20),
+          transparent 45%
+        ),
+        var(--surface);
+    }
+
+    .wallet-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    .coin-balance {
+      margin-top: 12px;
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+
+    .coin-symbol {
+      color: var(--blue2);
+      font-size: 18px;
+      margin-left: 4px;
+    }
+
+    .wallet-note {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .wallet-actions {
+      display: flex;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    .wallet-action {
+      padding: 10px 15px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: #dce8f5;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .wallet-action.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: white;
+    }
+
+
+    /* =========================
+       XP CARD
+    ========================== */
+
+    .xp-card {
+      padding: 25px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,201,74,.20);
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(255,201,74,.09),
+          transparent 45%
+        ),
+        var(--surface);
+    }
+
+    .xp-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .xp-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: rgba(255,201,74,.10);
+      font-size: 18px;
+    }
+
+    .xp-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .xp-balance {
+      margin-top: 15px;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .xp-unit {
+      color: var(--gold);
+      font-size: 14px;
+      margin-left: 4px;
+    }
+
+    .xp-description {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .xp-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       STATS
+    ========================== */
+
+    .section-title {
+      margin: 30px 0 13px;
+      font-size: 15px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 11px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .stat-icon {
+      font-size: 15px;
+    }
+
+    .stat-value {
+      margin-top: 10px;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .stat-name {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+
+    /* =========================
+       ACTIVITY
+    ========================== */
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 15px;
+    }
+
+    .activity-card,
+    .security-card {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 17px;
+      padding: 20px;
+    }
+
+    .activity-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(29,48,72,.55);
+    }
+
+    .activity-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .activity-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .activity-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--surface2);
+    }
+
+    .activity-name {
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .activity-date {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 8px;
+    }
+
+    .activity-amount {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .empty {
+      padding: 25px 0 10px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       SECURITY
+    ========================== */
+
+    .security-item {
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(29,48,72,.55);
+    }
+
+    .security-item:last-child {
+      border-bottom: none;
+    }
+
+    .security-label {
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .security-value {
+      margin-top: 5px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--green);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+
+    /* =========================
+       NOTICE
+    ========================== */
+
+    .notice {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 13px;
+      border: 1px solid rgba(8,124,255,.18);
+      background: rgba(8,124,255,.045);
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+    .notice strong {
+      color: var(--blue2);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(29,48,72,.55);
+      text-align: center;
+    }
+
+    footer p {
+      color: #61748a;
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+    .footer-brand {
+      margin-top: 6px;
+      color: #40536a;
+      font-size: 9px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 800px) {
+
+      .wallet-grid,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 520px) {
+
+      .page {
+        padding: 15px;
+      }
+
+      .brand img {
+        width: 37px;
+        height: 37px;
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .header-btn {
+        padding: 8px 10px;
+        font-size: 9px;
+      }
+
+      .title-area h1 {
+        font-size: 27px;
+      }
+
+      .main-wallet,
+      .xp-card {
+        padding: 20px;
+      }
+
+      .coin-balance {
+        font-size: 34px;
+      }
+
+      .xp-balance {
+        font-size: 30px;
+      }
+
+    }
+
+    @media (max-width: 350px) {
+
+      .header-btn.home {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .stat {
+        padding: 13px;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <div class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="header">
+
+      <a
+        href="../index.html"
+        class="brand">
+
+        <img
+          src="../logo.png"
+          alt="DSATECHON1">
+
+        <div>
+
+          <div class="brand-name">
+            ON1<span>Ecosystem</span>
+          </div>
+
+          <small class="brand-subtitle">
+            ONE DIGITAL ECOSYSTEM
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <div class="header-actions">
+
+        <a
+          href="../index.html"
+          class="header-btn home">
+          Home
+        </a>
+
+        <a
+          href="dashboard.html"
+          class="header-btn">
+          Dashboard
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================
+         TITLE
+    ========================== -->
+
+    <section class="title-area">
+
+      <div class="eyebrow">
+
+        <span class="dot"></span>
+
+        Personal Wallet
+
+      </div>
+
+      <h1>
+        Your Wallet
+      </h1>
+
+      <p>
+        Manage your ON1Coin and XP balances,
+        track ecosystem activity and monitor your
+        rewards in one place.
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         WALLET BALANCES
+    ========================== -->
+
+    <section class="wallet-grid">
+
+
+      <!-- ON1COIN -->
+
+      <div class="main-wallet">
+
+        <div class="wallet-label">
+          ON1Coin Balance
+        </div>
+
+        <div class="coin-balance">
+
+          0.000
+
+          <span class="coin-symbol">
+            ON1
+          </span>
+
+        </div>
+
+        <div class="wallet-note">
+          Available ON1Coin balance
+        </div>
+
+
+        <div class="wallet-actions">
+
+          <a
+            href="#"
+            class="wallet-action primary"
+            onclick="demoAction('ON1Coin transactions'); return false;">
+            Transactions
+          </a>
+
+          <a
+            href="#"
+            class="wallet-action"
+            onclick="demoAction('ON1Coin details'); return false;">
+            Details
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- XP -->
+
+      <div class="xp-card">
+
+        <div class="xp-top">
+
+          <div>
+
+            <div class="xp-label">
+              Experience Points
+            </div>
+
+          </div>
+
+          <div class="xp-icon">
+            ⭐
+          </div>
+
+        </div>
+
+
+        <div class="xp-balance">
+
+          0
+
+          <span class="xp-unit">
+            XP
+          </span>
+
+        </div>
+
+
+        <p class="xp-description">
+          XP can be earned through eligible
+          partnership and ecosystem activities.
+        </p>
+
+
+        <a
+          href="partnership.html"
+          class="xp-link">
+
+          Explore XP Activities →
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         OVERVIEW
+    ========================== -->
+
+    <h2 class="section-title">
+      Wallet Overview
+    </h2>
+
+
+    <section class="stats">
+
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          ⛏️
+        </div>
+
+        <div class="stat-value">
+          0.000
+        </div>
+
+        <div class="stat-name">
+          Mining Rewards
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          🤝
+        </div>
+
+        <div
