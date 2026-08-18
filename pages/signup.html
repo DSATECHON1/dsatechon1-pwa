@@ -43,21 +43,43 @@ p{text-align:center;margin-top:15px;color:#aaa}
 <div class="footer-note">Account creation will be connected to database in next stage</div>
 </div>
 <script>
+// Auto-fill referral from URL?ref=
+const urlParams = new URLSearchParams(window.location.search);
+const refFromUrl = urlParams.get('ref');
+if(refFromUrl){document.getElementById('ref').value = refFromUrl;}
+
 document.getElementById('f').onsubmit=function(e){
 e.preventDefault();
 
 let pass = document.getElementById('pass').value;
 let cpass = document.getElementById('cpass').value;
 let ref = document.getElementById('ref').value.trim();
+let user = document.getElementById('user').value.trim();
 
-if(pass != cpass){alert('Passwords do not match');return}
-if(ref == ""){alert('Referral Code is required! Please enter a referral code.');return}
+if(pass!= cpass){alert('Passwords do not match');return}
+if(ref == ""){alert('Referral Code is required!');return}
 
 let users=JSON.parse(localStorage.getItem('on1users')||'[]');
-if(users.find(x=>x.user==document.getElementById('user').value)){alert('Username already taken');return}
+if(users.find(x=>x.user==user)){alert('Username already taken');return}
 
-let u={name:document.getElementById('user').value,user:document.getElementById('user').value,email:document.getElementById('email').value,pass:pass,ref:ref,b:0,lm:0};
-users.push(u);localStorage.setItem('on1users',JSON.stringify(users));localStorage.setItem('on1u',JSON.stringify(u));
-alert('Account Created Successfully!');location.href='dashboard.html';
+// Check if referrer exists
+let referrer = users.find(x=>x.user==ref);
+if(!referrer && ref!= "DSATECHON1"){alert('Invalid Referral Code');return}
+
+// Create new user with signup bonus
+let newUser={name:user,user:user,email:document.getElementById('email').value,pass:pass,ref:ref,b:0.010,lm:0}; // 0.010 signup bonus
+users.push(newUser);
+
+// Give referrer bonus
+if(referrer){
+referrer.b += 0.050; // 0.050 referral bonus
+let idx=users.findIndex(x=>x.user==ref);
+users[idx]=referrer;
+}
+
+localStorage.setItem('on1users',JSON.stringify(users));
+localStorage.setItem('on1u',JSON.stringify(newUser));
+alert('Account Created! You got 0.010 ON1. Referrer got 0.050 ON1');
+location.href='dashboard.html';
 }
 </script></body></html>
