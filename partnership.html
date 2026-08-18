@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Partnerships & XP — ON1Ecosystem</title>
+
+<meta name="theme-color" content="#050b13">
+<meta name="description" content="ON1Ecosystem Partnership and XP Center">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --bg:#050b13;
+    --card:#0c1624;
+    --card2:#101d2d;
+    --border:#1d3048;
+    --blue:#087cff;
+    --blue2:#42a5ff;
+    --green:#00df88;
+    --gold:#ffc94a;
+    --purple:#9b6cff;
+    --red:#ff6178;
+    --text:#fff;
+    --muted:#8ea2b8;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(8,124,255,.18),
+            transparent 42%
+        ),
+        var(--bg);
+    color:var(--text);
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.page{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:18px 20px 40px;
+}
+
+
+/* =========================
+HEADER
+========================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:17px;
+    border-bottom:1px solid rgba(29,48,72,.7);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+}
+
+.brand-name{
+    font-size:18px;
+    font-weight:800;
+}
+
+.brand-name span{
+    color:var(--blue2);
+}
+
+.brand-sub{
+    display:block;
+    margin-top:3px;
+    color:#61748a;
+    font-size:8px;
+    letter-spacing:.7px;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.header-btn{
+    padding:9px 12px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:#dce8f5;
+    font-size:9px;
+    font-weight:700;
+}
+
+.header-btn:hover{
+    border-color:var(--blue);
+}
+
+
+/* =========================
+INTRO
+========================= */
+
+.intro{
+    margin:30px 0 20px;
+}
+
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:var(--blue2);
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:.8px;
+    text-transform:uppercase;
+}
+
+.dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 9px rgba(0,223,136,.7);
+}
+
+h1{
+    margin-top:9px;
+    font-size:30px;
+    letter-spacing:-1px;
+}
+
+.intro p{
+    max-width:650px;
+    margin-top:8px;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.65;
+}
+
+
+/* =========================
+WALLET / XP SUMMARY
+========================= */
+
+.balance-card{
+    position:relative;
+    overflow:hidden;
+    padding:22px;
+    border:1px solid rgba(8,124,255,.28);
+    border-radius:18px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8,124,255,.13),
+            rgba(12,22,36,.95)
+        );
+}
+
+.balance-card::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    right:-70px;
+    top:-90px;
+    border-radius:50%;
+    background:rgba(8,124,255,.08);
+}
+
+.balance-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.balance-label{
+    color:var(--muted);
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    font-weight:700;
+}
+
+.xp-number{
+    margin-top:7px;
+    font-size:32px;
+    font-weight:900;
+}
+
+.xp-number span{
+    color:var(--purple);
+}
+
+.level{
+    padding:8px 11px;
+    border-radius:9px;
+    border:1px solid rgba(155,108,255,.3);
+    background:rgba(155,108,255,.08);
+    color:#c7b3ff;
+    font-size:9px;
+    font-weight:800;
+}
+
+.progress-wrap{
+    margin-top:18px;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
+    font-size:8px;
+    margin-bottom:7px;
+}
+
+.progress{
+    height:7px;
+    overflow:hidden;
+    border-radius:20px;
+    background:#07101c;
+}
+
+.progress-bar{
+    width:64%;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(
+        90deg,
+        var(--purple),
+        var(--blue2)
+    );
+}
+
+
+/* =========================
+WALLET LINK
+========================= */
+
+.wallet-link{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-top:10px;
+    padding:14px 16px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:var(--card);
+}
+
+.wallet-info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.wallet-icon{
+    width:34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:9px;
+    background:rgba(0,223,136,.08);
+}
+
+.wallet-info strong{
+    display:block;
+    font-size:10px;
+}
+
+.wallet-info small{
+    display:block;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:8px;
+}
+
+.wallet-button{
+    padding:8px 11px;
+    border:1px solid rgba(8,124,255,.35);
+    border-radius:8px;
+    background:rgba(8,124,255,.1);
+    color:var(--blue2);
+    font-size:8px;
+    font-weight:800;
+}
+
+
+/* =========================
+STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin:10px 0 25px;
+}
+
+.stat{
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:var(--card);
+}
+
+.stat-icon{
+    font-size:15px;
+}
+
+.stat-value{
+    margin-top:8px;
+    font-size:18px;
+    font-weight:900;
+}
+
+.stat-label{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:8px;
+}
+
+
+/* =========================
+SECTION HEADER
+========================= */
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:12px;
+}
+
+.section-title{
+    font-size:16px;
+    font-weight:800;
+}
+
+.section-description{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:9px;
+}
+
+.view-all{
+    color:var(--blue2);
+    font-size:8px;
+    font-weight:800;
+}
+
+
+/* =========================
+FILTERS
+========================= */
+
+.filters{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    margin-bottom:14px;
+    padding-bottom:3px;
+}
+
+.filter{
+    white-space:nowrap;
+    padding:8px 12px;
+    border:1px solid var(--border);
+    border-radius:50px;
+    background:var(--card);
+    color:var(--muted);
+    font-size:8px;
+    font-weight:800;
+}
+
+.filter.active{
+    border-color:rgba(8,124,255,.4);
+    background:rgba(8,124,255,.1);
+    color:var(--blue2);
+}
+
+
+/* =========================
+PARTNERSHIP GRID
+========================= */
+
+.activities{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:11px;
+}
+
+.activity{
+    position:relative;
+    padding:17px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    background:var(--card);
+    transition:.2s ease;
+}
+
+.activity:hover{
+    transform:translateY(-2px);
+    border-color:rgba(8,124,255,.35);
+}
+
+.activity-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.activity-icon{
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
+    border-radius:11px;
+    background:var(--card2);
+    font-size:18px;
+}
+
+.activity-status{
+    padding:5px 7px;
+    border-radius:6px;
+    font-size:7px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.status-open{
+    background:rgba(0,223,136,.08);
+    color:var(--green);
+}
+
+.status-soon{
+    background:rgba(255,201,74,.08);
+    color:var(--gold);
+}
+
+.status-locked{
+    background:rgba(142,162,184,.08);
+    color:var(--muted);
+}
+
+.activity h3{
+    margin-top:14px;
+    font-size:12px;
+}
+
+.activity p{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.55;
+}
+
+.activity-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-top:15px;
+    padding-top:12px;
+    border-top:1px solid rgba(29,48,72,.55);
+}
+
+.reward{
+    color:#c7b3ff;
+    font-size:9px;
+    font-weight:900;
+}
+
+.reward span{
+    color:var(--purple);
+}
+
+.join{
+    padding:8px 11px;
+    border:none;
+    border-radius:8px;
+    background:var(--blue);
+    color:white;
+    font-size:8px;
+    font-weight:800;
+}
+
+.join:hover{
+    background:#1688ff;
+}
+
+.join.disabled{
+    background:#162333;
+    color:#61748a;
+    cursor:not-allowed;
+}
+
+
+/* =========================
+HOW XP WORKS
+========================= */
+
+.how-section{
+    margin-top:32px;
+}
+
+.how-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.how-card{
+    padding:16px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:var(--card);
+}
+
+.how-number{
+    width:25px;
+    height:25px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:rgba(8,124,255,.1);
+    color:var(--blue2);
+    font-size:9px;
+    font-weight:900;
+}
+
+.how-card h3{
+    margin-top:11px;
+    font-size:10px;
+}
+
+.how-card p{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:8px;
+    line-height:1.55;
+}
+
+
+/* =========================
+NOTICE
+========================= */
+
+.notice{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+    padding:13px;
+    border:1px solid rgba(255,201,74,.18);
+    border-radius:12px;
+    background:rgba(255,201,74,.045);
+}
+
+.notice-icon{
+    font-size:15px;
+}
+
+.notice p{
+    color:#aebdcb;
+    font-size:8px;
+    line-height:1.6;
+}
+
+.notice strong{
+    color:#fff;
+}
+
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+    margin-top:42px;
+    padding-top:20px;
+    border-top:1px solid rgba(29,48,72,.55);
+    text-align:center;
+}
+
+footer p{
+    color:#61748a;
+    font-size:8px;
+    line-height:1.6;
+}
+
+.footer-brand{
+    margin-top:5px;
+    color:#40536a;
+    font-size:8px;
+}
+
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .page{
+        padding:15px;
+    }
+
+    .brand img{
+        width:37px;
+        height:37px;
+    }
+
+    .brand-name{
+        font-size:16px;
+    }
+
+    .brand-sub{
+        display:none;
+    }
+
+    .header-btn{
+        padding:8px 10px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+
+    .activities{
+        grid-template-columns:1fr;
+    }
+
+    .how-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:430px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .balance-top{
+        flex-direction:column;
+    }
+
+    .wallet-link{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .wallet-button{
+        width:100%;
+        text-align:center;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<!-- =========================
+HEADER
+========================= -->
+
+<header>
+
+    <a href="../index.html" class="brand">
+
+        <img
+            src="../logo.png"
+            alt="DSATECHON1 Logo">
+
+        <div>
+
+            <div class="brand-name">
+                ON1<span>Ecosystem</span>
+            </div>
+
+            <small class="brand-sub">
+                ONE DIGITAL ECOSYSTEM
+            </small>
+
+        </div>
+
+    </a>
+
+
+    <div class="header-actions">
+
+        <a
+            href="../index.html"
+            class="header-btn">
+            Home
+        </a>
+
+        <a
+            href="dashboard.html"
+            class="header-btn">
+            Dashboard
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+INTRO
+========================= -->
+
+<section class="intro">
+
+    <div class="eyebrow">
+
+        <span class="dot"></span>
+
+        Partnership Center
+
+    </div>
+
+    <h1>
+        Participate. Earn XP. Grow.
+    </h1>
+
+    <p>
+        Discover eligible partnership activities,
+        ecosystem campaigns and participation
+        opportunities. Complete activities to
+        build your XP profile and unlock future
+        ecosystem benefits.
+    </p>
+
+</section>
+
+
+<!-- =========================
+XP BALANCE
+========================= -->
+
+<section class="balance-card">
+
+    <div class="balance-top">
+
+        <div>
+
+            <div class="balance-label">
+                XP Balance
+            </div>
+
+            <div class="xp-number">
+                1,250 <span>XP</span>
+            </div>
+
+        </div>
+
+
+        <div class="level">
+            LEVEL 3
+        </div>
+
+    </div>
+
+
+    <div class="progress-wrap">
+
+        <div class="progress-info">
+
+            <span>
+                Progress to Level 4
+            </span>
+
+            <span>
+                1,250 / 2,000 XP
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div class="progress-bar"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+WALLET
+========================= -->
+
+<a
+    href="wallet.html"
+    class="wallet-link">
+
+    <div class="wallet-info">
+
+        <div class="wallet-icon">
+            💼
+        </div>
+
+        <div>
+
+            <strong>
+                Your Ecosystem Wallet
+            </strong>
+
+            <small>
+                View XP Balance and ON1Coin Balance
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <div class="wallet-button">
+        OPEN WALLET →
+    </div>
+
+</a>
+
+
+<!-- =========================
+STATS
+========================= -->
+
+<div class="stats">
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            ⭐
+        </div>
+
+        <div class="stat-value">
+            1,250
+        </div>
+
+        <div class="stat-label">
+            Total XP
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            🤝
+        </div>
+
+        <div class="stat-value">
+            7
+        </div>
+
+        <div class="stat-label">
+            Activities Completed
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            🏆
+        </div>
+
+        <div class="stat-value">
+            3
+        </div>
+
+        <div class="stat-label">
+            Current Level
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+ACTIVITIES
+========================= -->
+
+<div class="section-head">
+
+    <div>
+
+        <div class="section-title">
+            Partnership Activities
+        </div>
+
+        <div class="section-description">
+            Choose eligible activities and earn XP.
+        </div>
+
+    </div>
+
+    <span class="view-all">
+        VIEW ALL
+    </span>
+
+</div>
+
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+    <button
+        class="filter active"
+        data-filter="all">
+        All
+    </button>
+
+    <button
+        class="filter"
+        data-filter="social">
+        Social
+    </button>
+
+    <button
+        class="filter"
+        data-filter="community">
+        Community
+    </button>
+
+    <button
+        class="filter"
+        data-filter="campaign">
+        Campaigns
+    </button>
+
+    <button
+        class="filter"
+        data-filter="coming">
+        Coming Soon
+    </button>
+
+</div>
+
+
+<div class="activities" id="activities">
+
+
+<!-- ACTIVITY 1 -->
+
+<article
+    class="activity"
+    data-category="social">
+
+    <div class="activity-top">
+
+        <div class="activity-icon">
+            📣
+        </div>
+
+        <span class="activity-status status-open">
+            Available
+        </span>
+
+    </div>
+
+    <h3>
+        Ecosystem Awareness Campaign
+    </h3>
+
+    <p>
+        Participate in an eligible ON1Ecosystem
+        awareness activity and help introduce
+        the ecosystem to new communities.
+    </p>
+
+    <div class="activity-bottom">
+
+        <div class="reward">
+            + <span>100 XP</span>
+        </div>
+
+        <button
+            class="join"
+            onclick="joinActivity(this)">
+            PARTICIPATE
+        </button>
+
+    </div>
+
+</article>
+
+
+<!-- ACTIVITY 2 -->
+
+<article
+    class="activity"
+    data-category="community">
+
+    <div class="activity-top">
+
+        <div class="activity-icon">
+            👥
+        </div>
+
+        <span class="activity-status status-open">
+            Available
+        </span>
+
+    </div>
+
+    <h3>
+        Community Participation
+    </h3>
+
+    <p>
+        Participate in an approved community
+        activity and contribute useful feedback
+        to the ecosystem.
+    </p>
+
+    <div class="activity-bottom">
+
+        <div class="reward">
+            + <span>150 XP</span>
+        </div>
+
+        <button
+            class="join"
+            onclick="joinActivity(this)">
+            PARTICIPATE
+        </button>
+
+    </div>
+
+</article>
+
+
+<!-- ACTIVITY 3 -->
+
+<article
+    class="activity"
+    data-category="campaign">
+
+    <div class="activity-top">
+
+        <div class="activity-icon">
+            🚀
+        </div>
+
+        <span class="activity-status status-open">
+            Available
+        </span>
+
+    </div>
+
+    <h3>
+        Partner Campaign
+    </h3>
+
+    <p>
+        Complete an eligible partner campaign
+        and receive XP according to the campaign
+        participation rules.
+    </p>
+
+    <div class="activity-bottom">
+
+        <div class="reward">
+            + <span>250 XP</span>
+        </div>
+
+        <button
+            class="join"
+            onclick="joinActivity(this)">
+            PARTICIPATE
+        </button>
+
+    </div>
+
+</article>
+
+
+<!-- ACTIVITY 4 -->
+
+<article
+    class="activity"
+    data-category="social">
+
+    <div class="activity-top">
+
+        <div class="activity-icon">
+            📱
+        </div>
+
+        <span class="activity-status status-soon">
+            Coming Soon
+        </span>
+
+    </div>
+
+    <h3>
+        Social Partner Challenge
+    </h3>
+
+    <p>
+        A future social participation challenge
+        will be available here after the partner
+        campaign officially launches.
+    </p>
+
+    <div class="activity-bottom">
+
+        <div class="reward">
+            + <span>300 XP</span>
+        </div>
+
+        <button
+            class="join disabled"
+            disabled>
+            COMING SOON
+        </button>
+
+    </div>
+
+</article>
+
+
+<!-- ACTIVITY 5 -->
+
+<article
+    class="activity"
+    data-category="community">
+
+    <div class="activity-top">
+
+        <div class="activity-icon">
+            💡
+        </div>
+
+        <span class="activity-status status-open">
+            Available
+        </span>
+
+    </div>
+
+    <h3>
+        Ecosystem Feedback
+    </h3>
+
+    <p>
+        Share useful feedback about the ON1Ecosystem
+        experience through an eligible feedback
+        activity.
+    </p>
+
+    <div class="activity-bottom">
+
+        <div class="reward">
+            + <span>75 XP</span>
+        </div>
+
+        <button
+            class="join"
+            onclick="joinActivity(this)">
+            PARTICIPATE
+        </button>
+
+    </div>
+
+</article>
+
+
+<!-- ACTIVITY 6 -->
+
+<article
+    class="activity"
+    data-category="coming">
+
+    <div class="activity-top">
+
+        <div class="activity-icon">
+            🌍
+        </div>
+
+        <span class="activity-status status-locked">
+            Planned
+        </span>
+
+    </div>
+
+    <h3>
+        Global Partnership Mission
+    </h3>
+
+    <p>
+        Future partner missions may allow
+        members to participate in larger
+        ecosystem campaigns.
+    </p>
+
+    <div class="activity-bottom">
+
+        <div class="reward">
+            + <span>500 XP</span>
+        </div>
+
+        <button
+            class="join disabled"
+            disabled>
+            PLANNED
+        </button>
+
+    </div>
+
+</article>
+
+
+</div>
+
+
+<!-- =========================
+HOW XP WORKS
+========================= -->
+
+<section class="how-section">
+
+    <div class="section-head">
+
+        <div>
+
+            <div class="section-title">
+                How XP Participation Works
+            </div>
+
+            <div class="section-description">
+                A simple path from participation to progression.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="how-grid">
+
+
+        <div class="how-card">
+
+            <div class="how-number">
+                01
+            </div>
+
+            <h3>
+                Choose an Activity
+            </h3>
+
+            <p>
+                Select an eligible partnership or
+                ecosystem activity that is currently
+                available to you.
+            </p>
+
+        </div>
+
+
+        <div class="how-card">
+
+            <div class="how-number">
+                02
+            </div>
+
+            <h3>
+                Participate
+            </h3>
+
+            <p>
+                Complete the required participation
+                steps according to the activity's
+                rules.
+            </p>
+
+        </div>
+
+
+        <div class="how-card">
+
+            <div class="how-number">
+                03
+            </div>
+
+            <h3>
+                Earn XP
+            </h3>
+
+            <p>
+                Eligible completed activities can
+                award XP to your ecosystem profile.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="notice">
+
+        <div class="notice-icon">
+            ⚠️
+        </div>
+
+        <p>
+            <strong>Important:</strong>
+            XP rewards, activity eligibility and
+            participation limits may vary by campaign.
+            XP is a separate ecosystem point balance
+            and should not be treated as ON1Coin unless
+            an official reward rule explicitly states so.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        ON1Ecosystem — one ecosystem,
+        multiple digital opportunities.
+    </p>
+
+    <div class="footer-brand">
+        A DSATECHON1 initiative
+    </div>
+
+</footer>
+
+
+</div>
+
+
+<script>
+
+/*
+=================================================
+ON1ECOSYSTEM PARTNERSHIP PROTOTYPE
+=================================================
+
+Firebase is intentionally NOT connected yet.
+
+Later this page can connect to:
+
+• Firebase Authentication
+• Firestore
+• User XP balance
+• Activity eligibility
+• Partnership records
+• Completion verification
+• XP transaction history
+• Notifications
+• Wallet
+
+The demo numbers below are only for visual testing.
+*/
+
+
+/* =========================
+FILTER SYSTEM
+========================= */
+
+const filters =
+    document.querySelectorAll(".filter");
+
+const activities =
+    document.querySelectorAll(".activity");
+
+
+filters.forEach(filter => {
+
+    filter.addEventListener("click", () => {
+
+        filters.forEach(item => {
+            item.classList.remove("active");
+        });
+
+        filter.classList.add("active");
+
+        const category =
+            filter.dataset.filter;
+
+        activities.forEach(activity => {
+
+            if(
+                category === "all" ||
+                activity.dataset.category === category
+            ){
+
+                activity.style.display = "block";
+
+            }else{
+
+                activity.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+});
+
+
+/* =========================
+DEMO PARTICIPATION
+========================= */
+
+function joinActivity(button){
+
+    const activity =
+        button.closest(".activity");
+
+    const title =
+        activity.querySelector("h3").textContent;
+
+    const reward =
+        activity.querySelector(".reward").textContent;
+
+    button.textContent = "STARTING...";
+
+    button.disabled = true;
+
+    setTimeout(() => {
+
+        button.textContent = "IN PROGRESS";
+
+        button.style.background =
+            "#162d45";
+
+        button.style.color =
+            "#42a5ff";
+
+        alert(
+            "Activity started:\n\n" +
+            title +
+            "\n\n" +
+            "Potential reward: " +
+            reward +
+            "\n\n" +
+            "Verification and XP awarding will be connected later."
+        );
+
+    },700);
+
+}
+
+</script>
+
+</body>
+</html>
