@@ -1,21 +1,95 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Dashboard</title>
-<style>body{background:#0a0f1a;color:#fff;font-family:Arial;padding:20px;text-align:center}.card{background:#111a2a;padding:20px;border-radius:15px;margin:15px 0} #b{font-size:50px;color:#087cff}#btn{width:180px;height:180px;border-radius:50%;background:#087cff;color:#fff;border:none;font-size:18px}</style>
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#0a0f1a;color:#fff;text-align:center;padding:20px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.header h3{color:#087cff}
+.card{background:#111a2a;padding:25px;border-radius:20px;margin:20px 0}
+.balance{font-size:40px;color:#087cff;font-weight:bold;margin:10px 0}
+.mine-btn{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#087cff,#0056b3);border:none;color:#fff;font-size:18px;font-weight:bold;cursor:pointer;box-shadow:0 0 30px rgba(8,124,255,0.4)}
+.mine-btn:disabled{background:#333;box-shadow:none;cursor:not-allowed}
+.timer{color:#aaa;margin-top:10px}
+.stats{display:flex;justify-content:space-around;margin-top:20px}
+.stat-box{background:#0a0f1a;padding:15px;border-radius:10px;width:48%}
+.stat-box h4{color:#00ff88;font-size:20px}
+.ref-link{background:#0a0f1a;padding:12px;border-radius:10px;margin-top:10px;word-break:break-all;color:#087cff}
+</style>
 </head><body>
-<div class="card"><h2 id="w">Welcome</h2><p>@<span id="u"></span> | Ref: <span id="r"></span></p></div>
-<div class="card"><p>ON1 Balance</p><div id="b">0.000</div><button id="btn">TAP TO MINE</button><p id="t"></p><a href="#" onclick="out()" style="color:red">Logout</a></div>
+<div class="header">
+<h3>DSATECHON1</h3>
+<span id="username"></span>
+</div>
+
+<div class="card">
+<h4>Your Balance</h4>
+<div class="balance" id="balance">0.000</div>
+<p>ON1 Coins</p>
+</div>
+
+<button class="mine-btn" id="mineBtn" onclick="mine()">TAP TO MINE</button>
+<div class="timer" id="timer"></div>
+
+<div class="stats">
+<div class="stat-box">
+<h4 id="refCount">0</h4>
+<p>Referrals</p>
+</div>
+<div class="stat-box">
+<h4>0.050</h4>
+<p>Bonus/Referral</p>
+</div>
+</div>
+
+<div class="card">
+<h4>Your Referral Link</h4>
+<div class="ref-link" id="refLink"></div>
+<button class="mine-btn" style="width:100%;height:50px;border-radius:10px;margin-top:10px" onclick="copyRef()">COPY LINK</button>
+</div>
+
 <script>
-try{
-let u=JSON.parse(localStorage.getItem('on1u')||'null');
-if(!u){alert('Login first');location.href='login.html'}
-if(u.b==null)u.b=0;if(u.lm==null)u.lm=0;
-document.getElementById('w').innerText='Welcome '+u.name;
-document.getElementById('u').innerText=u.user;
-document.getElementById('r').innerText=u.ref;
-document.getElementById('b').innerText=parseFloat(u.b).toFixed(3);
-function save(){let users=JSON.parse(localStorage.getItem('on1users')||'[]');let i=users.findIndex(x=>x.user==u.user);users[i]=u;localStorage.setItem('on1users',JSON.stringify(users));localStorage.setItem('on1u',JSON.stringify(u))}
-function timer(){let d=24-((Date.now()-u.lm)/1000/60/60);document.getElementById('btn').disabled=d>0;document.getElementById('t').innerText=d>0?'Next in: '+d.toFixed(1)+'h':'Ready to Mine'}
-document.getElementById('btn').onclick=function(){u.b+=0.001;u.lm=Date.now();document.getElementById('b').innerText=u.b.toFixed(3);save();timer()}
-function out(){localStorage.removeItem('on1u');location.href='login.html'}
-timer();setInterval(timer,60000)
-}catch(e){document.body.innerHTML='<h2 style="color:red">ERROR: '+e.message+'</h2><p>Clear cache and try again</p>'}
+let u=JSON.parse(localStorage.getItem('on1u'));
+if(!u) location.href='login.html';
+
+document.getElementById('username').innerText = u.user;
+document.getElementById('balance').innerText = u.b.toFixed(3);
+document.getElementById('refLink').innerText = window.location.origin + '/dsatechon1-pwa/pages/signup.html?ref=' + u.user;
+
+// Count referrals
+let users=JSON.parse(localStorage.getItem('on1users')||'[]');
+let refCount = users.filter(x=>x.ref==u.user).length;
+document.getElementById('refCount').innerText = refCount;
+
+function mine(){
+let now=Date.now();
+if(now-u.lm<86400000){alert('Come back after 24 hours');return}
+u.b+=0.001; u.lm=now;
+localStorage.setItem('on1u',JSON.stringify(u));
+// Update in users array too
+let idx=users.findIndex(x=>x.user==u.user);
+users[idx]=u; localStorage.setItem('on1users',JSON.stringify(users));
+document.getElementById('balance').innerText=u.b.toFixed(3);
+alert('Mined 0.001 ON1! Come back in 24h');
+updateTimer();
+}
+
+function updateTimer(){
+let left=86400000-(Date.now()-u.lm);
+if(left>0){
+let h=Math.floor(left/3600000);
+let m=Math.floor((left%3600000)/60000);
+document.getElementById('timer').innerText='Next mine in: '+h+'h '+m+'m';
+document.getElementById('mineBtn').disabled=true;
+setTimeout(updateTimer,60000);
+}else{
+document.getElementById('timer').innerText='Ready to mine!';
+document.getElementById('mineBtn').disabled=false;
+}
+}
+updateTimer();
+
+function copyRef(){
+navigator.clipboard.writeText(document.getElementById('refLink').innerText);
+alert('Referral link copied!');
+}
 </script></body></html>
