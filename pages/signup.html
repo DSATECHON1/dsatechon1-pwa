@@ -1,25 +1,654 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sign Up</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a0f1a;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}.box{background:#111a2a;padding:30px;border-radius:20px;width:100%;max-width:420px}.logo{text-align:center}.logo img{width:70px}h2{color:#087cff;text-align:center;margin:20px 0}label{display:block;margin-top:15px;margin-bottom:5px;font-size:14px;color:#aaa}label span{color:red}input{width:100%;padding:14px;background:#0a0f1a;border:1px solid #1a2332;border-radius:10px;color:#fff;font-size:15px}.btn{width:100%;padding:16px;margin-top:20px;background:#087cff;color:#fff;border:none;border-radius:10px;font-weight:bold}.ref-note{color:#00ff88;text-align:center;margin:15px 0;font-size:13px}</style></head><body><div class="box">
-<div class="logo"><img src="../logo.png"></div><h2>Create Account</h2>
-<form id="f"><label>Choose unique username <span>*</span></label><input id="user" required>
-<label>Email <span>*</span></label><input id="email" type="email" required>
-<label>Password <span>*</span></label><input id="pass" type="password" required>
-<label>Confirm Password <span>*</span></label><input id="cpass" type="password" required>
-<label>Referral Code <span>*</span></label><input id="ref" required>
-<div class="ref-note">Don't have one? Use: DSATECHON1</div><button class="btn">CREATE ACCOUNT</button></form>
-<p style="text-align:center;margin-top:15px">Already have account? <a href="login.html" style="color:#087cff">Login</a></p></div>
-<script>
-const urlParams = new URLSearchParams(window.location.search);
-if(urlParams.get('ref'))document.getElementById('ref').value = urlParams.get('ref');
-document.getElementById('f').onsubmit=function(e){e.preventDefault();
-let u=document.getElementById('user').value.trim(),e1=document.getElementById('email').value,p=document.getElementById('pass').value,cp=document.getElementById('cpass').value,r=document.getElementById('ref').value.trim();
-if(p!=cp){alert('Passwords not match');return}if(r==""){alert('Referral required');return}
-let users=JSON.parse(localStorage.getItem('on1users')||'[]');
-if(users.find(x=>x.user.toLowerCase()==u.toLowerCase())){alert('Username taken');return}
-let referrer=users.find(x=>x.user.toLowerCase()==r.toLowerCase());
-if(!referrer && r.toLowerCase()!="dsatechon1"){alert('Invalid Referral: '+r);return}
-let newUser={user:u,email:e1,pass:p,ref:r,b:0.010,lm:0};users.push(newUser);
-if(referrer){referrer.b+=0.050;users[users.findIndex(x=>x.user.toLowerCase()==r.toLowerCase())]=referrer;}
-localStorage.setItem('on1users',JSON.stringify(users));localStorage.setItem('on1u',JSON.stringify(newUser));
-alert('Account Created! +0.010 ON1');location.href='dashboard.html';}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Create Account | ON1Coin</title>
+  <meta name="description" content="Create your ON1Coin account and join the ON1Ecosystem.">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --bg: #070b14;
+      --card: #101827;
+      --card-light: #151f31;
+      --border: #223047;
+      --blue: #087cff;
+      --blue-hover: #0669d8;
+      --green: #00e88a;
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --danger: #ff5c70;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(8,124,255,.16), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .brand img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .brand-name {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: .4px;
+    }
+
+    .brand-name span {
+      color: var(--blue);
+    }
+
+    .brand-subtitle {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card {
+      background: rgba(16, 24, 39, .96);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+
+    .card h1 {
+      text-align: center;
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #dbe5f2;
+    }
+
+    .required {
+      color: var(--danger);
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      height: 50px;
+      padding: 0 14px;
+      background: #080e19;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      color: var(--text);
+      outline: none;
+      font-size: 15px;
+      transition: .2s ease;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(8,124,255,.12);
+    }
+
+    input::placeholder {
+      color: #64748b;
+    }
+
+    .password-input {
+      padding-right: 70px;
+    }
+
+    .show-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .referral-box {
+      margin: 4px 0 20px;
+      padding: 13px 14px;
+      background: rgba(0,232,138,.06);
+      border: 1px solid rgba(0,232,138,.18);
+      border-radius: 11px;
+    }
+
+    .referral-box strong {
+      display: block;
+      color: var(--green);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .referral-box p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .message {
+      display: none;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .message.error {
+      display: block;
+      background: rgba(255,92,112,.09);
+      border: 1px solid rgba(255,92,112,.25);
+      color: #ff9aa8;
+    }
+
+    .message.success {
+      display: block;
+      background: rgba(0,232,138,.08);
+      border: 1px solid rgba(0,232,138,.22);
+      color: #70f5b7;
+    }
+
+    .btn {
+      width: 100%;
+      height: 52px;
+      border: none;
+      border-radius: 12px;
+      background: var(--blue);
+      color: white;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+      box-shadow: 0 8px 24px rgba(8,124,255,.2);
+    }
+
+    .btn:hover {
+      background: var(--blue-hover);
+    }
+
+    .btn:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .login-link a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 18px;
+      color: #64748b;
+      font-size: 11px;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 18px 12px;
+      }
+
+      .card {
+        padding: 24px 18px;
+        border-radius: 19px;
+      }
+
+      .brand img {
+        width: 64px;
+        height: 64px;
+      }
+
+      .card h1 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <div class="brand">
+      <img src="../logo.png" alt="ON1Coin Logo">
+      <div class="brand-name">ON1<span>Coin</span></div>
+      <div class="brand-subtitle">Part of the ON1Ecosystem</div>
+    </div>
+
+    <section class="card">
+
+      <h1>Create your account</h1>
+
+      <p class="intro">
+        Join ON1Coin and get started with the ON1Ecosystem.
+      </p>
+
+      <div id="message" class="message"></div>
+
+      <form id="signupForm">
+
+        <div class="field">
+          <label for="username">
+            Username <span class="required">*</span>
+          </label>
+
+          <input
+            id="username"
+            type="text"
+            placeholder="Choose a username"
+            autocomplete="username"
+            minlength="3"
+            maxlength="30"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="email">
+            Email address <span class="required">*</span>
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="password">
+            Password <span class="required">*</span>
+          </label>
+
+          <div class="input-wrap">
+            <input
+              id="password"
+              class="password-input"
+              type="password"
+              placeholder="Create a secure password"
+              autocomplete="new-password"
+              minlength="6"
+              required
+            >
+
+            <button
+              type="button"
+              class="show-password"
+              data-target="password"
+            >
+              SHOW
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">
+            Confirm password <span class="required">*</span>
+          </label>
+
+          <div class="input-wrap">
+            <input
+              id="confirmPassword"
+              class="password-input"
+              type="password"
+              placeholder="Enter your password again"
+              autocomplete="new-password"
+              minlength="6"
+              required
+            >
+
+            <button
+              type="button"
+              class="show-password"
+              data-target="confirmPassword"
+            >
+              SHOW
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="referralCode">
+            Referral code <span class="required">*</span>
+          </label>
+
+          <input
+            id="referralCode"
+            type="text"
+            placeholder="Enter referral code"
+            autocomplete="off"
+            required
+          >
+        </div>
+
+        <div class="referral-box">
+          <strong>Don't have a referral code?</strong>
+          <p>
+            You can use the official ON1Ecosystem referral code:
+            <strong>DSATECHON1</strong>
+          </p>
+        </div>
+
+        <button id="signupButton" class="btn" type="submit">
+          CREATE ACCOUNT
+        </button>
+
+      </form>
+
+      <div class="login-link">
+        Already have an account?
+        <a href="login.html">Log in</a>
+      </div>
+
+    </section>
+
+    <div class="footer">
+      © 2026 ON1Coin · ON1Ecosystem
+    </div>
+
+  </main>
+
+
+  <!-- Firebase -->
+  <script type="module">
+
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      updateProfile
+    }
+      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      serverTimestamp
+    }
+      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
+      authDomain: "dsatechon1-c8b41.firebaseapp.com",
+      projectId: "dsatechon1-c8b41",
+      storageBucket: "dsatechon1-c8b41.firebasestorage.app",
+      messagingSenderId: "5740594058",
+      appId: "1:5740594058:web:23fbbca5392f12db863e73"
+    };
+
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+
+    const form = document.getElementById("signupForm");
+    const message = document.getElementById("message");
+    const button = document.getElementById("signupButton");
+
+
+    // Referral link support
+    const params = new URLSearchParams(window.location.search);
+    const referralFromURL = params.get("ref");
+
+    if (referralFromURL) {
+      document.getElementById("referralCode").value =
+        referralFromURL.trim();
+    }
+
+
+    // Password visibility
+    document.querySelectorAll(".show-password").forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        const input =
+          document.getElementById(button.dataset.target);
+
+        if (input.type === "password") {
+          input.type = "text";
+          button.textContent = "HIDE";
+        } else {
+          input.type = "password";
+          button.textContent = "SHOW";
+        }
+
+      });
+
+    });
+
+
+    function showMessage(text, type = "error") {
+
+      message.className = "message " + type;
+      message.textContent = text;
+      message.style.display = "block";
+
+    }
+
+
+    form.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+      const username =
+        document.getElementById("username").value.trim();
+
+      const email =
+        document.getElementById("email").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+      const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+      const referralCode =
+        document.getElementById("referralCode").value.trim();
+
+
+      message.style.display = "none";
+
+
+      // Basic validation
+      if (username.length < 3) {
+        showMessage("Username must be at least 3 characters.");
+        return;
+      }
+
+      if (password.length < 6) {
+        showMessage("Password must be at least 6 characters.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showMessage("Passwords do not match.");
+        return;
+      }
+
+      if (!referralCode) {
+        showMessage("Please enter a referral code.");
+        return;
+      }
+
+
+      button.disabled = true;
+      button.textContent = "CREATING ACCOUNT...";
+
+
+      try {
+
+        // Create Firebase Authentication account
+        const credential =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+        const user = credential.user;
+
+
+        // Set Firebase display name
+        await updateProfile(user, {
+          displayName: username
+        });
+
+
+        /*
+          IMPORTANT:
+          The browser creates the profile with:
+          balance = 0
+          isAdmin = false
+
+          The browser NEVER awards ON1Coin.
+        */
+
+        await setDoc(
+          doc(db, "users", user.uid),
+          {
+            email: email,
+            username: username,
+            balance: 0,
+            referralCode: referralCode,
+            referredBy: referralCode,
+            isAdmin: false,
+            createdAt: serverTimestamp()
+          }
+        );
+
+
+        showMessage(
+          "Account created successfully. Welcome to ON1Coin!",
+          "success"
+        );
+
+
+        button.textContent = "ACCOUNT CREATED";
+
+
+        // Move to dashboard
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 1200);
+
+
+      } catch (error) {
+
+        console.error("Signup error:", error);
+
+        let errorMessage =
+          "We couldn't create your account. Please try again.";
+
+        switch (error.code) {
+
+          case "auth/email-already-in-use":
+            errorMessage =
+              "An account with this email already exists.";
+            break;
+
+          case "auth/invalid-email":
+            errorMessage =
+              "Please enter a valid email address.";
+            break;
+
+          case "auth/weak-password":
+            errorMessage =
+              "Your password is too weak. Use at least 6 characters.";
+            break;
+
+          case "auth/network-request-failed":
+            errorMessage =
+              "Network connection problem. Check your internet and try again.";
+            break;
+
+          case "permission-denied":
+            errorMessage =
+              "Your account was created, but your profile could not be saved. Contact support.";
+            break;
+        }
+
+        showMessage(errorMessage);
+
+        button.disabled = false;
+        button.textContent = "CREATE ACCOUNT";
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
