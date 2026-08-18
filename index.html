@@ -1,26 +1,38 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Sign Up</title>
-<style>body{background:#0a0f1a;color:#fff;font-family:Arial;padding:20px;display:flex;justify-content:center}.box{background:#111a2a;padding:30px;border-radius:15px;width:100%;max-width:400px}input,button{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #1a2332;background:#0a0f1a;color:#fff}button{background:#087cff;border:none;font-weight:bold}</style>
-</head><body><div class="box">
-<img src="../logo.png" style="height:50px;display:block;margin:0 auto 20px">
-<h2 style="text-align:center;color:#087cff">Create Account</h2>
-<form id="f"><input id="name" placeholder="Full Name" required>
-<input id="user" placeholder="Username" required>
-<input id="email" type="email" placeholder="Email" required>
-<input id="pass" type="password" placeholder="Password" required>
-<input id="cpass" type="password" placeholder="Confirm Password" required>
-<input id="ref" placeholder="Referral Code" value="DSATECHON1">
-<button>CREATE ACCOUNT</button></form>
-<p style="text-align:center"><a href="login.html" style="color:#087cff">Already have account? Login</a></p>
-</div>
-<script>
-document.getElementById('f').onsubmit=function(e){
-e.preventDefault();
-if(document.getElementById('pass').value!=document.getElementById('cpass').value){alert('Passwords not match');return}
-let users=JSON.parse(localStorage.getItem('on1users')||'[]');
-if(users.find(x=>x.user==document.getElementById('user').value)){alert('Username taken');return}
-let u={name:document.getElementById('name').value,user:document.getElementById('user').value,email:document.getElementById('email').value,pass:document.getElementById('pass').value,ref:document.getElementById('ref').value,b:0,lm:0};
-users.push(u);localStorage.setItem('on1users',JSON.stringify(users));localStorage.setItem('on1u',JSON.stringify(u));
-alert('Success!');location.href='dashboard.html';
-}
-</script></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSATECHON1 - ON1Coin Mining</title>
+  <style>
+    *{margin:0; padding:0; box-sizing:border-box;}
+    body{
+      background: linear-gradient(180deg, #0a0f1a 0%, #111a2a 100%);
+      color:#fff; 
+      font-family: Arial, sans-serif;
+      text-align:center;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+    .logo img{width:120px; margin-bottom:20px;}
+    h1{color:#087cff; font-size:32px; margin-bottom:10px;}
+    p{color:#aaa; font-size:16px; margin-bottom:30px; max-width:400px;}
+    .btn{
+      display:block;
+      width:300px;
+      max-width:90%;
+      padding:18px;
+      margin:12px auto;
+      background:#087cff;
+      color:#fff;
+      text-decoration:none;
+      border-radius:12px;
+      font-size:18px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    .btn:hover{background:#0066cc; transform:scale
