@@ -3,184 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Create Account — ON1Ecosystem</title>
-
-  <meta
-    name="description"
-    content="Create your ON1Ecosystem account."
-  >
-
-  <meta name="theme-color" content="#087cff">
-
-  <link rel="manifest" href="../manifest.json">
-
-  <link rel="stylesheet" href="../style.css">
+  <title>Sign Up - DSATECHON1</title>
+  <style>
+    body{background:#0a0f1a; color:#fff; font-family:Arial; margin:0; display:flex; justify-content:center; align-items:center; min-height:100vh; padding:20px;}
+    .card{background:#111a2a; padding:40px; border-radius:15px; width:100%; max-width:450px; border:1px solid #1a2332;}
+    .logo{text-align:center; margin-bottom:20px;}
+    h2{text-align:center; color:#087cff;}
+    input{width:100%; padding:12px; margin:10px 0; background:#0a0f1a; border:1px solid #1a2332; border-radius:8px; color:#fff; box-sizing:border-box;}
+    label{font-size:14px; color:#aaa;}
+    .btn{width:100%; padding:15px; background:#087cff; color:#fff; border:none; border-radius:8px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:10px;}
+    .btn:hover{background:#0066cc;}
+    .link{text-align:center; margin-top:15px; font-size:14px;}
+    .link a{color:#087cff; text-decoration:none;}
+  </style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-
+  <div class="card">
     <div class="logo">
-      <div class="logo-mark">D</div>
-      <span>ON1Ecosystem</span>
+      <img src="../logo.png" alt="DSATECHON1 Logo" style="height:50px;">
+      <h2>JOIN ON1Ecosystem</h2>
+    </div>
+    
+    <h3>Create Your Account</h3>
+    <p style="text-align:center; color:#aaa; font-size:14px;">Create your account and become part of the ON1Ecosystem community.</p>
+
+    <form id="signupForm">
+      <label>Full Name</label>
+      <input type="text" placeholder="Enter your full name" required>
+
+      <label>Username *</label>
+      <input type="text" placeholder="Choose unique username" required>
+      <small style="color:#aaa;">This will be your mining ID</small>
+
+      <label>Email Address</label>
+      <input type="email" placeholder="Enter your email address" required>
+
+      <label>Password</label>
+      <input type="password" placeholder="Create a password" required>
+
+      <label>Confirm Password</label>
+      <input type="password" placeholder="Confirm your password" required>
+
+      <label>Referral Code (Optional)</label>
+      <input type="text" placeholder="Enter referral username if any">
+      <small style="color:#aaa;">Get bonus ON1Coin if referred</small>
+
+      <button type="submit" class="btn">CREATE ACCOUNT</button>
+    </form>
+
+    <div class="link">
+      Already have an account? <a href="login.html">Sign In</a>
     </div>
 
-    <a href="../index.html" class="secondary-btn">
-      BACK HOME
-    </a>
-
-  </header>
-
-
-  <!-- SIGN UP -->
-  <main>
-
-    <section class="signup-section">
-
-      <div class="signup-card">
-
-        <p class="eyebrow">JOIN ON1Ecosystem</p>
-
-        <h1>Create Your Account</h1>
-
-        <p class="signup-intro">
-          Create your account and become part of
-          the ON1Ecosystem community.
-        </p>
-
-
-        <form id="signupForm">
-
-          <div class="form-group">
-
-            <label for="fullName">
-              Full Name
-            </label>
-
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              placeholder="Enter your full name"
-              autocomplete="name"
-              required
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="email">
-              Email Address
-            </label>
-
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email address"
-              autocomplete="email"
-              required
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="password">
-              Password
-            </label>
-
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Create a password"
-              autocomplete="new-password"
-              minlength="8"
-              required
-            >
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="confirmPassword">
-              Confirm Password
-            </label>
-
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Confirm your password"
-              autocomplete="new-password"
-              minlength="8"
-              required
-            >
-
-          </div>
-
-
-          <button
-            type="submit"
-            class="primary-btn signup-submit"
-          >
-            CREATE ACCOUNT
-          </button>
-
-        </form>
-
-
-        <p class="signin-text">
-          Already have an account?
-          <a href="#" id="signInLink">
-            Sign In
-          </a>
-        </p>
-
-
-        <p class="signup-note">
-          Account creation and secure authentication
-          will be connected in the next stage.
-        </p>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- FOOTER -->
-  <footer class="footer">
-
-    <div class="logo">
-
-      <div class="logo-mark">D</div>
-
-      <span>ON1Ecosystem</span>
-
-    </div>
-
-    <p>
-      ONE ECOSYSTEM. MULTIPLE SOLUTIONS.
+    <p style="text-align:center; color:#555; font-size:12px; margin-top:20px;">
+      Account creation will be connected to database in next stage
     </p>
+  </div>
 
-    <p class="copyright">
-      © 2026 DSATECHON1. All rights reserved.
-    </p>
-
-  </footer>
-
-
-  <script src="../app.js"></script>
-
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  alert('Account Created! Next: Mining Dashboard');
+  window.location.href = 'dashboard.html';
+});
+</script>
 </body>
-  </html>
+</html>
