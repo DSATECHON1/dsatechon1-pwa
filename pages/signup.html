@@ -1,26 +1,63 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Sign Up</title>
-<style>body{background:#0a0f1a;color:#fff;font-family:Arial;padding:20px;display:flex;justify-content:center}.box{background:#111a2a;padding:30px;border-radius:15px;width:100%;max-width:400px}input,button{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #1a2332;background:#0a0f1a;color:#fff}button{background:#087cff;border:none;font-weight:bold}</style>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sign Up - DSATECHON1</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#0a0f1a;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.box{background:#111a2a;padding:30px;border-radius:20px;width:100%;max-width:420px}
+.logo{text-align:center;margin-bottom:15px}
+.logo img{width:70px}
+h2{color:#087cff;text-align:center;margin-bottom:20px}
+label{display:block;margin-top:15px;margin-bottom:5px;font-size:14px;color:#aaa}
+label span{color:red}
+input{width:100%;padding:14px;background:#0a0f1a;border:1px solid #1a2332;border-radius:10px;color:#fff;font-size:15px}
+input:focus{border-color:#087cff;outline:none}
+.btn{width:100%;padding:16px;margin-top:20px;background:#087cff;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer}
+.ref-note{color:#00ff88;text-align:center;margin:15px 0;font-size:13px}
+.footer-note{color:#555;text-align:center;margin-top:15px;font-size:12px}
+a{color:#087cff;text-decoration:none}
+p{text-align:center;margin-top:15px;color:#aaa}
+</style>
 </head><body><div class="box">
-<img src="../logo.png" style="height:50px;display:block;margin:0 auto 20px">
-<h2 style="text-align:center;color:#087cff">Create Account</h2>
-<form id="f"><input id="name" placeholder="Full Name" required>
-<input id="user" placeholder="Username" required>
-<input id="email" type="email" placeholder="Email" required>
-<input id="pass" type="password" placeholder="Password" required>
-<input id="cpass" type="password" placeholder="Confirm Password" required>
-<input id="ref" placeholder="Referral Code" value="DSATECHON1">
-<button>CREATE ACCOUNT</button></form>
-<p style="text-align:center"><a href="login.html" style="color:#087cff">Already have account? Login</a></p>
+<div class="logo"><img src="../logo.png" alt="DSATECHON1"></div>
+<h2>Create Account</h2>
+<form id="f">
+<label>Choose unique username <span>*</span></label>
+<input id="user" placeholder="Enter username" required>
+
+<label>This will be your mining ID Email Address <span>*</span></label>
+<input id="email" type="email" placeholder="Enter your email address" required>
+
+<label>Password <span>*</span></label>
+<input id="pass" type="password" placeholder="Create a password" required>
+
+<label>Confirm Password <span>*</span></label>
+<input id="cpass" type="password" placeholder="Confirm your password" required>
+
+<label>Referral Code <span>*</span></label>
+<input id="ref" placeholder="Enter referral username" required>
+
+<div class="ref-note">Don't have one? Use: DSATECHON1</div>
+
+<button class="btn">CREATE ACCOUNT</button></form>
+<p>Already have an account? <a href="login.html">Sign In</a></p>
+<div class="footer-note">Account creation will be connected to database in next stage</div>
 </div>
 <script>
 document.getElementById('f').onsubmit=function(e){
 e.preventDefault();
-if(document.getElementById('pass').value!=document.getElementById('cpass').value){alert('Passwords not match');return}
+
+let pass = document.getElementById('pass').value;
+let cpass = document.getElementById('cpass').value;
+let ref = document.getElementById('ref').value.trim();
+
+if(pass != cpass){alert('Passwords do not match');return}
+if(ref == ""){alert('Referral Code is required! Please enter a referral code.');return}
+
 let users=JSON.parse(localStorage.getItem('on1users')||'[]');
-if(users.find(x=>x.user==document.getElementById('user').value)){alert('Username taken');return}
-let u={name:document.getElementById('name').value,user:document.getElementById('user').value,email:document.getElementById('email').value,pass:document.getElementById('pass').value,ref:document.getElementById('ref').value,b:0,lm:0};
+if(users.find(x=>x.user==document.getElementById('user').value)){alert('Username already taken');return}
+
+let u={name:document.getElementById('user').value,user:document.getElementById('user').value,email:document.getElementById('email').value,pass:pass,ref:ref,b:0,lm:0};
 users.push(u);localStorage.setItem('on1users',JSON.stringify(users));localStorage.setItem('on1u',JSON.stringify(u));
-alert('Success!');location.href='dashboard.html';
+alert('Account Created Successfully!');location.href='dashboard.html';
 }
 </script></body></html>
