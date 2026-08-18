@@ -1,45 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><title>Sign Up</title>
+<style>body{background:#0a0f1a;color:#fff;font-family:Arial;padding:20px;display:flex;justify-content:center}.box{background:#111a2a;padding:30px;border-radius:15px;width:100%;max-width:400px}input,button{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #1a2332;background:#0a0f1a;color:#fff}button{background:#087cff;border:none;font-weight:bold}</style>
+</head><body><div class="box">
+<img src="../logo.png" style="height:50px;display:block;margin:0 auto 20px">
+<h2 style="text-align:center;color:#087cff">Create Account</h2>
+<form id="f"><input id="name" placeholder="Full Name" required>
+<input id="user" placeholder="Username" required>
+<input id="email" type="email" placeholder="Email" required>
+<input id="pass" type="password" placeholder="Password" required>
+<input id="cpass" type="password" placeholder="Confirm Password" required>
+<input id="ref" placeholder="Referral Code" value="DSATECHON1">
+<button>CREATE ACCOUNT</button></form>
+<p style="text-align:center"><a href="login.html" style="color:#087cff">Already have account? Login</a></p>
+</div>
 <script>
-document.getElementById('signupForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  
-  let referral = document.getElementById('referral').value.trim();
-  if(referral === ""){
-    referral = "DSATECHON1";
-    document.getElementById('referral').value = "DSATECHON1";
-  }
-  
-  if(document.getElementById('password').value !== document.getElementById('confirm').value){
-    alert("Passwords do not match!");
-    return;
-  }
-
-  // GET EXISTING USERS OR CREATE NEW ARRAY
-  let users = JSON.parse(localStorage.getItem('on1users')) || [];
-  
-  // CHECK IF USERNAME ALREADY EXISTS
-  if(users.find(u => u.username === document.getElementById('username').value)){
-    alert("Username already taken! Choose another.");
-    return;
-  }
-
-  // CREATE NEW USER
-  let newUser = {
-    fullname: document.getElementById('fullname').value,
-    username: document.getElementById('username').value,
-    email: document.getElementById('email').value,
-    password: document.getElementById('password').value, // In real app we will encrypt this
-    referral: referral,
-    balance: 0,
-    lastMine: 0
-  };
-  
-  users.push(newUser);
-  localStorage.setItem('on1users', JSON.stringify(users));
-  
-  // ALSO SAVE AS "CURRENT USER"
-  localStorage.setItem('on1current', JSON.stringify(newUser));
-
-  alert('Account Created! Referred by: ' + referral);
-  window.location.href = 'dashboard.html';
-});
-</script>
+document.getElementById('f').onsubmit=function(e){
+e.preventDefault();
+if(document.getElementById('pass').value!=document.getElementById('cpass').value){alert('Passwords not match');return}
+let users=JSON.parse(localStorage.getItem('on1users')||'[]');
+if(users.find(x=>x.user==document.getElementById('user').value)){alert('Username taken');return}
+let u={name:document.getElementById('name').value,user:document.getElementById('user').value,email:document.getElementById('email').value,pass:document.getElementById('pass').value,ref:document.getElementById('ref').value,b:0,lm:0};
+users.push(u);localStorage.setItem('on1users',JSON.stringify(users));localStorage.setItem('on1u',JSON.stringify(u));
+alert('Success!');location.href='dashboard.html';
+}
+</script></body></html>
