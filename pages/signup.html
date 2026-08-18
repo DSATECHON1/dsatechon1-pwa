@@ -1,85 +1,25 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sign Up - DSATECHON1</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0a0f1a;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
-.box{background:#111a2a;padding:30px;border-radius:20px;width:100%;max-width:420px}
-.logo{text-align:center;margin-bottom:15px}
-.logo img{width:70px}
-h2{color:#087cff;text-align:center;margin-bottom:20px}
-label{display:block;margin-top:15px;margin-bottom:5px;font-size:14px;color:#aaa}
-label span{color:red}
-input{width:100%;padding:14px;background:#0a0f1a;border:1px solid #1a2332;border-radius:10px;color:#fff;font-size:15px}
-input:focus{border-color:#087cff;outline:none}
-.btn{width:100%;padding:16px;margin-top:20px;background:#087cff;color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer}
-.ref-note{color:#00ff88;text-align:center;margin:15px 0;font-size:13px}
-.footer-note{color:#555;text-align:center;margin-top:15px;font-size:12px}
-a{color:#087cff;text-decoration:none}
-p{text-align:center;margin-top:15px;color:#aaa}
-</style>
-</head><body><div class="box">
-<div class="logo"><img src="../logo.png" alt="DSATECHON1"></div>
-<h2>Create Account</h2>
-<form id="f">
-<label>Choose unique username <span>*</span></label>
-<input id="user" placeholder="Enter username" required>
-
-<label>This will be your mining ID Email Address <span>*</span></label>
-<input id="email" type="email" placeholder="Enter your email address" required>
-
-<label>Password <span>*</span></label>
-<input id="pass" type="password" placeholder="Create a password" required>
-
-<label>Confirm Password <span>*</span></label>
-<input id="cpass" type="password" placeholder="Confirm your password" required>
-
-<label>Referral Code <span>*</span></label>
-<input id="ref" placeholder="Enter referral username" required>
-
-<div class="ref-note">Don't have one? Use: DSATECHON1</div>
-
-<button class="btn">CREATE ACCOUNT</button></form>
-<p>Already have an account? <a href="login.html">Sign In</a></p>
-<div class="footer-note">Account creation will be connected to database in next stage</div>
-</div>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sign Up</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a0f1a;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}.box{background:#111a2a;padding:30px;border-radius:20px;width:100%;max-width:420px}.logo{text-align:center}.logo img{width:70px}h2{color:#087cff;text-align:center;margin:20px 0}label{display:block;margin-top:15px;margin-bottom:5px;font-size:14px;color:#aaa}label span{color:red}input{width:100%;padding:14px;background:#0a0f1a;border:1px solid #1a2332;border-radius:10px;color:#fff;font-size:15px}.btn{width:100%;padding:16px;margin-top:20px;background:#087cff;color:#fff;border:none;border-radius:10px;font-weight:bold}.ref-note{color:#00ff88;text-align:center;margin:15px 0;font-size:13px}</style></head><body><div class="box">
+<div class="logo"><img src="../logo.png"></div><h2>Create Account</h2>
+<form id="f"><label>Choose unique username <span>*</span></label><input id="user" required>
+<label>Email <span>*</span></label><input id="email" type="email" required>
+<label>Password <span>*</span></label><input id="pass" type="password" required>
+<label>Confirm Password <span>*</span></label><input id="cpass" type="password" required>
+<label>Referral Code <span>*</span></label><input id="ref" required>
+<div class="ref-note">Don't have one? Use: DSATECHON1</div><button class="btn">CREATE ACCOUNT</button></form>
+<p style="text-align:center;margin-top:15px">Already have account? <a href="login.html" style="color:#087cff">Login</a></p></div>
 <script>
-// Auto-fill referral from URL?ref=
 const urlParams = new URLSearchParams(window.location.search);
-const refFromUrl = urlParams.get('ref');
-if(refFromUrl){document.getElementById('ref').value = refFromUrl;}
-
-document.getElementById('f').onsubmit=function(e){
-e.preventDefault();
-
-let pass = document.getElementById('pass').value;
-let cpass = document.getElementById('cpass').value;
-let ref = document.getElementById('ref').value.trim();
-let user = document.getElementById('user').value.trim();
-
-if(pass!= cpass){alert('Passwords do not match');return}
-if(ref == ""){alert('Referral Code is required!');return}
-
+if(urlParams.get('ref'))document.getElementById('ref').value = urlParams.get('ref');
+document.getElementById('f').onsubmit=function(e){e.preventDefault();
+let u=document.getElementById('user').value.trim(),e1=document.getElementById('email').value,p=document.getElementById('pass').value,cp=document.getElementById('cpass').value,r=document.getElementById('ref').value.trim();
+if(p!=cp){alert('Passwords not match');return}if(r==""){alert('Referral required');return}
 let users=JSON.parse(localStorage.getItem('on1users')||'[]');
-if(users.find(x=>x.user==user)){alert('Username already taken');return}
-
-// Check if referrer exists
-let referrer = users.find(x=>x.user==ref);
-if(!referrer && ref!= "DSATECHON1"){alert('Invalid Referral Code');return}
-
-// Create new user with signup bonus
-let newUser={name:user,user:user,email:document.getElementById('email').value,pass:pass,ref:ref,b:0.010,lm:0}; // 0.010 signup bonus
-users.push(newUser);
-
-// Give referrer bonus
-if(referrer){
-referrer.b += 0.050; // 0.050 referral bonus
-let idx=users.findIndex(x=>x.user==ref);
-users[idx]=referrer;
-}
-
-localStorage.setItem('on1users',JSON.stringify(users));
-localStorage.setItem('on1u',JSON.stringify(newUser));
-alert('Account Created! You got 0.010 ON1. Referrer got 0.050 ON1');
-location.href='dashboard.html';
-}
+if(users.find(x=>x.user.toLowerCase()==u.toLowerCase())){alert('Username taken');return}
+let referrer=users.find(x=>x.user.toLowerCase()==r.toLowerCase());
+if(!referrer && r.toLowerCase()!="dsatechon1"){alert('Invalid Referral: '+r);return}
+let newUser={user:u,email:e1,pass:p,ref:r,b:0.010,lm:0};users.push(newUser);
+if(referrer){referrer.b+=0.050;users[users.findIndex(x=>x.user.toLowerCase()==r.toLowerCase())]=referrer;}
+localStorage.setItem('on1users',JSON.stringify(users));localStorage.setItem('on1u',JSON.stringify(newUser));
+alert('Account Created! +0.010 ON1');location.href='dashboard.html';}
 </script></body></html>
