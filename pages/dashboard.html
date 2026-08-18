@@ -1,95 +1,994 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Dashboard</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0a0f1a;color:#fff;text-align:center;padding:20px}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.header h3{color:#087cff}
-.card{background:#111a2a;padding:25px;border-radius:20px;margin:20px 0}
-.balance{font-size:40px;color:#087cff;font-weight:bold;margin:10px 0}
-.mine-btn{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#087cff,#0056b3);border:none;color:#fff;font-size:18px;font-weight:bold;cursor:pointer;box-shadow:0 0 30px rgba(8,124,255,0.4)}
-.mine-btn:disabled{background:#333;box-shadow:none;cursor:not-allowed}
-.timer{color:#aaa;margin-top:10px}
-.stats{display:flex;justify-content:space-around;margin-top:20px}
-.stat-box{background:#0a0f1a;padding:15px;border-radius:10px;width:48%}
-.stat-box h4{color:#00ff88;font-size:20px}
-.ref-link{background:#0a0f1a;padding:12px;border-radius:10px;margin-top:10px;word-break:break-all;color:#087cff}
-</style>
-</head><body>
-<div class="header">
-<h3>DSATECHON1</h3>
-<span id="username"></span>
-</div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="card">
-<h4>Your Balance</h4>
-<div class="balance" id="balance">0.000</div>
-<p>ON1 Coins</p>
-</div>
+  <title>Dashboard | ON1Coin</title>
+  <meta name="theme-color" content="#07111f">
 
-<button class="mine-btn" id="mineBtn" onclick="mine()">TAP TO MINE</button>
-<div class="timer" id="timer"></div>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-<div class="stats">
-<div class="stat-box">
-<h4 id="refCount">0</h4>
-<p>Referrals</p>
-</div>
-<div class="stat-box">
-<h4>0.050</h4>
-<p>Bonus/Referral</p>
-</div>
-</div>
+    :root {
+      --bg: #060b13;
+      --surface: #0d1624;
+      --surface-2: #111d2d;
+      --border: #203149;
+      --blue: #087cff;
+      --blue-light: #36a0ff;
+      --green: #00e88a;
+      --yellow: #ffc857;
+      --orange: #ff9f43;
+      --red: #ff5d73;
+      --text: #ffffff;
+      --muted: #8fa1b7;
+    }
 
-<div class="card">
-<h4>Your Referral Link</h4>
-<div class="ref-link" id="refLink"></div>
-<button class="mine-btn" style="width:100%;height:50px;border-radius:10px;margin-top:10px" onclick="copyRef()">COPY LINK</button>
-</div>
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(8,124,255,.18), transparent 38%),
+        var(--bg);
+      color: var(--text);
+      padding-bottom: 90px;
+    }
 
-<script>
-let u=JSON.parse(localStorage.getItem('on1u'));
-if(!u) location.href='login.html';
+    button {
+      font-family: inherit;
+    }
 
-document.getElementById('username').innerText = u.user;
-document.getElementById('balance').innerText = u.b.toFixed(3);
-document.getElementById('refLink').innerText = window.location.origin + '/dsatechon1-pwa/pages/signup.html?ref=' + u.user;
+    .app {
+      width: 100%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 16px;
+    }
 
-// Count referrals
-let users=JSON.parse(localStorage.getItem('on1users')||'[]');
-let refCount = users.filter(x=>x.ref==u.user).length;
-document.getElementById('refCount').innerText = refCount;
+    /* HEADER */
 
-function mine(){
-let now=Date.now();
-if(now-u.lm<86400000){alert('Come back after 24 hours');return}
-u.b+=0.001; u.lm=now;
-localStorage.setItem('on1u',JSON.stringify(u));
-// Update in users array too
-let idx=users.findIndex(x=>x.user==u.user);
-users[idx]=u; localStorage.setItem('on1users',JSON.stringify(users));
-document.getElementById('balance').innerText=u.b.toFixed(3);
-alert('Mined 0.001 ON1! Come back in 24h');
-updateTimer();
-}
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
 
-function updateTimer(){
-let left=86400000-(Date.now()-u.lm);
-if(left>0){
-let h=Math.floor(left/3600000);
-let m=Math.floor((left%3600000)/60000);
-document.getElementById('timer').innerText='Next mine in: '+h+'h '+m+'m';
-document.getElementById('mineBtn').disabled=true;
-setTimeout(updateTimer,60000);
-}else{
-document.getElementById('timer').innerText='Ready to mine!';
-document.getElementById('mineBtn').disabled=false;
-}
-}
-updateTimer();
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-function copyRef(){
-navigator.clipboard.writeText(document.getElementById('refLink').innerText);
-alert('Referral link copied!');
-}
-</script></body></html>
+    .brand img {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .brand-name span {
+      color: var(--blue);
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    .profile-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* WELCOME */
+
+    .welcome {
+      margin-bottom: 18px;
+    }
+
+    .welcome small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .welcome h1 {
+      margin-top: 4px;
+      font-size: 25px;
+    }
+
+    .welcome h1 span {
+      color: var(--blue-light);
+    }
+
+    /* BALANCE */
+
+    .balance-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(8,124,255,.22), rgba(13,22,36,.97) 55%);
+      border: 1px solid rgba(8,124,255,.35);
+      border-radius: 24px;
+      padding: 25px 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.28);
+    }
+
+    .balance-card::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: rgba(8,124,255,.08);
+      right: -80px;
+      top: -80px;
+    }
+
+    .balance-label {
+      color: #b5c6da;
+      font-size: 13px;
+    }
+
+    .balance {
+      margin-top: 8px;
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .balance span {
+      color: var(--blue-light);
+      font-size: 17px;
+      margin-left: 4px;
+    }
+
+    .balance-info {
+      margin-top: 10px;
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .balance-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .outline-btn,
+    .primary-btn {
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .primary-btn {
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      color: white;
+    }
+
+    .outline-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: #dce8f5;
+    }
+
+    /* GRID */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      padding: 20px;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 17px;
+    }
+
+    .card-title h2 {
+      font-size: 16px;
+    }
+
+    .card-title small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* MINING */
+
+    .mining-card {
+      grid-column: span 2;
+    }
+
+    .mining-rate {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .rate-value {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .rate-value span {
+      color: var(--blue-light);
+      font-size: 13px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,232,138,.7);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 9px;
+      background: #07101c;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid #17273c;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--blue), var(--blue-light));
+      border-radius: 20px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 8px;
+    }
+
+    .mine-btn {
+      width: 100%;
+      margin-top: 19px;
+      height: 50px;
+      border: none;
+      border-radius: 12px;
+      background: var(--blue);
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .mine-btn:hover {
+      background: #066bdc;
+    }
+
+    /* STREAK */
+
+    .streak-number {
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .streak-number span {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: normal;
+    }
+
+    .multiplier {
+      display: inline-block;
+      margin-top: 6px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 5px;
+      margin-top: 18px;
+    }
+
+    .day {
+      text-align: center;
+      padding: 7px 2px;
+      border-radius: 7px;
+      background: #08111d;
+      color: #63758a;
+      font-size: 9px;
+      border: 1px solid #17273a;
+    }
+
+    .day.active {
+      background: rgba(8,124,255,.16);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .day.completed {
+      background: rgba(0,232,138,.08);
+      border-color: rgba(0,232,138,.35);
+      color: var(--green);
+    }
+
+    .claim-btn {
+      width: 100%;
+      height: 42px;
+      margin-top: 17px;
+      border-radius: 10px;
+      border: 1px solid var(--yellow);
+      background: rgba(255,200,87,.07);
+      color: var(--yellow);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* XP */
+
+    .xp-number {
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .level {
+      color: var(--blue-light);
+      font-size: 12px;
+      margin-top: 5px;
+      font-weight: 700;
+    }
+
+    .xp-track {
+      height: 8px;
+      background: #07101c;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-top: 18px;
+    }
+
+    .xp-bar {
+      height: 100%;
+      width: 62%;
+      background: linear-gradient(90deg, var(--blue), #6bbcff);
+    }
+
+    .xp-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* REFERRAL */
+
+    .referral-card {
+      grid-column: span 2;
+    }
+
+    .ref-code {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px;
+      border-radius: 11px;
+      background: #080f19;
+      border: 1px solid var(--border);
+    }
+
+    .ref-code strong {
+      color: var(--green);
+      font-size: 15px;
+      letter-spacing: .5px;
+    }
+
+    .copy-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .ref-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .ref-stat {
+      background: var(--surface-2);
+      border-radius: 10px;
+      padding: 13px;
+    }
+
+    .ref-stat strong {
+      display: block;
+      font-size: 20px;
+    }
+
+    .ref-stat span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* REWARDS */
+
+    .reward-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .reward {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px;
+      background: var(--surface-2);
+      border-radius: 10px;
+    }
+
+    .reward-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reward-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: #08111d;
+    }
+
+    .reward-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .reward-status {
+      font-size: 10px;
+      color: var(--green);
+    }
+
+    .reward-amount {
+      font-size: 12px;
+      color: var(--blue-light);
+      font-weight: 800;
+    }
+
+    /* NAV */
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 600px;
+      padding: 9px 12px calc(9px + env(safe-area-inset-bottom));
+      background: rgba(7,11,19,.95);
+      backdrop-filter: blur(15px);
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      z-index: 20;
+    }
+
+    .nav-item {
+      text-align: center;
+      color: #65778d;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+
+    .nav-item.active {
+      color: var(--blue-light);
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 700px) {
+
+      .app {
+        padding: 28px 24px;
+      }
+
+      .balance {
+        font-size: 46px;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mining-card,
+      .referral-card {
+        grid-column: span 1;
+      }
+
+      .balance-actions {
+        flex-direction: column;
+      }
+
+      .primary-btn,
+      .outline-btn {
+        width: 100%;
+      }
+
+    }
+
+    @media (max-width: 360px) {
+
+      .app {
+        padding-left: 11px;
+        padding-right: 11px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      .balance {
+        font-size: 32px;
+      }
+
+      .days {
+        gap: 3px;
+      }
+
+      .day {
+        font-size: 8px;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="app">
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+      <div class="brand">
+        <img src="../logo.png" alt="ON1Coin">
+
+        <div>
+          <div class="brand-name">ON1<span>Coin</span></div>
+          <div class="brand-subtitle">ON1Ecosystem</div>
+        </div>
+      </div>
+
+      <button class="profile-btn" aria-label="Profile">
+        U
+      </button>
+
+    </header>
+
+
+    <!-- WELCOME -->
+    <section class="welcome">
+
+      <small>Welcome back</small>
+
+      <h1>Hello, <span>ON1 Pioneer</span> 👋</h1>
+
+    </section>
+
+
+    <!-- BALANCE -->
+    <section class="balance-card">
+
+      <div class="balance-label">
+        Total ON1Coin Balance
+      </div>
+
+      <div class="balance">
+        0.0000 <span>ON1</span>
+      </div>
+
+      <div class="balance-info">
+        ● Mining system active
+      </div>
+
+      <div class="balance-actions">
+        <button class="primary-btn">
+          Claim Reward
+        </button>
+
+        <button class="outline-btn">
+          Transaction History
+        </button>
+      </div>
+
+    </section>
+
+
+    <!-- DASHBOARD GRID -->
+    <section class="grid">
+
+
+      <!-- MINING -->
+      <article class="card mining-card">
+
+        <div class="card-title">
+
+          <h2>⛏️ ON1Coin Mining</h2>
+
+          <div class="status">
+            <span class="status-dot"></span>
+            Active
+          </div>
+
+        </div>
+
+        <div class="mining-rate">
+
+          <div>
+            <div class="rate-value">
+              0.4167 <span>ON1 / hour</span>
+            </div>
+
+            <small style="color:var(--muted);font-size:11px;">
+              Base rate · 10 ON1 / 24 hours
+            </small>
+          </div>
+
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-bar"></div>
+        </div>
+
+        <div class="progress-meta">
+          <span>8h 24m elapsed</span>
+          <span>15h 36m remaining</span>
+        </div>
+
+        <button class="mine-btn" id="mineButton">
+          CLAIM MINING REWARD
+        </button>
+
+      </article>
+
+
+      <!-- DAILY STREAK -->
+      <article class="card">
+
+        <div class="card-title">
+
+          <h2>🔥 Daily Streak</h2>
+
+          <small>10-day cycle</small>
+
+        </div>
+
+        <div class="streak-number">
+          Day 4
+        </div>
+
+        <div class="multiplier">
+          ×1.3 Streak Multiplier
+        </div>
+
+        <div class="days">
+
+          <div class="day completed">1</div>
+          <div class="day completed">2</div>
+          <div class="day completed">3</div>
+          <div class="day active">4</div>
+          <div class="day">5</div>
+          <div class="day">6</div>
+          <div class="day">7</div>
+          <div class="day">8</div>
+          <div class="day">9</div>
+          <div class="day">10</div>
+
+        </div>
+
+        <button class="claim-btn">
+          CLAIM STREAK REWARD
+        </button>
+
+      </article>
+
+
+      <!-- XP -->
+      <article class="card">
+
+        <div class="card-title">
+
+          <h2>⭐ ON1 XP</h2>
+
+          <small>Progress</small>
+
+        </div>
+
+        <div class="xp-number">
+          1,240 XP
+        </div>
+
+        <div class="level">
+          Level 4 · Pioneer
+        </div>
+
+        <div class="xp-track">
+          <div class="xp-bar"></div>
+        </div>
+
+        <div class="xp-meta">
+          <span>1,240 XP</span>
+          <span>2,000 XP</span>
+        </div>
+
+      </article>
+
+
+      <!-- REFERRALS -->
+      <article class="card referral-card">
+
+        <div class="card-title">
+
+          <h2>👥 Invite & Earn</h2>
+
+          <small>Referral rewards</small>
+
+        </div>
+
+        <div class="ref-code">
+
+          <strong>ON1PIONEER</strong>
+
+          <button class="copy-btn" id="copyReferral">
+            COPY
+          </button>
+
+        </div>
+
+        <div class="ref-stats">
+
+          <div class="ref-stat">
+            <strong>0</strong>
+            <span>Successful referrals</span>
+          </div>
+
+          <div class="ref-stat">
+            <strong>0.000 ON1</strong>
+            <span>Referral rewards</span>
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <!-- REWARDS -->
+      <article class="card">
+
+        <div class="card-title">
+
+          <h2>🎁 Rewards</h2>
+
+          <small>Available</small>
+
+        </div>
+
+        <div class="reward-list">
+
+          <div class="reward">
+
+            <div class="reward-left">
+
+              <div class="reward-icon">🎉</div>
+
+              <div>
+                <div class="reward-name">Welcome Bonus</div>
+                <div class="reward-status">Coming soon</div>
+              </div>
+
+            </div>
+
+            <div class="reward-amount">
+              +10 ON1
+            </div>
+
+          </div>
+
+
+          <div class="reward">
+
+            <div class="reward-left">
+
+              <div class="reward-icon">🔥</div>
+
+              <div>
+                <div class="reward-name">Daily Streak</div>
+                <div class="reward-status">Day 4</div>
+              </div>
+
+            </div>
+
+            <div class="reward-amount">
+              ×1.3
+            </div>
+
+          </div>
+
+
+          <div class="reward">
+
+            <div class="reward-left">
+
+              <div class="reward-icon">👥</div>
+
+              <div>
+                <div class="reward-name">Referral</div>
+                <div class="reward-status">Invite friends</div>
+              </div>
+
+            </div>
+
+            <div class="reward-amount">
+              Earn
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+    </section>
+
+  </main>
+
+
+  <!-- BOTTOM NAVIGATION -->
+  <nav class="bottom-nav">
+
+    <div class="nav-item active">
+      <span class="nav-icon">⌂</span>
+      Home
+    </div>
+
+    <div class="nav-item">
+      <span class="nav-icon">⛏</span>
+      Mining
+    </div>
+
+    <div class="nav-item">
+      <span class="nav-icon">👥</span>
+      Referrals
+    </div>
+
+    <div class="nav-item">
+      <span class="nav-icon">☰</span>
+      More
+    </div>
+
+  </nav>
+
+
+  <!-- DEMO-ONLY INTERACTIONS -->
+  <script>
+
+    /*
+      DESIGN PROTOTYPE ONLY
+
+      This dashboard is NOT connected to Firebase.
+      Numbers displayed here are demonstration values.
+
+      Firebase + secure reward logic will be integrated
+      only after the UI/UX is approved.
+    */
+
+
+    const copyButton =
+      document.getElementById("copyReferral");
+
+    copyButton.addEventListener("click", async () => {
+
+      try {
+
+        await navigator.clipboard.writeText("ON1PIONEER");
+
+        copyButton.textContent = "COPIED";
+
+        setTimeout(() => {
+          copyButton.textContent = "COPY";
+        }, 1500);
+
+      } catch {
+
+        copyButton.textContent = "COPY";
+
+      }
+
+    });
+
+
+    const mineButton =
+      document.getElementById("mineButton");
+
+    mineButton.addEventListener("click", () => {
+
+      mineButton.textContent =
+        "DEMO REWARD CLAIMED";
+
+      setTimeout(() => {
+
+        mineButton.textContent =
+          "CLAIM MINING REWARD";
+
+      }, 1800);
+
+    });
+
+  </script>
+
+</body>
+</html>
