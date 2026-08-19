@@ -1,994 +1,1505 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Dashboard | ON1Coin</title>
-  <meta name="theme-color" content="#07111f">
+<title>Dashboard — ON1Ecosystem</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+<meta name="theme-color" content="#050b13">
+<meta name="description" content="ON1Ecosystem member dashboard">
 
-    :root {
-      --bg: #060b13;
-      --surface: #0d1624;
-      --surface-2: #111d2d;
-      --border: #203149;
-      --blue: #087cff;
-      --blue-light: #36a0ff;
-      --green: #00e88a;
-      --yellow: #ffc857;
-      --orange: #ff9f43;
-      --red: #ff5d73;
-      --text: #ffffff;
-      --muted: #8fa1b7;
-    }
+<style>
 
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 50% -10%, rgba(8,124,255,.18), transparent 38%),
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --bg:#050b13;
+    --card:#0c1624;
+    --card2:#101d2d;
+    --border:#1d3048;
+    --blue:#087cff;
+    --blue2:#42a5ff;
+    --green:#00df88;
+    --gold:#ffc94a;
+    --purple:#9b6cff;
+    --red:#ff6178;
+    --text:#ffffff;
+    --muted:#8ea2b8;
+}
+
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(8,124,255,.18),
+            transparent 42%
+        ),
         var(--bg);
-      color: var(--text);
-      padding-bottom: 90px;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    .app {
-      width: 100%;
-      max-width: 1100px;
-      margin: auto;
-      padding: 18px 16px;
-    }
-
-    /* HEADER */
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand img {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-    }
-
-    .brand-name {
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .brand-name span {
-      color: var(--blue);
-    }
-
-    .brand-subtitle {
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 2px;
-    }
-
-    .profile-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* WELCOME */
-
-    .welcome {
-      margin-bottom: 18px;
-    }
-
-    .welcome small {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .welcome h1 {
-      margin-top: 4px;
-      font-size: 25px;
-    }
-
-    .welcome h1 span {
-      color: var(--blue-light);
-    }
-
-    /* BALANCE */
-
-    .balance-card {
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(135deg, rgba(8,124,255,.22), rgba(13,22,36,.97) 55%);
-      border: 1px solid rgba(8,124,255,.35);
-      border-radius: 24px;
-      padding: 25px 22px;
-      margin-bottom: 16px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.28);
-    }
-
-    .balance-card::after {
-      content: "";
-      position: absolute;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: rgba(8,124,255,.08);
-      right: -80px;
-      top: -80px;
-    }
-
-    .balance-label {
-      color: #b5c6da;
-      font-size: 13px;
-    }
-
-    .balance {
-      margin-top: 8px;
-      font-size: 38px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .balance span {
-      color: var(--blue-light);
-      font-size: 17px;
-      margin-left: 4px;
-    }
-
-    .balance-info {
-      margin-top: 10px;
-      color: var(--green);
-      font-size: 12px;
-    }
-
-    .balance-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .outline-btn,
-    .primary-btn {
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .primary-btn {
-      background: var(--blue);
-      border: 1px solid var(--blue);
-      color: white;
-    }
-
-    .outline-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: #dce8f5;
-    }
-
-    /* GRID */
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      padding: 20px;
-    }
-
-    .card-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 17px;
-    }
-
-    .card-title h2 {
-      font-size: 16px;
-    }
-
-    .card-title small {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    /* MINING */
-
-    .mining-card {
-      grid-column: span 2;
-    }
-
-    .mining-rate {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 15px;
-    }
-
-    .rate-value {
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .rate-value span {
-      color: var(--blue-light);
-      font-size: 13px;
-    }
-
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--green);
-      font-size: 12px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 10px rgba(0,232,138,.7);
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 9px;
-      background: #07101c;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid #17273c;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 35%;
-      background: linear-gradient(90deg, var(--blue), var(--blue-light));
-      border-radius: 20px;
-    }
-
-    .progress-meta {
-      display: flex;
-      justify-content: space-between;
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 8px;
-    }
-
-    .mine-btn {
-      width: 100%;
-      margin-top: 19px;
-      height: 50px;
-      border: none;
-      border-radius: 12px;
-      background: var(--blue);
-      color: white;
-      font-weight: 800;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .mine-btn:hover {
-      background: #066bdc;
-    }
-
-    /* STREAK */
-
-    .streak-number {
-      font-size: 32px;
-      font-weight: 800;
-    }
-
-    .streak-number span {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: normal;
-    }
-
-    .multiplier {
-      display: inline-block;
-      margin-top: 6px;
-      color: var(--yellow);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .days {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      gap: 5px;
-      margin-top: 18px;
-    }
-
-    .day {
-      text-align: center;
-      padding: 7px 2px;
-      border-radius: 7px;
-      background: #08111d;
-      color: #63758a;
-      font-size: 9px;
-      border: 1px solid #17273a;
-    }
-
-    .day.active {
-      background: rgba(8,124,255,.16);
-      border-color: var(--blue);
-      color: #fff;
-    }
-
-    .day.completed {
-      background: rgba(0,232,138,.08);
-      border-color: rgba(0,232,138,.35);
-      color: var(--green);
-    }
-
-    .claim-btn {
-      width: 100%;
-      height: 42px;
-      margin-top: 17px;
-      border-radius: 10px;
-      border: 1px solid var(--yellow);
-      background: rgba(255,200,87,.07);
-      color: var(--yellow);
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* XP */
-
-    .xp-number {
-      font-size: 28px;
-      font-weight: 800;
-    }
-
-    .level {
-      color: var(--blue-light);
-      font-size: 12px;
-      margin-top: 5px;
-      font-weight: 700;
-    }
-
-    .xp-track {
-      height: 8px;
-      background: #07101c;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-top: 18px;
-    }
-
-    .xp-bar {
-      height: 100%;
-      width: 62%;
-      background: linear-gradient(90deg, var(--blue), #6bbcff);
-    }
-
-    .xp-meta {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    /* REFERRAL */
-
-    .referral-card {
-      grid-column: span 2;
-    }
-
-    .ref-code {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 13px;
-      border-radius: 11px;
-      background: #080f19;
-      border: 1px solid var(--border);
-    }
-
-    .ref-code strong {
-      color: var(--green);
-      font-size: 15px;
-      letter-spacing: .5px;
-    }
-
-    .copy-btn {
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .ref-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .ref-stat {
-      background: var(--surface-2);
-      border-radius: 10px;
-      padding: 13px;
-    }
-
-    .ref-stat strong {
-      display: block;
-      font-size: 20px;
-    }
-
-    .ref-stat span {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    /* REWARDS */
-
-    .reward-list {
-      display: grid;
-      gap: 9px;
-    }
-
-    .reward {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 11px;
-      background: var(--surface-2);
-      border-radius: 10px;
-    }
-
-    .reward-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .reward-icon {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border-radius: 9px;
-      background: #08111d;
-    }
-
-    .reward-name {
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .reward-status {
-      font-size: 10px;
-      color: var(--green);
-    }
-
-    .reward-amount {
-      font-size: 12px;
-      color: var(--blue-light);
-      font-weight: 800;
-    }
-
-    /* NAV */
-
-    .bottom-nav {
-      position: fixed;
-      left: 50%;
-      bottom: 0;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 600px;
-      padding: 9px 12px calc(9px + env(safe-area-inset-bottom));
-      background: rgba(7,11,19,.95);
-      backdrop-filter: blur(15px);
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      z-index: 20;
-    }
-
-    .nav-item {
-      text-align: center;
-      color: #65778d;
-      font-size: 10px;
-      cursor: pointer;
-    }
-
-    .nav-icon {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 3px;
-    }
-
-    .nav-item.active {
-      color: var(--blue-light);
-    }
-
-    /* RESPONSIVE */
-
-    @media (min-width: 700px) {
-
-      .app {
-        padding: 28px 24px;
-      }
-
-      .balance {
-        font-size: 46px;
-      }
-
-    }
-
-    @media (max-width: 600px) {
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .mining-card,
-      .referral-card {
-        grid-column: span 1;
-      }
-
-      .balance-actions {
-        flex-direction: column;
-      }
-
-      .primary-btn,
-      .outline-btn {
-        width: 100%;
-      }
-
-    }
-
-    @media (max-width: 360px) {
-
-      .app {
-        padding-left: 11px;
-        padding-right: 11px;
-      }
-
-      .card {
-        padding: 17px;
-      }
-
-      .balance {
-        font-size: 32px;
-      }
-
-      .days {
-        gap: 3px;
-      }
-
-      .day {
-        font-size: 8px;
-      }
-
-    }
-  </style>
+    color:var(--text);
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.page{
+    width:100%;
+    max-width:1150px;
+    margin:auto;
+    padding:18px 20px 40px;
+}
+
+
+/* =========================
+HEADER
+========================= */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-bottom:17px;
+    border-bottom:1px solid rgba(29,48,72,.7);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+}
+
+.brand-name{
+    font-size:18px;
+    font-weight:800;
+}
+
+.brand-name span{
+    color:var(--blue2);
+}
+
+.brand-sub{
+    display:block;
+    margin-top:3px;
+    color:#61748a;
+    font-size:8px;
+    letter-spacing:.7px;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.header-btn{
+    padding:9px 12px;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:#dce8f5;
+    font-size:9px;
+    font-weight:700;
+}
+
+.header-btn:hover{
+    border-color:var(--blue);
+}
+
+.notification-button{
+    position:relative;
+    width:35px;
+    height:35px;
+    display:grid;
+    place-items:center;
+    border:1px solid var(--border);
+    border-radius:9px;
+    background:var(--card);
+    font-size:15px;
+}
+
+.notification-dot{
+    position:absolute;
+    right:6px;
+    top:5px;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--red);
+}
+
+
+/* =========================
+WELCOME
+========================= */
+
+.welcome{
+    margin:30px 0 18px;
+}
+
+.eyebrow{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:var(--blue2);
+    font-size:9px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+}
+
+.live-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 9px rgba(0,223,136,.7);
+}
+
+.welcome h1{
+    margin-top:8px;
+    font-size:29px;
+    letter-spacing:-1px;
+}
+
+.welcome h1 span{
+    color:var(--blue2);
+}
+
+.welcome p{
+    margin-top:6px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+
+/* =========================
+BALANCE AREA
+========================= */
+
+.balance-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:11px;
+}
+
+.balance-card{
+    position:relative;
+    overflow:hidden;
+    padding:22px;
+    border:1px solid rgba(8,124,255,.28);
+    border-radius:18px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8,124,255,.13),
+            rgba(12,22,36,.96)
+        );
+}
+
+.balance-card::after{
+    content:"";
+    position:absolute;
+    width:210px;
+    height:210px;
+    right:-90px;
+    top:-100px;
+    border-radius:50%;
+    background:rgba(8,124,255,.08);
+}
+
+.balance-label{
+    color:var(--muted);
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    font-weight:700;
+}
+
+.coin-balance{
+    margin-top:7px;
+    font-size:34px;
+    font-weight:900;
+}
+
+.coin-balance span{
+    color:var(--blue2);
+    font-size:15px;
+}
+
+.balance-note{
+    margin-top:8px;
+    color:#6f849b;
+    font-size:8px;
+}
+
+.balance-action{
+    position:relative;
+    z-index:2;
+    margin-top:18px;
+    display:inline-flex;
+    padding:10px 14px;
+    border-radius:9px;
+    background:var(--blue);
+    color:#fff;
+    font-size:9px;
+    font-weight:800;
+}
+
+.balance-action:hover{
+    background:#1688ff;
+}
+
+
+/* =========================
+XP CARD
+========================= */
+
+.xp-card{
+    padding:20px;
+    border:1px solid rgba(155,108,255,.25);
+    border-radius:18px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(155,108,255,.09),
+            var(--card)
+        );
+}
+
+.xp-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.xp-label{
+    color:var(--muted);
+    font-size:9px;
+    text-transform:uppercase;
+    font-weight:700;
+}
+
+.xp-value{
+    margin-top:8px;
+    font-size:26px;
+    font-weight:900;
+}
+
+.xp-value span{
+    color:var(--purple);
+    font-size:12px;
+}
+
+.level{
+    padding:7px 9px;
+    border-radius:8px;
+    background:rgba(155,108,255,.09);
+    border:1px solid rgba(155,108,255,.25);
+    color:#c7b3ff;
+    font-size:8px;
+    font-weight:800;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    margin-top:20px;
+    margin-bottom:6px;
+    color:var(--muted);
+    font-size:8px;
+}
+
+.progress{
+    height:6px;
+    border-radius:20px;
+    overflow:hidden;
+    background:#07101c;
+}
+
+.progress-bar{
+    width:62%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        var(--purple),
+        var(--blue2)
+    );
+}
+
+.xp-link{
+    display:block;
+    margin-top:13px;
+    color:var(--blue2);
+    font-size:8px;
+    font-weight:800;
+}
+
+
+/* =========================
+MINING CENTER
+========================= */
+
+.mining{
+    margin-top:12px;
+    padding:20px;
+    border:1px solid var(--border);
+    border-radius:17px;
+    background:var(--card);
+}
+
+.mining-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.section-title{
+    font-size:15px;
+    font-weight:800;
+}
+
+.section-description{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:8px;
+    line-height:1.5;
+}
+
+.mining-status{
+    padding:6px 9px;
+    border-radius:7px;
+    background:rgba(142,162,184,.08);
+    color:var(--muted);
+    font-size:7px;
+    font-weight:800;
+}
+
+.mining-status.active{
+    background:rgba(0,223,136,.08);
+    color:var(--green);
+}
+
+.mining-body{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:20px;
+    align-items:center;
+    margin-top:18px;
+}
+
+.mining-rate{
+    font-size:23px;
+    font-weight:900;
+}
+
+.mining-rate span{
+    color:var(--green);
+    font-size:10px;
+}
+
+.mining-sub{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:8px;
+}
+
+.mining-button{
+    min-width:150px;
+    padding:13px 18px;
+    border:none;
+    border-radius:10px;
+    background:var(--blue);
+    color:#fff;
+    font-size:9px;
+    font-weight:900;
+}
+
+.mining-button:hover{
+    background:#1688ff;
+}
+
+.mining-button.active{
+    background:rgba(0,223,136,.12);
+    border:1px solid rgba(0,223,136,.3);
+    color:var(--green);
+}
+
+.mining-progress{
+    margin-top:16px;
+}
+
+.mining-progress-info{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+    color:var(--muted);
+    font-size:7px;
+}
+
+.mining-progress-bar{
+    height:5px;
+    border-radius:20px;
+    overflow:hidden;
+    background:#07101c;
+}
+
+.mining-progress-fill{
+    width:18%;
+    height:100%;
+    background:var(--green);
+}
+
+
+/* =========================
+QUICK STATS
+========================= */
+
+.quick-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:12px;
+}
+
+.quick-card{
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:var(--card);
+}
+
+.quick-icon{
+    font-size:16px;
+}
+
+.quick-value{
+    margin-top:7px;
+    font-size:17px;
+    font-weight:900;
+}
+
+.quick-label{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:7px;
+}
+
+
+/* =========================
+STREAK
+========================= */
+
+.streak{
+    margin-top:25px;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:11px;
+}
+
+.streak-card{
+    padding:18px;
+    border:1px solid rgba(255,201,74,.2);
+    border-radius:16px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,201,74,.06),
+            var(--card)
+        );
+}
+
+.streak-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.streak-number{
+    font-size:25px;
+    font-weight:900;
+}
+
+.streak-number span{
+    color:var(--gold);
+    font-size:10px;
+}
+
+.streak-description{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:8px;
+}
+
+.streak-days{
+    display:grid;
+    grid-template-columns:repeat(10,1fr);
+    gap:6px;
+    margin-top:15px;
+}
+
+.day{
+    height:42px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:var(--card2);
+}
+
+.day-number{
+    color:#61748a;
+    font-size:7px;
+}
+
+.day-icon{
+    font-size:11px;
+}
+
+.day.done{
+    border-color:rgba(255,201,74,.3);
+    background:rgba(255,201,74,.07);
+}
+
+.day.done .day-number{
+    color:var(--gold);
+}
+
+.day.today{
+    border-color:var(--blue);
+    box-shadow:0 0 12px rgba(8,124,255,.15);
+}
+
+.streak-note{
+    margin-top:12px;
+    color:#73879d;
+    font-size:7px;
+    line-height:1.6;
+}
+
+
+/* =========================
+TWO COLUMN AREA
+========================= */
+
+.lower-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:11px;
+    margin-top:25px;
+}
+
+
+/* =========================
+REFERRAL
+========================= */
+
+.panel{
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    background:var(--card);
+}
+
+.panel-title{
+    font-size:13px;
+    font-weight:800;
+}
+
+.panel-description{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:8px;
+    line-height:1.55;
+}
+
+.referral-code{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+    margin-top:15px;
+    padding:11px;
+    border:1px dashed #29425d;
+    border-radius:9px;
+    background:#08111d;
+}
+
+.referral-code strong{
+    color:var(--blue2);
+    font-size:11px;
+    letter-spacing:.5px;
+}
+
+.copy-button{
+    padding:7px 9px;
+    border:1px solid var(--border);
+    border-radius:7px;
+    background:var(--card2);
+    color:#dce8f5;
+    font-size:7px;
+    font-weight:800;
+}
+
+.referral-stats{
+    display:flex;
+    gap:25px;
+    margin-top:15px;
+}
+
+.ref-stat strong{
+    display:block;
+    font-size:16px;
+}
+
+.ref-stat span{
+    display:block;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:7px;
+}
+
+
+/* =========================
+PARTNERSHIP
+========================= */
+
+.partner-link{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-top:15px;
+    padding:13px;
+    border-radius:10px;
+    background:rgba(155,108,255,.06);
+    border:1px solid rgba(155,108,255,.18);
+}
+
+.partner-icon{
+    width:34px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:9px;
+    background:rgba(155,108,255,.1);
+}
+
+.partner-text{
+    flex:1;
+}
+
+.partner-text strong{
+    display:block;
+    font-size:9px;
+}
+
+.partner-text span{
+    display:block;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:7px;
+}
+
+.partner-arrow{
+    color:#c7b3ff;
+    font-size:12px;
+}
+
+
+/* =========================
+QUICK ACTIONS
+========================= */
+
+.actions{
+    margin-top:25px;
+}
+
+.action-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
+}
+
+.action{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:90px;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:var(--card);
+    text-align:center;
+    transition:.2s;
+}
+
+.action:hover{
+    border-color:rgba(8,124,255,.35);
+    transform:translateY(-2px);
+}
+
+.action-icon{
+    font-size:19px;
+}
+
+.action strong{
+    margin-top:8px;
+    font-size:8px;
+}
+
+.action span{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:7px;
+}
+
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+    padding-top:20px;
+    border-top:1px solid rgba(29,48,72,.55);
+    text-align:center;
+}
+
+footer p{
+    color:#61748a;
+    font-size:8px;
+    line-height:1.6;
+}
+
+.footer-brand{
+    margin-top:5px;
+    color:#40536a;
+    font-size:8px;
+}
+
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+    .balance-grid{
+        grid-template-columns:1fr;
+    }
+
+    .quick-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .lower-grid{
+        grid-template-columns:1fr;
+    }
+
+    .action-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .page{
+        padding:15px;
+    }
+
+    .brand img{
+        width:37px;
+        height:37px;
+    }
+
+    .brand-name{
+        font-size:16px;
+    }
+
+    .brand-sub{
+        display:none;
+    }
+
+    .header-btn{
+        display:none;
+    }
+
+    .welcome{
+        margin-top:26px;
+    }
+
+    .welcome h1{
+        font-size:26px;
+    }
+
+    .mining-body{
+        grid-template-columns:1fr;
+    }
+
+    .mining-button{
+        width:100%;
+    }
+
+    .streak-days{
+        gap:4px;
+    }
+
+    .day{
+        height:38px;
+    }
+
+}
+
+@media(max-width:380px){
+
+    .quick-stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .streak-days{
+        grid-template-columns:repeat(5,1fr);
+    }
+
+}
+
+
+/* =========================
+TOAST
+========================= */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,20px);
+    opacity:0;
+    pointer-events:none;
+    padding:11px 15px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#101d2d;
+    color:white;
+    font-size:9px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:.25s;
+    z-index:100;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <main class="app">
+<div class="page">
 
-    <!-- HEADER -->
-    <header class="topbar">
 
-      <div class="brand">
-        <img src="../logo.png" alt="ON1Coin">
+<!-- =========================
+HEADER
+========================= -->
+
+<header>
+
+    <a href="../index.html" class="brand">
+
+        <img
+            src="../logo.png"
+            alt="DSATECHON1 Logo">
 
         <div>
-          <div class="brand-name">ON1<span>Coin</span></div>
-          <div class="brand-subtitle">ON1Ecosystem</div>
+
+            <div class="brand-name">
+                ON1<span>Ecosystem</span>
+            </div>
+
+            <small class="brand-sub">
+                ONE DIGITAL ECOSYSTEM
+            </small>
+
         </div>
-      </div>
 
-      <button class="profile-btn" aria-label="Profile">
-        U
-      </button>
-
-    </header>
+    </a>
 
 
-    <!-- WELCOME -->
-    <section class="welcome">
+    <div class="header-actions">
 
-      <small>Welcome back</small>
+        <a
+            href="notifications.html"
+            class="notification-button"
+            title="Notifications">
 
-      <h1>Hello, <span>ON1 Pioneer</span> 👋</h1>
+            🔔
 
-    </section>
+            <span class="notification-dot"></span>
+
+        </a>
+
+        <a
+            href="../index.html"
+            class="header-btn">
+            Home
+        </a>
+
+    </div>
+
+</header>
 
 
-    <!-- BALANCE -->
+<!-- =========================
+WELCOME
+========================= -->
+
+<section class="welcome">
+
+    <div class="eyebrow">
+
+        <span class="live-dot"></span>
+
+        Member Dashboard
+
+    </div>
+
+    <h1>
+        Welcome back, <span>Member</span>
+    </h1>
+
+    <p>
+        Your ON1Ecosystem activity and rewards at a glance.
+    </p>
+
+</section>
+
+
+<!-- =========================
+BALANCES
+========================= -->
+
+<div class="balance-grid">
+
+
+    <!-- ON1COIN -->
+
     <section class="balance-card">
 
-      <div class="balance-label">
-        Total ON1Coin Balance
-      </div>
+        <div class="balance-label">
+            ON1Coin Balance
+        </div>
 
-      <div class="balance">
-        0.0000 <span>ON1</span>
-      </div>
+        <div
+            class="coin-balance"
+            id="coinBalance">
 
-      <div class="balance-info">
-        ● Mining system active
-      </div>
+            0.010
+            <span>ON1</span>
 
-      <div class="balance-actions">
-        <button class="primary-btn">
-          Claim Reward
-        </button>
+        </div>
 
-        <button class="outline-btn">
-          Transaction History
-        </button>
-      </div>
+        <div class="balance-note">
+            Your ON1Coin balance will be securely
+            managed through the ecosystem wallet.
+        </div>
+
+        <a
+            href="wallet.html"
+            class="balance-action">
+
+            OPEN WALLET →
+
+        </a>
 
     </section>
 
 
-    <!-- DASHBOARD GRID -->
-    <section class="grid">
+    <!-- XP -->
 
+    <section class="xp-card">
 
-      <!-- MINING -->
-      <article class="card mining-card">
+        <div class="xp-top">
 
-        <div class="card-title">
+            <div>
 
-          <h2>⛏️ ON1Coin Mining</h2>
+                <div class="xp-label">
+                    Experience Points
+                </div>
 
-          <div class="status">
-            <span class="status-dot"></span>
-            Active
-          </div>
-
-        </div>
-
-        <div class="mining-rate">
-
-          <div>
-            <div class="rate-value">
-              0.4167 <span>ON1 / hour</span>
-            </div>
-
-            <small style="color:var(--muted);font-size:11px;">
-              Base rate · 10 ON1 / 24 hours
-            </small>
-          </div>
-
-        </div>
-
-        <div class="progress-track">
-          <div class="progress-bar"></div>
-        </div>
-
-        <div class="progress-meta">
-          <span>8h 24m elapsed</span>
-          <span>15h 36m remaining</span>
-        </div>
-
-        <button class="mine-btn" id="mineButton">
-          CLAIM MINING REWARD
-        </button>
-
-      </article>
-
-
-      <!-- DAILY STREAK -->
-      <article class="card">
-
-        <div class="card-title">
-
-          <h2>🔥 Daily Streak</h2>
-
-          <small>10-day cycle</small>
-
-        </div>
-
-        <div class="streak-number">
-          Day 4
-        </div>
-
-        <div class="multiplier">
-          ×1.3 Streak Multiplier
-        </div>
-
-        <div class="days">
-
-          <div class="day completed">1</div>
-          <div class="day completed">2</div>
-          <div class="day completed">3</div>
-          <div class="day active">4</div>
-          <div class="day">5</div>
-          <div class="day">6</div>
-          <div class="day">7</div>
-          <div class="day">8</div>
-          <div class="day">9</div>
-          <div class="day">10</div>
-
-        </div>
-
-        <button class="claim-btn">
-          CLAIM STREAK REWARD
-        </button>
-
-      </article>
-
-
-      <!-- XP -->
-      <article class="card">
-
-        <div class="card-title">
-
-          <h2>⭐ ON1 XP</h2>
-
-          <small>Progress</small>
-
-        </div>
-
-        <div class="xp-number">
-          1,240 XP
-        </div>
-
-        <div class="level">
-          Level 4 · Pioneer
-        </div>
-
-        <div class="xp-track">
-          <div class="xp-bar"></div>
-        </div>
-
-        <div class="xp-meta">
-          <span>1,240 XP</span>
-          <span>2,000 XP</span>
-        </div>
-
-      </article>
-
-
-      <!-- REFERRALS -->
-      <article class="card referral-card">
-
-        <div class="card-title">
-
-          <h2>👥 Invite & Earn</h2>
-
-          <small>Referral rewards</small>
-
-        </div>
-
-        <div class="ref-code">
-
-          <strong>ON1PIONEER</strong>
-
-          <button class="copy-btn" id="copyReferral">
-            COPY
-          </button>
-
-        </div>
-
-        <div class="ref-stats">
-
-          <div class="ref-stat">
-            <strong>0</strong>
-            <span>Successful referrals</span>
-          </div>
-
-          <div class="ref-stat">
-            <strong>0.000 ON1</strong>
-            <span>Referral rewards</span>
-          </div>
-
-        </div>
-
-      </article>
-
-
-      <!-- REWARDS -->
-      <article class="card">
-
-        <div class="card-title">
-
-          <h2>🎁 Rewards</h2>
-
-          <small>Available</small>
-
-        </div>
-
-        <div class="reward-list">
-
-          <div class="reward">
-
-            <div class="reward-left">
-
-              <div class="reward-icon">🎉</div>
-
-              <div>
-                <div class="reward-name">Welcome Bonus</div>
-                <div class="reward-status">Coming soon</div>
-              </div>
+                <div class="xp-value">
+                    1,250 <span>XP</span>
+                </div>
 
             </div>
 
-            <div class="reward-amount">
-              +10 ON1
+            <div class="level">
+                LEVEL 3
             </div>
-
-          </div>
-
-
-          <div class="reward">
-
-            <div class="reward-left">
-
-              <div class="reward-icon">🔥</div>
-
-              <div>
-                <div class="reward-name">Daily Streak</div>
-                <div class="reward-status">Day 4</div>
-              </div>
-
-            </div>
-
-            <div class="reward-amount">
-              ×1.3
-            </div>
-
-          </div>
-
-
-          <div class="reward">
-
-            <div class="reward-left">
-
-              <div class="reward-icon">👥</div>
-
-              <div>
-                <div class="reward-name">Referral</div>
-                <div class="reward-status">Invite friends</div>
-              </div>
-
-            </div>
-
-            <div class="reward-amount">
-              Earn
-            </div>
-
-          </div>
 
         </div>
 
-      </article>
 
+        <div class="progress-info">
+
+            <span>
+                Level Progress
+            </span>
+
+            <span>
+                1,250 / 2,000
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div class="progress-bar"></div>
+
+        </div>
+
+
+        <a
+            href="partnership.html"
+            class="xp-link">
+
+            EARN MORE XP →
+
+        </a>
 
     </section>
 
-  </main>
+</div>
 
 
-  <!-- BOTTOM NAVIGATION -->
-  <nav class="bottom-nav">
+<!-- =========================
+MINING CENTER
+========================= -->
 
-    <div class="nav-item active">
-      <span class="nav-icon">⌂</span>
-      Home
+<section class="mining">
+
+    <div class="mining-head">
+
+        <div>
+
+            <div class="section-title">
+                ON1Coin Mining
+            </div>
+
+            <div class="section-description">
+                Participate in eligible mining sessions
+                and monitor your current session.
+            </div>
+
+        </div>
+
+        <div
+            class="mining-status"
+            id="miningStatus">
+
+            READY
+
+        </div>
+
     </div>
 
-    <div class="nav-item">
-      <span class="nav-icon">⛏</span>
-      Mining
+
+    <div class="mining-body">
+
+        <div>
+
+            <div class="mining-rate">
+                0.010
+                <span>ON1 / 24H</span>
+            </div>
+
+            <div class="mining-sub">
+                Current prototype mining rate
+            </div>
+
+        </div>
+
+
+        <button
+            class="mining-button"
+            id="mineButton">
+
+            ⛏ START MINING
+
+        </button>
+
     </div>
 
-    <div class="nav-item">
-      <span class="nav-icon">👥</span>
-      Referrals
+
+    <div class="mining-progress">
+
+        <div class="mining-progress-info">
+
+            <span>
+                Current session
+            </span>
+
+            <span id="timer">
+                00:00:00
+            </span>
+
+        </div>
+
+        <div class="mining-progress-bar">
+
+            <div
+                class="mining-progress-fill"
+                id="miningFill">
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="nav-item">
-      <span class="nav-icon">☰</span>
-      More
+</section>
+
+
+<!-- =========================
+QUICK STATS
+========================= -->
+
+<div class="quick-stats">
+
+    <div class="quick-card">
+
+        <div class="quick-icon">
+            🔥
+        </div>
+
+        <div class="quick-value">
+            3 Days
+        </div>
+
+        <div class="quick-label">
+            Daily Streak
+        </div>
+
     </div>
 
-  </nav>
+
+    <div class="quick-card">
+
+        <div class="quick-icon">
+            🤝
+        </div>
+
+        <div class="quick-value">
+            7
+        </div>
+
+        <div class="quick-label">
+            Referrals
+        </div>
+
+    </div>
 
 
-  <!-- DEMO-ONLY INTERACTIONS -->
-  <script>
+    <div class="quick-card">
 
-    /*
-      DESIGN PROTOTYPE ONLY
+        <div class="quick-icon">
+            ⭐
+        </div>
 
-      This dashboard is NOT connected to Firebase.
-      Numbers displayed here are demonstration values.
+        <div class="quick-value">
+            1,250
+        </div>
 
-      Firebase + secure reward logic will be integrated
-      only after the UI/UX is approved.
-    */
+        <div class="quick-label">
+            XP Earned
+        </div>
 
-
-    const copyButton =
-      document.getElementById("copyReferral");
-
-    copyButton.addEventListener("click", async () => {
-
-      try {
-
-        await navigator.clipboard.writeText("ON1PIONEER");
-
-        copyButton.textContent = "COPIED";
-
-        setTimeout(() => {
-          copyButton.textContent = "COPY";
-        }, 1500);
-
-      } catch {
-
-        copyButton.textContent = "COPY";
-
-      }
-
-    });
+    </div>
 
 
-    const mineButton =
-      document.getElementById("mineButton");
+    <div class="quick-card">
 
-    mineButton.addEventListener("click", () => {
+        <div class="quick-icon">
+            🎯
+        </div>
 
-      mineButton.textContent =
-        "DEMO REWARD CLAIMED";
+        <div class="quick-value">
+            7
+        </div>
 
-      setTimeout(() => {
+        <div class="quick-label">
+            Activities
+        </div>
 
-        mineButton.textContent =
-          "CLAIM MINING REWARD";
+    </div>
 
-      }, 1800);
+</div>
 
-    });
 
-  </script>
+<!-- =========================
+DAILY STREAK
+========================= -->
 
-</body>
-</html>
+<section class="streak">
+
+    <div class="section-head">
+
+        <div>
+
+            <div class="section-title">
+                🔥 Daily Streak
+            </div>
+
+            <div class="section-description">
+                Consistent daily participation can increase
+                your eligible streak reward.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="streak-card">
+
+        <div class="streak-top">
+
+            <div>
+
+                <div class="streak-number">
+                    3 <span>DAYS</span>
+                </div>
+
+                <div class="streak-description">
+                    Current consecutive participation
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="streak-days">
+
+
+            <div class="day done">
+                <span class="day-number">DAY 1</span>
+                <span class="day-icon">✓</span>
+            </div>
+
+
+            <div class="day done">
+                <span class="day-number">DAY 2</span>
+                <span class="day-icon">✓</span>
+            </div>
+
+
+            <div class="day done today">
+                <span class="day-number">DAY 3</span>
+                <span class="day-icon">🔥</span>
+            </div>
+
+
+            <div class="day">
+                <span class="day-number">DAY 4</span>
+                <span class="day-icon">•</span>
+            </div>
+
+
+            <div class="day">
+                <span class="day-number">DAY 5</span>
+                <span class="day-icon">•</span>
+            </div>
+
+
+            <div class="day">
+                <span class="day-number">DAY 6</span>
+                <span class="day-icon">•</span>
+            </div>
+
+
+            <div class="day">
+                <span class="day-number">DAY 7</span>
+                <span class="day-icon">•</span>
+            </div>
+
+
+            <div class="day">
+                <span class="day-number">DAY 8</span>
+                <span class="day-icon">•</span>
+            </div>
+
+
+            <div class="day">
+                <span class="day-number">DAY 9</span>
+                <span class="day-icon">•</span>
+            </div>
+
+
+            <div class="day">
+                <span class="day-number">DAY 10</span>
+                <span class="day-icon">🏆</span>
+            </div>
+
+        </div>
+
+
+        <div class="streak-note">
+
+            Maximum prototype streak shown: 10 days.
+            A missed eligible day should reset the consecutive
+            streak according to the final ON1Coin reward rules.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+REFERRAL + PARTNERSHIP
+========================= -->
+
+<div class="lower-grid">
+
+
+    <!-- REFERRALS -->
+
+    <section class="panel">
+
+        <div class="panel-title">
+            🤝 Referral Program
+        </div>
+
+        <div class="panel-description">
+            Invite eligible members and track your
+            referral activity and rewards.
+        </div>
+
+
+        <div class="referral-code">
+
+            <strong>
+                ON1MEMBER
+            </strong>
+
+            <button
+                class="copy-button"
+                id="copyReferral">
+
+                COPY
+
+            </button>
+
+        </div>
+
+
+        <div class="referral-stats">
+
+            <div class="ref-stat">
+
+                <strong>
+                    7
+                </strong>
+
+                <span>
+                    Referrals
+                </span>
+
+            </div>
+
+
+            <div class="ref-stat">
+
+                <strong>
+                    0.350
+                </strong>
+
+                <span>
+                    Prototype reward
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PARTNERSHIP -->
+
+    <section class="panel">
+
+        <div class="panel-title">
+            ⭐ Partnership Activities
+        </div>
+
+        <div class="panel-description">
+            Participate in eligible ecosystem activities
+            and build your XP profile.
+        </div>
+
+
+        <a
+            href="partnership.html"
+            class="partner-link">
+
+            <div class="partner-icon">
+                🤝
+            </div>
+
+            <div class="partner-text">
+
+                <strong>
+                    Explore Opportunities
+                </strong>
+
+                <span>
+                    Complete activities and earn XP
+                </span>
+
+            </div>
+
+            <div class="partner-arrow">
+                →
+            </div>
+
+        </a>
+
+    </section>
+
+</div>
+
+
+<!-- =========================
+QUICK ACTIONS
+========================= -->
