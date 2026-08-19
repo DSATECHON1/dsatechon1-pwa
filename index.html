@@ -1,25 +1,1105 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Sign Up</title>
-<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a0f1a;color:#fff;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}.box{background:#111a2a;padding:30px;border-radius:20px;width:100%;max-width:420px}.logo{text-align:center}.logo img{width:70px}h2{color:#087cff;text-align:center;margin:20px 0}label{display:block;margin-top:15px;margin-bottom:5px;font-size:14px;color:#aaa}label span{color:red}input{width:100%;padding:14px;background:#0a0f1a;border:1px solid #1a2332;border-radius:10px;color:#fff;font-size:15px}.btn{width:100%;padding:16px;margin-top:20px;background:#087cff;color:#fff;border:none;border-radius:10px;font-weight:bold}.ref-note{color:#00ff88;text-align:center;margin:15px 0;font-size:13px}</style></head><body><div class="box">
-<div class="logo"><img src="../logo.png"></div><h2>Create Account</h2>
-<form id="f"><label>Choose unique username <span>*</span></label><input id="user" required>
-<label>Email <span>*</span></label><input id="email" type="email" required>
-<label>Password <span>*</span></label><input id="pass" type="password" required>
-<label>Confirm Password <span>*</span></label><input id="cpass" type="password" required>
-<label>Referral Code <span>*</span></label><input id="ref" required>
-<div class="ref-note">Don't have one? Use: DSATECHON1</div><button class="btn">CREATE ACCOUNT</button></form>
-<p style="text-align:center;margin-top:15px">Already have account? <a href="login.html" style="color:#087cff">Login</a></p></div>
-<script>
-const urlParams = new URLSearchParams(window.location.search);
-if(urlParams.get('ref'))document.getElementById('ref').value = urlParams.get('ref');
-document.getElementById('f').onsubmit=function(e){e.preventDefault();
-let u=document.getElementById('user').value.trim(),e1=document.getElementById('email').value,p=document.getElementById('pass').value,cp=document.getElementById('cpass').value,r=document.getElementById('ref').value.trim();
-if(p!=cp){alert('Passwords not match');return}if(r==""){alert('Referral required');return}
-let users=JSON.parse(localStorage.getItem('on1users')||'[]');
-if(users.find(x=>x.user.toLowerCase()==u.toLowerCase())){alert('Username taken');return}
-let referrer=users.find(x=>x.user.toLowerCase()==r.toLowerCase());
-if(!referrer && r.toLowerCase()!="dsatechon1"){alert('Invalid Referral: '+r);return}
-let newUser={user:u,email:e1,pass:p,ref:r,b:0.010,lm:0};users.push(newUser);
-if(referrer){referrer.b+=0.050;users[users.findIndex(x=>x.user.toLowerCase()==r.toLowerCase())]=referrer;}
-localStorage.setItem('on1users',JSON.stringify(users));localStorage.setItem('on1u',JSON.stringify(newUser));
-alert('Account Created! +0.010 ON1');location.href='dashboard.html';}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ON1Ecosystem — One Ecosystem. Multiple Solutions.</title>
+
+<meta name="description"
+content="ON1Ecosystem brings digital services, payments, marketplace solutions, exchange services, participation and ON1Coin into one connected ecosystem.">
+
+<meta name="theme-color" content="#050b13">
+
+<style>
+
+/* =====================================================
+   ON1ECOSYSTEM — HOME PAGE
+   FRONT-END PROTOTYPE
+   FIREBASE NOT CONNECTED YET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --bg:#050b13;
+    --bg2:#08111d;
+    --card:#0c1624;
+    --card2:#101d2d;
+    --border:#1b2d43;
+    --blue:#087cff;
+    --blue2:#42a5ff;
+    --green:#00df88;
+    --gold:#ffc94a;
+    --purple:#9b6cff;
+    --text:#ffffff;
+    --muted:#8da1b7;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at 50% -10%,rgba(8,124,255,.18),transparent 35%),
+        var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
+.container{
+    width:100%;
+    max-width:1150px;
+    margin:auto;
+    padding-left:22px;
+    padding-right:22px;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(5,11,19,.88);
+    backdrop-filter:blur(14px);
+
+    border-bottom:1px solid rgba(27,45,67,.75);
+}
+
+.nav{
+    height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand img{
+    width:43px;
+    height:43px;
+    object-fit:contain;
+}
+
+.brand-title{
+    font-size:17px;
+    font-weight:900;
+    letter-spacing:-.4px;
+}
+
+.brand-title span{
+    color:var(--blue2);
+}
+
+.brand-subtitle{
+    display:block;
+    margin-top:3px;
+
+    color:#5e7288;
+    font-size:7px;
+    letter-spacing:1px;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-links a{
+    color:#9eb0c2;
+    font-size:9px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.nav-login{
+    padding:10px 14px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    color:#dbe7f3;
+    background:var(--card);
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.nav-start{
+    padding:10px 15px;
+
+    border:0;
+    border-radius:9px;
+
+    background:var(--blue);
+    color:#fff;
+
+    font-size:8px;
+    font-weight:800;
+
+    box-shadow:0 5px 20px rgba(8,124,255,.2);
+}
+
+.menu{
+    display:none;
+
+    width:38px;
+    height:38px;
+
+    border:1px solid var(--border);
+    border-radius:9px;
+
+    background:var(--card);
+    color:#fff;
+
+    font-size:17px;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    position:relative;
+
+    min-height:690px;
+
+    display:flex;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    top:-180px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:rgba(8,124,255,.09);
+
+    filter:blur(10px);
+}
+
+.hero-content{
+    position:relative;
+    z-index:1;
+
+    max-width:800px;
+
+    margin:auto;
+
+    text-align:center;
+}
+
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+
+    padding:8px 12px;
+
+    border:1px solid rgba(8,124,255,.3);
+    border-radius:50px;
+
+    background:rgba(8,124,255,.07);
+
+    color:var(--blue2);
+
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:.4px;
+}
+
+.live-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:0 0 10px rgba(0,223,136,.8);
+}
+
+.hero h1{
+    margin-top:25px;
+
+    font-size:clamp(39px,7vw,72px);
+
+    line-height:1.02;
+
+    letter-spacing:-3px;
+}
+
+.hero h1 span{
+    color:var(--blue2);
+}
+
+.hero-description{
+    max-width:650px;
+
+    margin:22px auto 0;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.8;
+}
+
+.hero-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+
+    margin-top:30px;
+}
+
+.primary-btn,
+.secondary-btn{
+    padding:14px 21px;
+
+    border-radius:10px;
+
+    font-size:9px;
+    font-weight:800;
+}
+
+.primary-btn{
+    border:0;
+
+    background:var(--blue);
+    color:#fff;
+
+    box-shadow:0 8px 25px rgba(8,124,255,.25);
+}
+
+.secondary-btn{
+    border:1px solid var(--border);
+
+    background:var(--card);
+    color:#dce8f4;
+}
+
+.hero-note{
+    margin-top:18px;
+
+    color:#53677d;
+
+    font-size:7px;
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+    position:relative;
+    z-index:2;
+
+    margin-top:-50px;
+}
+
+.stats-box{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    border:1px solid var(--border);
+    border-radius:17px;
+
+    background:rgba(12,22,36,.9);
+
+    overflow:hidden;
+}
+
+.stat{
+    padding:22px;
+
+    text-align:center;
+
+    border-right:1px solid var(--border);
+}
+
+.stat:last-child{
+    border-right:0;
+}
+
+.stat strong{
+    display:block;
+
+    font-size:20px;
+}
+
+.stat span{
+    display:block;
+
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:7px;
+}
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+section{
+    padding-top:95px;
+}
+
+.section-heading{
+    max-width:680px;
+
+    margin-bottom:30px;
+}
+
+.section-label{
+    color:var(--blue2);
+
+    font-size:8px;
+    font-weight:900;
+
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.section-heading h2{
+    margin-top:9px;
+
+    font-size:31px;
+
+    letter-spacing:-1px;
+}
+
+.section-heading p{
+    margin-top:9px;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+/* =====================================================
+   ECOSYSTEM CARDS
+===================================================== */
+
+.ecosystem-grid{
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+}
+
+.ecosystem-card{
+    position:relative;
+
+    min-height:190px;
+
+    padding:22px;
+
+    border:1px solid var(--border);
+    border-radius:17px;
+
+    background:
+        linear-gradient(145deg,rgba(16,29,45,.95),rgba(8,16,27,.95));
+
+    overflow:hidden;
+
+    transition:.25s;
+}
+
+.ecosystem-card:hover{
+    transform:translateY(-4px);
+
+    border-color:rgba(8,124,255,.5);
+
+    box-shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+.card-number{
+    position:absolute;
+
+    right:18px;
+    top:15px;
+
+    color:#1a2d43;
+
+    font-size:30px;
+    font-weight:900;
+}
+
+.eco-icon{
+    width:45px;
+    height:45px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:12px;
+
+    background:rgba(8,124,255,.09);
+
+    font-size:20px;
+}
+
+.ecosystem-card h3{
+    margin-top:18px;
+
+    font-size:12px;
+}
+
+.ecosystem-card p{
+    margin-top:7px;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+    line-height:1.6;
+}
+
+.card-link{
+    display:inline-block;
+
+    margin-top:14px;
+
+    color:var(--blue2);
+
+    font-size:7px;
+    font-weight:800;
+}
+
+/* =====================================================
+   ON1COIN
+===================================================== */
+
+.coin-section{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:30px;
+
+    align-items:center;
+}
+
+.coin-copy h2{
+    margin-top:8px;
+
+    font-size:31px;
+
+    letter-spacing:-1px;
+}
+
+.coin-copy p{
+    margin-top:14px;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.8;
+}
+
+.coin-features{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    margin-top:22px;
+}
+
+.coin-feature{
+    padding:13px;
+
+    border:1px solid var(--border);
+    border-radius:11px;
+
+    background:var(--card);
+}
+
+.coin-feature strong{
+    display:block;
+
+    font-size:9px;
+}
+
+.coin-feature span{
+    display:block;
+
+    margin-top:5px;
+
+    color:#6f8298;
+
+    font-size:7px;
+}
+
+.coin-visual{
+    min-height:360px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:1px solid rgba(8,124,255,.2);
+    border-radius:25px;
+
+    background:
+        radial-gradient(circle,rgba(8,124,255,.15),transparent 60%),
+        var(--card);
+}
+
+.coin{
+    width:185px;
+    height:185px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:7px solid rgba(66,165,255,.4);
+
+    background:
+        radial-gradient(circle at 35% 30%,#42a5ff,#087cff 55%,#0457b4);
+
+    box-shadow:
+        0 0 70px rgba(8,124,255,.25),
+        inset 0 0 30px rgba(255,255,255,.13);
+
+    font-size:38px;
+    font-weight:900;
+}
+
+/* =====================================================
+   PARTICIPATION
+===================================================== */
+
+.participation{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+}
+
+.participation-card{
+    padding:24px;
+
+    border:1px solid var(--border);
+    border-radius:18px;
+
+    background:var(--card);
+}
+
+.participation-card .big-icon{
+    font-size:25px;
+}
+
+.participation-card h3{
+    margin-top:14px;
+
+    font-size:15px;
+}
+
+.participation-card p{
+    margin-top:7px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.7;
+}
+
+.steps{
+    margin-top:18px;
+}
+
+.step{
+    display:flex;
+
+    gap:10px;
+
+    margin-top:11px;
+}
+
+.step-number{
+    width:25px;
+    height:25px;
+
+    flex-shrink:0;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:8px;
+
+    background:rgba(8,124,255,.1);
+
+    color:var(--blue2);
+
+    font-size:8px;
+    font-weight:900;
+}
+
+.step-text strong{
+    display:block;
+
+    font-size:8px;
+}
+
+.step-text span{
+    display:block;
+
+    margin-top:3px;
+
+    color:#63778c;
+
+    font-size:7px;
+}
+
+/* =====================================================
+   WALLET PREVIEW
+===================================================== */
+
+.wallet-preview{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+}
+
+.balance-card{
+    padding:23px;
+
+    border:1px solid var(--border);
+    border-radius:17px;
+
+    background:var(--card);
+}
+
+.balance-top{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+}
+
+.balance-name{
+    color:var(--muted);
+
+    font-size:8px;
+    font-weight:700;
+}
+
+.balance-icon{
+    font-size:18px;
+}
+
+.balance{
+    margin-top:17px;
+
+    font-size:27px;
+    font-weight:900;
+}
+
+.balance span{
+    color:#7890a8;
+
+    font-size:9px;
+}
+
+.balance-note{
+    margin-top:6px;
+
+    color:#52667b;
+
+    font-size:7px;
+}
+
+/* =====================================================
+   PARTNERS
+===================================================== */
+
+.partner-banner{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:25px;
+
+    padding:28px;
+
+    border:1px solid rgba(155,108,255,.25);
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            120deg,
+            rgba(155,108,255,.11),
+            rgba(12,22,36,.95)
+        );
+}
+
+.partner-banner h2{
+    font-size:24px;
+}
+
+.partner-banner p{
+    max-width:650px;
+
+    margin-top:8px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.7;
+}
+
+.partner-btn{
+    flex-shrink:0;
+
+    padding:13px 18px;
+
+    border:0;
+    border-radius:10px;
+
+    background:var(--purple);
+
+    color:#fff;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.cta{
+    padding-bottom:90px;
+}
+
+.cta-box{
+    padding:50px 25px;
+
+    text-align:center;
+
+    border:1px solid rgba(8,124,255,.2);
+    border-radius:22px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(8,124,255,.12),
+            transparent 65%
+        ),
+        var(--card);
+}
+
+.cta-box h2{
+    font-size:30px;
+
+    letter-spacing:-1px;
+}
+
+.cta-box p{
+    max-width:580px;
+
+    margin:12px auto 0;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.7;
+}
+
+.cta-box .hero-actions{
+    margin-top:22px;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    padding:35px 0;
+
+    border-top:1px solid var(--border);
+
+    background:#030810;
+}
+
+.footer-grid{
+    display:grid;
+
+    grid-template-columns:1.5fr 1fr 1fr 1fr;
+
+    gap:30px;
+}
+
+.footer-brand{
+    font-size:16px;
+    font-weight:900;
+}
+
+.footer-brand span{
+    color:var(--blue2);
+}
+
+.footer-description{
+    max-width:300px;
+
+    margin-top:9px;
+
+    color:#53677c;
+
+    font-size:8px;
+
+    line-height:1.7;
+}
+
+.footer-column h4{
+    margin-bottom:11px;
+
+    font-size:8px;
+}
+
+.footer-column a{
+    display:block;
+
+    margin-top:8px;
+
+    color:#62768b;
+
+    font-size:7px;
+}
+
+.footer-bottom{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-top:30px;
+    padding-top:17px;
+
+    border-top:1px solid rgba(27,45,67,.55);
+
+    color:#405268;
+
+    font-size:7px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:850px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .ecosystem-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .coin-section,
+    .participation{
+        grid-template-columns:1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .nav-actions{
+        display:none;
+    }
+
+    .hero{
+        min-height:620px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+    }
+
+    .hero-actions a{
+        width:100%;
+    }
+
+    .stats-box{
+        grid-template-columns:1fr;
+    }
+
+    .stat{
+        border-right:0;
+        border-bottom:1px solid var(--border);
+    }
+
+    .stat:last-child{
+        border-bottom:0;
+    }
+
+    .ecosystem-grid{
+        grid-template-columns:1fr;
+    }
+
+    .coin-features{
+        grid-template-columns:1fr;
+    }
+
+    .wallet-preview{
+        grid-template-columns:1fr;
+    }
+
+    .partner-banner{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<div class="container nav">
+
+<a href="index.html" class="brand">
+
+<img src="logo.png" alt="DSATECHON1">
+
+<div>
+
+<div class="brand-title">
+ON1<span>Ecosystem</span>
+</div>
+
+<small class="brand-subtitle">
+DIGITAL ECOSYSTEM
+</small>
+
+</div>
+
+</a>
+
+
+<nav class="nav-links">
+
+<a href="#ecosystem">Ecosystem</a>
+
+<a href="#on1coin">ON1Coin</a>
+
+<a href="#participation">Participation</a>
+
+<a href="#partnerships">Partnerships</a>
+
+</nav>
+
+
+<div class="nav-actions">
+
+<a href="pages/login.html" class="nav-login">
+LOGIN
+</a>
+
+<a href="pages/signup.html" class="nav-start">
+GET STARTED
+</a>
+
+</div>
