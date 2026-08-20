@@ -177,7 +177,7 @@
     }
 
     /* =========================
-       ECOSYSTEM BENEFITS
+       BENEFITS
     ========================= */
 
     .benefits {
@@ -226,8 +226,7 @@
       border: 1px solid var(--border);
       border-radius: 23px;
       padding: 28px;
-      box-shadow:
-        0 25px 70px rgba(0,0,0,.35);
+      box-shadow: 0 25px 70px rgba(0,0,0,.35);
     }
 
     .card-header {
@@ -431,7 +430,7 @@
     }
 
     /* =========================
-       TRUST MESSAGE
+       TRUST
     ========================= */
 
     .trust {
@@ -858,7 +857,7 @@
               <button
                 type="button"
                 class="password-toggle"
-                onclick="togglePassword('password', this)">
+                data-password="password">
                 SHOW
               </button>
 
@@ -892,7 +891,7 @@
               <button
                 type="button"
                 class="password-toggle"
-                onclick="togglePassword('confirmPassword', this)">
+                data-password="confirmPassword">
                 SHOW
               </button>
 
@@ -974,6 +973,8 @@
           </div>
 
 
+          <!-- MESSAGE -->
+
           <div
             id="message"
             class="message">
@@ -1040,7 +1041,7 @@
 
 
   <!-- =====================================================
-       FIREBASE + SIGNUP
+       FIREBASE AUTHENTICATION
        ===================================================== -->
 
   <script type="module">
@@ -1056,13 +1057,13 @@
 
 
     /* =====================================================
-       YOUR FIREBASE CONFIGURATION
+       FIREBASE CONFIGURATION
        ===================================================== */
 
     const firebaseConfig = {
 
       apiKey:
-        "AIzaSyCmmOlfLVP3s3oPCmFLSl8trLKNqWlo9YKs",
+        "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
 
       authDomain:
         "dsatechon1-c8b41.firebaseapp.com",
@@ -1089,49 +1090,64 @@
     const app =
       initializeApp(firebaseConfig);
 
-
     const auth =
       getAuth(app);
 
 
+    console.log(
+      "Firebase initialized for ON1Ecosystem"
+    );
+
+
     /* =====================================================
-       PASSWORD TOGGLE
+       PASSWORD SHOW / HIDE
        ===================================================== */
 
-    window.togglePassword =
-      function(id, button) {
+    document
+      .querySelectorAll(".password-toggle")
+      .forEach(function(button) {
 
-        const input =
-          document.getElementById(id);
+        button.addEventListener(
+          "click",
+          function() {
 
+            const input =
+              document.getElementById(
+                button.dataset.password
+              );
 
-        if (input.type === "password") {
+            if (input.type === "password") {
 
-          input.type = "text";
+              input.type = "text";
 
-          button.textContent = "HIDE";
+              button.textContent = "HIDE";
 
-        } else {
+            } else {
 
-          input.type = "password";
+              input.type = "password";
 
-          button.textContent = "SHOW";
+              button.textContent = "SHOW";
 
-        }
+            }
 
-      };
+          }
+        );
+
+      });
 
 
     /* =====================================================
-       FORM ELEMENTS
+       FORM
        ===================================================== */
 
     const form =
       document.getElementById("signupForm");
 
-
     const message =
       document.getElementById("message");
+
+    const createButton =
+      form.querySelector(".create-btn");
 
 
     /* =====================================================
@@ -1146,7 +1162,7 @@
 
 
         /* =========================
-           GET VALUES
+           READ FORM DATA
         ========================= */
 
         const firstName =
@@ -1155,13 +1171,11 @@
             .value
             .trim();
 
-
         const lastName =
           document
             .getElementById("lastName")
             .value
             .trim();
-
 
         const username =
           document
@@ -1169,25 +1183,21 @@
             .value
             .trim();
 
-
         const email =
           document
             .getElementById("email")
             .value
             .trim();
 
-
         const password =
           document
             .getElementById("password")
             .value;
 
-
         const confirmPassword =
           document
             .getElementById("confirmPassword")
             .value;
-
 
         const referral =
           document
@@ -1258,24 +1268,20 @@
 
 
         /* =========================
-           BUTTON
+           START CREATION
         ========================= */
 
-        const button =
-          form.querySelector(".create-btn");
+        createButton.disabled = true;
 
-
-        button.disabled = true;
-
-        button.textContent =
+        createButton.textContent =
           "CREATING ACCOUNT...";
 
 
         try {
 
-          /* =================================================
-             CREATE FIREBASE AUTH ACCOUNT
-             ================================================= */
+          /* =========================
+             FIREBASE ACCOUNT CREATION
+          ========================= */
 
           const userCredential =
             await createUserWithEmailAndPassword(
@@ -1290,7 +1296,7 @@
 
 
           console.log(
-            "ON1 Firebase account created:",
+            "ON1 account created successfully.",
             user.uid
           );
 
@@ -1298,13 +1304,15 @@
           /*
              IMPORTANT:
 
-             The password is handled only by Firebase
-             Authentication.
+             Firebase Authentication securely
+             manages the password.
 
-             We do NOT store the password ourselves.
+             We do NOT save the password ourselves.
 
-             First Name, Last Name, Username and Referral
-             will be saved to Firestore in the next stage.
+             First Name, Last Name, Username,
+             Referral Code, XP and ON1Coin balance
+             will be stored in Firestore in the
+             next stage.
           */
 
 
@@ -1314,9 +1322,13 @@
           message.classList.add("success");
 
 
-          /* =================================================
-             TEMPORARY REDIRECT
-             ================================================= */
+          createButton.textContent =
+            "ACCOUNT CREATED";
+
+
+          /* =========================
+             GO TO DASHBOARD
+          ========================= */
 
           setTimeout(
             function() {
@@ -1337,9 +1349,9 @@
           );
 
 
-          /* =================================================
-             FIREBASE ERROR HANDLING
-             ================================================= */
+          /* =========================
+             ERROR MESSAGES
+          ========================= */
 
           let errorMessage =
             "Unable to create your account.";
@@ -1397,31 +1409,21 @@
 
           else if (
             error.code ===
-            "auth/invalid-api-key"
-          ) {
-
-            errorMessage =
-              "Firebase configuration error. Please check the Firebase project configuration.";
-
-          }
-
-          else if (
-            error.code ===
             "auth/api-key-not-valid"
           ) {
 
             errorMessage =
-              "Firebase API key is not valid for this project.";
+              "Firebase API key is not valid. Please check the Firebase project configuration.";
 
           }
 
           else if (
             error.code ===
-            "auth/project-not-found"
+            "auth/invalid-api-key"
           ) {
 
             errorMessage =
-              "Firebase project could not be found.";
+              "Firebase API key is invalid. Please check the Firebase project configuration.";
 
           }
 
@@ -1432,6 +1434,16 @@
 
             errorMessage =
               "This website is not authorized in the Firebase project.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/project-not-found"
+          ) {
+
+            errorMessage =
+              "The Firebase project could not be found.";
 
           }
 
@@ -1447,30 +1459,34 @@
           message.textContent =
             errorMessage;
 
-
           message.classList.add("error");
 
 
-          button.disabled = false;
+          createButton.disabled = false;
 
-          button.textContent =
+          createButton.textContent =
             "CREATE ON1 ACCOUNT";
 
         }
 
-      }
-    );
+      });
 
 
     /* =====================================================
-       REFERRAL CODE FROM URL
-       ===================================================== */
+       READ REFERRAL CODE FROM URL
+       =====================================================
+
+       Example:
+
+       signup.html?ref=ON1ABC123
+
+       The referral field is optional.
+       */
 
     const params =
       new URLSearchParams(
         window.location.search
       );
-
 
     const referralFromURL =
       params.get("ref");
