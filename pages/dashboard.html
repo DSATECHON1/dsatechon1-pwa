@@ -994,7 +994,7 @@ WELCOME
     </div>
 
     <h1>
-        Welcome back, <span>Member</span>
+        Welcome back, <span id="firstName">Member</span>
     </h1>
 
     <p>
@@ -1023,7 +1023,7 @@ BALANCES
             class="coin-balance"
             id="coinBalance">
 
-            0.010
+            0.000
             <span>ON1</span>
 
         </div>
@@ -1057,13 +1057,25 @@ BALANCES
                 </div>
 
                 <div class="xp-value">
-                    1,250 <span>XP</span>
+
+                    <span
+                        id="xpValue"
+                        style="color:white;font-size:26px;">
+                        0
+                    </span>
+
+                    <span>XP</span>
+
                 </div>
 
             </div>
 
-            <div class="level">
-                LEVEL 3
+            <div
+                class="level"
+                id="levelValue">
+
+                LEVEL 1
+
             </div>
 
         </div>
@@ -1075,15 +1087,19 @@ BALANCES
                 Level Progress
             </span>
 
-            <span>
-                1,250 / 2,000
+            <span id="xpProgressText">
+                0 / 2,000
             </span>
 
         </div>
 
         <div class="progress">
 
-            <div class="progress-bar"></div>
+            <div
+                class="progress-bar"
+                id="xpProgressBar"
+                style="width:0%;">
+            </div>
 
         </div>
 
@@ -1200,8 +1216,10 @@ QUICK STATS
             🔥
         </div>
 
-        <div class="quick-value">
-            3 Days
+        <div
+            class="quick-value"
+            id="streakValue">
+            0 Days
         </div>
 
         <div class="quick-label">
@@ -1217,8 +1235,10 @@ QUICK STATS
             🤝
         </div>
 
-        <div class="quick-value">
-            7
+        <div
+            class="quick-value"
+            id="referralValue">
+            0
         </div>
 
         <div class="quick-label">
@@ -1234,8 +1254,10 @@ QUICK STATS
             ⭐
         </div>
 
-        <div class="quick-value">
-            1,250
+        <div
+            class="quick-value"
+            id="xpEarnedValue">
+            0
         </div>
 
         <div class="quick-label">
@@ -1251,8 +1273,10 @@ QUICK STATS
             🎯
         </div>
 
-        <div class="quick-value">
-            7
+        <div
+            class="quick-value"
+            id="activitiesValue">
+            0
         </div>
 
         <div class="quick-label">
@@ -1294,8 +1318,12 @@ DAILY STREAK
 
             <div>
 
-                <div class="streak-number">
-                    3 <span>DAYS</span>
+                <div
+                    class="streak-number"
+                    id="streakNumber">
+
+                    0 <span>DAYS</span>
+
                 </div>
 
                 <div class="streak-description">
@@ -1309,60 +1337,50 @@ DAILY STREAK
 
         <div class="streak-days">
 
-
             <div class="day done">
                 <span class="day-number">DAY 1</span>
                 <span class="day-icon">✓</span>
             </div>
 
-
-            <div class="day done">
+            <div class="day">
                 <span class="day-number">DAY 2</span>
-                <span class="day-icon">✓</span>
+                <span class="day-icon">•</span>
             </div>
 
-
-            <div class="day done today">
+            <div class="day">
                 <span class="day-number">DAY 3</span>
-                <span class="day-icon">🔥</span>
+                <span class="day-icon">•</span>
             </div>
-
 
             <div class="day">
                 <span class="day-number">DAY 4</span>
                 <span class="day-icon">•</span>
             </div>
 
-
             <div class="day">
                 <span class="day-number">DAY 5</span>
                 <span class="day-icon">•</span>
             </div>
-
 
             <div class="day">
                 <span class="day-number">DAY 6</span>
                 <span class="day-icon">•</span>
             </div>
 
-
             <div class="day">
                 <span class="day-number">DAY 7</span>
                 <span class="day-icon">•</span>
             </div>
-
 
             <div class="day">
                 <span class="day-number">DAY 8</span>
                 <span class="day-icon">•</span>
             </div>
 
-
             <div class="day">
                 <span class="day-number">DAY 9</span>
                 <span class="day-icon">•</span>
             </div>
-
 
             <div class="day">
                 <span class="day-number">DAY 10</span>
@@ -1408,7 +1426,7 @@ REFERRAL + PARTNERSHIP
 
         <div class="referral-code">
 
-            <strong>
+            <strong id="userReferralCode">
                 ON1MEMBER
             </strong>
 
@@ -1427,8 +1445,8 @@ REFERRAL + PARTNERSHIP
 
             <div class="ref-stat">
 
-                <strong>
-                    7
+                <strong id="referralCount">
+                    0
                 </strong>
 
                 <span>
@@ -1440,8 +1458,8 @@ REFERRAL + PARTNERSHIP
 
             <div class="ref-stat">
 
-                <strong>
-                    0.350
+                <strong id="referralReward">
+                    0.000
                 </strong>
 
                 <span>
@@ -1503,3 +1521,642 @@ REFERRAL + PARTNERSHIP
 <!-- =========================
 QUICK ACTIONS
 ========================= -->
+
+<section class="actions">
+
+    <div class="section-head">
+
+        <div>
+
+            <div class="section-title">
+                Quick Actions
+            </div>
+
+            <div class="section-description">
+                Access your ON1Ecosystem services.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="action-grid">
+
+        <a href="wallet.html" class="action">
+
+            <div class="action-icon">
+                💰
+            </div>
+
+            <strong>
+                Wallet
+            </strong>
+
+            <span>
+                Manage ON1Coin
+            </span>
+
+        </a>
+
+
+        <a href="marketplace.html" class="action">
+
+            <div class="action-icon">
+                🛒
+            </div>
+
+            <strong>
+                Marketplace
+            </strong>
+
+            <span>
+                Shop & discover
+            </span>
+
+        </a>
+
+
+        <a href="exchange.html" class="action">
+
+            <div class="action-icon">
+                🔄
+            </div>
+
+            <strong>
+                Exchange
+            </strong>
+
+            <span>
+                Exchange services
+            </span>
+
+        </a>
+
+
+        <a href="profile.html" class="action">
+
+            <div class="action-icon">
+                👤
+            </div>
+
+            <strong>
+                Profile
+            </strong>
+
+            <span>
+                Account settings
+            </span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        ON1Ecosystem is a project under DSATECHON1.
+    </p>
+
+    <div class="footer-brand">
+        ONE DIGITAL ECOSYSTEM
+    </div>
+
+</footer>
+
+
+</div>
+
+
+<!-- =========================
+TOAST
+========================= -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<!-- =====================================================
+     FIREBASE + DASHBOARD DATA
+===================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
+
+    authDomain:
+        "dsatechon1-c8b41.firebaseapp.com",
+
+    projectId:
+        "dsatechon1-c8b41",
+
+    storageBucket:
+        "dsatechon1-c8b41.firebasestorage.app",
+
+    messagingSenderId:
+        "5740594058",
+
+    appId:
+        "1:5740594058:web:23fbbca5392f12db863e73"
+};
+
+
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 3000);
+}
+
+
+/* =========================
+   LOAD USER DATA
+========================= */
+
+onAuthStateChanged(auth, async (user) => {
+
+    if(!user){
+
+        /*
+         * User is not logged in.
+         * Send them to login page.
+         */
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+
+    try{
+
+        const userRef =
+            doc(
+                db,
+                "users",
+                user.uid
+            );
+
+
+        const userSnap =
+            await getDoc(userRef);
+
+
+        if(!userSnap.exists()){
+
+            showToast(
+                "Your profile data was not found."
+            );
+
+            return;
+        }
+
+
+        const data =
+            userSnap.data();
+
+
+        /* =========================
+           FIRST NAME
+        ========================= */
+
+        const firstName =
+            data.firstName ||
+            "Member";
+
+        document.getElementById(
+            "firstName"
+        ).textContent = firstName;
+
+
+        /* =========================
+           BALANCE
+        ========================= */
+
+        const balance =
+            Number(
+                data.balance ??
+                data.ON1Balance ??
+                0
+            );
+
+
+        document.getElementById(
+            "coinBalance"
+        ).innerHTML =
+            balance.toFixed(3) +
+            ' <span>ON1</span>';
+
+
+        /* =========================
+           XP
+        ========================= */
+
+        const xp =
+            Number(
+                data.XP ??
+                0
+            );
+
+
+        document.getElementById(
+            "xpValue"
+        ).textContent =
+            xp.toLocaleString();
+
+
+        document.getElementById(
+            "xpEarnedValue"
+        ).textContent =
+            xp.toLocaleString();
+
+
+        /* =========================
+           LEVEL
+        ========================= */
+
+        const level =
+            Number(
+                data.level ??
+                1
+            );
+
+
+        document.getElementById(
+            "levelValue"
+        ).textContent =
+            "LEVEL " + level;
+
+
+        /* =========================
+           XP PROGRESS
+        ========================= */
+
+        const xpPerLevel = 2000;
+
+        const progress =
+            Math.min(
+                (xp / xpPerLevel) * 100,
+                100
+            );
+
+
+        document.getElementById(
+            "xpProgressBar"
+        ).style.width =
+            progress + "%";
+
+
+        document.getElementById(
+            "xpProgressText"
+        ).textContent =
+            xp.toLocaleString() +
+            " / " +
+            xpPerLevel.toLocaleString();
+
+
+        /* =========================
+           REFERRALS
+        ========================= */
+
+        const referrals =
+            Number(
+                data.referrals ??
+                0
+            );
+
+
+        document.getElementById(
+            "referralValue"
+        ).textContent =
+            referrals;
+
+
+        document.getElementById(
+            "referralCount"
+        ).textContent =
+            referrals;
+
+
+        /* =========================
+           REFERRAL REWARD
+        ========================= */
+
+        const referralReward =
+            Number(
+                data.referralReward ??
+                0
+            );
+
+
+        document.getElementById(
+            "referralReward"
+        ).textContent =
+            referralReward.toFixed(3);
+
+
+        /* =========================
+           STREAK
+        ========================= */
+
+        const streak =
+            Number(
+                data.streak ??
+                0
+            );
+
+
+        document.getElementById(
+            "streakValue"
+        ).textContent =
+            streak + " Days";
+
+
+        document.getElementById(
+            "streakNumber"
+        ).innerHTML =
+            streak +
+            ' <span>DAYS</span>';
+
+
+        /* =========================
+           ACTIVITIES
+        ========================= */
+
+        const activities =
+            Number(
+                data.activities ??
+                0
+            );
+
+
+        document.getElementById(
+            "activitiesValue"
+        ).textContent =
+            activities;
+
+
+        /* =========================
+           REFERRAL CODE
+        ========================= */
+
+        if(data.referralCode){
+
+            document.getElementById(
+                "userReferralCode"
+            ).textContent =
+                data.referralCode;
+
+        }
+
+
+        console.log(
+            "ON1Ecosystem profile loaded:",
+            data
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Dashboard Firebase error:",
+            error
+        );
+
+        showToast(
+            "Unable to load your profile."
+        );
+
+    }
+
+});
+
+
+/* =====================================================
+   COPY REFERRAL CODE
+===================================================== */
+
+document
+    .getElementById("copyReferral")
+    .addEventListener("click", async () => {
+
+        const code =
+            document.getElementById(
+                "userReferralCode"
+            ).textContent;
+
+
+        try{
+
+            await navigator.clipboard.writeText(
+                code
+            );
+
+            showToast(
+                "Referral code copied!"
+            );
+
+        }
+
+        catch(error){
+
+            showToast(
+                "Unable to copy referral code."
+            );
+
+        }
+
+    });
+
+
+/* =====================================================
+   PROTOTYPE MINING BUTTON
+===================================================== */
+
+const mineButton =
+    document.getElementById(
+        "mineButton"
+    );
+
+const miningStatus =
+    document.getElementById(
+        "miningStatus"
+    );
+
+const timer =
+    document.getElementById(
+        "timer"
+    );
+
+const miningFill =
+    document.getElementById(
+        "miningFill"
+    );
+
+
+let miningActive = false;
+
+let miningSeconds = 0;
+
+let miningInterval = null;
+
+
+mineButton.addEventListener(
+    "click",
+    () => {
+
+        if(miningActive){
+
+            miningActive = false;
+
+            clearInterval(
+                miningInterval
+            );
+
+            mineButton.textContent =
+                "⛏ START MINING";
+
+            mineButton.classList.remove(
+                "active"
+            );
+
+            miningStatus.textContent =
+                "PAUSED";
+
+            miningStatus.classList.remove(
+                "active"
+            );
+
+            return;
+        }
+
+
+        miningActive = true;
+
+        mineButton.textContent =
+            "⛏ MINING ACTIVE";
+
+        mineButton.classList.add(
+            "active"
+        );
+
+        miningStatus.textContent =
+            "ACTIVE";
+
+        miningStatus.classList.add(
+            "active"
+        );
+
+
+        miningInterval =
+            setInterval(
+                () => {
+
+                    miningSeconds++;
+
+
+                    const hours =
+                        Math.floor(
+                            miningSeconds / 3600
+                        );
+
+                    const minutes =
+                        Math.floor(
+                            (miningSeconds % 3600) / 60
+                        );
+
+                    const seconds =
+                        miningSeconds % 60;
+
+
+                    timer.textContent =
+                        String(hours).padStart(2,"0") +
+                        ":" +
+                        String(minutes).padStart(2,"0") +
+                        ":" +
+                        String(seconds).padStart(2,"0");
+
+
+                    const progress =
+                        Math.min(
+                            (miningSeconds / 86400) * 100,
+                            100
+                        );
+
+
+                    miningFill.style.width =
+                        Math.max(
+                            18,
+                            progress
+                        ) + "%";
+
+
+                },
+                1000
+            );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
