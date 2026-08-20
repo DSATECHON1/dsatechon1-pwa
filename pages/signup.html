@@ -10,7 +10,6 @@
   <meta name="description" content="Join ON1Ecosystem and participate in digital opportunities, rewards and ecosystem activities.">
 
   <style>
-
     * {
       margin: 0;
       padding: 0;
@@ -276,6 +275,11 @@
       color: var(--danger);
     }
 
+    .optional {
+      color: #61758b;
+      font-weight: normal;
+    }
+
     .input-wrap {
       position: relative;
     }
@@ -521,7 +525,6 @@
         max-width: 500px;
         margin: auto;
       }
-
     }
 
     @media (max-width: 520px) {
@@ -570,7 +573,6 @@
         grid-template-columns: 1fr;
         gap: 16px;
       }
-
     }
 
     @media (max-width: 350px) {
@@ -582,7 +584,6 @@
       .signup-card {
         padding: 18px;
       }
-
     }
 
   </style>
@@ -633,7 +634,6 @@
 
     <main class="main">
 
-
       <!-- INTRODUCTION -->
 
       <section class="intro">
@@ -665,7 +665,6 @@
         <!-- BENEFITS -->
 
         <div class="benefits">
-
 
           <div class="benefit">
 
@@ -734,7 +733,6 @@
 
           </div>
 
-
         </div>
 
       </section>
@@ -760,7 +758,6 @@
 
 
         <form id="signupForm">
-
 
           <!-- FIRST NAME + LAST NAME -->
 
@@ -911,10 +908,7 @@
             <label for="referral">
 
               Referral code
-
-              <span style="color:#61758b;font-weight:normal;">
-                (Optional)
-              </span>
+              <span class="optional">(Optional)</span>
 
             </label>
 
@@ -1007,7 +1001,6 @@
 
           </div>
 
-
         </form>
 
 
@@ -1046,79 +1039,104 @@
   </div>
 
 
-  <!-- =========================
-       FIREBASE APP
-  ========================== -->
-
-  <script
-    type="module"
-    src="../app.js">
-  </script>
-
-
-  <!-- =========================
-       SIGNUP LOGIC
-  ========================== -->
+  <!-- =====================================================
+       FIREBASE + SIGNUP
+       ===================================================== -->
 
   <script type="module">
 
     import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+    import {
+      getAuth,
       createUserWithEmailAndPassword
     } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-    /* =========================
-       WAIT FOR FIREBASE
-    ========================= */
+    /* =====================================================
+       YOUR FIREBASE CONFIGURATION
+       ===================================================== */
 
-    let auth = null;
+    const firebaseConfig = {
 
+      apiKey:
+        "AIzaSyCmmOlfLVP3s3oPCmFLSl8trLKNqWlo9YKs",
 
-    function getFirebaseAuth() {
+      authDomain:
+        "dsatechon1-c8b41.firebaseapp.com",
 
-      if (window.firebaseAuth) {
-        return window.firebaseAuth;
-      }
+      projectId:
+        "dsatechon1-c8b41",
 
-      return null;
+      storageBucket:
+        "dsatechon1-c8b41.firebasestorage.app",
 
-    }
+      messagingSenderId:
+        "5740594058",
 
-
-    /* =========================
-       PASSWORD TOGGLE
-    ========================= */
-
-    window.togglePassword = function(id, button) {
-
-      const input =
-        document.getElementById(id);
-
-      if (input.type === "password") {
-
-        input.type = "text";
-        button.textContent = "HIDE";
-
-      } else {
-
-        input.type = "password";
-        button.textContent = "SHOW";
-
-      }
+      appId:
+        "1:5740594058:web:23fbbca5392f12db863e73"
 
     };
 
 
-    /* =========================
-       FORM
-    ========================= */
+    /* =====================================================
+       INITIALIZE FIREBASE
+       ===================================================== */
+
+    const app =
+      initializeApp(firebaseConfig);
+
+
+    const auth =
+      getAuth(app);
+
+
+    /* =====================================================
+       PASSWORD TOGGLE
+       ===================================================== */
+
+    window.togglePassword =
+      function(id, button) {
+
+        const input =
+          document.getElementById(id);
+
+
+        if (input.type === "password") {
+
+          input.type = "text";
+
+          button.textContent = "HIDE";
+
+        } else {
+
+          input.type = "password";
+
+          button.textContent = "SHOW";
+
+        }
+
+      };
+
+
+    /* =====================================================
+       FORM ELEMENTS
+       ===================================================== */
 
     const form =
       document.getElementById("signupForm");
 
+
     const message =
       document.getElementById("message");
 
+
+    /* =====================================================
+       SIGNUP
+       ===================================================== */
 
     form.addEventListener(
       "submit",
@@ -1128,26 +1146,7 @@
 
 
         /* =========================
-           GET FIREBASE AUTH
-        ========================= */
-
-        auth = getFirebaseAuth();
-
-
-        if (!auth) {
-
-          message.className = "message error";
-
-          message.textContent =
-            "Firebase is still loading. Please wait a moment and try again.";
-
-          return;
-
-        }
-
-
-        /* =========================
-           GET FORM VALUES
+           GET VALUES
         ========================= */
 
         const firstName =
@@ -1202,6 +1201,7 @@
         ========================= */
 
         message.className = "message";
+
         message.textContent = "";
 
 
@@ -1258,7 +1258,7 @@
 
 
         /* =========================
-           BUTTON STATE
+           BUTTON
         ========================= */
 
         const button =
@@ -1273,9 +1273,9 @@
 
         try {
 
-          /* =========================
-             CREATE FIREBASE ACCOUNT
-          ========================= */
+          /* =================================================
+             CREATE FIREBASE AUTH ACCOUNT
+             ================================================= */
 
           const userCredential =
             await createUserWithEmailAndPassword(
@@ -1296,17 +1296,15 @@
 
 
           /*
-            IMPORTANT:
+             IMPORTANT:
 
-            At this stage we are intentionally
-            NOT saving the profile to Firestore.
+             The password is handled only by Firebase
+             Authentication.
 
-            First we confirm that Firebase
-            Authentication successfully creates
-            the account.
+             We do NOT store the password ourselves.
 
-            Firestore profile + referral system
-            comes next.
+             First Name, Last Name, Username and Referral
+             will be saved to Firestore in the next stage.
           */
 
 
@@ -1316,28 +1314,35 @@
           message.classList.add("success");
 
 
-          /* =========================
+          /* =================================================
              TEMPORARY REDIRECT
-          ========================= */
+             ================================================= */
 
-          setTimeout(function() {
+          setTimeout(
+            function() {
 
-            window.location.href =
-              "dashboard.html";
+              window.location.href =
+                "dashboard.html";
 
-          }, 1800);
+            },
+            1800
+          );
 
 
         } catch (error) {
 
           console.error(
-            "ON1 Firebase signup error:",
+            "Firebase signup error:",
             error
           );
 
 
+          /* =================================================
+             FIREBASE ERROR HANDLING
+             ================================================= */
+
           let errorMessage =
-            "Unable to create your account. Please try again.";
+            "Unable to create your account.";
 
 
           if (
@@ -1350,7 +1355,6 @@
 
           }
 
-
           else if (
             error.code ===
             "auth/invalid-email"
@@ -1360,7 +1364,6 @@
               "Please enter a valid email address.";
 
           }
-
 
           else if (
             error.code ===
@@ -1372,7 +1375,6 @@
 
           }
 
-
           else if (
             error.code ===
             "auth/network-request-failed"
@@ -1382,7 +1384,6 @@
               "Network error. Please check your internet connection.";
 
           }
-
 
           else if (
             error.code ===
@@ -1394,9 +1395,58 @@
 
           }
 
+          else if (
+            error.code ===
+            "auth/invalid-api-key"
+          ) {
+
+            errorMessage =
+              "Firebase configuration error. Please check the Firebase project configuration.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/api-key-not-valid"
+          ) {
+
+            errorMessage =
+              "Firebase API key is not valid for this project.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/project-not-found"
+          ) {
+
+            errorMessage =
+              "Firebase project could not be found.";
+
+          }
+
+          else if (
+            error.code ===
+            "auth/app-not-authorized"
+          ) {
+
+            errorMessage =
+              "This website is not authorized in the Firebase project.";
+
+          }
+
+          else {
+
+            errorMessage =
+              "Firebase error: " +
+              (error.code || error.message);
+
+          }
+
 
           message.textContent =
             errorMessage;
+
 
           message.classList.add("error");
 
@@ -1412,9 +1462,9 @@
     );
 
 
-    /* =========================
-       REFERRAL URL
-    ========================= */
+    /* =====================================================
+       REFERRAL CODE FROM URL
+       ===================================================== */
 
     const params =
       new URLSearchParams(
