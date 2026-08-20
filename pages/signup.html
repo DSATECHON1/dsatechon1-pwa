@@ -177,7 +177,7 @@
     }
 
     /* =========================
-       BENEFITS
+       ECOSYSTEM BENEFITS
     ========================= */
 
     .benefits {
@@ -226,7 +226,8 @@
       border: 1px solid var(--border);
       border-radius: 23px;
       padding: 28px;
-      box-shadow: 0 25px 70px rgba(0,0,0,.35);
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.35);
     }
 
     .card-header {
@@ -256,12 +257,6 @@
       margin-top: 0;
     }
 
-    .name-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
     label {
       display: block;
       margin-bottom: 7px;
@@ -272,11 +267,6 @@
 
     .required {
       color: var(--danger);
-    }
-
-    .optional {
-      color: #61758b;
-      font-weight: normal;
     }
 
     .input-wrap {
@@ -323,6 +313,16 @@
       color: #61758b;
       font-size: 9px;
       line-height: 1.4;
+    }
+
+    /* =========================
+       NAME ROW
+    ========================= */
+
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
     /* =========================
@@ -413,7 +413,7 @@
 
     .create-btn:disabled {
       opacity: .65;
-      cursor: wait;
+      cursor: not-allowed;
       transform: none;
     }
 
@@ -430,7 +430,7 @@
     }
 
     /* =========================
-       TRUST
+       TRUST MESSAGE
     ========================= */
 
     .trust {
@@ -524,6 +524,7 @@
         max-width: 500px;
         margin: auto;
       }
+
     }
 
     @media (max-width: 520px) {
@@ -568,10 +569,15 @@
         border-radius: 19px;
       }
 
+    }
+
+    @media (max-width: 400px) {
+
       .name-row {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 0;
       }
+
     }
 
     @media (max-width: 350px) {
@@ -583,6 +589,7 @@
       .signup-card {
         padding: 18px;
       }
+
     }
 
   </style>
@@ -633,6 +640,7 @@
 
     <main class="main">
 
+
       <!-- INTRODUCTION -->
 
       <section class="intro">
@@ -664,6 +672,7 @@
         <!-- BENEFITS -->
 
         <div class="benefits">
+
 
           <div class="benefit">
 
@@ -732,6 +741,7 @@
 
           </div>
 
+
         </div>
 
       </section>
@@ -750,7 +760,7 @@
           </h2>
 
           <p>
-            Join the ecosystem and create your personal ON1 profile.
+            Use your real name as it appears on your identification documents.
           </p>
 
         </div>
@@ -758,49 +768,55 @@
 
         <form id="signupForm">
 
-          <!-- FIRST NAME + LAST NAME -->
 
-          <div class="form-group">
+          <!-- =========================
+               FIRST NAME + LAST NAME
+          ========================== -->
 
-            <div class="name-row">
+          <div class="name-row">
 
-              <div>
+            <div class="form-group">
 
-                <label for="firstName">
-                  First Name <span class="required">*</span>
-                </label>
+              <label for="firstName">
+                First Name <span class="required">*</span>
+              </label>
 
-                <input
-                  id="firstName"
-                  type="text"
-                  placeholder="First name"
-                  autocomplete="given-name"
-                  required>
+              <input
+                id="firstName"
+                type="text"
+                placeholder="Your first name"
+                autocomplete="given-name"
+                required>
 
-              </div>
+            </div>
 
 
-              <div>
+            <div class="form-group">
 
-                <label for="lastName">
-                  Last Name <span class="required">*</span>
-                </label>
+              <label for="lastName">
+                Last Name <span class="required">*</span>
+              </label>
 
-                <input
-                  id="lastName"
-                  type="text"
-                  placeholder="Last name"
-                  autocomplete="family-name"
-                  required>
-
-              </div>
+              <input
+                id="lastName"
+                type="text"
+                placeholder="Your last name"
+                autocomplete="family-name"
+                required>
 
             </div>
 
           </div>
 
 
-          <!-- USERNAME -->
+          <div class="field-note">
+            Your registered name should match the name on the identification document you will use for KYC.
+          </div>
+
+
+          <!-- =========================
+               USERNAME
+          ========================== -->
 
           <div class="form-group">
 
@@ -818,7 +834,9 @@
           </div>
 
 
-          <!-- EMAIL -->
+          <!-- =========================
+               EMAIL
+          ========================== -->
 
           <div class="form-group">
 
@@ -836,7 +854,9 @@
           </div>
 
 
-          <!-- PASSWORD -->
+          <!-- =========================
+               PASSWORD
+          ========================== -->
 
           <div class="form-group">
 
@@ -857,7 +877,7 @@
               <button
                 type="button"
                 class="password-toggle"
-                data-password="password">
+                onclick="togglePassword('password', this)">
                 SHOW
               </button>
 
@@ -870,7 +890,9 @@
           </div>
 
 
-          <!-- CONFIRM PASSWORD -->
+          <!-- =========================
+               CONFIRM PASSWORD
+          ========================== -->
 
           <div class="form-group">
 
@@ -891,7 +913,7 @@
               <button
                 type="button"
                 class="password-toggle"
-                data-password="confirmPassword">
+                onclick="togglePassword('confirmPassword', this)">
                 SHOW
               </button>
 
@@ -900,15 +922,17 @@
           </div>
 
 
-          <!-- REFERRAL -->
+          <!-- =========================
+               REFERRAL
+          ========================== -->
 
           <div class="form-group">
 
             <label for="referral">
-
               Referral code
-              <span class="optional">(Optional)</span>
-
+              <span style="color:#61758b;font-weight:normal;">
+                (Optional)
+              </span>
             </label>
 
             <input
@@ -918,16 +942,15 @@
               autocomplete="off">
 
             <div class="field-note">
-
-              If someone invited you, enter their referral code.
-              You can leave this blank if you do not have one.
-
+              You can leave this blank if nobody referred you.
             </div>
 
           </div>
 
 
-          <!-- REFERRAL INFORMATION -->
+          <!-- =========================
+               REFERRAL INFORMATION
+          ========================== -->
 
           <div class="referral-box">
 
@@ -936,18 +959,18 @@
             </strong>
 
             <p>
-
-              Don't have a referral code? That's okay.
-              You can still create your ON1Ecosystem account.
-              Your referral relationship will be assigned
-              according to the ON1Ecosystem referral system.
-
+              If you were invited by an ON1Ecosystem member,
+              enter their referral code above. Referral rewards
+              are subject to ON1Ecosystem participation and
+              eligibility rules.
             </p>
 
           </div>
 
 
-          <!-- TERMS -->
+          <!-- =========================
+               TERMS
+          ========================== -->
 
           <div class="terms">
 
@@ -973,7 +996,9 @@
           </div>
 
 
-          <!-- MESSAGE -->
+          <!-- =========================
+               MESSAGE
+          ========================== -->
 
           <div
             id="message"
@@ -981,11 +1006,14 @@
           </div>
 
 
-          <!-- CREATE ACCOUNT -->
+          <!-- =========================
+               CREATE ACCOUNT
+          ========================== -->
 
           <button
             type="submit"
-            class="create-btn">
+            class="create-btn"
+            id="createBtn">
 
             CREATE ON1 ACCOUNT
 
@@ -1001,6 +1029,7 @@
             </a>
 
           </div>
+
 
         </form>
 
@@ -1025,10 +1054,8 @@
     <footer>
 
       <p>
-
         ON1Ecosystem is designed to connect digital services,
         opportunities and participation in one ecosystem.
-
       </p>
 
       <div class="footer-brand">
@@ -1041,29 +1068,36 @@
 
 
   <!-- =====================================================
-       FIREBASE AUTHENTICATION
-       ===================================================== -->
+       FIREBASE + AUTHENTICATION + FIRESTORE
+  ====================================================== -->
 
   <script type="module">
 
-    import {
-      initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
     import {
       getAuth,
       createUserWithEmailAndPassword
-    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    }
+      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      serverTimestamp
+    }
+      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-    /* =====================================================
+    /* =========================
        FIREBASE CONFIGURATION
-       ===================================================== */
+    ========================== */
 
     const firebaseConfig = {
 
-      apiKey:
-        "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
+      apiKey: "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
 
       authDomain:
         "dsatechon1-c8b41.firebaseapp.com",
@@ -1083,62 +1117,67 @@
     };
 
 
-    /* =====================================================
+    /* =========================
        INITIALIZE FIREBASE
-       ===================================================== */
+    ========================== */
 
     const app =
       initializeApp(firebaseConfig);
+
+
+    /* =========================
+       INITIALIZE AUTH
+    ========================== */
 
     const auth =
       getAuth(app);
 
 
+    /* =========================
+       INITIALIZE FIRESTORE
+    ========================== */
+
+    const db =
+      getFirestore(app);
+
+
     console.log(
-      "Firebase initialized for ON1Ecosystem"
+      "ON1Ecosystem Firebase + Firestore initialized."
     );
 
 
-    /* =====================================================
-       PASSWORD SHOW / HIDE
-       ===================================================== */
+    /* =========================
+       PASSWORD TOGGLE
+    ========================== */
 
-    document
-      .querySelectorAll(".password-toggle")
-      .forEach(function(button) {
+    window.togglePassword =
+      function(id, button) {
 
-        button.addEventListener(
-          "click",
-          function() {
+        const input =
+          document.getElementById(id);
 
-            const input =
-              document.getElementById(
-                button.dataset.password
-              );
+        if (input.type === "password") {
 
-            if (input.type === "password") {
+          input.type = "text";
 
-              input.type = "text";
+          button.textContent =
+            "HIDE";
 
-              button.textContent = "HIDE";
+        } else {
 
-            } else {
+          input.type = "password";
 
-              input.type = "password";
+          button.textContent =
+            "SHOW";
 
-              button.textContent = "SHOW";
+        }
 
-            }
-
-          }
-        );
-
-      });
+      };
 
 
-    /* =====================================================
-       FORM
-       ===================================================== */
+    /* =========================
+       FORM ELEMENTS
+    ========================== */
 
     const form =
       document.getElementById("signupForm");
@@ -1146,13 +1185,48 @@
     const message =
       document.getElementById("message");
 
-    const createButton =
-      form.querySelector(".create-btn");
+    const createBtn =
+      document.getElementById("createBtn");
 
 
-    /* =====================================================
+    /* =========================
+       SHOW MESSAGE
+    ========================== */
+
+    function showMessage(text, type) {
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    /* =========================
+       GET REFERRAL FROM URL
+    ========================== */
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const referralFromURL =
+      params.get("ref");
+
+
+    if (referralFromURL) {
+
+      document.getElementById("referral").value =
+        referralFromURL;
+
+    }
+
+
+    /* =========================
        SIGNUP
-       ===================================================== */
+    ========================== */
 
     form.addEventListener(
       "submit",
@@ -1161,9 +1235,9 @@
         event.preventDefault();
 
 
-        /* =========================
-           READ FORM DATA
-        ========================= */
+        /* -------------------------
+           GET FORM VALUES
+        -------------------------- */
 
         const firstName =
           document
@@ -1206,25 +1280,27 @@
             .trim();
 
 
-        /* =========================
-           RESET MESSAGE
-        ========================= */
+        /* -------------------------
+           CLEAR OLD MESSAGE
+        -------------------------- */
 
-        message.className = "message";
+        message.className =
+          "message";
 
-        message.textContent = "";
+        message.textContent =
+          "";
 
 
-        /* =========================
-           VALIDATION
-        ========================= */
+        /* -------------------------
+           BASIC VALIDATION
+        -------------------------- */
 
         if (!firstName || !lastName) {
 
-          message.textContent =
-            "Please enter your first name and last name.";
-
-          message.classList.add("error");
+          showMessage(
+            "Please enter your first name and last name.",
+            "error"
+          );
 
           return;
 
@@ -1233,10 +1309,10 @@
 
         if (!username) {
 
-          message.textContent =
-            "Please choose a username.";
-
-          message.classList.add("error");
+          showMessage(
+            "Please choose a username.",
+            "error"
+          );
 
           return;
 
@@ -1245,10 +1321,10 @@
 
         if (password.length < 8) {
 
-          message.textContent =
-            "Please use a password with at least 8 characters.";
-
-          message.classList.add("error");
+          showMessage(
+            "Please use a password with at least 8 characters.",
+            "error"
+          );
 
           return;
 
@@ -1257,31 +1333,33 @@
 
         if (password !== confirmPassword) {
 
-          message.textContent =
-            "The passwords do not match.";
-
-          message.classList.add("error");
+          showMessage(
+            "The passwords do not match.",
+            "error"
+          );
 
           return;
 
         }
 
 
-        /* =========================
-           START CREATION
-        ========================= */
+        /* -------------------------
+           DISABLE BUTTON
+        -------------------------- */
 
-        createButton.disabled = true;
+        createBtn.disabled = true;
 
-        createButton.textContent =
+        createBtn.textContent =
           "CREATING ACCOUNT...";
 
 
         try {
 
-          /* =========================
-             FIREBASE ACCOUNT CREATION
-          ========================= */
+
+          /* =================================
+             STEP 1
+             CREATE FIREBASE AUTH ACCOUNT
+          ================================= */
 
           const userCredential =
             await createUserWithEmailAndPassword(
@@ -1296,39 +1374,83 @@
 
 
           console.log(
-            "ON1 account created successfully.",
+            "Firebase Authentication account created:",
             user.uid
           );
 
 
-          /*
+          /* =================================
+             STEP 2
+             CREATE FIRESTORE USER PROFILE
+
              IMPORTANT:
+             These fields match your
+             current Firestore Rules.
+          ================================= */
 
-             Firebase Authentication securely
-             manages the password.
+          await setDoc(
+            doc(db, "users", user.uid),
+            {
 
-             We do NOT save the password ourselves.
+              firstName:
+                firstName,
 
-             First Name, Last Name, Username,
-             Referral Code, XP and ON1Coin balance
-             will be stored in Firestore in the
-             next stage.
-          */
+              lastName:
+                lastName,
+
+              username:
+                username,
+
+              email:
+                email,
+
+              referralCode:
+                referral || null,
+
+              balance:
+                0,
+
+              isAdmin:
+                false,
+
+              XP:
+                1250,
+
+              level:
+                3,
+
+              createdAt:
+                serverTimestamp()
+
+            }
+          );
 
 
-          message.textContent =
-            "Your ON1Ecosystem account has been created successfully!";
+          console.log(
+            "Firestore user profile created:",
+            user.uid
+          );
 
-          message.classList.add("success");
+
+          /* =================================
+             STEP 3
+             SUCCESS MESSAGE
+          ================================= */
+
+          showMessage(
+            "Your ON1Ecosystem account has been created successfully!",
+            "success"
+          );
 
 
-          createButton.textContent =
+          createBtn.textContent =
             "ACCOUNT CREATED";
 
 
-          /* =========================
-             GO TO DASHBOARD
-          ========================= */
+          /* =================================
+             STEP 4
+             REDIRECT
+          ================================= */
 
           setTimeout(
             function() {
@@ -1337,24 +1459,25 @@
                 "dashboard.html";
 
             },
-            1800
+            1500
           );
 
 
         } catch (error) {
 
+
           console.error(
-            "Firebase signup error:",
+            "ON1 signup error:",
             error
           );
 
 
           /* =========================
-             ERROR MESSAGES
-          ========================= */
+             FIREBASE ERROR HANDLING
+          ========================== */
 
           let errorMessage =
-            "Unable to create your account.";
+            "Unable to create your account. Please try again.";
 
 
           if (
@@ -1363,9 +1486,10 @@
           ) {
 
             errorMessage =
-              "This email address is already registered. Please login instead.";
+              "This email address is already registered. Please use another email or sign in.";
 
           }
+
 
           else if (
             error.code ===
@@ -1377,35 +1501,17 @@
 
           }
 
+
           else if (
             error.code ===
             "auth/weak-password"
           ) {
 
             errorMessage =
-              "Your password is too weak. Please use a stronger password.";
+              "Your password is too weak. Please use at least 8 characters.";
 
           }
 
-          else if (
-            error.code ===
-            "auth/network-request-failed"
-          ) {
-
-            errorMessage =
-              "Network error. Please check your internet connection.";
-
-          }
-
-          else if (
-            error.code ===
-            "auth/operation-not-allowed"
-          ) {
-
-            errorMessage =
-              "Email/password registration is not enabled in Firebase.";
-
-          }
 
           else if (
             error.code ===
@@ -1413,93 +1519,62 @@
           ) {
 
             errorMessage =
-              "Firebase API key is not valid. Please check the Firebase project configuration.";
+              "Firebase configuration error. Please check the Firebase project configuration.";
 
           }
+
 
           else if (
             error.code ===
-            "auth/invalid-api-key"
+            "permission-denied"
           ) {
 
             errorMessage =
-              "Firebase API key is invalid. Please check the Firebase project configuration.";
+              "Your account was created, but Firestore rejected the profile. Please check the Firestore security rules.";
 
           }
+
 
           else if (
             error.code ===
-            "auth/app-not-authorized"
+            "failed-precondition"
           ) {
 
             errorMessage =
-              "This website is not authorized in the Firebase project.";
+              "Firestore is not ready. Please check that your Firestore database is active.";
 
           }
+
 
           else if (
-            error.code ===
-            "auth/project-not-found"
+            error.message &&
+            error.message.toLowerCase().includes(
+              "permission"
+            )
           ) {
 
             errorMessage =
-              "The Firebase project could not be found.";
-
-          }
-
-          else {
-
-            errorMessage =
-              "Firebase error: " +
-              (error.code || error.message);
+              "Firebase Authentication succeeded, but Firestore permission was denied. Check your Firestore Rules.";
 
           }
 
 
-          message.textContent =
-            errorMessage;
+          showMessage(
+            errorMessage,
+            "error"
+          );
 
-          message.classList.add("error");
 
+          createBtn.disabled = false;
 
-          createButton.disabled = false;
-
-          createButton.textContent =
+          createBtn.textContent =
             "CREATE ON1 ACCOUNT";
+
 
         }
 
-      });
-
-
-    /* =====================================================
-       READ REFERRAL CODE FROM URL
-       =====================================================
-
-       Example:
-
-       signup.html?ref=ON1ABC123
-
-       The referral field is optional.
-       */
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    const referralFromURL =
-      params.get("ref");
-
-
-    if (referralFromURL) {
-
-      document.getElementById(
-        "referral"
-      ).value =
-        referralFromURL;
-
-    }
+      }
+    );
 
   </script>
 
