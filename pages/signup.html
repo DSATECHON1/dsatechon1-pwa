@@ -10,6 +10,7 @@
   <meta name="description" content="Join ON1Ecosystem and participate in digital opportunities, rewards and ecosystem activities.">
 
   <style>
+
     * {
       margin: 0;
       padding: 0;
@@ -405,6 +406,12 @@
 
     .create-btn:active {
       transform: translateY(0);
+    }
+
+    .create-btn:disabled {
+      opacity: .65;
+      cursor: wait;
+      transform: none;
     }
 
     .already {
@@ -902,10 +909,13 @@
           <div class="form-group">
 
             <label for="referral">
+
               Referral code
+
               <span style="color:#61758b;font-weight:normal;">
                 (Optional)
               </span>
+
             </label>
 
             <input
@@ -915,7 +925,10 @@
               autocomplete="off">
 
             <div class="field-note">
-              If someone invited you, enter their referral code. You can leave this blank if you do not have one.
+
+              If someone invited you, enter their referral code.
+              You can leave this blank if you do not have one.
+
             </div>
 
           </div>
@@ -930,7 +943,12 @@
             </strong>
 
             <p>
-              Don't have a referral code? That's okay. You can still create your ON1Ecosystem account. Your referral relationship will be assigned according to the ON1Ecosystem referral system.
+
+              Don't have a referral code? That's okay.
+              You can still create your ON1Ecosystem account.
+              Your referral relationship will be assigned
+              according to the ON1Ecosystem referral system.
+
             </p>
 
           </div>
@@ -1013,8 +1031,10 @@
     <footer>
 
       <p>
+
         ON1Ecosystem is designed to connect digital services,
         opportunities and participation in one ecosystem.
+
       </p>
 
       <div class="footer-brand">
@@ -1027,15 +1047,52 @@
 
 
   <!-- =========================
-       DEMO JAVASCRIPT
-       NO FIREBASE YET
+       FIREBASE APP
   ========================== -->
 
-  <script>
+  <script
+    type="module"
+    src="../app.js">
+  </script>
 
-    function togglePassword(id, button) {
 
-      const input = document.getElementById(id);
+  <!-- =========================
+       SIGNUP LOGIC
+  ========================== -->
+
+  <script type="module">
+
+    import {
+      createUserWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    /* =========================
+       WAIT FOR FIREBASE
+    ========================= */
+
+    let auth = null;
+
+
+    function getFirebaseAuth() {
+
+      if (window.firebaseAuth) {
+        return window.firebaseAuth;
+      }
+
+      return null;
+
+    }
+
+
+    /* =========================
+       PASSWORD TOGGLE
+    ========================= */
+
+    window.togglePassword = function(id, button) {
+
+      const input =
+        document.getElementById(id);
 
       if (input.type === "password") {
 
@@ -1049,8 +1106,12 @@
 
       }
 
-    }
+    };
 
+
+    /* =========================
+       FORM
+    ========================= */
 
     const form =
       document.getElementById("signupForm");
@@ -1059,104 +1120,307 @@
       document.getElementById("message");
 
 
-    form.addEventListener("submit", function(event) {
+    form.addEventListener(
+      "submit",
+      async function(event) {
 
-      event.preventDefault();
-
-
-      const firstName =
-        document.getElementById("firstName").value.trim();
-
-      const lastName =
-        document.getElementById("lastName").value.trim();
-
-      const username =
-        document.getElementById("username").value.trim();
-
-      const email =
-        document.getElementById("email").value.trim();
-
-      const password =
-        document.getElementById("password").value;
-
-      const confirmPassword =
-        document.getElementById("confirmPassword").value;
-
-      const referral =
-        document.getElementById("referral").value.trim();
+        event.preventDefault();
 
 
-      message.className = "message";
+        /* =========================
+           GET FIREBASE AUTH
+        ========================= */
+
+        auth = getFirebaseAuth();
 
 
-      if (!firstName || !lastName) {
+        if (!auth) {
 
-        message.textContent =
-          "Please enter your first name and last name.";
+          message.className = "message error";
 
-        message.classList.add("error");
+          message.textContent =
+            "Firebase is still loading. Please wait a moment and try again.";
 
-        return;
+          return;
+
+        }
+
+
+        /* =========================
+           GET FORM VALUES
+        ========================= */
+
+        const firstName =
+          document
+            .getElementById("firstName")
+            .value
+            .trim();
+
+
+        const lastName =
+          document
+            .getElementById("lastName")
+            .value
+            .trim();
+
+
+        const username =
+          document
+            .getElementById("username")
+            .value
+            .trim();
+
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+
+        const confirmPassword =
+          document
+            .getElementById("confirmPassword")
+            .value;
+
+
+        const referral =
+          document
+            .getElementById("referral")
+            .value
+            .trim();
+
+
+        /* =========================
+           RESET MESSAGE
+        ========================= */
+
+        message.className = "message";
+        message.textContent = "";
+
+
+        /* =========================
+           VALIDATION
+        ========================= */
+
+        if (!firstName || !lastName) {
+
+          message.textContent =
+            "Please enter your first name and last name.";
+
+          message.classList.add("error");
+
+          return;
+
+        }
+
+
+        if (!username) {
+
+          message.textContent =
+            "Please choose a username.";
+
+          message.classList.add("error");
+
+          return;
+
+        }
+
+
+        if (password.length < 8) {
+
+          message.textContent =
+            "Please use a password with at least 8 characters.";
+
+          message.classList.add("error");
+
+          return;
+
+        }
+
+
+        if (password !== confirmPassword) {
+
+          message.textContent =
+            "The passwords do not match.";
+
+          message.classList.add("error");
+
+          return;
+
+        }
+
+
+        /* =========================
+           BUTTON STATE
+        ========================= */
+
+        const button =
+          form.querySelector(".create-btn");
+
+
+        button.disabled = true;
+
+        button.textContent =
+          "CREATING ACCOUNT...";
+
+
+        try {
+
+          /* =========================
+             CREATE FIREBASE ACCOUNT
+          ========================= */
+
+          const userCredential =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+
+          const user =
+            userCredential.user;
+
+
+          console.log(
+            "ON1 Firebase account created:",
+            user.uid
+          );
+
+
+          /*
+            IMPORTANT:
+
+            At this stage we are intentionally
+            NOT saving the profile to Firestore.
+
+            First we confirm that Firebase
+            Authentication successfully creates
+            the account.
+
+            Firestore profile + referral system
+            comes next.
+          */
+
+
+          message.textContent =
+            "Your ON1Ecosystem account has been created successfully!";
+
+          message.classList.add("success");
+
+
+          /* =========================
+             TEMPORARY REDIRECT
+          ========================= */
+
+          setTimeout(function() {
+
+            window.location.href =
+              "dashboard.html";
+
+          }, 1800);
+
+
+        } catch (error) {
+
+          console.error(
+            "ON1 Firebase signup error:",
+            error
+          );
+
+
+          let errorMessage =
+            "Unable to create your account. Please try again.";
+
+
+          if (
+            error.code ===
+            "auth/email-already-in-use"
+          ) {
+
+            errorMessage =
+              "This email address is already registered. Please login instead.";
+
+          }
+
+
+          else if (
+            error.code ===
+            "auth/invalid-email"
+          ) {
+
+            errorMessage =
+              "Please enter a valid email address.";
+
+          }
+
+
+          else if (
+            error.code ===
+            "auth/weak-password"
+          ) {
+
+            errorMessage =
+              "Your password is too weak. Please use a stronger password.";
+
+          }
+
+
+          else if (
+            error.code ===
+            "auth/network-request-failed"
+          ) {
+
+            errorMessage =
+              "Network error. Please check your internet connection.";
+
+          }
+
+
+          else if (
+            error.code ===
+            "auth/operation-not-allowed"
+          ) {
+
+            errorMessage =
+              "Email/password registration is not enabled in Firebase.";
+
+          }
+
+
+          message.textContent =
+            errorMessage;
+
+          message.classList.add("error");
+
+
+          button.disabled = false;
+
+          button.textContent =
+            "CREATE ON1 ACCOUNT";
+
+        }
 
       }
+    );
 
 
-      if (password.length < 8) {
-
-        message.textContent =
-          "Please use a password with at least 8 characters.";
-
-        message.classList.add("error");
-
-        return;
-
-      }
-
-
-      if (password !== confirmPassword) {
-
-        message.textContent =
-          "The passwords do not match.";
-
-        message.classList.add("error");
-
-        return;
-
-      }
-
-
-      /*
-        Referral code is intentionally optional.
-
-        If referral is empty, the user is still
-        allowed to continue.
-
-        The final Firebase referral logic will
-        assign the default/root referrer later.
-      */
-
-
-      message.textContent =
-        "Demo mode: your signup information looks good. Firebase account creation will be connected next.";
-
-      message.classList.add("success");
-
-    });
-
-
-    /*
-      Automatically read referral code from URL.
-
-      Example:
-
-      signup.html?ref=ON1PIONEER
-
-      If a referral link is used, the referral
-      code will automatically appear in the box.
-    */
+    /* =========================
+       REFERRAL URL
+    ========================= */
 
     const params =
-      new URLSearchParams(window.location.search);
+      new URLSearchParams(
+        window.location.search
+      );
+
 
     const referralFromURL =
       params.get("ref");
@@ -1164,7 +1428,9 @@
 
     if (referralFromURL) {
 
-      document.getElementById("referral").value =
+      document.getElementById(
+        "referral"
+      ).value =
         referralFromURL;
 
     }
