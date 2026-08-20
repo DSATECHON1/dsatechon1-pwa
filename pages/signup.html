@@ -257,6 +257,12 @@
       margin-top: 0;
     }
 
+    .name-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
     label {
       display: block;
       margin-bottom: 7px;
@@ -455,7 +461,7 @@
     }
 
     /* =========================
-       DEMO MESSAGE
+       MESSAGE
     ========================= */
 
     .message {
@@ -551,6 +557,11 @@
       .signup-card {
         padding: 21px;
         border-radius: 19px;
+      }
+
+      .name-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
     }
@@ -744,6 +755,48 @@
         <form id="signupForm">
 
 
+          <!-- FIRST NAME + LAST NAME -->
+
+          <div class="form-group">
+
+            <div class="name-row">
+
+              <div>
+
+                <label for="firstName">
+                  First Name <span class="required">*</span>
+                </label>
+
+                <input
+                  id="firstName"
+                  type="text"
+                  placeholder="First name"
+                  autocomplete="given-name"
+                  required>
+
+              </div>
+
+
+              <div>
+
+                <label for="lastName">
+                  Last Name <span class="required">*</span>
+                </label>
+
+                <input
+                  id="lastName"
+                  type="text"
+                  placeholder="Last name"
+                  autocomplete="family-name"
+                  required>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
           <!-- USERNAME -->
 
           <div class="form-group">
@@ -850,18 +903,19 @@
 
             <label for="referral">
               Referral code
-              <span class="required">*</span>
+              <span style="color:#61758b;font-weight:normal;">
+                (Optional)
+              </span>
             </label>
 
             <input
               id="referral"
               type="text"
-              placeholder="Enter referral code"
-              autocomplete="off"
-              required>
+              placeholder="Enter referral code if you have one"
+              autocomplete="off">
 
             <div class="field-note">
-              If someone invited you, enter their referral code.
+              If someone invited you, enter their referral code. You can leave this blank if you do not have one.
             </div>
 
           </div>
@@ -876,8 +930,7 @@
             </strong>
 
             <p>
-              Referral rewards are subject to the ON1Ecosystem
-              participation and eligibility rules.
+              Don't have a referral code? That's okay. You can still create your ON1Ecosystem account. Your referral relationship will be assigned according to the ON1Ecosystem referral system.
             </p>
 
           </div>
@@ -975,20 +1028,10 @@
 
   <!-- =========================
        DEMO JAVASCRIPT
-       NO FIREBASE
+       NO FIREBASE YET
   ========================== -->
 
   <script>
-
-    /*
-      FRONT-END PROTOTYPE ONLY
-
-      This page does NOT create a real account.
-
-      Firebase Authentication and Firestore will be
-      integrated after the complete UI/UX has been approved.
-    */
-
 
     function togglePassword(id, button) {
 
@@ -1021,6 +1064,12 @@
       event.preventDefault();
 
 
+      const firstName =
+        document.getElementById("firstName").value.trim();
+
+      const lastName =
+        document.getElementById("lastName").value.trim();
+
       const username =
         document.getElementById("username").value.trim();
 
@@ -1038,6 +1087,18 @@
 
 
       message.className = "message";
+
+
+      if (!firstName || !lastName) {
+
+        message.textContent =
+          "Please enter your first name and last name.";
+
+        message.classList.add("error");
+
+        return;
+
+      }
 
 
       if (password.length < 8) {
@@ -1064,24 +1125,19 @@
       }
 
 
-      if (!referral) {
-
-        message.textContent =
-          "Please enter a referral code.";
-
-        message.classList.add("error");
-
-        return;
-
-      }
-
-
       /*
-        Demo response only.
+        Referral code is intentionally optional.
+
+        If referral is empty, the user is still
+        allowed to continue.
+
+        The final Firebase referral logic will
+        assign the default/root referrer later.
       */
 
+
       message.textContent =
-        "Demo mode: your signup information looks good. Firebase account creation will be connected later.";
+        "Demo mode: your signup information looks good. Firebase account creation will be connected next.";
 
       message.classList.add("success");
 
@@ -1095,7 +1151,8 @@
 
       signup.html?ref=ON1PIONEER
 
-      This is only a front-end demonstration for now.
+      If a referral link is used, the referral
+      code will automatically appear in the box.
     */
 
     const params =
