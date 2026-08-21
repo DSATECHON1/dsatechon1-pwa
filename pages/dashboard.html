@@ -62,10 +62,7 @@ button{
     padding:18px 20px 40px;
 }
 
-
-/* =========================
-HEADER
-========================= */
+/* HEADER */
 
 header{
     display:flex;
@@ -120,10 +117,6 @@ header{
     font-weight:700;
 }
 
-.header-btn:hover{
-    border-color:var(--blue);
-}
-
 .notification-button{
     position:relative;
     width:35px;
@@ -146,10 +139,7 @@ header{
     background:var(--red);
 }
 
-
-/* =========================
-WELCOME
-========================= */
+/* WELCOME */
 
 .welcome{
     margin:30px 0 18px;
@@ -190,10 +180,23 @@ WELCOME
     font-size:10px;
 }
 
+.member-id{
+    display:inline-flex;
+    margin-top:10px;
+    padding:7px 10px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:var(--card);
+    color:#8ea2b8;
+    font-size:8px;
+}
 
-/* =========================
-BALANCE AREA
-========================= */
+.member-id strong{
+    color:var(--blue2);
+    margin-left:5px;
+}
+
+/* BALANCE */
 
 .balance-grid{
     display:grid;
@@ -264,14 +267,7 @@ BALANCE AREA
     font-weight:800;
 }
 
-.balance-action:hover{
-    background:#1688ff;
-}
-
-
-/* =========================
-XP CARD
-========================= */
+/* XP */
 
 .xp-card{
     padding:20px;
@@ -336,7 +332,7 @@ XP CARD
 }
 
 .progress-bar{
-    width:62%;
+    width:0%;
     height:100%;
     background:linear-gradient(
         90deg,
@@ -345,18 +341,7 @@ XP CARD
     );
 }
 
-.xp-link{
-    display:block;
-    margin-top:13px;
-    color:var(--blue2);
-    font-size:8px;
-    font-weight:800;
-}
-
-
-/* =========================
-MINING CENTER
-========================= */
+/* MINING */
 
 .mining{
     margin-top:12px;
@@ -424,7 +409,7 @@ MINING CENTER
 }
 
 .mining-button{
-    min-width:150px;
+    min-width:170px;
     padding:13px 18px;
     border:none;
     border-radius:10px;
@@ -432,10 +417,6 @@ MINING CENTER
     color:#fff;
     font-size:9px;
     font-weight:900;
-}
-
-.mining-button:hover{
-    background:#1688ff;
 }
 
 .mining-button.active{
@@ -464,15 +445,12 @@ MINING CENTER
 }
 
 .mining-progress-fill{
-    width:18%;
+    width:0%;
     height:100%;
     background:var(--green);
 }
 
-
-/* =========================
-QUICK STATS
-========================= */
+/* STATS */
 
 .quick-stats{
     display:grid;
@@ -504,20 +482,47 @@ QUICK STATS
     font-size:7px;
 }
 
+/* WALLET */
 
-/* =========================
-STREAK
-========================= */
+.wallet-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:12px;
+}
+
+.wallet-card{
+    padding:17px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--card);
+}
+
+.wallet-label{
+    color:var(--muted);
+    font-size:8px;
+    text-transform:uppercase;
+    font-weight:700;
+}
+
+.wallet-value{
+    margin-top:7px;
+    font-size:22px;
+    font-weight:900;
+}
+
+.wallet-value.coin{
+    color:var(--blue2);
+}
+
+.wallet-value.point{
+    color:#c7b3ff;
+}
+
+/* STREAK */
 
 .streak{
     margin-top:25px;
-}
-
-.section-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:11px;
 }
 
 .streak-card{
@@ -562,7 +567,7 @@ STREAK
 }
 
 .day{
-    height:42px;
+    height:48px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -578,8 +583,10 @@ STREAK
     font-size:7px;
 }
 
-.day-icon{
-    font-size:11px;
+.day-multiplier{
+    color:#fff;
+    font-size:8px;
+    font-weight:800;
 }
 
 .day.done{
@@ -587,26 +594,12 @@ STREAK
     background:rgba(255,201,74,.07);
 }
 
-.day.done .day-number{
-    color:var(--gold);
-}
-
 .day.today{
     border-color:var(--blue);
     box-shadow:0 0 12px rgba(8,124,255,.15);
 }
 
-.streak-note{
-    margin-top:12px;
-    color:#73879d;
-    font-size:7px;
-    line-height:1.6;
-}
-
-
-/* =========================
-TWO COLUMN AREA
-========================= */
+/* LOWER */
 
 .lower-grid{
     display:grid;
@@ -614,11 +607,6 @@ TWO COLUMN AREA
     gap:11px;
     margin-top:25px;
 }
-
-
-/* =========================
-REFERRAL
-========================= */
 
 .panel{
     padding:18px;
@@ -639,6 +627,8 @@ REFERRAL
     line-height:1.55;
 }
 
+/* REFERRAL */
+
 .referral-code{
     display:flex;
     justify-content:space-between;
@@ -654,7 +644,6 @@ REFERRAL
 .referral-code strong{
     color:var(--blue2);
     font-size:11px;
-    letter-spacing:.5px;
 }
 
 .copy-button{
@@ -685,57 +674,66 @@ REFERRAL
     font-size:7px;
 }
 
+/* ACTIVITIES */
 
-/* =========================
-PARTNERSHIP
-========================= */
+.activity-list{
+    margin-top:14px;
+    display:grid;
+    gap:8px;
+}
 
-.partner-link{
+.activity{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:12px;
-    margin-top:15px;
-    padding:13px;
-    border-radius:10px;
-    background:rgba(155,108,255,.06);
-    border:1px solid rgba(155,108,255,.18);
-}
-
-.partner-icon{
-    width:34px;
-    height:34px;
-    display:grid;
-    place-items:center;
+    padding:11px;
+    border:1px solid var(--border);
     border-radius:9px;
-    background:rgba(155,108,255,.1);
+    background:var(--card2);
 }
 
-.partner-text{
-    flex:1;
+.activity-name{
+    font-size:8px;
+    font-weight:800;
 }
 
-.partner-text strong{
-    display:block;
-    font-size:9px;
+.activity-reward{
+    font-size:8px;
+    font-weight:900;
 }
 
-.partner-text span{
-    display:block;
-    margin-top:3px;
+.activity-reward.coin{
+    color:var(--blue2);
+}
+
+.activity-reward.xp{
+    color:#c7b3ff;
+}
+
+/* KYC */
+
+.kyc-box{
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid rgba(255,201,74,.2);
+    background:rgba(255,201,74,.05);
+}
+
+.kyc-label{
     color:var(--muted);
     font-size:7px;
+    text-transform:uppercase;
 }
 
-.partner-arrow{
-    color:#c7b3ff;
+.kyc-level{
+    margin-top:5px;
+    color:var(--gold);
     font-size:12px;
+    font-weight:900;
 }
 
-
-/* =========================
-QUICK ACTIONS
-========================= */
+/* ACTIONS */
 
 .actions{
     margin-top:25px;
@@ -781,10 +779,7 @@ QUICK ACTIONS
     font-size:7px;
 }
 
-
-/* =========================
-FOOTER
-========================= */
+/* FOOTER */
 
 footer{
     margin-top:40px;
@@ -805,10 +800,32 @@ footer p{
     font-size:8px;
 }
 
+/* TOAST */
 
-/* =========================
-RESPONSIVE
-========================= */
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,20px);
+    opacity:0;
+    pointer-events:none;
+    padding:11px 15px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:#101d2d;
+    color:white;
+    font-size:9px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:.25s;
+    z-index:100;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* RESPONSIVE */
 
 @media(max-width:800px){
 
@@ -818,6 +835,10 @@ RESPONSIVE
 
     .quick-stats{
         grid-template-columns:repeat(2,1fr);
+    }
+
+    .wallet-grid{
+        grid-template-columns:1fr 1fr;
     }
 
     .lower-grid{
@@ -870,67 +891,18 @@ RESPONSIVE
     }
 
     .streak-days{
-        gap:4px;
-    }
-
-    .day{
-        height:38px;
-    }
-
-}
-
-@media(max-width:380px){
-
-    .quick-stats{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .streak-days{
         grid-template-columns:repeat(5,1fr);
+        gap:5px;
     }
 
-}
-
-
-/* =========================
-TOAST
-========================= */
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:25px;
-    transform:translate(-50%,20px);
-    opacity:0;
-    pointer-events:none;
-    padding:11px 15px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    background:#101d2d;
-    color:white;
-    font-size:9px;
-    box-shadow:0 10px 30px rgba(0,0,0,.35);
-    transition:.25s;
-    z-index:100;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translate(-50%,0);
 }
 
 </style>
 </head>
 
-
 <body>
 
 <div class="page">
-
-
-<!-- =========================
-HEADER
-========================= -->
 
 <header>
 
@@ -954,7 +926,6 @@ HEADER
 
     </a>
 
-
     <div class="header-actions">
 
         <a
@@ -963,7 +934,6 @@ HEADER
             title="Notifications">
 
             🔔
-
             <span class="notification-dot"></span>
 
         </a>
@@ -979,10 +949,6 @@ HEADER
 </header>
 
 
-<!-- =========================
-WELCOME
-========================= -->
-
 <section class="welcome">
 
     <div class="eyebrow">
@@ -994,24 +960,24 @@ WELCOME
     </div>
 
     <h1>
-        Welcome back, <span id="firstName">Member</span>
+        Welcome back, <span id="userFirstName">Member</span>
     </h1>
 
     <p>
-        Your ON1Ecosystem activity and rewards at a glance.
+        Your ON1Ecosystem activity, rewards and wallet at a glance.
     </p>
+
+    <div class="member-id">
+        ON1 ID:
+        <strong id="userId">ON1----------</strong>
+    </div>
 
 </section>
 
 
-<!-- =========================
-BALANCES
-========================= -->
+<!-- BALANCES -->
 
 <div class="balance-grid">
-
-
-    <!-- ON1COIN -->
 
     <section class="balance-card">
 
@@ -1023,14 +989,13 @@ BALANCES
             class="coin-balance"
             id="coinBalance">
 
-            0.000
+            100.000
             <span>ON1</span>
 
         </div>
 
         <div class="balance-note">
-            Your ON1Coin balance will be securely
-            managed through the ecosystem wallet.
+            Welcome allocation and eligible ON1Coin rewards.
         </div>
 
         <a
@@ -1044,8 +1009,6 @@ BALANCES
     </section>
 
 
-    <!-- XP -->
-
     <section class="xp-card">
 
         <div class="xp-top">
@@ -1057,24 +1020,17 @@ BALANCES
                 </div>
 
                 <div class="xp-value">
-
-                    <span
-                        id="xpValue"
-                        style="color:white;font-size:26px;">
-                        0
-                    </span>
-
+                    <span id="xpValue">1,000</span>
                     <span>XP</span>
-
                 </div>
 
             </div>
 
             <div
                 class="level"
-                id="levelValue">
+                id="levelBadge">
 
-                LEVEL 1
+                LEVEL 0
 
             </div>
 
@@ -1088,7 +1044,7 @@ BALANCES
             </span>
 
             <span id="xpProgressText">
-                0 / 2,000
+                1,000 / 2,500
             </span>
 
         </div>
@@ -1097,29 +1053,17 @@ BALANCES
 
             <div
                 class="progress-bar"
-                id="xpProgressBar"
-                style="width:0%;">
+                id="xpProgressBar">
             </div>
 
         </div>
-
-
-        <a
-            href="partnership.html"
-            class="xp-link">
-
-            EARN MORE XP →
-
-        </a>
 
     </section>
 
 </div>
 
 
-<!-- =========================
-MINING CENTER
-========================= -->
+<!-- MINING -->
 
 <section class="mining">
 
@@ -1132,8 +1076,9 @@ MINING CENTER
             </div>
 
             <div class="section-description">
-                Participate in eligible mining sessions
-                and monitor your current session.
+                Base mining rate: 50 ON1 per 24 hours.
+                Your eligible streak multiplier can increase
+                the mining reward.
             </div>
 
         </div>
@@ -1154,12 +1099,19 @@ MINING CENTER
         <div>
 
             <div class="mining-rate">
-                0.010
-                <span>ON1 / 24H</span>
+
+                <span id="currentMiningReward">
+                    50
+                </span>
+
+                <span>
+                    ON1 / 24H
+                </span>
+
             </div>
 
             <div class="mining-sub">
-                Current prototype mining rate
+                Current base mining rate
             </div>
 
         </div>
@@ -1181,7 +1133,7 @@ MINING CENTER
         <div class="mining-progress-info">
 
             <span>
-                Current session
+                Current mining session
             </span>
 
             <span id="timer">
@@ -1204,9 +1156,7 @@ MINING CENTER
 </section>
 
 
-<!-- =========================
-QUICK STATS
-========================= -->
+<!-- QUICK STATS -->
 
 <div class="quick-stats">
 
@@ -1219,11 +1169,13 @@ QUICK STATS
         <div
             class="quick-value"
             id="streakValue">
+
             0 Days
+
         </div>
 
         <div class="quick-label">
-            Daily Streak
+            Mining Streak
         </div>
 
     </div>
@@ -1237,8 +1189,10 @@ QUICK STATS
 
         <div
             class="quick-value"
-            id="referralValue">
+            id="referralCount">
+
             0
+
         </div>
 
         <div class="quick-label">
@@ -1256,8 +1210,10 @@ QUICK STATS
 
         <div
             class="quick-value"
-            id="xpEarnedValue">
+            id="activityXP">
+
             0
+
         </div>
 
         <div class="quick-label">
@@ -1270,17 +1226,19 @@ QUICK STATS
     <div class="quick-card">
 
         <div class="quick-icon">
-            🎯
+            🛡️
         </div>
 
         <div
             class="quick-value"
-            id="activitiesValue">
-            0
+            id="kycQuick">
+
+            Level 0
+
         </div>
 
         <div class="quick-label">
-            Activities
+            KYC Status
         </div>
 
     </div>
@@ -1288,27 +1246,70 @@ QUICK STATS
 </div>
 
 
-<!-- =========================
-DAILY STREAK
-========================= -->
+<!-- WALLET -->
 
 <section class="streak">
 
-    <div class="section-head">
+    <div class="section-title">
+        💰 ON1 Wallet
+    </div>
 
-        <div>
+    <div class="section-description">
+        Your ecosystem balances.
+    </div>
 
-            <div class="section-title">
-                🔥 Daily Streak
+
+    <div class="wallet-grid">
+
+        <div class="wallet-card">
+
+            <div class="wallet-label">
+                Coin
             </div>
 
-            <div class="section-description">
-                Consistent daily participation can increase
-                your eligible streak reward.
+            <div
+                class="wallet-value coin"
+                id="walletCoin">
+
+                100 ON1
+
             </div>
 
         </div>
 
+
+        <div class="wallet-card">
+
+            <div class="wallet-label">
+                Points
+            </div>
+
+            <div
+                class="wallet-value point"
+                id="walletXP">
+
+                1,000 XP
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STREAK -->
+
+<section class="streak">
+
+    <div class="section-title">
+        🔥 Daily Mining Streak
+    </div>
+
+    <div class="section-description">
+        Your mining rate increases according to your
+        consecutive eligible mining days.
     </div>
 
 
@@ -1318,16 +1319,20 @@ DAILY STREAK
 
             <div>
 
-                <div
-                    class="streak-number"
-                    id="streakNumber">
+                <div class="streak-number">
 
-                    0 <span>DAYS</span>
+                    <span id="streakNumber">
+                        0
+                    </span>
+
+                    <span>
+                        DAYS
+                    </span>
 
                 </div>
 
                 <div class="streak-description">
-                    Current consecutive participation
+                    Current consecutive mining streak
                 </div>
 
             </div>
@@ -1337,64 +1342,55 @@ DAILY STREAK
 
         <div class="streak-days">
 
-            <div class="day done">
+            <div class="day" data-day="1">
                 <span class="day-number">DAY 1</span>
-                <span class="day-icon">✓</span>
+                <span class="day-multiplier">×0</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="2">
                 <span class="day-number">DAY 2</span>
-                <span class="day-icon">•</span>
+                <span class="day-multiplier">×0.4</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="3">
                 <span class="day-number">DAY 3</span>
-                <span class="day-icon">•</span>
+                <span class="day-multiplier">×0.6</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="4">
                 <span class="day-number">DAY 4</span>
-                <span class="day-icon">•</span>
+                <span class="day-multiplier">×0.8</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="5">
                 <span class="day-number">DAY 5</span>
-                <span class="day-icon">•</span>
+                <span class="day-multiplier">×1.5</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="6">
                 <span class="day-number">DAY 6</span>
-                <span class="day-icon">•</span>
+                <span class="day-multiplier">×1.6</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="7">
                 <span class="day-number">DAY 7</span>
-                <span class="day-icon">•</span>
+                <span class="day-multiplier">×1.7</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="8">
                 <span class="day-number">DAY 8</span>
-                <span class="day-icon">•</span>
+                <span class="day-multiplier">×1.8</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="9">
                 <span class="day-number">DAY 9</span>
-                <span class="day-icon">•</span>
+                <span class="day-multiplier">×1.9</span>
             </div>
 
-            <div class="day">
+            <div class="day" data-day="10">
                 <span class="day-number">DAY 10</span>
-                <span class="day-icon">🏆</span>
+                <span class="day-multiplier">×2.5</span>
             </div>
-
-        </div>
-
-
-        <div class="streak-note">
-
-            Maximum prototype streak shown: 10 days.
-            A missed eligible day should reset the consecutive
-            streak according to the final ON1Coin reward rules.
 
         </div>
 
@@ -1403,14 +1399,10 @@ DAILY STREAK
 </section>
 
 
-<!-- =========================
-REFERRAL + PARTNERSHIP
-========================= -->
+<!-- REFERRAL + ACTIVITIES -->
 
 <div class="lower-grid">
 
-
-    <!-- REFERRALS -->
 
     <section class="panel">
 
@@ -1419,14 +1411,13 @@ REFERRAL + PARTNERSHIP
         </div>
 
         <div class="panel-description">
-            Invite eligible members and track your
-            referral activity and rewards.
+            Invite eligible members and earn ecosystem rewards.
         </div>
 
 
         <div class="referral-code">
 
-            <strong id="userReferralCode">
+            <strong id="referralCode">
                 ON1MEMBER
             </strong>
 
@@ -1445,7 +1436,7 @@ REFERRAL + PARTNERSHIP
 
             <div class="ref-stat">
 
-                <strong id="referralCount">
+                <strong id="referralsDisplay">
                     0
                 </strong>
 
@@ -1458,12 +1449,12 @@ REFERRAL + PARTNERSHIP
 
             <div class="ref-stat">
 
-                <strong id="referralReward">
-                    0.000
+                <strong>
+                    50 ON1
                 </strong>
 
                 <span>
-                    Prototype reward
+                    Per eligible referral
                 </span>
 
             </div>
@@ -1473,77 +1464,128 @@ REFERRAL + PARTNERSHIP
     </section>
 
 
-    <!-- PARTNERSHIP -->
-
     <section class="panel">
 
         <div class="panel-title">
-            ⭐ Partnership Activities
+            ⭐ ON1 Activities
         </div>
 
         <div class="panel-description">
-            Participate in eligible ecosystem activities
-            and build your XP profile.
+            Participate in eligible ON1Ecosystem activities.
         </div>
 
 
-        <a
-            href="partnership.html"
-            class="partner-link">
+        <div class="activity-list">
 
-            <div class="partner-icon">
-                🤝
-            </div>
+            <div class="activity">
 
-            <div class="partner-text">
+                <div class="activity-name">
+                    ON1 Activity
+                </div>
 
-                <strong>
-                    Explore Opportunities
-                </strong>
-
-                <span>
-                    Complete activities and earn XP
-                </span>
+                <div class="activity-reward coin">
+                    +50 ON1
+                </div>
 
             </div>
 
-            <div class="partner-arrow">
-                →
+
+            <div class="activity">
+
+                <div class="activity-name">
+                    Partnership Activity
+                </div>
+
+                <div class="activity-reward xp">
+                    +100 XP
+                </div>
+
             </div>
 
-        </a>
+
+            <div class="activity">
+
+                <div class="activity-name">
+                    Referral Bonus
+                </div>
+
+                <div class="activity-reward coin">
+                    +50 ON1
+                </div>
+
+            </div>
+
+
+            <div class="activity">
+
+                <div class="activity-name">
+                    Referral XP
+                </div>
+
+                <div class="activity-reward xp">
+                    +100 XP
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
 
 </div>
 
 
-<!-- =========================
-QUICK ACTIONS
-========================= -->
+<!-- KYC -->
 
-<section class="actions">
+<section class="panel" style="margin-top:12px;">
 
-    <div class="section-head">
+    <div class="panel-title">
+        🛡️ KYC Verification
+    </div>
 
-        <div>
+    <div class="panel-description">
+        Your KYC level will determine the identity verification
+        status and eligibility for applicable ecosystem features.
+    </div>
 
-            <div class="section-title">
-                Quick Actions
-            </div>
 
-            <div class="section-description">
-                Access your ON1Ecosystem services.
-            </div>
+    <div class="kyc-box">
+
+        <div class="kyc-label">
+            Current KYC Level
+        </div>
+
+        <div
+            class="kyc-level"
+            id="kycLevel">
+
+            LEVEL 0 — NOT VERIFIED
 
         </div>
 
     </div>
 
+</section>
+
+
+<!-- ACTIONS -->
+
+<section class="actions">
+
+    <div class="section-title">
+        Quick Actions
+    </div>
+
+    <div class="section-description">
+        Access your ON1Ecosystem services.
+    </div>
+
 
     <div class="action-grid">
 
-        <a href="wallet.html" class="action">
+        <a
+            href="wallet.html"
+            class="action">
 
             <div class="action-icon">
                 💰
@@ -1554,47 +1596,15 @@ QUICK ACTIONS
             </strong>
 
             <span>
-                Manage ON1Coin
+                Manage ON1
             </span>
 
         </a>
 
 
-        <a href="marketplace.html" class="action">
-
-            <div class="action-icon">
-                🛒
-            </div>
-
-            <strong>
-                Marketplace
-            </strong>
-
-            <span>
-                Shop & discover
-            </span>
-
-        </a>
-
-
-        <a href="exchange.html" class="action">
-
-            <div class="action-icon">
-                🔄
-            </div>
-
-            <strong>
-                Exchange
-            </strong>
-
-            <span>
-                Exchange services
-            </span>
-
-        </a>
-
-
-        <a href="profile.html" class="action">
+        <a
+            href="profile.html"
+            class="action">
 
             <div class="action-icon">
                 👤
@@ -1605,7 +1615,45 @@ QUICK ACTIONS
             </strong>
 
             <span>
-                Account settings
+                Account details
+            </span>
+
+        </a>
+
+
+        <a
+            href="partnership.html"
+            class="action">
+
+            <div class="action-icon">
+                🤝
+            </div>
+
+            <strong>
+                Partnership
+            </strong>
+
+            <span>
+                Earn XP
+            </span>
+
+        </a>
+
+
+        <a
+            href="kyc.html"
+            class="action">
+
+            <div class="action-icon">
+                🛡️
+            </div>
+
+            <strong>
+                KYC
+            </strong>
+
+            <span>
+                Verify identity
             </span>
 
         </a>
@@ -1615,29 +1663,20 @@ QUICK ACTIONS
 </section>
 
 
-<!-- =========================
-FOOTER
-========================= -->
-
 <footer>
 
     <p>
-        ON1Ecosystem is a project under DSATECHON1.
+        ON1Ecosystem — One Ecosystem. Multiple Solutions.
     </p>
 
     <div class="footer-brand">
-        ONE DIGITAL ECOSYSTEM
+        Powered by DSATECHON1
     </div>
 
 </footer>
 
-
 </div>
 
-
-<!-- =========================
-TOAST
-========================= -->
 
 <div
     class="toast"
@@ -1645,9 +1684,9 @@ TOAST
 </div>
 
 
-<!-- =====================================================
-     FIREBASE + DASHBOARD DATA
-===================================================== -->
+<!-- =========================
+     FIREBASE
+========================= -->
 
 <script type="module">
 
@@ -1666,10 +1705,6 @@ import {
     getDoc
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-
-/* =========================
-   FIREBASE CONFIG
-========================= */
 
 const firebaseConfig = {
 
@@ -1690,12 +1725,9 @@ const firebaseConfig = {
 
     appId:
         "1:5740594058:web:23fbbca5392f12db863e73"
+
 };
 
-
-/* =========================
-   INITIALIZE FIREBASE
-========================= */
 
 const app = initializeApp(firebaseConfig);
 
@@ -1705,453 +1737,705 @@ const db = getFirestore(app);
 
 
 /* =========================
+   ON1ECOSYSTEM ECONOMICS
+========================= */
+
+const BASE_MINING_RATE = 50;
+
+const WELCOME_ON1 = 100;
+
+const WELCOME_XP = 1000;
+
+const ACTIVITY_ON1 = 50;
+
+const PARTNERSHIP_XP = 100;
+
+const REFERRAL_ON1 = 50;
+
+const REFERRAL_XP = 100;
+
+
+/* =========================
+   STREAK MULTIPLIERS
+========================= */
+
+const streakMultipliers = {
+
+    1: 0,
+
+    2: 0.4,
+
+    3: 0.6,
+
+    4: 0.8,
+
+    5: 1.5,
+
+    6: 1.6,
+
+    7: 1.7,
+
+    8: 1.8,
+
+    9: 1.9,
+
+    10: 2.5
+
+};
+
+
+/* =========================
+   XP LEVELS
+========================= */
+
+const levelRequirements = [
+
+    1000,
+
+    2500,
+
+    5000,
+
+    10000,
+
+    25000,
+
+    50000,
+
+    100000,
+
+    250000,
+
+    500000,
+
+    750000,
+
+    1000000
+
+];
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const firstNameEl =
+    document.getElementById("userFirstName");
+
+const userIdEl =
+    document.getElementById("userId");
+
+const coinBalanceEl =
+    document.getElementById("coinBalance");
+
+const xpValueEl =
+    document.getElementById("xpValue");
+
+const levelBadgeEl =
+    document.getElementById("levelBadge");
+
+const xpProgressBarEl =
+    document.getElementById("xpProgressBar");
+
+const xpProgressTextEl =
+    document.getElementById("xpProgressText");
+
+const walletCoinEl =
+    document.getElementById("walletCoin");
+
+const walletXPEl =
+    document.getElementById("walletXP");
+
+const kycLevelEl =
+    document.getElementById("kycLevel");
+
+const kycQuickEl =
+    document.getElementById("kycQuick");
+
+const streakNumberEl =
+    document.getElementById("streakNumber");
+
+const streakValueEl =
+    document.getElementById("streakValue");
+
+const referralCountEl =
+    document.getElementById("referralCount");
+
+const referralsDisplayEl =
+    document.getElementById("referralsDisplay");
+
+const activityXPEl =
+    document.getElementById("activityXP");
+
+const referralCodeEl =
+    document.getElementById("referralCode");
+
+const currentMiningRewardEl =
+    document.getElementById("currentMiningReward");
+
+const miningStatusEl =
+    document.getElementById("miningStatus");
+
+const mineButton =
+    document.getElementById("mineButton");
+
+const timerEl =
+    document.getElementById("timer");
+
+const miningFill =
+    document.getElementById("miningFill");
+
+const toastEl =
+    document.getElementById("toast");
+
+
+/* =========================
    TOAST
 ========================= */
 
 function showToast(message){
 
-    const toast =
-        document.getElementById("toast");
+    toastEl.textContent = message;
 
-    toast.textContent = message;
-
-    toast.classList.add("show");
+    toastEl.classList.add("show");
 
     setTimeout(() => {
 
-        toast.classList.remove("show");
+        toastEl.classList.remove("show");
 
-    }, 3000);
+    },3000);
+
 }
 
 
 /* =========================
-   LOAD USER DATA
+   FORMAT ON1
 ========================= */
 
-onAuthStateChanged(auth, async (user) => {
+function formatON1(value){
 
-    if(!user){
+    return Number(value || 0).toLocaleString(
+        "en-US",
+        {
+            minimumFractionDigits:3,
+            maximumFractionDigits:3
+        }
+    );
 
-        /*
-         * User is not logged in.
-         * Send them to login page.
-         */
+}
 
-        window.location.href =
-            "login.html";
+
+/* =========================
+   FORMAT XP
+========================= */
+
+function formatXP(value){
+
+    return Number(value || 0).toLocaleString(
+        "en-US"
+    );
+
+}
+
+
+/* =========================
+   CALCULATE LEVEL
+========================= */
+
+function calculateLevel(xp){
+
+    let level = 0;
+
+    for(let i = 0; i < levelRequirements.length; i++){
+
+        if(xp >= levelRequirements[i]){
+
+            level = i;
+
+        }
+
+    }
+
+    return level;
+
+}
+
+
+/* =========================
+   LEVEL PROGRESS
+========================= */
+
+function calculateProgress(xp){
+
+    const level =
+        calculateLevel(xp);
+
+    if(level >= 10){
+
+        return {
+            level:10,
+            percent:100,
+            current:xp,
+            next:1000000
+        };
+
+    }
+
+    const currentRequirement =
+        levelRequirements[level];
+
+    const nextRequirement =
+        levelRequirements[level + 1];
+
+    const range =
+        nextRequirement - currentRequirement;
+
+    const progress =
+        xp - currentRequirement;
+
+    let percent =
+        (progress / range) * 100;
+
+    if(percent < 0){
+
+        percent = 0;
+
+    }
+
+    if(percent > 100){
+
+        percent = 100;
+
+    }
+
+    return {
+
+        level,
+
+        percent,
+
+        current:xp,
+
+        next:nextRequirement
+
+    };
+
+}
+
+
+/* =========================
+   KYC DISPLAY
+========================= */
+
+function displayKYC(level){
+
+    const kyc =
+        Number(level || 0);
+
+    if(kyc <= 0){
+
+        kycLevelEl.textContent =
+            "LEVEL 0 — NOT VERIFIED";
+
+        kycQuickEl.textContent =
+            "Level 0";
 
         return;
+
     }
 
+    if(kyc === 1){
 
-    try{
+        kycLevelEl.textContent =
+            "LEVEL 1 — BASIC";
 
-        const userRef =
-            doc(
-                db,
-                "users",
-                user.uid
+    }else if(kyc === 2){
+
+        kycLevelEl.textContent =
+            "LEVEL 2 — ID VERIFIED";
+
+    }else if(kyc === 3){
+
+        kycLevelEl.textContent =
+            "LEVEL 3 — FULLY VERIFIED";
+
+    }else{
+
+        kycLevelEl.textContent =
+            "LEVEL " + kyc;
+
+    }
+
+    kycQuickEl.textContent =
+        "Level " + kyc;
+
+}
+
+
+/* =========================
+   STREAK DISPLAY
+========================= */
+
+function displayStreak(streak){
+
+    streak =
+        Math.max(
+            0,
+            Math.min(
+                10,
+                Number(streak || 0)
+            )
+        );
+
+    streakNumberEl.textContent =
+        streak;
+
+    streakValueEl.textContent =
+        streak + " Days";
+
+
+    document
+        .querySelectorAll(".day")
+        .forEach(day => {
+
+            const dayNumber =
+                Number(
+                    day.dataset.day
+                );
+
+            day.classList.remove(
+                "done",
+                "today"
             );
 
+            if(
+                dayNumber <= streak &&
+                streak > 0
+            ){
 
-        const userSnap =
-            await getDoc(userRef);
+                day.classList.add("done");
+
+            }
+
+            if(
+                dayNumber === streak &&
+                streak > 0
+            ){
+
+                day.classList.add("today");
+
+            }
+
+        });
+
+}
 
 
-        if(!userSnap.exists()){
+/* =========================
+   MINING REWARD PREVIEW
+========================= */
 
-            showToast(
-                "Your profile data was not found."
-            );
+function getMiningReward(streak){
+
+    const multiplier =
+        streakMultipliers[streak] || 0;
+
+    return BASE_MINING_RATE * multiplier;
+
+}
+
+
+/* =========================
+   LOAD USER
+========================= */
+
+onAuthStateChanged(
+    auth,
+    async (user) => {
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
 
             return;
-        }
-
-
-        const data =
-            userSnap.data();
-
-
-        /* =========================
-           FIRST NAME
-        ========================= */
-
-        const firstName =
-            data.firstName ||
-            "Member";
-
-        document.getElementById(
-            "firstName"
-        ).textContent = firstName;
-
-
-        /* =========================
-           BALANCE
-        ========================= */
-
-        const balance =
-            Number(
-                data.balance ??
-                data.ON1Balance ??
-                0
-            );
-
-
-        document.getElementById(
-            "coinBalance"
-        ).innerHTML =
-            balance.toFixed(3) +
-            ' <span>ON1</span>';
-
-
-        /* =========================
-           XP
-        ========================= */
-
-        const xp =
-            Number(
-                data.XP ??
-                0
-            );
-
-
-        document.getElementById(
-            "xpValue"
-        ).textContent =
-            xp.toLocaleString();
-
-
-        document.getElementById(
-            "xpEarnedValue"
-        ).textContent =
-            xp.toLocaleString();
-
-
-        /* =========================
-           LEVEL
-        ========================= */
-
-        const level =
-            Number(
-                data.level ??
-                1
-            );
-
-
-        document.getElementById(
-            "levelValue"
-        ).textContent =
-            "LEVEL " + level;
-
-
-        /* =========================
-           XP PROGRESS
-        ========================= */
-
-        const xpPerLevel = 2000;
-
-        const progress =
-            Math.min(
-                (xp / xpPerLevel) * 100,
-                100
-            );
-
-
-        document.getElementById(
-            "xpProgressBar"
-        ).style.width =
-            progress + "%";
-
-
-        document.getElementById(
-            "xpProgressText"
-        ).textContent =
-            xp.toLocaleString() +
-            " / " +
-            xpPerLevel.toLocaleString();
-
-
-        /* =========================
-           REFERRALS
-        ========================= */
-
-        const referrals =
-            Number(
-                data.referrals ??
-                0
-            );
-
-
-        document.getElementById(
-            "referralValue"
-        ).textContent =
-            referrals;
-
-
-        document.getElementById(
-            "referralCount"
-        ).textContent =
-            referrals;
-
-
-        /* =========================
-           REFERRAL REWARD
-        ========================= */
-
-        const referralReward =
-            Number(
-                data.referralReward ??
-                0
-            );
-
-
-        document.getElementById(
-            "referralReward"
-        ).textContent =
-            referralReward.toFixed(3);
-
-
-        /* =========================
-           STREAK
-        ========================= */
-
-        const streak =
-            Number(
-                data.streak ??
-                0
-            );
-
-
-        document.getElementById(
-            "streakValue"
-        ).textContent =
-            streak + " Days";
-
-
-        document.getElementById(
-            "streakNumber"
-        ).innerHTML =
-            streak +
-            ' <span>DAYS</span>';
-
-
-        /* =========================
-           ACTIVITIES
-        ========================= */
-
-        const activities =
-            Number(
-                data.activities ??
-                0
-            );
-
-
-        document.getElementById(
-            "activitiesValue"
-        ).textContent =
-            activities;
-
-
-        /* =========================
-           REFERRAL CODE
-        ========================= */
-
-        if(data.referralCode){
-
-            document.getElementById(
-                "userReferralCode"
-            ).textContent =
-                data.referralCode;
 
         }
-
-
-        console.log(
-            "ON1Ecosystem profile loaded:",
-            data
-        );
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Dashboard Firebase error:",
-            error
-        );
-
-        showToast(
-            "Unable to load your profile."
-        );
-
-    }
-
-});
-
-
-/* =====================================================
-   COPY REFERRAL CODE
-===================================================== */
-
-document
-    .getElementById("copyReferral")
-    .addEventListener("click", async () => {
-
-        const code =
-            document.getElementById(
-                "userReferralCode"
-            ).textContent;
 
 
         try{
 
-            await navigator.clipboard.writeText(
-                code
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                );
+
+
+            const snapshot =
+                await getDoc(userRef);
+
+
+            if(!snapshot.exists()){
+
+                showToast(
+                    "Your ON1 profile was not found."
+                );
+
+                return;
+
+            }
+
+
+            const data =
+                snapshot.data();
+
+
+            /* NAME */
+
+            const firstName =
+                data.firstName ||
+                "Member";
+
+            firstNameEl.textContent =
+                firstName;
+
+
+            /* ON1 ID */
+
+            const on1Id =
+                data.on1Id ||
+                data.userId ||
+                "ON1----------";
+
+            userIdEl.textContent =
+                on1Id;
+
+
+            /* BALANCE */
+
+            const balance =
+                Number(
+                    data.balance ??
+                    data.ON1Balance ??
+                    WELCOME_ON1
+                );
+
+
+            coinBalanceEl.innerHTML =
+                formatON1(balance) +
+                ' <span>ON1</span>';
+
+
+            walletCoinEl.textContent =
+                formatON1(balance) +
+                " ON1";
+
+
+            /* XP */
+
+            const xp =
+                Number(
+                    data.XP ??
+                    data.xp ??
+                    WELCOME_XP
+                );
+
+
+            xpValueEl.childNodes[0].nodeValue =
+                formatXP(xp) + " ";
+
+
+            walletXPEl.textContent =
+                formatXP(xp) +
+                " XP";
+
+
+            activityXPEl.textContent =
+                formatXP(xp);
+
+
+            /* LEVEL */
+
+            const progress =
+                calculateProgress(xp);
+
+
+            levelBadgeEl.textContent =
+                "LEVEL " +
+                progress.level;
+
+
+            xpProgressBarEl.style.width =
+                progress.percent + "%";
+
+
+            xpProgressTextEl.textContent =
+                formatXP(progress.current) +
+                " / " +
+                formatXP(progress.next);
+
+
+            /* STREAK */
+
+            const streak =
+                Number(
+                    data.streak || 0
+                );
+
+            displayStreak(streak);
+
+
+            /* REFERRALS */
+
+            const referrals =
+                Number(
+                    data.referrals || 0
+                );
+
+            referralCountEl.textContent =
+                referrals;
+
+            referralsDisplayEl.textContent =
+                referrals;
+
+
+            /* REFERRAL CODE */
+
+            const referralCode =
+                data.referralCode ||
+                on1Id;
+
+            referralCodeEl.textContent =
+                referralCode;
+
+
+            /* KYC */
+
+            displayKYC(
+                data.kycLevel || 0
+            );
+
+
+            /* MINING */
+
+            const miningReward =
+                getMiningReward(streak);
+
+
+            currentMiningRewardEl.textContent =
+                formatON1(
+                    miningReward
+                );
+
+
+            if(streak >= 10){
+
+                miningStatusEl.textContent =
+                    "DAY 10 BONUS";
+
+            }else if(streak > 0){
+
+                miningStatusEl.textContent =
+                    "STREAK ACTIVE";
+
+            }else{
+
+                miningStatusEl.textContent =
+                    "READY";
+
+            }
+
+
+            /*
+             * Day 10 includes:
+             * 2.5 × 50 ON1 = 125 ON1
+             * plus 100 XP
+             */
+
+        }catch(error){
+
+            console.error(
+                "Dashboard error:",
+                error
             );
 
             showToast(
-                "Referral code copied!"
+                "Unable to load your ON1 profile."
             );
 
         }
 
-        catch(error){
+    }
+);
 
-            showToast(
-                "Unable to copy referral code."
-            );
+
+/* =========================
+   COPY REFERRAL
+========================= */
+
+document
+    .getElementById("copyReferral")
+    .addEventListener(
+        "click",
+        async () => {
+
+            const code =
+                referralCodeEl.textContent;
+
+            try{
+
+                await navigator.clipboard.writeText(
+                    code
+                );
+
+                showToast(
+                    "Referral code copied."
+                );
+
+            }catch(error){
+
+                showToast(
+                    "Unable to copy referral code."
+                );
+
+            }
 
         }
-
-    });
-
-
-/* =====================================================
-   PROTOTYPE MINING BUTTON
-===================================================== */
-
-const mineButton =
-    document.getElementById(
-        "mineButton"
-    );
-
-const miningStatus =
-    document.getElementById(
-        "miningStatus"
-    );
-
-const timer =
-    document.getElementById(
-        "timer"
-    );
-
-const miningFill =
-    document.getElementById(
-        "miningFill"
     );
 
 
-let miningActive = false;
-
-let miningSeconds = 0;
-
-let miningInterval = null;
-
+/* =========================
+   MINING BUTTON
+========================= */
 
 mineButton.addEventListener(
     "click",
     () => {
 
-        if(miningActive){
-
-            miningActive = false;
-
-            clearInterval(
-                miningInterval
-            );
-
-            mineButton.textContent =
-                "⛏ START MINING";
-
-            mineButton.classList.remove(
-                "active"
-            );
-
-            miningStatus.textContent =
-                "PAUSED";
-
-            miningStatus.classList.remove(
-                "active"
-            );
-
-            return;
-        }
-
-
-        miningActive = true;
-
-        mineButton.textContent =
-            "⛏ MINING ACTIVE";
-
-        mineButton.classList.add(
-            "active"
+        showToast(
+            "Mining engine is being prepared securely."
         );
 
-        miningStatus.textContent =
-            "ACTIVE";
-
-        miningStatus.classList.add(
-            "active"
-        );
-
-
-        miningInterval =
-            setInterval(
-                () => {
-
-                    miningSeconds++;
-
-
-                    const hours =
-                        Math.floor(
-                            miningSeconds / 3600
-                        );
-
-                    const minutes =
-                        Math.floor(
-                            (miningSeconds % 3600) / 60
-                        );
-
-                    const seconds =
-                        miningSeconds % 60;
-
-
-                    timer.textContent =
-                        String(hours).padStart(2,"0") +
-                        ":" +
-                        String(minutes).padStart(2,"0") +
-                        ":" +
-                        String(seconds).padStart(2,"0");
-
-
-                    const progress =
-                        Math.min(
-                            (miningSeconds / 86400) * 100,
-                            100
-                        );
-
-
-                    miningFill.style.width =
-                        Math.max(
-                            18,
-                            progress
-                        ) + "%";
-
-
-                },
-                1000
-            );
+        /*
+         * IMPORTANT:
+         *
+         * ON1 rewards should NOT be created
+         * directly from browser JavaScript.
+         *
+         * The final mining system will validate:
+         *
+         * 1. authenticated UID
+         * 2. last mining time
+         * 3. 24-hour eligibility
+         * 4. streak
+         * 5. multiplier
+         * 6. Day 10 +100 XP
+         *
+         * Then a trusted server-side process
+         * will update Firestore.
+         */
 
     }
 );
