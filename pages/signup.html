@@ -1,967 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Join ON1Ecosystem</title>
-
-<meta name="theme-color" content="#06101d">
-<meta name="description"
-      content="Join ON1Ecosystem and participate in digital opportunities, rewards and ecosystem activities.">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-:root{
-    --bg:#050b13;
-    --surface:#0c1624;
-    --surface2:#101d2d;
-    --border:#1d3048;
-    --blue:#087cff;
-    --blue2:#3aa0ff;
-    --green:#00df88;
-    --text:#ffffff;
-    --muted:#8ea2b8;
-    --danger:#ff6075;
-}
-
-body{
-    min-height:100vh;
-    background:
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(8,124,255,.20),
-            transparent 42%
-        ),
-        var(--bg);
-    color:var(--text);
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-button,
-input{
-    font-family:inherit;
-}
-
-.page{
-    width:100%;
-    max-width:1180px;
-    margin:auto;
-    padding:20px;
-}
-
-/* HEADER */
-
-.header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:45px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.brand img{
-    width:42px;
-    height:42px;
-    object-fit:contain;
-}
-
-.brand-text strong{
-    display:block;
-    font-size:18px;
-}
-
-.brand-text strong span{
-    color:var(--blue2);
-}
-
-.brand-text small{
-    display:block;
-    margin-top:3px;
-    color:var(--muted);
-    font-size:9px;
-    letter-spacing:.5px;
-}
-
-.login-link{
-    border:1px solid var(--border);
-    background:rgba(12,22,36,.75);
-    padding:10px 15px;
-    border-radius:10px;
-    color:#dce8f5;
-    font-size:12px;
-    font-weight:700;
-}
-
-.login-link:hover{
-    border-color:var(--blue);
-}
-
-/* MAIN */
-
-.main{
-    display:grid;
-    grid-template-columns:1fr 450px;
-    gap:55px;
-    align-items:center;
-}
-
-.intro{
-    max-width:600px;
-}
-
-.eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    padding:7px 11px;
-    border-radius:30px;
-    background:rgba(8,124,255,.08);
-    border:1px solid rgba(8,124,255,.25);
-    color:var(--blue2);
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:.6px;
-    text-transform:uppercase;
-}
-
-.eyebrow-dot{
-    width:6px;
-    height:6px;
-    background:var(--green);
-    border-radius:50%;
-    box-shadow:0 0 9px rgba(0,223,136,.7);
-}
-
-.intro h1{
-    margin-top:20px;
-    font-size:clamp(35px,5vw,58px);
-    line-height:1.05;
-    letter-spacing:-2px;
-}
-
-.intro h1 span{
-    color:var(--blue2);
-}
-
-.intro-text{
-    max-width:520px;
-    margin-top:18px;
-    color:var(--muted);
-    font-size:15px;
-    line-height:1.7;
-}
-
-/* BENEFITS */
-
-.benefits{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:11px;
-    margin-top:28px;
-}
-
-.benefit{
-    padding:15px;
-    border-radius:14px;
-    background:rgba(12,22,36,.72);
-    border:1px solid var(--border);
-}
-
-.benefit-icon{
-    width:32px;
-    height:32px;
-    display:grid;
-    place-items:center;
-    background:rgba(8,124,255,.09);
-    border-radius:9px;
-    margin-bottom:10px;
-    font-size:16px;
-}
-
-.benefit strong{
-    display:block;
-    font-size:12px;
-}
-
-.benefit p{
-    margin-top:5px;
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.5;
-}
-
-/* SIGNUP CARD */
-
-.signup-card{
-    background:rgba(12,22,36,.94);
-    border:1px solid var(--border);
-    border-radius:23px;
-    padding:28px;
-    box-shadow:0 25px 70px rgba(0,0,0,.35);
-}
-
-.card-header{
-    margin-bottom:22px;
-}
-
-.card-header h2{
-    font-size:23px;
-}
-
-.card-header p{
-    margin-top:7px;
-    color:var(--muted);
-    font-size:12px;
-    line-height:1.5;
-}
-
-/* FORM */
-
-.form-group{
-    margin-top:16px;
-}
-
-.form-group:first-child{
-    margin-top:0;
-}
-
-label{
-    display:block;
-    margin-bottom:7px;
-    color:#d9e4ef;
-    font-size:11px;
-    font-weight:700;
-}
-
-.required{
-    color:var(--danger);
-}
-
-input{
-    width:100%;
-    height:48px;
-    padding:0 14px;
-    border:1px solid var(--border);
-    border-radius:11px;
-    background:#07101b;
-    color:white;
-    outline:none;
-    font-size:13px;
-}
-
-input::placeholder{
-    color:#52657a;
-}
-
-input:focus{
-    border-color:var(--blue);
-    box-shadow:0 0 0 3px rgba(8,124,255,.10);
-}
-
-.name-row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.field-note{
-    margin-top:6px;
-    color:#61758b;
-    font-size:9px;
-    line-height:1.4;
-}
-
-/* PASSWORD */
-
-.input-wrap{
-    position:relative;
-}
-
-.password-toggle{
-    position:absolute;
-    right:10px;
-    top:50%;
-    transform:translateY(-50%);
-    border:none;
-    background:transparent;
-    color:var(--muted);
-    cursor:pointer;
-    font-size:11px;
-    padding:5px;
-}
-
-/* REFERRAL */
-
-.referral-box{
-    margin-top:18px;
-    padding:13px;
-    border-radius:12px;
-    background:rgba(0,223,136,.045);
-    border:1px solid rgba(0,223,136,.17);
-}
-
-.referral-box strong{
-    color:var(--green);
-    font-size:11px;
-}
-
-.referral-box p{
-    margin-top:5px;
-    color:var(--muted);
-    font-size:9px;
-    line-height:1.5;
-}
-
-/* TERMS */
-
-.terms{
-    display:flex;
-    gap:8px;
-    align-items:flex-start;
-    margin-top:18px;
-}
-
-.terms input{
-    width:15px;
-    height:15px;
-    margin-top:1px;
-    accent-color:var(--blue);
-}
-
-.terms label{
-    margin:0;
-    color:var(--muted);
-    font-size:9px;
-    line-height:1.5;
-    font-weight:normal;
-}
-
-.terms a{
-    color:var(--blue2);
-}
-
-/* BUTTON */
-
-.create-btn{
-    width:100%;
-    height:50px;
-    margin-top:19px;
-    border:none;
-    border-radius:11px;
-    background:linear-gradient(
-        135deg,
-        var(--blue),
-        #0065d8
-    );
-    color:white;
-    font-weight:800;
-    font-size:13px;
-    cursor:pointer;
-}
-
-.create-btn:hover{
-    transform:translateY(-1px);
-}
-
-.create-btn:disabled{
-    opacity:.65;
-    cursor:not-allowed;
-    transform:none;
-}
-
-.already{
-    text-align:center;
-    margin-top:17px;
-    color:var(--muted);
-    font-size:10px;
-}
-
-.already a{
-    color:var(--blue2);
-    font-weight:700;
-}
-
-/* TRUST */
-
-.trust{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:7px;
-    margin-top:16px;
-    color:#64778c;
-    font-size:9px;
-}
-
-.trust span{
-    color:var(--green);
-}
-
-/* MESSAGE */
-
-.message{
-    display:none;
-    margin-top:12px;
-    padding:10px;
-    border-radius:9px;
-    text-align:center;
-    font-size:10px;
-    line-height:1.5;
-}
-
-.message.error{
-    display:block;
-    background:rgba(255,96,117,.08);
-    border:1px solid rgba(255,96,117,.2);
-    color:#ff8192;
-}
-
-.message.success{
-    display:block;
-    background:rgba(0,223,136,.07);
-    border:1px solid rgba(0,223,136,.18);
-    color:var(--green);
-}
-
-/* FOOTER */
-
-footer{
-    margin-top:65px;
-    padding-top:20px;
-    border-top:1px solid rgba(29,48,72,.55);
-    text-align:center;
-}
-
-footer p{
-    color:#61748a;
-    font-size:9px;
-    line-height:1.6;
-}
-
-.footer-brand{
-    margin-top:6px;
-    color:#40536a;
-    font-size:9px;
-}
-
-/* MOBILE */
-
-@media(max-width:850px){
-
-    .main{
-        grid-template-columns:1fr;
-        gap:35px;
-    }
-
-    .intro{
-        max-width:650px;
-        margin:auto;
-        text-align:center;
-    }
-
-    .benefits{
-        text-align:left;
-    }
-
-    .signup-card{
-        width:100%;
-        max-width:500px;
-        margin:auto;
-    }
-}
-
-@media(max-width:520px){
-
-    .page{
-        padding:15px;
-    }
-
-    .header{
-        margin-bottom:35px;
-    }
-
-    .brand img{
-        width:37px;
-        height:37px;
-    }
-
-    .brand-text strong{
-        font-size:16px;
-    }
-
-    .login-link{
-        padding:9px 11px;
-        font-size:10px;
-    }
-
-    .intro h1{
-        font-size:38px;
-    }
-
-    .intro-text{
-        font-size:13px;
-    }
-
-    .benefits{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .signup-card{
-        padding:21px;
-    }
-}
-
-@media(max-width:400px){
-
-    .name-row{
-        grid-template-columns:1fr;
-        gap:0;
-    }
-}
-
-@media(max-width:350px){
-
-    .benefits{
-        grid-template-columns:1fr;
-    }
-
-    .signup-card{
-        padding:18px;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="page">
-
-<header class="header">
-
-    <a href="../index.html" class="brand">
-
-        <img
-            src="../logo.png"
-            alt="ON1Ecosystem">
-
-        <div class="brand-text">
-
-            <strong>
-                ON1<span>Ecosystem</span>
-            </strong>
-
-            <small>
-                ONE DIGITAL ECOSYSTEM
-            </small>
-
-        </div>
-
-    </a>
-
-    <a
-        href="login.html"
-        class="login-link">
-        Already a member? Login
-    </a>
-
-</header>
-
-
-<main class="main">
-
-<section class="intro">
-
-    <div class="eyebrow">
-
-        <span class="eyebrow-dot"></span>
-
-        Welcome to ON1Ecosystem
-
-    </div>
-
-    <h1>
-        One ecosystem.
-        <span>More possibilities.</span>
-    </h1>
-
-    <p class="intro-text">
-
-        Create your ON1Ecosystem account and receive your
-        permanent ON1 ID, welcome ON1Coin and XP.
-
-    </p>
-
-    <div class="benefits">
-
-        <div class="benefit">
-
-            <div class="benefit-icon">
-                ⛏️
-            </div>
-
-            <strong>
-                ON1Coin
-            </strong>
-
-            <p>
-                Receive 100 ON1 as your initial ecosystem balance.
-            </p>
-
-        </div>
-
-
-        <div class="benefit">
-
-            <div class="benefit-icon">
-                ⭐
-            </div>
-
-            <strong>
-                XP
-            </strong>
-
-            <p>
-                Start with 1,000 XP at Level 0.
-            </p>
-
-        </div>
-
-
-        <div class="benefit">
-
-            <div class="benefit-icon">
-                🆔
-            </div>
-
-            <strong>
-                ON1 ID
-            </strong>
-
-            <p>
-                Every member receives a permanent 10-character ON1 ID.
-            </p>
-
-        </div>
-
-
-        <div class="benefit">
-
-            <div class="benefit-icon">
-                👛
-            </div>
-
-            <strong>
-                Your Wallet
-            </strong>
-
-            <p>
-                Your ON1Coin and XP balances are connected to your profile.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<section class="signup-card">
-
-    <div class="card-header">
-
-        <h2>
-            Create your account
-        </h2>
-
-        <p>
-            Use your real name as it appears on your identification documents.
-        </p>
-
-    </div>
-
-
-    <form id="signupForm">
-
-        <div class="name-row">
-
-            <div class="form-group">
-
-                <label for="firstName">
-                    First Name <span class="required">*</span>
-                </label>
-
-                <input
-                    id="firstName"
-                    type="text"
-                    placeholder="Your first name"
-                    autocomplete="given-name"
-                    required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="lastName">
-                    Last Name <span class="required">*</span>
-                </label>
-
-                <input
-                    id="lastName"
-                    type="text"
-                    placeholder="Your last name"
-                    autocomplete="family-name"
-                    required>
-
-            </div>
-
-        </div>
-
-
-        <div class="field-note">
-
-            Your registered name should match the identification
-            document you may use for KYC.
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="username">
-                Username <span class="required">*</span>
-            </label>
-
-            <input
-                id="username"
-                type="text"
-                placeholder="Choose a unique username"
-                autocomplete="username"
-                required>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="email">
-                Email address <span class="required">*</span>
-            </label>
-
-            <input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                autocomplete="email"
-                required>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="password">
-                Password <span class="required">*</span>
-            </label>
-
-            <div class="input-wrap">
-
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="Create a secure password"
-                    autocomplete="new-password"
-                    minlength="8"
-                    required>
-
-                <button
-                    type="button"
-                    class="password-toggle"
-                    onclick="togglePassword('password', this)">
-                    SHOW
-                </button>
-
-            </div>
-
-            <div class="field-note">
-                Use at least 8 characters.
-            </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="confirmPassword">
-                Confirm password <span class="required">*</span>
-            </label>
-
-            <div class="input-wrap">
-
-                <input
-                    id="confirmPassword"
-                    type="password"
-                    placeholder="Enter your password again"
-                    autocomplete="new-password"
-                    minlength="8"
-                    required>
-
-                <button
-                    type="button"
-                    class="password-toggle"
-                    onclick="togglePassword('confirmPassword', this)">
-                    SHOW
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="referral">
-
-                Referral code
-
-                <span style="color:#61758b;font-weight:normal;">
-                    (Optional)
-                </span>
-
-            </label>
-
-            <input
-                id="referral"
-                type="text"
-                placeholder="Enter referral code if you have one"
-                autocomplete="off">
-
-            <div class="field-note">
-
-                Leave blank if nobody referred you.
-
-            </div>
-
-        </div>
-
-
-        <div class="referral-box">
-
-            <strong>
-                🤝 Referral participation
-            </strong>
-
-            <p>
-
-                Referral participation is optional.
-                If no referral code is entered, the account
-                will be marked as having no direct referral
-                until the ON1Ecosystem fallback sponsor is configured.
-
-            </p>
-
-        </div>
-
-
-        <div class="terms">
-
-            <input
-                id="terms"
-                type="checkbox"
-                required>
-
-            <label for="terms">
-
-                I agree to the
-                <a href="#" onclick="return false;">
-                    Terms of Use
-                </a>
-                and acknowledge the
-                <a href="#" onclick="return false;">
-                    Privacy Policy
-                </a>.
-
-            </label>
-
-        </div>
-
-
-        <div
-            id="message"
-            class="message">
-        </div>
-
-
-        <button
-            type="submit"
-            class="create-btn"
-            id="createBtn">
-
-            CREATE ON1 ACCOUNT
-
-        </button>
-
-
-        <div class="already">
-
-            Already have an account?
-
-            <a href="login.html">
-                Sign in
-            </a>
-
-        </div>
-
-    </form>
-
-
-    <div class="trust">
-
-        <span>●</span>
-
-        Secure account experience
-
-    </div>
-
-</section>
-
-</main>
-
-
-<footer>
-
-    <p>
-        ON1Ecosystem connects digital services,
-        opportunities and participation in one ecosystem.
-    </p>
-
-    <div class="footer-brand">
-        A DSATECHON1 initiative
-    </div>
-
-</footer>
-
-</div>
-
-
 <script type="module">
 
 import { initializeApp }
@@ -977,10 +13,6 @@ import {
     getFirestore,
     doc,
     setDoc,
-    getDocs,
-    collection,
-    query,
-    where,
     serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -1012,6 +44,10 @@ const firebaseConfig = {
 
 };
 
+
+/* ==========================================
+   INITIALIZE FIREBASE
+========================================== */
 
 const app =
     initializeApp(firebaseConfig);
@@ -1063,7 +99,7 @@ const createBtn =
 
 
 /* ==========================================
-   MESSAGE
+   MESSAGE FUNCTION
 ========================================== */
 
 function showMessage(text,type){
@@ -1079,6 +115,10 @@ function showMessage(text,type){
 /* ==========================================
    GENERATE ON1 ID
    EXACTLY 10 CHARACTERS
+
+   ON1 + 7 characters
+   Example:
+   ON1ABC1234
 ========================================== */
 
 function generateON1Id(){
@@ -1101,63 +141,6 @@ function generateON1Id(){
     }
 
     return result;
-}
-
-
-/* ==========================================
-   CHECK WHETHER ON1 ID ALREADY EXISTS
-========================================== */
-
-async function on1IdExists(on1Id){
-
-    const usersRef =
-        collection(db,"users");
-
-    const idQuery =
-        query(
-            usersRef,
-            where("on1Id","==",on1Id)
-        );
-
-    const result =
-        await getDocs(idQuery);
-
-    return !result.empty;
-}
-
-
-/* ==========================================
-   GENERATE UNIQUE ON1 ID
-========================================== */
-
-async function generateUniqueON1Id(){
-
-    let on1Id;
-    let exists = true;
-
-    let attempts = 0;
-
-    while(exists && attempts < 10){
-
-        on1Id =
-            generateON1Id();
-
-        exists =
-            await on1IdExists(on1Id);
-
-        attempts++;
-
-    }
-
-    if(exists){
-
-        throw new Error(
-            "Unable to generate a unique ON1 ID. Please try again."
-        );
-
-    }
-
-    return on1Id;
 }
 
 
@@ -1191,6 +174,10 @@ form.addEventListener(
 
         event.preventDefault();
 
+
+        /* ==================================
+           GET FORM VALUES
+        ================================== */
 
         const firstName =
             document
@@ -1233,11 +220,20 @@ form.addEventListener(
             .trim();
 
 
-        message.className = "message";
-        message.textContent = "";
+        /* ==================================
+           CLEAR MESSAGE
+        ================================== */
+
+        message.className =
+            "message";
+
+        message.textContent =
+            "";
 
 
-        /* VALIDATION */
+        /* ==================================
+           VALIDATION
+        ================================== */
 
         if(!firstName || !lastName){
 
@@ -1247,6 +243,7 @@ form.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -1258,6 +255,7 @@ form.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -1269,6 +267,7 @@ form.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -1280,8 +279,13 @@ form.addEventListener(
             );
 
             return;
+
         }
 
+
+        /* ==================================
+           DISABLE BUTTON
+        ================================== */
 
         createBtn.disabled = true;
 
@@ -1293,7 +297,7 @@ form.addEventListener(
 
 
             /* ==================================
-               1. CREATE FIREBASE AUTH ACCOUNT
+               1. CREATE AUTH ACCOUNT
             ================================== */
 
             const userCredential =
@@ -1307,16 +311,39 @@ form.addEventListener(
                 userCredential.user;
 
 
+            console.log(
+                "Authentication account created:",
+                user.uid
+            );
+
+
             /* ==================================
-               2. GENERATE PERMANENT ON1 ID
+               2. GENERATE ON1 ID
+
+               NO FIRESTORE QUERY HERE.
+
+               This fixes the permission error.
             ================================== */
 
             const on1Id =
-                await generateUniqueON1Id();
+                generateON1Id();
+
+
+            console.log(
+                "Generated ON1 ID:",
+                on1Id
+            );
 
 
             /* ==================================
                3. OPTIONAL REFERRAL
+
+               If blank:
+               referralCode = null
+
+               We are NOT assigning the personal
+               fallback account yet because its
+               ON1 ID has not been supplied.
             ================================== */
 
             const referralCode =
@@ -1326,14 +353,16 @@ form.addEventListener(
 
 
             /* ==================================
-               4. CREATE FIRESTORE PROFILE
+               4. CREATE FIRESTORE USER PROFILE
             ================================== */
 
             await setDoc(
                 doc(db,"users",user.uid),
                 {
 
-                    /* IDENTITY */
+                    /* =========================
+                       IDENTITY
+                    ========================= */
 
                     firstName:
                         firstName,
@@ -1348,13 +377,17 @@ form.addEventListener(
                         email,
 
 
-                    /* PERMANENT ON1 ID */
+                    /* =========================
+                       PERMANENT ON1 ID
+                    ========================= */
 
                     on1Id:
                         on1Id,
 
 
-                    /* STARTING BALANCES */
+                    /* =========================
+                       WELCOME BONUS
+                    ========================= */
 
                     balance:
                         100,
@@ -1366,13 +399,17 @@ form.addEventListener(
                         0,
 
 
-                    /* KYC */
+                    /* =========================
+                       KYC
+                    ========================= */
 
                     kycLevel:
                         0,
 
 
-                    /* ACTIVITY */
+                    /* =========================
+                       STREAK / MINING
+                    ========================= */
 
                     streak:
                         0,
@@ -1381,19 +418,20 @@ form.addEventListener(
                         null,
 
 
-                    /* REFERRAL */
+                    /* =========================
+                       REFERRAL
+                    ========================= */
 
                     referralCode:
                         referralCode,
 
 
-                    /* SECURITY */
+                    /* =========================
+                       ACCOUNT STATUS
+                    ========================= */
 
                     isAdmin:
                         false,
-
-
-                    /* ACCOUNT */
 
                     createdAt:
                         serverTimestamp()
@@ -1402,12 +440,18 @@ form.addEventListener(
             );
 
 
+            console.log(
+                "Firestore profile created successfully."
+            );
+
+
             /* ==================================
                5. SUCCESS
             ================================== */
 
             showMessage(
-                "Account created! Your permanent ON1 ID is " +
+                "Account created successfully! " +
+                "Your permanent ON1 ID is " +
                 on1Id +
                 ". You received 100 ON1 and 1,000 XP.",
                 "success"
@@ -1419,7 +463,7 @@ form.addEventListener(
 
 
             /* ==================================
-               6. DASHBOARD
+               6. GO TO DASHBOARD
             ================================== */
 
             setTimeout(
@@ -1445,15 +489,20 @@ form.addEventListener(
                 "Unable to create your account. Please try again.";
 
 
+            /* =========================
+               AUTH ERRORS
+            ========================= */
+
             if(
                 error.code ===
                 "auth/email-already-in-use"
             ){
 
                 errorMessage =
-                    "This email is already registered. Please use another email or sign in.";
+                    "This email is already registered. Please sign in or use another email.";
 
             }
+
 
             else if(
                 error.code ===
@@ -1465,6 +514,7 @@ form.addEventListener(
 
             }
 
+
             else if(
                 error.code ===
                 "auth/weak-password"
@@ -1475,6 +525,11 @@ form.addEventListener(
 
             }
 
+
+            /* =========================
+               FIRESTORE ERRORS
+            ========================= */
+
             else if(
                 error.code ===
                 "permission-denied"
@@ -1484,6 +539,7 @@ form.addEventListener(
                     "Firestore permission was denied. Check your published Firestore Rules.";
 
             }
+
 
             else if(
                 error.message &&
@@ -1497,9 +553,8 @@ form.addEventListener(
 
             }
 
-            else if(
-                error.message
-            ){
+
+            else if(error.message){
 
                 errorMessage =
                     error.message;
@@ -1524,6 +579,3 @@ form.addEventListener(
 );
 
 </script>
-
-</body>
-</html>
