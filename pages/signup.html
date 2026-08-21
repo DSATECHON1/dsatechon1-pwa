@@ -1,581 +1,242 @@
-<script type="module">
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-import {
-    getAuth,
-    createUserWithEmailAndPassword
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+<title>Join ON1Ecosystem</title>
 
-import {
-    getFirestore,
-    doc,
-    setDoc,
-    serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+<meta name="theme-color" content="#06101d">
+<meta name="description"
+content="Join ON1Ecosystem and receive your permanent ON1 ID, ON1Coin and XP.">
 
+<style>
 
-/* ==========================================
-   FIREBASE CONFIG
-========================================== */
-
-const firebaseConfig = {
-
-    apiKey:
-        "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
-
-    authDomain:
-        "dsatechon1-c8b41.firebaseapp.com",
-
-    projectId:
-        "dsatechon1-c8b41",
-
-    storageBucket:
-        "dsatechon1-c8b41.firebasestorage.app",
-
-    messagingSenderId:
-        "5740594058",
-
-    appId:
-        "1:5740594058:web:23fbbca5392f12db863e73"
-
-};
-
-
-/* ==========================================
-   INITIALIZE FIREBASE
-========================================== */
-
-const app =
-    initializeApp(firebaseConfig);
-
-const auth =
-    getAuth(app);
-
-const db =
-    getFirestore(app);
-
-
-/* ==========================================
-   PASSWORD TOGGLE
-========================================== */
-
-window.togglePassword =
-function(id, button){
-
-    const input =
-        document.getElementById(id);
-
-    if(input.type === "password"){
-
-        input.type = "text";
-        button.textContent = "HIDE";
-
-    }else{
-
-        input.type = "password";
-        button.textContent = "SHOW";
-
-    }
-
-};
-
-
-/* ==========================================
-   FORM ELEMENTS
-========================================== */
-
-const form =
-    document.getElementById("signupForm");
-
-const message =
-    document.getElementById("message");
-
-const createBtn =
-    document.getElementById("createBtn");
-
-
-/* ==========================================
-   MESSAGE FUNCTION
-========================================== */
-
-function showMessage(text,type){
-
-    message.textContent = text;
-
-    message.className =
-        "message " + type;
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-
-/* ==========================================
-   GENERATE ON1 ID
-   EXACTLY 10 CHARACTERS
-
-   ON1 + 7 characters
-   Example:
-   ON1ABC1234
-========================================== */
-
-function generateON1Id(){
-
-    const characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-    let result = "ON1";
-
-    for(let i = 0; i < 7; i++){
-
-        result +=
-            characters.charAt(
-                Math.floor(
-                    Math.random() *
-                    characters.length
-                )
-            );
-
-    }
-
-    return result;
+:root{
+    --bg:#050b13;
+    --surface:#0c1624;
+    --border:#1d3048;
+    --blue:#087cff;
+    --blue2:#3aa0ff;
+    --green:#00df88;
+    --text:#ffffff;
+    --muted:#8ea2b8;
+    --danger:#ff6075;
 }
 
-
-/* ==========================================
-   REFERRAL FROM URL
-========================================== */
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-const referralFromURL =
-    params.get("ref");
-
-if(referralFromURL){
-
-    document.getElementById("referral").value =
-        referralFromURL;
-
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(8,124,255,.20),
+            transparent 42%
+        ),
+        var(--bg);
+    color:var(--text);
 }
 
-
-/* ==========================================
-   SIGNUP
-========================================== */
-
-form.addEventListener(
-    "submit",
-    async function(event){
-
-        event.preventDefault();
-
-
-        /* ==================================
-           GET FORM VALUES
-        ================================== */
-
-        const firstName =
-            document
-            .getElementById("firstName")
-            .value
-            .trim();
-
-        const lastName =
-            document
-            .getElementById("lastName")
-            .value
-            .trim();
-
-        const username =
-            document
-            .getElementById("username")
-            .value
-            .trim();
-
-        const email =
-            document
-            .getElementById("email")
-            .value
-            .trim();
-
-        const password =
-            document
-            .getElementById("password")
-            .value;
-
-        const confirmPassword =
-            document
-            .getElementById("confirmPassword")
-            .value;
-
-        const referralInput =
-            document
-            .getElementById("referral")
-            .value
-            .trim();
-
-
-        /* ==================================
-           CLEAR MESSAGE
-        ================================== */
-
-        message.className =
-            "message";
-
-        message.textContent =
-            "";
-
-
-        /* ==================================
-           VALIDATION
-        ================================== */
-
-        if(!firstName || !lastName){
-
-            showMessage(
-                "Please enter your first name and last name.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(!username){
-
-            showMessage(
-                "Please choose a username.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(password.length < 8){
-
-            showMessage(
-                "Password must contain at least 8 characters.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(password !== confirmPassword){
-
-            showMessage(
-                "The passwords do not match.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /* ==================================
-           DISABLE BUTTON
-        ================================== */
-
-        createBtn.disabled = true;
-
-        createBtn.textContent =
-            "CREATING ACCOUNT...";
-
-
-        try{
-
-
-            /* ==================================
-               1. CREATE AUTH ACCOUNT
-            ================================== */
-
-            const userCredential =
-                await createUserWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-            const user =
-                userCredential.user;
-
-
-            console.log(
-                "Authentication account created:",
-                user.uid
-            );
-
-
-            /* ==================================
-               2. GENERATE ON1 ID
-
-               NO FIRESTORE QUERY HERE.
-
-               This fixes the permission error.
-            ================================== */
-
-            const on1Id =
-                generateON1Id();
-
-
-            console.log(
-                "Generated ON1 ID:",
-                on1Id
-            );
-
-
-            /* ==================================
-               3. OPTIONAL REFERRAL
-
-               If blank:
-               referralCode = null
-
-               We are NOT assigning the personal
-               fallback account yet because its
-               ON1 ID has not been supplied.
-            ================================== */
-
-            const referralCode =
-                referralInput
-                ? referralInput
-                : null;
-
-
-            /* ==================================
-               4. CREATE FIRESTORE USER PROFILE
-            ================================== */
-
-            await setDoc(
-                doc(db,"users",user.uid),
-                {
-
-                    /* =========================
-                       IDENTITY
-                    ========================= */
-
-                    firstName:
-                        firstName,
-
-                    lastName:
-                        lastName,
-
-                    username:
-                        username,
-
-                    email:
-                        email,
-
-
-                    /* =========================
-                       PERMANENT ON1 ID
-                    ========================= */
-
-                    on1Id:
-                        on1Id,
-
-
-                    /* =========================
-                       WELCOME BONUS
-                    ========================= */
-
-                    balance:
-                        100,
-
-                    XP:
-                        1000,
-
-                    level:
-                        0,
-
-
-                    /* =========================
-                       KYC
-                    ========================= */
-
-                    kycLevel:
-                        0,
-
-
-                    /* =========================
-                       STREAK / MINING
-                    ========================= */
-
-                    streak:
-                        0,
-
-                    lastMine:
-                        null,
-
-
-                    /* =========================
-                       REFERRAL
-                    ========================= */
-
-                    referralCode:
-                        referralCode,
-
-
-                    /* =========================
-                       ACCOUNT STATUS
-                    ========================= */
-
-                    isAdmin:
-                        false,
-
-                    createdAt:
-                        serverTimestamp()
-
-                }
-            );
-
-
-            console.log(
-                "Firestore profile created successfully."
-            );
-
-
-            /* ==================================
-               5. SUCCESS
-            ================================== */
-
-            showMessage(
-                "Account created successfully! " +
-                "Your permanent ON1 ID is " +
-                on1Id +
-                ". You received 100 ON1 and 1,000 XP.",
-                "success"
-            );
-
-
-            createBtn.textContent =
-                "ACCOUNT CREATED";
-
-
-            /* ==================================
-               6. GO TO DASHBOARD
-            ================================== */
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "dashboard.html";
-
-                },
-                2200
-            );
-
-
-        }catch(error){
-
-            console.error(
-                "ON1 signup error:",
-                error
-            );
-
-
-            let errorMessage =
-                "Unable to create your account. Please try again.";
-
-
-            /* =========================
-               AUTH ERRORS
-            ========================= */
-
-            if(
-                error.code ===
-                "auth/email-already-in-use"
-            ){
-
-                errorMessage =
-                    "This email is already registered. Please sign in or use another email.";
-
-            }
-
-
-            else if(
-                error.code ===
-                "auth/invalid-email"
-            ){
-
-                errorMessage =
-                    "Please enter a valid email address.";
-
-            }
-
-
-            else if(
-                error.code ===
-                "auth/weak-password"
-            ){
-
-                errorMessage =
-                    "Your password is too weak. Please use at least 8 characters.";
-
-            }
-
-
-            /* =========================
-               FIRESTORE ERRORS
-            ========================= */
-
-            else if(
-                error.code ===
-                "permission-denied"
-            ){
-
-                errorMessage =
-                    "Firestore permission was denied. Check your published Firestore Rules.";
-
-            }
-
-
-            else if(
-                error.message &&
-                error.message
-                .toLowerCase()
-                .includes("permission")
-            ){
-
-                errorMessage =
-                    "Firestore permission was denied. Check your published Firestore Rules.";
-
-            }
-
-
-            else if(error.message){
-
-                errorMessage =
-                    error.message;
-
-            }
-
-
-            showMessage(
-                errorMessage,
-                "error"
-            );
-
-
-            createBtn.disabled = false;
-
-            createBtn.textContent =
-                "CREATE ON1 ACCOUNT";
-
-        }
-
-    }
-);
-
-</script>
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+.page{
+    width:100%;
+    max-width:1180px;
+    margin:auto;
+    padding:20px;
+}
+
+/* HEADER */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:45px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand img{
+    width:42px;
+    height:42px;
+    object-fit:contain;
+}
+
+.brand-text strong{
+    display:block;
+    font-size:18px;
+}
+
+.brand-text strong span{
+    color:var(--blue2);
+}
+
+.brand-text small{
+    display:block;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:9px;
+    letter-spacing:.5px;
+}
+
+.login-link{
+    border:1px solid var(--border);
+    background:rgba(12,22,36,.75);
+    padding:10px 15px;
+    border-radius:10px;
+    color:#dce8f5;
+    font-size:12px;
+    font-weight:700;
+}
+
+.login-link:hover{
+    border-color:var(--blue);
+}
+
+/* MAIN */
+
+.main{
+    display:grid;
+    grid-template-columns:1fr 450px;
+    gap:55px;
+    align-items:center;
+}
+
+.intro{
+    max-width:600px;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:7px 11px;
+    border-radius:30px;
+    background:rgba(8,124,255,.08);
+    border:1px solid rgba(8,124,255,.25);
+    color:var(--blue2);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+}
+
+.eyebrow-dot{
+    width:6px;
+    height:6px;
+    background:var(--green);
+    border-radius:50%;
+    box-shadow:0 0 9px rgba(0,223,136,.7);
+}
+
+.intro h1{
+    margin-top:20px;
+    font-size:clamp(35px,5vw,58px);
+    line-height:1.05;
+    letter-spacing:-2px;
+}
+
+.intro h1 span{
+    color:var(--blue2);
+}
+
+.intro-text{
+    max-width:520px;
+    margin-top:18px;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.7;
+}
+
+/* BENEFITS */
+
+.benefits{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:11px;
+    margin-top:28px;
+}
+
+.benefit{
+    padding:15px;
+    border-radius:14px;
+    background:rgba(12,22,36,.72);
+    border:1px solid var(--border);
+}
+
+.benefit-icon{
+    width:32px;
+    height:32px;
+    display:grid;
+    place-items:center;
+    background:rgba(8,124,255,.09);
+    border-radius:9px;
+    margin-bottom:10px;
+    font-size:16px;
+}
+
+.benefit strong{
+    display:block;
+    font-size:12px;
+}
+
+.benefit p{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.5;
+}
+
+/* SIGNUP CARD */
+
+.signup-card{
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
+    border-radius:23px;
+    padding:28px;
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.card-header{
+    margin-bottom:22px;
+}
+
+.card-header h2{
+    font-size:23px;
+}
+
+.card-header p{
+    margin-top:7px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* FORM */
+
+.form-group{
+    margin-top:16px;
+}
+
+.form-group:first-child{
+    margin-top:
