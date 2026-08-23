@@ -938,8 +938,8 @@ footer{
 
             <div class="card-subtitle">
 
-                Mine ON1Coin once every 24 hours.
-                Your mining rate increases with your streak.
+                Mine 50 ON1Coin every 24 hours.
+                Daily streak rewards are additional bonuses.
 
             </div>
 
@@ -959,7 +959,7 @@ footer{
             class="rate-number"
             id="miningRate">
 
-            0.000
+            50.000
 
         </div>
 
@@ -1000,7 +1000,7 @@ footer{
         class="next-mine"
         id="nextMine">
 
-        Your first mining cycle is ready.
+        Your 24-hour mining cycle is ready.
 
     </div>
 
@@ -1179,31 +1179,23 @@ footer{
 ========================================== */
 
 import {
-
     initializeApp
-
 } from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
 import {
-
     getAuth,
     onAuthStateChanged,
     signOut
-
 } from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
 import {
-
     getFirestore,
     doc,
-    getDoc,
-    runTransaction,
-    serverTimestamp
-
+    getDoc
 } from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
@@ -1236,7 +1228,7 @@ const firebaseConfig = {
 
 
 /* ==========================================
-   INITIALIZE
+   INITIALIZE FIREBASE
 ========================================== */
 
 const app =
@@ -1267,34 +1259,21 @@ const nextMine =
 
 
 /* ==========================================
-   MINING RATES
+   BASE MINING RATE
 ========================================== */
 
-function getMiningRate(streak){
+/*
+   IMPORTANT:
 
-    if(streak <= 1){
+   The standard mining cycle is ALWAYS:
 
-        return 0;
+   50 ON1Coin / 24 hours
 
-    }
+   The daily streak is a separate bonus
+   and does NOT change this rate.
+*/
 
-    if(streak === 2){
-
-        return 20;
-
-    }
-
-    if(streak === 3){
-
-        return 30;
-
-    }
-
-    if(streak === 4){
-
-        return 40;
-
-    }
+function getMiningRate(){
 
     return 50;
 
@@ -1316,6 +1295,52 @@ function calculateLevel(xp){
     return Math.floor(
         xp / 2500
     );
+
+}
+
+
+/* ==========================================
+   TIMESTAMP CONVERSION
+========================================== */
+
+function timestampToMillis(timestamp){
+
+    if(!timestamp){
+
+        return null;
+
+    }
+
+    if(
+        typeof timestamp.toMillis ===
+        "function"
+    ){
+
+        return timestamp.toMillis();
+
+    }
+
+    if(
+        timestamp.seconds !== undefined
+    ){
+
+        return (
+            timestamp.seconds * 1000
+        ) +
+        Math.floor(
+            (timestamp.nanoseconds || 0)
+            / 1000000
+        );
+
+    }
+
+    if(timestamp instanceof Date){
+
+        return timestamp.getTime();
+
+    }
+
+    return null;
 
 }
 
@@ -1375,14 +1400,10 @@ function updateDashboard(data){
         "Day " + streak;
 
 
-    const rate =
-        getMiningRate(streak);
-
-
     document.getElementById(
         "miningRate"
     ).textContent =
-        rate.toFixed(3);
+        getMiningRate().toFixed(3);
 
 
     document.getElementById(
@@ -1407,6 +1428,19 @@ function updateDashboard(data){
         "referral"
     ).textContent =
         data.referralCode || "None";
+
+
+    const on1Id =
+        data.on1Id ||
+        data.ON1Id ||
+        data.uid ||
+        "—";
+
+
+    document.getElementById(
+        "on1Id"
+    ).textContent =
+        on1Id;
 
 
     const currentXP =
@@ -1437,53 +1471,7 @@ function updateDashboard(data){
 
 
 /* ==========================================
-   TIMESTAMP CONVERSION
-========================================== */
-
-function timestampToMillis(timestamp){
-
-    if(!timestamp){
-
-        return null;
-
-    }
-
-    if(
-        typeof timestamp.toMillis ===
-        "function"
-    ){
-
-        return timestamp.toMillis();
-
-    }
-
-    if(
-        timestamp.seconds !== undefined
-    ){
-
-        return (
-            timestamp.seconds * 1000
-        ) +
-        Math.floor(
-            (timestamp.nanoseconds || 0)
-            / 1000000
-        );
-
-    }
-
-    if(timestamp instanceof Date){
-
-        return timestamp.getTime();
-
-    }
-
-    return null;
-
-}
-
-
-/* ==========================================
-   UPDATE MINING BUTTON
+   UPDATE MINING STATUS
 ========================================== */
 
 function updateMiningButton(lastMine){
@@ -1501,7 +1489,7 @@ function updateMiningButton(lastMine){
             "START MINING";
 
         nextMine.textContent =
-            "Your first mining cycle is ready.";
+            "Your 24-hour mining cycle is ready.";
 
         return;
 
@@ -1528,7 +1516,7 @@ function updateMiningButton(lastMine){
             "START MINING";
 
         nextMine.textContent =
-            "Your next mining cycle is ready.";
+            "Your next 24-hour mining cycle is ready.";
 
         return;
 
@@ -1539,7 +1527,7 @@ function updateMiningButton(lastMine){
         true;
 
     mineBtn.textContent =
-        "MINING COMPLETED";
+        "MINING ACTIVE";
 
 
     const remaining =
@@ -1554,7 +1542,7 @@ function updateMiningButton(lastMine){
 
 
 /* ==========================================
-   FORMAT REMAINING TIME
+   FORMAT TIME
 ========================================== */
 
 function formatTime(milliseconds){
@@ -1693,289 +1681,28 @@ onAuthStateChanged(
 
 
 /* ==========================================
-   START MINING
+   MINING BUTTON
 ========================================== */
+
+/*
+   The actual ON1Coin reward transaction
+   is NOT activated here yet.
+
+   We will connect this button to the
+   secure Firebase mining backend next.
+
+   This prevents the browser from directly
+   modifying the user's ON1Coin balance.
+*/
 
 mineBtn.addEventListener(
     "click",
     async function(){
 
-        const user =
-            auth.currentUser;
-
-
-        if(!user){
-
-            window.location.href =
-                "login.html";
-
-            return;
-
-        }
-
-
-        mineBtn.disabled =
-            true;
-
-        mineBtn.textContent =
-            "MINING...";
-
-
-        try{
-
-            const userRef =
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                );
-
-
-            let miningResult;
-
-
-            await runTransaction(
-                db,
-                async function(transaction){
-
-                    const snapshot =
-                        await transaction.get(
-                            userRef
-                        );
-
-
-                    if(!snapshot.exists()){
-
-                        throw new Error(
-                            "ON1 profile not found."
-                        );
-
-                    }
-
-
-                    const data =
-                        snapshot.data();
-
-
-                    const currentBalance =
-                        Number(
-                            data.balance || 0
-                        );
-
-
-                    const currentXP =
-                        Number(
-                            data.XP || 0
-                        );
-
-
-                    let currentStreak =
-                        Number(
-                            data.streak || 1
-                        );
-
-
-                    const lastMineMs =
-                        timestampToMillis(
-                            data.lastMine
-                        );
-
-
-                    const now =
-                        Date.now();
-
-
-                    const twentyFourHours =
-                        24 * 60 * 60 * 1000;
-
-
-                    /* =========================
-                       FIRST MINING
-                    ========================= */
-
-                    if(!lastMineMs){
-
-                        currentStreak =
-                            1;
-
-                    }
-
-                    /* =========================
-                       MINING TOO SOON
-                    ========================= */
-
-                    else if(
-                        now - lastMineMs
-                        <
-                        twentyFourHours
-                    ){
-
-                        throw new Error(
-                            "You have already mined today."
-                        );
-
-                    }
-
-                    /* =========================
-                       CONSECUTIVE DAY
-                    ========================= */
-
-                    else if(
-                        now - lastMineMs
-                        <
-                        48 * 60 * 60 * 1000
-                    ){
-
-                        currentStreak =
-                            Math.min(
-                                currentStreak + 1,
-                                5
-                            );
-
-                    }
-
-                    /* =========================
-                       STREAK BROKEN
-                    ========================= */
-
-                    else{
-
-                        currentStreak =
-                            1;
-
-                    }
-
-
-                    const miningRate =
-                        getMiningRate(
-                            currentStreak
-                        );
-
-
-                    const newBalance =
-                        currentBalance +
-                        miningRate;
-
-
-                    const newXP =
-                        currentXP +
-                        (
-                            miningRate > 0
-                            ? 100
-                            : 0
-                        );
-
-
-                    const newLevel =
-                        calculateLevel(
-                            newXP
-                        );
-
-
-                    transaction.update(
-                        userRef,
-                        {
-
-                            balance:
-                                newBalance,
-
-                            XP:
-                                newXP,
-
-                            level:
-                                newLevel,
-
-                            streak:
-                                currentStreak,
-
-                            lastMine:
-                                serverTimestamp()
-
-                        }
-                    );
-
-
-                    miningResult = {
-
-                        miningRate:
-                            miningRate,
-
-                        newBalance:
-                            newBalance,
-
-                        newXP:
-                            newXP,
-
-                        streak:
-                            currentStreak,
-
-                        level:
-                            newLevel
-
-                    };
-
-                }
-            );
-
-
-            /* =========================
-               SUCCESS MESSAGE
-            ========================= */
-
-            if(
-                miningResult.miningRate === 0
-            ){
-
-                showMessage(
-                    "Mining cycle completed. Day 1 reward is 0 ON1. Keep your streak for the next cycle.",
-                    "success"
-                );
-
-            }
-
-            else{
-
-                showMessage(
-                    "Mining successful! +" +
-                    miningResult.miningRate.toFixed(3) +
-                    " ON1 added to your balance.",
-                    "success"
-                );
-
-            }
-
-
-            /* =========================
-               REFRESH PROFILE
-            ========================= */
-
-            await loadUser(user);
-
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Mining error:",
-                error
-            );
-
-
-            showMessage(
-                error.message ||
-                "Mining could not be completed.",
-                "error"
-            );
-
-
-            mineBtn.disabled =
-                false;
-
-            mineBtn.textContent =
-                "START MINING";
-
-        }
+        showMessage(
+            "The secure 24-hour mining system is being connected. Your 50 ON1Coin base rate is confirmed.",
+            "success"
+        );
 
     }
 );
