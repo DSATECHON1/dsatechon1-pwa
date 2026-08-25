@@ -27,7 +27,6 @@
 }
 
 :root{
-
     --bg:#050b13;
     --surface:#0c1624;
     --surface2:#101d2d;
@@ -43,11 +42,9 @@
     --muted:#8ea2b8;
 
     --danger:#ff6075;
-
 }
 
 body{
-
     min-height:100vh;
 
     background:
@@ -59,7 +56,6 @@ body{
         var(--bg);
 
     color:var(--text);
-
 }
 
 a{
@@ -76,14 +72,10 @@ button{
 ===================================================== */
 
 .page{
-
     width:100%;
     max-width:1100px;
-
     margin:auto;
-
     padding:15px;
-
 }
 
 /* =====================================================
@@ -91,81 +83,50 @@ button{
 ===================================================== */
 
 .header{
-
     display:flex;
-
     align-items:center;
     justify-content:space-between;
-
     padding:10px 0;
-
     margin-bottom:20px;
-
 }
 
 .brand{
-
     display:flex;
-
     align-items:center;
-
     gap:9px;
-
 }
 
 .brand img{
-
     width:38px;
     height:38px;
-
     object-fit:contain;
-
 }
 
 .brand strong{
-
     display:block;
-
     font-size:16px;
-
 }
 
 .brand strong span{
-
     color:var(--blue2);
-
 }
 
 .brand small{
-
     display:block;
-
     margin-top:2px;
-
     color:var(--muted);
-
     font-size:8px;
-
     letter-spacing:.5px;
-
 }
 
 .logout{
-
     border:1px solid var(--border);
-
     background:var(--surface);
-
     color:#dce8f5;
-
     padding:8px 12px;
-
     border-radius:9px;
-
     cursor:pointer;
-
     font-size:10px;
-
 }
 
 /* =====================================================
@@ -173,25 +134,27 @@ button{
 ===================================================== */
 
 .welcome{
-
     margin-bottom:16px;
-
 }
 
 .welcome h1{
-
     font-size:24px;
-
 }
 
 .welcome p{
-
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:11px;
+}
 
+.welcome-bonus{
+    margin-top:10px;
+    padding:9px 11px;
+    border-radius:9px;
+    background:rgba(8,124,255,.06);
+    border:1px solid rgba(8,124,255,.14);
+    color:var(--blue2);
+    font-size:8px;
 }
 
 /* =====================================================
@@ -199,72 +162,41 @@ button{
 ===================================================== */
 
 .stats{
-
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
-
 }
 
-/*
-   Smaller cards to reduce scrolling
-*/
-
 .stat-card{
-
-    background:
-        rgba(12,22,36,.94);
-
-    border:
-        1px solid var(--border);
-
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
     border-radius:13px;
-
-    padding:12px 14px;
-
+    padding:10px 12px;
 }
 
 .stat-label{
-
     color:var(--muted);
-
     font-size:8px;
-
     text-transform:uppercase;
-
     letter-spacing:.5px;
-
 }
 
 .stat-value{
-
-    margin-top:5px;
-
-    font-size:19px;
-
+    margin-top:4px;
+    font-size:18px;
     font-weight:800;
-
 }
 
 .stat-value.coin{
-
     color:var(--gold);
-
 }
 
 .stat-value.xp{
-
     color:var(--blue2);
-
 }
 
 .stat-value.level{
-
     color:var(--green);
-
 }
 
 /* =====================================================
@@ -272,16 +204,10 @@ button{
 ===================================================== */
 
 .main-grid{
-
     display:grid;
-
-    grid-template-columns:
-        1.25fr .75fr;
-
+    grid-template-columns:1.25fr .75fr;
     gap:14px;
-
     margin-top:14px;
-
 }
 
 /* =====================================================
@@ -289,37 +215,22 @@ button{
 ===================================================== */
 
 .card{
-
-    background:
-        rgba(12,22,36,.94);
-
-    border:
-        1px solid var(--border);
-
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
     border-radius:17px;
-
     padding:18px;
-
 }
 
 .card-title{
-
     font-size:15px;
-
     font-weight:800;
-
 }
 
 .card-subtitle{
-
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:9px;
-
     line-height:1.5;
-
 }
 
 /* =====================================================
@@ -327,17 +238,12 @@ button{
 ===================================================== */
 
 .mining-card{
-
     position:relative;
-
     overflow:hidden;
-
 }
 
 .mining-card::before{
-
     content:"";
-
     position:absolute;
 
     width:150px;
@@ -345,68 +251,47 @@ button{
 
     border-radius:50%;
 
-    background:
-        rgba(8,124,255,.07);
+    background:rgba(8,124,255,.07);
 
     right:-60px;
     top:-60px;
-
 }
 
 .mining-top{
-
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
 }
 
 .mining-icon{
-
     width:42px;
     height:42px;
 
     display:grid;
-
     place-items:center;
 
     border-radius:12px;
 
-    background:
-        rgba(8,124,255,.10);
+    background:rgba(8,124,255,.10);
 
     font-size:20px;
-
 }
 
 .rate{
-
     margin-top:18px;
-
     text-align:center;
-
 }
 
 .rate-number{
-
     font-size:34px;
-
     font-weight:900;
-
     color:var(--gold);
-
 }
 
 .rate-label{
-
     margin-top:3px;
-
     color:var(--muted);
-
     font-size:9px;
-
 }
 
 /* =====================================================
@@ -414,43 +299,29 @@ button{
 ===================================================== */
 
 .streak{
-
     margin-top:16px;
-
     padding:11px;
 
     border-radius:11px;
 
-    background:
-        rgba(0,223,136,.045);
+    background:rgba(0,223,136,.045);
 
-    border:
-        1px solid rgba(0,223,136,.15);
+    border:1px solid rgba(0,223,136,.15);
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
 }
 
 .streak-label{
-
     color:var(--muted);
-
     font-size:9px;
-
 }
 
 .streak-value{
-
     color:var(--green);
-
     font-weight:800;
-
     font-size:13px;
-
 }
 
 /* =====================================================
@@ -459,40 +330,32 @@ button{
 
 .mine-btn,
 .streak-btn{
-
     width:100%;
-
     height:45px;
 
     margin-top:12px;
 
     border:none;
-
     border-radius:10px;
 
     color:white;
 
     font-size:11px;
-
     font-weight:800;
 
     cursor:pointer;
-
 }
 
 .mine-btn{
-
     background:
         linear-gradient(
             135deg,
             var(--blue),
             #0065d8
         );
-
 }
 
 .streak-btn{
-
     background:
         linear-gradient(
             135deg,
@@ -501,40 +364,26 @@ button{
         );
 
     color:#111;
-
 }
 
 .mine-btn:disabled,
 .streak-btn:disabled{
-
     opacity:.5;
-
     cursor:not-allowed;
-
 }
 
 .next-mine{
-
     margin-top:8px;
-
     text-align:center;
-
     color:var(--muted);
-
     font-size:8px;
-
 }
 
 .streak-status{
-
     margin-top:7px;
-
     text-align:center;
-
     color:var(--muted);
-
     font-size:8px;
-
 }
 
 /* =====================================================
@@ -542,7 +391,6 @@ button{
 ===================================================== */
 
 .message{
-
     display:none;
 
     margin-top:12px;
@@ -556,35 +404,26 @@ button{
     font-size:9px;
 
     line-height:1.5;
-
 }
 
 .message.success{
-
     display:block;
 
-    background:
-        rgba(0,223,136,.07);
+    background:rgba(0,223,136,.07);
 
-    border:
-        1px solid rgba(0,223,136,.18);
+    border:1px solid rgba(0,223,136,.18);
 
     color:var(--green);
-
 }
 
 .message.error{
-
     display:block;
 
-    background:
-        rgba(255,96,117,.08);
+    background:rgba(255,96,117,.08);
 
-    border:
-        1px solid rgba(255,96,117,.2);
+    border:1px solid rgba(255,96,117,.2);
 
     color:#ff8192;
-
 }
 
 /* =====================================================
@@ -592,43 +431,28 @@ button{
 ===================================================== */
 
 .level-box{
-
     margin-top:15px;
-
 }
 
 .level-head{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
 }
 
 .level-name{
-
     color:var(--green);
-
     font-size:10px;
-
     font-weight:800;
-
 }
 
 .level-xp{
-
     color:var(--muted);
-
     font-size:8px;
-
 }
 
 .progress{
-
     height:7px;
-
     margin-top:7px;
 
     background:#07101b;
@@ -638,13 +462,10 @@ button{
     overflow:hidden;
 
     border:1px solid var(--border);
-
 }
 
 .progress-bar{
-
     height:100%;
-
     width:0%;
 
     background:
@@ -655,7 +476,6 @@ button{
         );
 
     transition:width .5s ease;
-
 }
 
 /* =====================================================
@@ -663,74 +483,34 @@ button{
 ===================================================== */
 
 .profile-row{
-
     display:flex;
-
     justify-content:space-between;
-
     gap:10px;
 
     padding:10px 0;
 
     border-bottom:
         1px solid rgba(29,48,72,.55);
-
 }
 
 .profile-row:last-child{
-
     border-bottom:none;
-
 }
 
 .profile-label{
-
     color:var(--muted);
-
     font-size:9px;
-
 }
 
 .profile-value{
-
     font-size:10px;
-
     font-weight:700;
-
     text-align:right;
-
     word-break:break-word;
-
 }
 
 .on1-id{
-
     color:var(--gold);
-
-}
-
-/* =====================================================
-   WELCOME XP
-===================================================== */
-
-.welcome-bonus{
-
-    margin-top:10px;
-
-    padding:9px 11px;
-
-    border-radius:9px;
-
-    background:
-        rgba(8,124,255,.06);
-
-    border:
-        1px solid rgba(8,124,255,.14);
-
-    color:var(--blue2);
-
-    font-size:8px;
-
 }
 
 /* =====================================================
@@ -738,47 +518,32 @@ button{
 ===================================================== */
 
 .loading{
-
     position:fixed;
-
     inset:0;
 
     background:var(--bg);
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     z-index:999;
-
 }
 
 .loading-box{
-
     text-align:center;
-
 }
 
 .loading-box strong{
-
     display:block;
-
     margin-top:10px;
-
     font-size:13px;
-
 }
 
 .loading-box p{
-
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:9px;
-
 }
 
 /* =====================================================
@@ -786,9 +551,7 @@ button{
 ===================================================== */
 
 footer{
-
     margin-top:25px;
-
     padding-top:14px;
 
     border-top:
@@ -797,9 +560,7 @@ footer{
     text-align:center;
 
     color:#61748a;
-
     font-size:8px;
-
 }
 
 /* =====================================================
@@ -809,9 +570,7 @@ footer{
 @media(max-width:800px){
 
     .main-grid{
-
         grid-template-columns:1fr;
-
     }
 
 }
@@ -819,40 +578,28 @@ footer{
 @media(max-width:500px){
 
     .page{
-
         padding:12px;
-
     }
 
     .stats{
-
         gap:7px;
-
     }
 
     .stat-card{
-
-        padding:10px;
-
+        padding:9px;
     }
 
     .stat-value{
-
-        font-size:17px;
-
+        font-size:16px;
     }
 
     .welcome h1{
-
         font-size:21px;
-
     }
 
     .brand img{
-
         width:34px;
         height:34px;
-
     }
 
 }
@@ -881,7 +628,7 @@ footer{
             Loading ON1 Dashboard
         </strong>
 
-        <p>
+        <p id="loadingText">
             Connecting to your account...
         </p>
 
@@ -1061,30 +808,23 @@ footer{
 
     <div class="rate">
 
-        <div
-            class="rate-number">
-
+        <div class="rate-number">
             50.000
-
         </div>
 
         <div class="rate-label">
-
             ON1Coin base reward / 24 hours
-
         </div>
 
     </div>
 
 
-    <!-- STREAK DISPLAY -->
+    <!-- STREAK -->
 
     <div class="streak">
 
         <div class="streak-label">
-
             Current mining streak
-
         </div>
 
         <div
@@ -1098,7 +838,7 @@ footer{
     </div>
 
 
-    <!-- BASE MINING BUTTON -->
+    <!-- BASE MINING -->
 
     <button
         class="mine-btn"
@@ -1118,7 +858,7 @@ footer{
     </div>
 
 
-    <!-- STREAK BONUS BUTTON -->
+    <!-- STREAK BONUS -->
 
     <button
         class="streak-btn"
@@ -1147,9 +887,7 @@ footer{
     </div>
 
 
-    <!-- =================================================
-         LEVEL PROGRESS
-    ================================================== -->
+    <!-- LEVEL PROGRESS -->
 
     <div class="level-box">
 
@@ -1159,7 +897,7 @@ footer{
                 class="level-name"
                 id="levelName">
 
-                LEVEL 0
+                PROGRESS TO LEVEL 1
 
             </div>
 
@@ -1190,7 +928,7 @@ footer{
 
 
 <!-- =====================================================
-     PROFILE CARD
+     PROFILE
 ===================================================== -->
 
 <section class="card">
@@ -1391,7 +1129,7 @@ const firebaseConfig = {
 
 
 /* =====================================================
-   FIREBASE INITIALIZATION
+   INITIALIZE FIREBASE
 ===================================================== */
 
 const app =
@@ -1405,7 +1143,7 @@ const db =
 
 
 /* =====================================================
-   WORKER URL
+   WORKER
 ===================================================== */
 
 const MINING_WORKER =
@@ -1413,7 +1151,7 @@ const MINING_WORKER =
 
 
 /* =====================================================
-   ON1 REFERRAL FALLBACK
+   DEFAULT REFERRER
 ===================================================== */
 
 const DEFAULT_REFERRER = {
@@ -1428,11 +1166,25 @@ const DEFAULT_REFERRER = {
 
 
 /* =====================================================
+   CONSTANTS
+===================================================== */
+
+const DAY =
+    24 * 60 * 60 * 1000;
+
+const XP_PER_LEVEL =
+    2500;
+
+
+/* =====================================================
    ELEMENTS
 ===================================================== */
 
 const loading =
     document.getElementById("loading");
+
+const loadingText =
+    document.getElementById("loadingText");
 
 const mineBtn =
     document.getElementById("mineBtn");
@@ -1449,25 +1201,19 @@ const nextMine =
 const streakStatus =
     document.getElementById("streakStatus");
 
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
 
 /* =====================================================
    CURRENT USER
 ===================================================== */
 
-let currentUser = null;
+let currentUser =
+    null;
 
-let currentData = null;
-
-
-/* =====================================================
-   CONSTANTS
-===================================================== */
-
-const DAY =
-    24 * 60 * 60 * 1000;
-
-const XP_PER_LEVEL =
-    2500;
+let currentData =
+    null;
 
 
 /* =====================================================
@@ -1480,6 +1226,44 @@ function calculateLevel(xp){
         Number(xp || 0) /
         XP_PER_LEVEL
     );
+
+}
+
+
+/* =====================================================
+   XP READER
+===================================================== */
+
+function getXP(data){
+
+    /*
+       Support the different possible field names
+       without changing Firestore.
+    */
+
+    if(data.XP !== undefined){
+
+        return Number(data.XP) || 0;
+
+    }
+
+    if(data.xp !== undefined){
+
+        return Number(data.xp) || 0;
+
+    }
+
+    if(
+        data.experiencePoints !== undefined
+    ){
+
+        return Number(
+            data.experiencePoints
+        ) || 0;
+
+    }
+
+    return 0;
 
 }
 
@@ -1507,9 +1291,7 @@ function timestampToMillis(value){
         value.seconds !== undefined
     ){
 
-        return (
-            Number(value.seconds) * 1000
-        );
+        return Number(value.seconds) * 1000;
 
     }
 
@@ -1531,7 +1313,9 @@ function timestampToMillis(value){
             Date.parse(value);
 
         if(!isNaN(parsed)){
+
             return parsed;
+
         }
 
     }
@@ -1542,7 +1326,7 @@ function timestampToMillis(value){
 
 
 /* =====================================================
-   GENERATE ON1 ID
+   ON1 ID
 ===================================================== */
 
 function generateON1Id(uid){
@@ -1554,108 +1338,171 @@ function generateON1Id(uid){
     }
 
     /*
-       Firebase UID is NOT displayed directly.
+       IMPORTANT:
 
-       We use the first 7 characters to create
-       the short ON1 member ID.
+       Firebase UID is NEVER displayed directly.
+
+       ON1 ID = ON1 + exactly 7 characters.
     */
 
     const clean =
         String(uid)
-            .replace(/[^a-zA-Z0-9]/g,"")
-            .toUpperCase();
+        .replace(
+            /[^a-zA-Z0-9]/g,
+            ""
+        )
+        .toUpperCase();
 
-    return "ON1" +
-        clean.substring(0,7);
+    return (
+        "ON1" +
+        clean.substring(0,7)
+    );
 
 }
 
 
 /* =====================================================
-   GET USER ON1 ID
+   GET ON1 ID
 ===================================================== */
 
 function getON1Id(data,user){
 
     /*
-       If the account already has an ON1 ID,
-       preserve it.
+       Accept a properly formatted ON1 ID
+       if one already exists.
     */
 
-    if(data.on1Id){
+    const possibleIds = [
 
-        const existing =
-            String(data.on1Id);
+        data.on1Id,
+        data.ON1Id,
+        data.on1ID
+
+    ];
+
+
+    for(
+        const value of possibleIds
+    ){
+
+        if(!value){
+            continue;
+        }
+
+        const id =
+            String(value)
+            .trim()
+            .toUpperCase();
+
+
+        /*
+           Valid ON1 ID must be:
+
+           ON1 + 7 characters
+           = 10 characters total
+        */
 
         if(
-            existing.startsWith("ON1") &&
-            existing.length === 10
+            /^ON1[A-Z0-9]{7}$/.test(id)
         ){
 
-            return existing;
+            return id;
 
         }
 
     }
 
-    if(data.ON1Id){
-
-        const existing =
-            String(data.ON1Id);
-
-        if(
-            existing.startsWith("ON1") &&
-            existing.length === 10
-        ){
-
-            return existing;
-
-        }
-
-    }
 
     /*
-       Otherwise generate ON1 + 7 characters.
+       If Firestore contains the Firebase UID
+       instead of an ON1 ID, ignore it.
+
+       Generate the proper ON1 ID.
     */
 
-    return generateON1Id(user.uid);
+    return generateON1Id(
+        user.uid
+    );
 
 }
 
 
 /* =====================================================
-   REFERRAL FALLBACK
+   REFERRAL
 ===================================================== */
 
 function getReferral(data){
 
-    /*
-       Check actual referral fields first.
-    */
-
-    const referredBy =
+    const possible =
         data.referredBy ||
         data.referrer ||
         data.referralUsername ||
         data.referralCode ||
         "";
 
+
     if(
-        referredBy &&
-        String(referredBy).trim() !== ""
+        possible &&
+        String(possible).trim() !== ""
     ){
 
-        return String(referredBy);
+        return String(possible);
 
     }
 
-    /*
-       No referral supplied.
-
-       Use the ON1 default referral.
-    */
 
     return DEFAULT_REFERRER.username;
+
+}
+
+
+/* =====================================================
+   REFERRAL ID
+===================================================== */
+
+function getReferralId(data){
+
+    const possible =
+        data.referredById ||
+        data.referrerId ||
+        data.referralId ||
+        "";
+
+
+    if(
+        possible &&
+        String(possible).trim() !== ""
+    ){
+
+        /*
+           If it is already an ON1 ID,
+           use it.
+        */
+
+        const value =
+            String(possible)
+            .trim()
+            .toUpperCase();
+
+
+        if(
+            /^ON1[A-Z0-9]{7}$/.test(value)
+        ){
+
+            return value;
+
+        }
+
+    }
+
+
+    /*
+       No valid referral ID.
+
+       Use your default referral.
+    */
+
+    return DEFAULT_REFERRER.on1Id;
 
 }
 
@@ -1666,16 +1513,25 @@ function getReferral(data){
 
 function updateDashboard(data){
 
-    currentData = data;
+    currentData =
+        data;
+
 
     const xp =
-        Number(data.XP || 0);
+        getXP(data);
+
 
     const balance =
-        Number(data.balance || 0);
+        Number(
+            data.balance || 0
+        );
+
 
     const streak =
-        Number(data.streak || 0);
+        Number(
+            data.streak || 0
+        );
+
 
     const level =
         calculateLevel(xp);
@@ -1687,6 +1543,9 @@ function updateDashboard(data){
         "firstName"
     ).textContent =
         data.firstName ||
+        data.firstname ||
+        data.name ||
+        data.username ||
         "Member";
 
 
@@ -1712,12 +1571,6 @@ function updateDashboard(data){
         "level"
     ).textContent =
         level;
-
-
-    document.getElementById(
-        "levelName"
-    ).textContent =
-        "LEVEL " + level;
 
 
     /* STREAK */
@@ -1773,8 +1626,7 @@ function updateDashboard(data){
     document.getElementById(
         "referralId"
     ).textContent =
-        data.referredById ||
-        DEFAULT_REFERRER.on1Id;
+        getReferralId(data);
 
 
     /* XP PROGRESS */
@@ -1782,8 +1634,23 @@ function updateDashboard(data){
     const currentXP =
         xp % XP_PER_LEVEL;
 
+
     const progress =
-        (currentXP / XP_PER_LEVEL) * 100;
+        (
+            currentXP /
+            XP_PER_LEVEL
+        ) * 100;
+
+
+    const nextLevel =
+        level + 1;
+
+
+    document.getElementById(
+        "levelName"
+    ).textContent =
+        "PROGRESS TO LEVEL " +
+        nextLevel;
 
 
     document.getElementById(
@@ -1802,29 +1669,47 @@ function updateDashboard(data){
         ) + "%";
 
 
+    /*
+       Welcome bonus remains visible.
+
+       We do NOT modify XP here.
+    */
+
+    document.getElementById(
+        "welcomeBonus"
+    ).textContent =
+        "🎁 Welcome bonus: 1,000 XP";
+
+
     updateMiningState(data);
 
 }
 
 
 /* =====================================================
-   UPDATE MINING STATE
+   MINING STATE
 ===================================================== */
 
 function updateMiningState(data){
 
     const lastClaim =
-        Number(data.lastClaim || 0);
+        Number(
+            data.lastClaim || 0
+        );
+
 
     const lastStreakClaim =
-        Number(data.lastStreakClaim || 0);
+        Number(
+            data.lastStreakClaim || 0
+        );
+
 
     const now =
         Date.now();
 
 
     /* ===============================================
-       NO MINING CLAIM YET
+       NEVER MINED
     =============================================== */
 
     if(!lastClaim){
@@ -1858,7 +1743,7 @@ function updateMiningState(data){
 
 
     /* ===============================================
-       BASE MINING READY AGAIN
+       NEXT CYCLE READY
     =============================================== */
 
     if(elapsed >= DAY){
@@ -1888,7 +1773,7 @@ function updateMiningState(data){
 
 
     /* ===============================================
-       BASE MINING ACTIVE
+       MINING ACTIVE
     =============================================== */
 
     mineBtn.disabled =
@@ -1908,7 +1793,7 @@ function updateMiningState(data){
 
 
     /* ===============================================
-       STREAK BONUS
+       STREAK
     =============================================== */
 
     const streakAlreadyClaimed =
@@ -1931,20 +1816,14 @@ function updateMiningState(data){
     }
 
 
-    /*
-       Determine today's bonus.
-
-       Day 1 = +5
-       Day 2 = +10
-       ...
-       Day 9 = +45
-       Day 10 = +100
-    */
-
     const streak =
-        Number(data.streak || 0);
+        Number(
+            data.streak || 0
+        );
 
-    let bonus = 0;
+
+    let bonus;
+
 
     if(streak >= 10){
 
@@ -1952,7 +1831,8 @@ function updateMiningState(data){
 
     }else{
 
-        bonus = streak * 5;
+        bonus =
+            streak * 5;
 
     }
 
@@ -2017,17 +1897,17 @@ function formatTime(milliseconds){
     return (
 
         String(hours)
-            .padStart(2,"0")
+        .padStart(2,"0")
 
         + ":" +
 
         String(minutes)
-            .padStart(2,"0")
+        .padStart(2,"0")
 
         + ":" +
 
         String(seconds)
-            .padStart(2,"0")
+        .padStart(2,"0")
 
     );
 
@@ -2035,7 +1915,7 @@ function formatTime(milliseconds){
 
 
 /* =====================================================
-   SHOW MESSAGE
+   MESSAGE
 ===================================================== */
 
 function showMessage(
@@ -2067,7 +1947,9 @@ async function loadUser(user){
 
 
     const snapshot =
-        await getDoc(userRef);
+        await getDoc(
+            userRef
+        );
 
 
     if(!snapshot.exists()){
@@ -2086,12 +1968,13 @@ async function loadUser(user){
     /*
        IMPORTANT:
 
-       We only READ XP.
+       Dashboard only READS the user's data.
 
-       We do NOT write XP here.
+       It does NOT create XP.
 
-       Therefore the existing 1,000 XP
-       welcome bonus remains untouched.
+       It does NOT reset XP.
+
+       It does NOT change balance.
     */
 
     updateDashboard(data);
@@ -2100,7 +1983,7 @@ async function loadUser(user){
 
 
 /* =====================================================
-   GET FRESH USER DATA
+   REFRESH USER
 ===================================================== */
 
 async function refreshUser(){
@@ -2137,13 +2020,14 @@ async function refreshUser(){
 
     updateDashboard(data);
 
+
     return data;
 
 }
 
 
 /* =====================================================
-   GET FIREBASE ID TOKEN
+   FIREBASE TOKEN
 ===================================================== */
 
 async function getFirebaseToken(){
@@ -2217,7 +2101,6 @@ mineBtn.addEventListener(
                         body:JSON.stringify({
                             idToken:idToken
                         })
-
                     }
                 );
 
@@ -2247,16 +2130,292 @@ mineBtn.addEventListener(
             }
 
 
-            /*
-               Refresh Firestore.
-
-               This updates the dashboard with the
-               balance and streak saved by Worker.
-            */
-
             await refreshUser();
 
 
             showMessage(
                 "🎉 Successfully mined +" +
-                data.reward
+                data.reward +
+                " ON1Coin. Your balance has been updated.",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showMessage(
+                error.message ||
+                "Mining failed.",
+                "error"
+            );
+
+
+            await refreshUser()
+                .catch(()=>{});
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   STREAK BONUS
+===================================================== */
+
+streakBtn.addEventListener(
+    "click",
+    async function(){
+
+        if(!currentUser){
+
+            showMessage(
+                "Please sign in again.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        streakBtn.disabled =
+            true;
+
+        streakBtn.textContent =
+            "CLAIMING...";
+
+
+        showMessage(
+            "Processing your ON1 streak bonus...",
+            "success"
+        );
+
+
+        try{
+
+            const idToken =
+                await getFirebaseToken();
+
+
+            const response =
+                await fetch(
+                    MINING_WORKER + "/streak",
+                    {
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:JSON.stringify({
+                            idToken:idToken
+                        })
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if(!response.ok){
+
+                throw new Error(
+                    data.error ||
+                    data.message ||
+                    "Streak bonus failed."
+                );
+
+            }
+
+
+            if(!data.success){
+
+                throw new Error(
+                    data.error ||
+                    "Streak bonus was not completed."
+                );
+
+            }
+
+
+            await refreshUser();
+
+
+            showMessage(
+                "🔥 Successfully claimed +" +
+                data.bonus +
+                " ON1Coin streak bonus. Added to your balance.",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showMessage(
+                error.message ||
+                "Streak bonus failed.",
+                "error"
+            );
+
+
+            await refreshUser()
+                .catch(()=>{});
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+logoutBtn.addEventListener(
+    "click",
+    async function(){
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "login.html";
+
+        }catch(error){
+
+            console.error(error);
+
+            showMessage(
+                "Unable to log out. Please try again.",
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+onAuthStateChanged(
+    auth,
+    async function(user){
+
+        console.log(
+            "Auth state:",
+            user
+                ? user.email
+                : "No user"
+        );
+
+
+        if(!user){
+
+            loadingText.textContent =
+                "No active session. Redirecting...";
+
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "login.html";
+
+                },
+                800
+            );
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        try{
+
+            loadingText.textContent =
+                "Loading your ON1 profile...";
+
+
+            await loadUser(user);
+
+
+            loading.style.display =
+                "none";
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            loadingText.textContent =
+                error.message ||
+                "Unable to load your account.";
+
+
+            setTimeout(
+                function(){
+
+                    loading.style.display =
+                        "none";
+
+                    showMessage(
+                        error.message ||
+                        "Unable to load your account.",
+                        "error"
+                    );
+
+                },
+                1000
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FALLBACK LOADING TIMEOUT
+===================================================== */
+
+setTimeout(
+    function(){
+
+        if(
+            loading.style.display !==
+            "none"
+        ){
+
+            loadingText.textContent =
+                "Authentication is taking longer than expected...";
+
+        }
+
+    },
+    10000
+);
+
+
+</script>
+
+</body>
+
+</html>
