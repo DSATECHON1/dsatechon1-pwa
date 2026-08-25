@@ -15,6 +15,10 @@
 
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 *{
     margin:0;
     padding:0;
@@ -23,21 +27,29 @@
 }
 
 :root{
+
     --bg:#050b13;
     --surface:#0c1624;
     --surface2:#101d2d;
     --border:#1d3048;
+
     --blue:#087cff;
     --blue2:#3aa0ff;
+
     --green:#00df88;
     --gold:#f5c451;
+
     --text:#ffffff;
     --muted:#8ea2b8;
+
     --danger:#ff6075;
+
 }
 
 body{
+
     min-height:100vh;
+
     background:
         radial-gradient(
             circle at 50% -10%,
@@ -45,11 +57,9 @@ body{
             transparent 42%
         ),
         var(--bg);
-    color:var(--text);
-}
 
-button{
-    font-family:inherit;
+    color:var(--text);
+
 }
 
 a{
@@ -57,417 +67,751 @@ a{
     text-decoration:none;
 }
 
-.page{
-    width:100%;
-    max-width:1050px;
-    margin:auto;
-    padding:15px;
+button{
+    font-family:inherit;
 }
 
-/* HEADER */
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    width:100%;
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:15px;
+
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header{
+
     display:flex;
+
     align-items:center;
     justify-content:space-between;
+
     padding:10px 0;
+
     margin-bottom:20px;
+
 }
 
 .brand{
+
     display:flex;
+
     align-items:center;
+
     gap:9px;
+
 }
 
 .brand img{
+
     width:38px;
     height:38px;
+
     object-fit:contain;
+
 }
 
 .brand strong{
+
     display:block;
+
     font-size:16px;
+
 }
 
 .brand strong span{
+
     color:var(--blue2);
+
 }
 
 .brand small{
+
     display:block;
+
     margin-top:2px;
+
     color:var(--muted);
+
     font-size:8px;
+
     letter-spacing:.5px;
+
 }
 
 .logout{
+
     border:1px solid var(--border);
+
     background:var(--surface);
+
     color:#dce8f5;
-    padding:8px 11px;
+
+    padding:8px 12px;
+
     border-radius:9px;
+
     cursor:pointer;
+
     font-size:10px;
+
 }
 
-/* WELCOME */
+/* =====================================================
+   WELCOME
+===================================================== */
 
 .welcome{
-    margin-bottom:15px;
+
+    margin-bottom:16px;
+
 }
 
 .welcome h1{
-    font-size:23px;
+
+    font-size:24px;
+
 }
 
 .welcome p{
+
     margin-top:5px;
+
     color:var(--muted);
-    font-size:10px;
+
+    font-size:11px;
+
 }
 
-/* COMPACT STATS */
+/* =====================================================
+   STATS
+===================================================== */
 
 .stats{
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:10px;
+
 }
 
+/*
+   Smaller cards to reduce scrolling
+*/
+
 .stat-card{
-    background:rgba(12,22,36,.94);
-    border:1px solid var(--border);
+
+    background:
+        rgba(12,22,36,.94);
+
+    border:
+        1px solid var(--border);
+
     border-radius:13px;
+
     padding:12px 14px;
-    min-height:70px;
+
 }
 
 .stat-label{
+
     color:var(--muted);
+
     font-size:8px;
+
     text-transform:uppercase;
-    letter-spacing:.4px;
+
+    letter-spacing:.5px;
+
 }
 
 .stat-value{
-    margin-top:6px;
-    font-size:18px;
+
+    margin-top:5px;
+
+    font-size:19px;
+
     font-weight:800;
+
 }
 
 .stat-value.coin{
+
     color:var(--gold);
+
 }
 
 .stat-value.xp{
+
     color:var(--blue2);
+
 }
 
-.stat-value.streak{
+.stat-value.level{
+
     color:var(--green);
+
 }
 
-/* MAIN */
+/* =====================================================
+   MAIN GRID
+===================================================== */
 
 .main-grid{
+
     display:grid;
-    grid-template-columns:1.25fr .75fr;
+
+    grid-template-columns:
+        1.25fr .75fr;
+
     gap:14px;
+
     margin-top:14px;
+
 }
 
-/* CARD */
+/* =====================================================
+   CARD
+===================================================== */
 
 .card{
-    background:rgba(12,22,36,.94);
-    border:1px solid var(--border);
+
+    background:
+        rgba(12,22,36,.94);
+
+    border:
+        1px solid var(--border);
+
     border-radius:17px;
-    padding:17px;
+
+    padding:18px;
+
 }
 
 .card-title{
+
     font-size:15px;
+
     font-weight:800;
+
 }
 
 .card-subtitle{
+
     margin-top:5px;
+
     color:var(--muted);
+
     font-size:9px;
+
     line-height:1.5;
+
 }
 
-/* MINING */
+/* =====================================================
+   MINING
+===================================================== */
 
 .mining-card{
+
     position:relative;
+
     overflow:hidden;
+
 }
 
 .mining-card::before{
+
     content:"";
+
     position:absolute;
-    width:160px;
-    height:160px;
+
+    width:150px;
+    height:150px;
+
     border-radius:50%;
-    background:rgba(8,124,255,.06);
-    right:-70px;
-    top:-70px;
+
+    background:
+        rgba(8,124,255,.07);
+
+    right:-60px;
+    top:-60px;
+
 }
 
 .mining-top{
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
 }
 
 .mining-icon{
+
     width:42px;
     height:42px;
+
     display:grid;
+
     place-items:center;
+
     border-radius:12px;
-    background:rgba(8,124,255,.10);
+
+    background:
+        rgba(8,124,255,.10);
+
     font-size:20px;
+
 }
 
 .rate{
+
     margin-top:18px;
+
     text-align:center;
+
 }
 
 .rate-number{
-    font-size:32px;
+
+    font-size:34px;
+
     font-weight:900;
+
     color:var(--gold);
+
 }
 
 .rate-label{
+
     margin-top:3px;
+
     color:var(--muted);
+
     font-size:9px;
+
 }
 
-/* STREAK INFO */
+/* =====================================================
+   STREAK
+===================================================== */
 
 .streak{
-    margin-top:15px;
+
+    margin-top:16px;
+
     padding:11px;
+
     border-radius:11px;
-    background:rgba(0,223,136,.045);
-    border:1px solid rgba(0,223,136,.15);
+
+    background:
+        rgba(0,223,136,.045);
+
+    border:
+        1px solid rgba(0,223,136,.15);
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
 }
 
 .streak-label{
+
     color:var(--muted);
+
     font-size:9px;
+
 }
 
 .streak-value{
+
     color:var(--green);
+
     font-weight:800;
+
     font-size:13px;
+
 }
 
-/* BUTTONS */
+/* =====================================================
+   BUTTONS
+===================================================== */
 
 .mine-btn,
 .streak-btn{
+
     width:100%;
+
     height:45px;
+
     margin-top:12px;
+
     border:none;
+
     border-radius:10px;
+
     color:white;
+
     font-size:11px;
+
     font-weight:800;
+
     cursor:pointer;
+
 }
 
 .mine-btn{
+
     background:
         linear-gradient(
             135deg,
             var(--blue),
             #0065d8
         );
+
 }
 
 .streak-btn{
+
     background:
         linear-gradient(
             135deg,
-            #d99d16,
+            #d99d00,
             #f5c451
         );
+
     color:#111;
+
 }
 
 .mine-btn:disabled,
 .streak-btn:disabled{
-    opacity:.45;
+
+    opacity:.5;
+
     cursor:not-allowed;
+
 }
 
-.next-mine,
-.next-streak{
-    margin-top:7px;
+.next-mine{
+
+    margin-top:8px;
+
     text-align:center;
+
     color:var(--muted);
+
     font-size:8px;
+
 }
 
-/* MESSAGE */
+.streak-status{
+
+    margin-top:7px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:8px;
+
+}
+
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 .message{
+
     display:none;
+
     margin-top:12px;
-    padding:9px;
+
+    padding:10px;
+
     border-radius:9px;
+
     text-align:center;
+
     font-size:9px;
+
     line-height:1.5;
+
 }
 
 .message.success{
+
     display:block;
-    background:rgba(0,223,136,.07);
-    border:1px solid rgba(0,223,136,.18);
+
+    background:
+        rgba(0,223,136,.07);
+
+    border:
+        1px solid rgba(0,223,136,.18);
+
     color:var(--green);
+
 }
 
 .message.error{
+
     display:block;
-    background:rgba(255,96,117,.08);
-    border:1px solid rgba(255,96,117,.2);
+
+    background:
+        rgba(255,96,117,.08);
+
+    border:
+        1px solid rgba(255,96,117,.2);
+
     color:#ff8192;
+
 }
 
-/* LEVEL */
+/* =====================================================
+   LEVEL PROGRESS
+===================================================== */
 
 .level-box{
-    margin-top:17px;
+
+    margin-top:15px;
+
 }
 
 .level-head{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
 }
 
 .level-name{
+
     color:var(--green);
-    font-size:11px;
+
+    font-size:10px;
+
     font-weight:800;
+
 }
 
 .level-xp{
+
     color:var(--muted);
-    font-size:9px;
+
+    font-size:8px;
+
 }
 
 .progress{
+
     height:7px;
-    margin-top:8px;
+
+    margin-top:7px;
+
     background:#07101b;
+
     border-radius:20px;
+
     overflow:hidden;
+
     border:1px solid var(--border);
+
 }
 
 .progress-bar{
+
     height:100%;
+
     width:0%;
+
     background:
         linear-gradient(
             90deg,
             var(--blue),
             var(--green)
         );
+
     transition:width .5s ease;
+
 }
 
-/* PROFILE */
+/* =====================================================
+   PROFILE
+===================================================== */
 
 .profile-row{
+
     display:flex;
+
     justify-content:space-between;
-    gap:12px;
-    padding:11px 0;
-    border-bottom:1px solid rgba(29,48,72,.55);
+
+    gap:10px;
+
+    padding:10px 0;
+
+    border-bottom:
+        1px solid rgba(29,48,72,.55);
+
 }
 
 .profile-row:last-child{
+
     border-bottom:none;
+
 }
 
 .profile-label{
+
     color:var(--muted);
+
     font-size:9px;
+
 }
 
 .profile-value{
+
     font-size:10px;
+
     font-weight:700;
+
     text-align:right;
+
     word-break:break-word;
+
 }
 
 .on1-id{
+
     color:var(--gold);
+
 }
 
-/* LOADING */
+/* =====================================================
+   WELCOME XP
+===================================================== */
+
+.welcome-bonus{
+
+    margin-top:10px;
+
+    padding:9px 11px;
+
+    border-radius:9px;
+
+    background:
+        rgba(8,124,255,.06);
+
+    border:
+        1px solid rgba(8,124,255,.14);
+
+    color:var(--blue2);
+
+    font-size:8px;
+
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
 
 .loading{
+
     position:fixed;
+
     inset:0;
+
     background:var(--bg);
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     z-index:999;
+
 }
 
 .loading-box{
+
     text-align:center;
+
 }
 
 .loading-box strong{
+
     display:block;
+
     margin-top:10px;
+
     font-size:13px;
+
 }
 
 .loading-box p{
+
     margin-top:5px;
+
     color:var(--muted);
+
     font-size:9px;
+
 }
 
-/* FOOTER */
+/* =====================================================
+   FOOTER
+===================================================== */
 
 footer{
+
     margin-top:25px;
-    padding-top:15px;
-    border-top:1px solid rgba(29,48,72,.55);
+
+    padding-top:14px;
+
+    border-top:
+        1px solid rgba(29,48,72,.55);
+
     text-align:center;
+
     color:#61748a;
+
     font-size:8px;
+
 }
 
-/* MOBILE */
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:800px){
 
     .main-grid{
+
         grid-template-columns:1fr;
+
     }
 
 }
@@ -475,29 +819,40 @@ footer{
 @media(max-width:500px){
 
     .page{
+
         padding:12px;
+
     }
 
     .stats{
+
         gap:7px;
+
     }
 
     .stat-card{
+
         padding:10px;
-        min-height:64px;
+
     }
 
     .stat-value{
-        font-size:16px;
+
+        font-size:17px;
+
     }
 
     .welcome h1{
+
         font-size:21px;
+
     }
 
     .brand img{
+
         width:34px;
         height:34px;
+
     }
 
 }
@@ -506,15 +861,19 @@ footer{
 
 </head>
 
+
 <body>
 
-<!-- LOADING -->
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
 
 <div class="loading" id="loading">
 
     <div class="loading-box">
 
-        <div style="font-size:28px;">
+        <div style="font-size:27px;">
             ◉
         </div>
 
@@ -533,7 +892,10 @@ footer{
 
 <div class="page">
 
-<!-- HEADER -->
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
 <header class="header">
 
@@ -558,6 +920,7 @@ footer{
 
     </a>
 
+
     <button
         class="logout"
         id="logoutBtn">
@@ -569,7 +932,9 @@ footer{
 </header>
 
 
-<!-- WELCOME -->
+<!-- =====================================================
+     WELCOME
+===================================================== -->
 
 <section class="welcome">
 
@@ -583,17 +948,28 @@ footer{
         Your ON1Ecosystem account and activities.
     </p>
 
+    <div
+        class="welcome-bonus"
+        id="welcomeBonus">
+
+        🎁 Welcome bonus: 1,000 XP
+
+    </div>
+
 </section>
 
 
-<!-- COMPACT STATS -->
+<!-- =====================================================
+     STATS
+===================================================== -->
 
 <section class="stats">
+
 
     <div class="stat-card">
 
         <div class="stat-label">
-            ON1Coin
+            ON1Coin Balance
         </div>
 
         <div
@@ -610,7 +986,7 @@ footer{
     <div class="stat-card">
 
         <div class="stat-label">
-            Experience
+            Experience Points
         </div>
 
         <div
@@ -627,30 +1003,36 @@ footer{
     <div class="stat-card">
 
         <div class="stat-label">
-            Mining Streak
+            Current Level
         </div>
 
         <div
-            class="stat-value streak"
-            id="topStreak">
+            class="stat-value level"
+            id="level">
 
-            Day 1
+            0
 
         </div>
 
     </div>
 
+
 </section>
 
 
-<!-- MAIN -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <div class="main-grid">
 
 
-<!-- MINING CARD -->
+<!-- =====================================================
+     MINING CARD
+===================================================== -->
 
 <section class="card mining-card">
+
 
     <div class="mining-top">
 
@@ -661,11 +1043,14 @@ footer{
             </div>
 
             <div class="card-subtitle">
-                Claim your base mining reward once every
-                24 hours, then claim your separate streak bonus.
+
+                Claim your 50 ON1Coin base mining
+                reward once every 24 hours.
+
             </div>
 
         </div>
+
 
         <div class="mining-icon">
             ⛏️
@@ -679,41 +1064,47 @@ footer{
         <div
             class="rate-number">
 
-            50
+            50.000
 
         </div>
 
         <div class="rate-label">
+
             ON1Coin base reward / 24 hours
+
         </div>
 
     </div>
 
 
+    <!-- STREAK DISPLAY -->
+
     <div class="streak">
 
         <div class="streak-label">
+
             Current mining streak
+
         </div>
 
         <div
             class="streak-value"
             id="streak">
 
-            Day 1
+            Day 0
 
         </div>
 
     </div>
 
 
-    <!-- BASE MINING -->
+    <!-- BASE MINING BUTTON -->
 
     <button
         class="mine-btn"
         id="mineBtn">
 
-        ⛏️ CLAIM 50 ON1COIN
+        START MINING — +50 ON1
 
     </button>
 
@@ -722,28 +1113,28 @@ footer{
         class="next-mine"
         id="nextMine">
 
-        Your base mining cycle is ready.
+        Your 24-hour mining cycle is ready.
 
     </div>
 
 
-    <!-- STREAK BONUS -->
+    <!-- STREAK BONUS BUTTON -->
 
     <button
         class="streak-btn"
         id="streakBtn"
         disabled>
 
-        🔥 CLAIM STREAK BONUS
+        CLAIM STREAK BONUS
 
     </button>
 
 
     <div
-        class="next-streak"
-        id="nextStreak">
+        class="streak-status"
+        id="streakStatus">
 
-        Claim base mining first.
+        Claim today's base mining first.
 
     </div>
 
@@ -756,7 +1147,9 @@ footer{
     </div>
 
 
-    <!-- LEVEL -->
+    <!-- =================================================
+         LEVEL PROGRESS
+    ================================================== -->
 
     <div class="level-box">
 
@@ -792,10 +1185,13 @@ footer{
 
     </div>
 
+
 </section>
 
 
-<!-- PROFILE -->
+<!-- =====================================================
+     PROFILE CARD
+===================================================== -->
 
 <section class="card">
 
@@ -808,7 +1204,7 @@ footer{
     </div>
 
 
-    <div style="margin-top:15px;">
+    <div style="margin-top:14px;">
 
 
         <div class="profile-row">
@@ -889,7 +1285,24 @@ footer{
                 class="profile-value"
                 id="referral">
 
-                None
+                JennyKhiss
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-row">
+
+            <div class="profile-label">
+                Referral ON1 ID
+            </div>
+
+            <div
+                class="profile-value on1-id"
+                id="referralId">
+
+                ON12YBGYI9
 
             </div>
 
@@ -900,6 +1313,7 @@ footer{
 
 </section>
 
+
 </div>
 
 
@@ -909,38 +1323,49 @@ footer{
 
 </footer>
 
+
 </div>
 
 
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
 <script type="module">
 
-/* ==========================================
-   FIREBASE
-========================================== */
+
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
 
 import {
     initializeApp
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
 
 import {
     getAuth,
     onAuthStateChanged,
     signOut
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
 
 import {
     getFirestore,
     doc,
     getDoc
-} from
+}
+from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* ==========================================
+/* =====================================================
    FIREBASE CONFIG
-========================================== */
+===================================================== */
 
 const firebaseConfig = {
 
@@ -965,9 +1390,9 @@ const firebaseConfig = {
 };
 
 
-/* ==========================================
-   INITIALIZE
-========================================== */
+/* =====================================================
+   FIREBASE INITIALIZATION
+===================================================== */
 
 const app =
     initializeApp(firebaseConfig);
@@ -979,17 +1404,32 @@ const db =
     getFirestore(app);
 
 
-/* ==========================================
-   WORKER
-========================================== */
+/* =====================================================
+   WORKER URL
+===================================================== */
 
 const MINING_WORKER =
     "https://on1-mining-engine.dsatechon1official.workers.dev";
 
 
-/* ==========================================
+/* =====================================================
+   ON1 REFERRAL FALLBACK
+===================================================== */
+
+const DEFAULT_REFERRER = {
+
+    username:
+        "JennyKhiss",
+
+    on1Id:
+        "ON12YBGYI9"
+
+};
+
+
+/* =====================================================
    ELEMENTS
-========================================== */
+===================================================== */
 
 const loading =
     document.getElementById("loading");
@@ -1006,21 +1446,47 @@ const message =
 const nextMine =
     document.getElementById("nextMine");
 
-const nextStreak =
-    document.getElementById("nextStreak");
+const streakStatus =
+    document.getElementById("streakStatus");
 
 
-/* ==========================================
-   CURRENT USER DATA
-========================================== */
+/* =====================================================
+   CURRENT USER
+===================================================== */
 
 let currentUser = null;
-let currentData = {};
+
+let currentData = null;
 
 
-/* ==========================================
-   TIMESTAMP TO MILLISECONDS
-========================================== */
+/* =====================================================
+   CONSTANTS
+===================================================== */
+
+const DAY =
+    24 * 60 * 60 * 1000;
+
+const XP_PER_LEVEL =
+    2500;
+
+
+/* =====================================================
+   LEVEL
+===================================================== */
+
+function calculateLevel(xp){
+
+    return Math.floor(
+        Number(xp || 0) /
+        XP_PER_LEVEL
+    );
+
+}
+
+
+/* =====================================================
+   TIMESTAMP
+===================================================== */
 
 function timestampToMillis(value){
 
@@ -1032,141 +1498,178 @@ function timestampToMillis(value){
         typeof value.toMillis ===
         "function"
     ){
-        return value.toMillis();
-    }
 
-    if(
-        typeof value === "number"
-    ){
-        return value;
+        return value.toMillis();
+
     }
 
     if(
         value.seconds !== undefined
     ){
+
         return (
             Number(value.seconds) * 1000
-        ) +
-        Math.floor(
-            Number(value.nanoseconds || 0)
-            / 1000000
         );
+
     }
 
-    if(
-        typeof value === "string"
-    ){
-        const time =
+    if(value instanceof Date){
+
+        return value.getTime();
+
+    }
+
+    if(typeof value === "number"){
+
+        return value;
+
+    }
+
+    if(typeof value === "string"){
+
+        const parsed =
             Date.parse(value);
 
-        return Number.isNaN(time)
-            ? 0
-            : time;
+        if(!isNaN(parsed)){
+            return parsed;
+        }
+
     }
 
     return 0;
+
 }
 
 
-/* ==========================================
-   LEVEL
-========================================== */
+/* =====================================================
+   GENERATE ON1 ID
+===================================================== */
 
-function calculateLevel(xp){
+function generateON1Id(uid){
 
-    xp = Number(xp || 0);
+    if(!uid){
 
-    if(xp < 2500){
-        return 0;
+        return "ON1XXXXXXX";
+
     }
 
-    return Math.floor(
-        xp / 2500
-    );
+    /*
+       Firebase UID is NOT displayed directly.
+
+       We use the first 7 characters to create
+       the short ON1 member ID.
+    */
+
+    const clean =
+        String(uid)
+            .replace(/[^a-zA-Z0-9]/g,"")
+            .toUpperCase();
+
+    return "ON1" +
+        clean.substring(0,7);
+
 }
 
 
-/* ==========================================
-   FORMAT TIME
-========================================== */
+/* =====================================================
+   GET USER ON1 ID
+===================================================== */
 
-function formatTime(ms){
+function getON1Id(data,user){
 
-    if(ms <= 0){
-        return "Ready";
+    /*
+       If the account already has an ON1 ID,
+       preserve it.
+    */
+
+    if(data.on1Id){
+
+        const existing =
+            String(data.on1Id);
+
+        if(
+            existing.startsWith("ON1") &&
+            existing.length === 10
+        ){
+
+            return existing;
+
+        }
+
     }
 
-    const total =
-        Math.ceil(ms / 1000);
+    if(data.ON1Id){
 
-    const hours =
-        Math.floor(total / 3600);
+        const existing =
+            String(data.ON1Id);
 
-    const minutes =
-        Math.floor(
-            (total % 3600) / 60
-        );
+        if(
+            existing.startsWith("ON1") &&
+            existing.length === 10
+        ){
 
-    const seconds =
-        total % 60;
+            return existing;
 
-    return (
-        String(hours).padStart(2,"0")
-        + ":" +
-        String(minutes).padStart(2,"0")
-        + ":" +
-        String(seconds).padStart(2,"0")
-    );
+        }
+
+    }
+
+    /*
+       Otherwise generate ON1 + 7 characters.
+    */
+
+    return generateON1Id(user.uid);
+
 }
 
 
-/* ==========================================
-   MESSAGE
-========================================== */
-
-function showMessage(text,type){
-
-    message.textContent = text;
-
-    message.className =
-        "message " + type;
-}
-
-
-/* ==========================================
+/* =====================================================
    REFERRAL FALLBACK
-========================================== */
+===================================================== */
 
 function getReferral(data){
 
-    if(
-        data.referralCode &&
-        String(data.referralCode).trim()
-    ){
-        return data.referralCode;
-    }
+    /*
+       Check actual referral fields first.
+    */
+
+    const referredBy =
+        data.referredBy ||
+        data.referrer ||
+        data.referralUsername ||
+        data.referralCode ||
+        "";
 
     if(
-        data.referredBy &&
-        String(data.referredBy).trim()
+        referredBy &&
+        String(referredBy).trim() !== ""
     ){
-        return data.referredBy;
+
+        return String(referredBy);
+
     }
 
-    return "None";
+    /*
+       No referral supplied.
+
+       Use the ON1 default referral.
+    */
+
+    return DEFAULT_REFERRER.username;
+
 }
 
 
-/* ==========================================
+/* =====================================================
    UPDATE DASHBOARD
-========================================== */
+===================================================== */
 
 function updateDashboard(data){
 
-    currentData = data || {};
+    currentData = data;
 
     const xp =
-        Number(data.XP || data.xp || 0);
+        Number(data.XP || 0);
 
     const balance =
         Number(data.balance || 0);
@@ -1178,13 +1681,16 @@ function updateDashboard(data){
         calculateLevel(xp);
 
 
+    /* NAME */
+
     document.getElementById(
         "firstName"
     ).textContent =
         data.firstName ||
-        data.firstname ||
         "Member";
 
+
+    /* BALANCE */
 
     document.getElementById(
         "balance"
@@ -1192,26 +1698,20 @@ function updateDashboard(data){
         balance.toFixed(3);
 
 
+    /* XP */
+
     document.getElementById(
         "xp"
     ).textContent =
         xp.toLocaleString();
 
 
-    document.getElementById(
-        "topStreak"
-    ).textContent =
-        streak > 0
-        ? "Day " + streak
-        : "Ready";
-
+    /* LEVEL */
 
     document.getElementById(
-        "streak"
+        "level"
     ).textContent =
-        streak > 0
-        ? "Day " + streak
-        : "Ready";
+        level;
 
 
     document.getElementById(
@@ -1220,11 +1720,70 @@ function updateDashboard(data){
         "LEVEL " + level;
 
 
+    /* STREAK */
+
+    document.getElementById(
+        "streak"
+    ).textContent =
+        "Day " + streak;
+
+
+    /* PROFILE */
+
+    document.getElementById(
+        "username"
+    ).textContent =
+        data.username ||
+        "—";
+
+
+    document.getElementById(
+        "email"
+    ).textContent =
+        data.email ||
+        currentUser?.email ||
+        "—";
+
+
+    document.getElementById(
+        "kycLevel"
+    ).textContent =
+        data.kycLevel ?? 0;
+
+
+    /* ON1 ID */
+
+    document.getElementById(
+        "on1Id"
+    ).textContent =
+        getON1Id(
+            data,
+            currentUser
+        );
+
+
+    /* REFERRAL */
+
+    document.getElementById(
+        "referral"
+    ).textContent =
+        getReferral(data);
+
+
+    document.getElementById(
+        "referralId"
+    ).textContent =
+        data.referredById ||
+        DEFAULT_REFERRER.on1Id;
+
+
+    /* XP PROGRESS */
+
     const currentXP =
-        xp % 2500;
+        xp % XP_PER_LEVEL;
 
     const progress =
-        (currentXP / 2500) * 100;
+        (currentXP / XP_PER_LEVEL) * 100;
 
 
     document.getElementById(
@@ -1243,197 +1802,267 @@ function updateDashboard(data){
         ) + "%";
 
 
-    document.getElementById(
-        "username"
-    ).textContent =
-        data.username || "—";
+    updateMiningState(data);
 
-
-    document.getElementById(
-        "email"
-    ).textContent =
-        data.email ||
-        currentUser?.email ||
-        "—";
-
-
-    document.getElementById(
-        "kycLevel"
-    ).textContent =
-        data.kycLevel ?? 0;
-
-
-    document.getElementById(
-        "referral"
-    ).textContent =
-        getReferral(data);
-
-
-    const on1Id =
-        data.on1Id ||
-        data.ON1Id ||
-        data.uid ||
-        currentUser?.uid ||
-        "—";
-
-
-    document.getElementById(
-        "on1Id"
-    ).textContent =
-        on1Id;
-
-
-    updateMiningControls(data);
 }
 
 
-/* ==========================================
-   MINING CONTROLS
-========================================== */
+/* =====================================================
+   UPDATE MINING STATE
+===================================================== */
 
-function updateMiningControls(data){
+function updateMiningState(data){
+
+    const lastClaim =
+        Number(data.lastClaim || 0);
+
+    const lastStreakClaim =
+        Number(data.lastStreakClaim || 0);
 
     const now =
         Date.now();
 
-    const lastClaim =
-        timestampToMillis(
-            data.lastClaim
-        );
 
-    const lastStreakClaim =
-        timestampToMillis(
-            data.lastStreakClaim
-        );
-
-
-    /* BASE MINING */
+    /* ===============================================
+       NO MINING CLAIM YET
+    =============================================== */
 
     if(!lastClaim){
 
-        mineBtn.disabled = false;
+        mineBtn.disabled =
+            false;
 
         mineBtn.textContent =
-            "⛏️ CLAIM 50 ON1COIN";
+            "START MINING — +50 ON1";
 
         nextMine.textContent =
-            "Your base mining cycle is ready.";
-
-    }else{
-
-        const elapsed =
-            now - lastClaim;
-
-        if(elapsed >= 86400000){
-
-            mineBtn.disabled = false;
-
-            mineBtn.textContent =
-                "⛏️ CLAIM 50 ON1COIN";
-
-            nextMine.textContent =
-                "Your next base mining cycle is ready.";
-
-        }else{
-
-            mineBtn.disabled = true;
-
-            mineBtn.textContent =
-                "MINING ACTIVE";
-
-            nextMine.textContent =
-                "Next base mining: " +
-                formatTime(
-                    86400000 - elapsed
-                );
-
-        }
-    }
+            "Your 24-hour mining cycle is ready.";
 
 
-    /* STREAK BONUS */
+        streakBtn.disabled =
+            true;
 
-    if(!lastClaim){
+        streakBtn.textContent =
+            "CLAIM STREAK BONUS";
 
-        streakBtn.disabled = true;
-
-        nextStreak.textContent =
-            "Claim base mining first.";
+        streakStatus.textContent =
+            "Claim today's base mining first.";
 
         return;
+
     }
 
 
-    const cycleActive =
-        now - lastClaim < 86400000;
+    const elapsed =
+        now - lastClaim;
 
 
-    const alreadyClaimed =
+    /* ===============================================
+       BASE MINING READY AGAIN
+    =============================================== */
+
+    if(elapsed >= DAY){
+
+        mineBtn.disabled =
+            false;
+
+        mineBtn.textContent =
+            "START MINING — +50 ON1";
+
+        nextMine.textContent =
+            "Your next 24-hour mining cycle is ready.";
+
+
+        streakBtn.disabled =
+            true;
+
+        streakBtn.textContent =
+            "CLAIM STREAK BONUS";
+
+        streakStatus.textContent =
+            "Start today's mining cycle first.";
+
+        return;
+
+    }
+
+
+    /* ===============================================
+       BASE MINING ACTIVE
+    =============================================== */
+
+    mineBtn.disabled =
+        true;
+
+    mineBtn.textContent =
+        "MINING ACTIVE";
+
+
+    const remaining =
+        DAY - elapsed;
+
+
+    nextMine.textContent =
+        "Next mining cycle in " +
+        formatTime(remaining);
+
+
+    /* ===============================================
+       STREAK BONUS
+    =============================================== */
+
+    const streakAlreadyClaimed =
         lastStreakClaim >= lastClaim;
 
 
-    if(
-        cycleActive &&
-        !alreadyClaimed
-    ){
+    if(streakAlreadyClaimed){
 
-        streakBtn.disabled = false;
-
-        const streak =
-            Number(data.streak || 1);
-
-        let bonus;
-
-        if(streak >= 10){
-            bonus = 100;
-        }else{
-            bonus = streak * 5;
-        }
+        streakBtn.disabled =
+            true;
 
         streakBtn.textContent =
-            "🔥 CLAIM +" +
-            bonus +
-            " STREAK BONUS";
+            "STREAK BONUS CLAIMED";
 
-        nextStreak.textContent =
-            "Day " +
-            streak +
-            " streak bonus is ready.";
+        streakStatus.textContent =
+            "Today's streak bonus has already been claimed.";
+
+        return;
+
+    }
+
+
+    /*
+       Determine today's bonus.
+
+       Day 1 = +5
+       Day 2 = +10
+       ...
+       Day 9 = +45
+       Day 10 = +100
+    */
+
+    const streak =
+        Number(data.streak || 0);
+
+    let bonus = 0;
+
+    if(streak >= 10){
+
+        bonus = 100;
 
     }else{
 
-        streakBtn.disabled = true;
+        bonus = streak * 5;
 
-        if(alreadyClaimed){
-
-            nextStreak.textContent =
-                "Today's streak bonus claimed.";
-
-        }else{
-
-            nextStreak.textContent =
-                "Start the next mining cycle first.";
-        }
     }
+
+
+    if(bonus <= 0){
+
+        streakBtn.disabled =
+            true;
+
+        streakStatus.textContent =
+            "Complete a mining cycle to unlock the streak bonus.";
+
+        return;
+
+    }
+
+
+    streakBtn.disabled =
+        false;
+
+    streakBtn.textContent =
+        "CLAIM +" +
+        bonus +
+        " STREAK BONUS";
+
+    streakStatus.textContent =
+        "Your Day " +
+        streak +
+        " streak bonus is ready.";
+
 }
 
 
-/* ==========================================
-   LOAD FIRESTORE USER
-========================================== */
+/* =====================================================
+   FORMAT TIME
+===================================================== */
 
-async function loadUser(){
+function formatTime(milliseconds){
 
-    if(!currentUser){
-        return;
-    }
+    const totalSeconds =
+        Math.ceil(
+            milliseconds / 1000
+        );
 
+
+    const hours =
+        Math.floor(
+            totalSeconds / 3600
+        );
+
+
+    const minutes =
+        Math.floor(
+            (totalSeconds % 3600) / 60
+        );
+
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    return (
+
+        String(hours)
+            .padStart(2,"0")
+
+        + ":" +
+
+        String(minutes)
+            .padStart(2,"0")
+
+        + ":" +
+
+        String(seconds)
+            .padStart(2,"0")
+
+    );
+
+}
+
+
+/* =====================================================
+   SHOW MESSAGE
+===================================================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    message.textContent =
+        text;
+
+    message.className =
+        "message " + type;
+
+}
+
+
+/* =====================================================
+   LOAD USER
+===================================================== */
+
+async function loadUser(user){
 
     const userRef =
         doc(
             db,
             "users",
-            currentUser.uid
+            user.uid
         );
 
 
@@ -1446,6 +2075,59 @@ async function loadUser(){
         throw new Error(
             "Your ON1 profile could not be found."
         );
+
+    }
+
+
+    const data =
+        snapshot.data();
+
+
+    /*
+       IMPORTANT:
+
+       We only READ XP.
+
+       We do NOT write XP here.
+
+       Therefore the existing 1,000 XP
+       welcome bonus remains untouched.
+    */
+
+    updateDashboard(data);
+
+}
+
+
+/* =====================================================
+   GET FRESH USER DATA
+===================================================== */
+
+async function refreshUser(){
+
+    if(!currentUser){
+
+        return null;
+
+    }
+
+
+    const snapshot =
+        await getDoc(
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            )
+        );
+
+
+    if(!snapshot.exists()){
+
+        throw new Error(
+            "User profile not found."
+        );
+
     }
 
 
@@ -1454,346 +2136,127 @@ async function loadUser(){
 
 
     updateDashboard(data);
+
+    return data;
+
 }
 
 
-/* ==========================================
+/* =====================================================
    GET FIREBASE ID TOKEN
-========================================== */
+===================================================== */
 
-async function getIdToken(){
+async function getFirebaseToken(){
 
     if(!currentUser){
 
         throw new Error(
-            "You are not logged in."
+            "You are not signed in."
         );
+
     }
 
 
     return await currentUser.getIdToken(
-        false
+        true
     );
+
 }
 
 
-/* ==========================================
-   CALL MINING WORKER
-========================================== */
-
-async function callWorker(endpoint){
-
-    const idToken =
-        await getIdToken();
-
-
-    const response =
-        await fetch(
-            MINING_WORKER + endpoint,
-            {
-                method:"POST",
-
-                headers:{
-                    "Content-Type":
-                        "application/json"
-                },
-
-                body:JSON.stringify({
-                    idToken:idToken
-                })
-            }
-        );
-
-
-    let data;
-
-    try{
-
-        data =
-            await response.json();
-
-    }catch(error){
-
-        throw new Error(
-            "Mining server returned an invalid response."
-        );
-    }
-
-
-    if(!response.ok){
-
-        throw new Error(
-            data.message ||
-            data.error ||
-            "Mining request failed."
-        );
-    }
-
-
-    return data;
-}
-
-
-/* ==========================================
-   BASE MINING BUTTON
-========================================== */
+/* =====================================================
+   BASE MINING
+===================================================== */
 
 mineBtn.addEventListener(
     "click",
     async function(){
 
         if(!currentUser){
+
+            showMessage(
+                "Please sign in again.",
+                "error"
+            );
+
             return;
+
         }
 
 
-        mineBtn.disabled = true;
-        streakBtn.disabled = true;
+        mineBtn.disabled =
+            true;
 
         mineBtn.textContent =
             "MINING...";
 
 
         showMessage(
-            "Processing your 50 ON1Coin mining reward...",
+            "Connecting to the secure ON1 Mining Engine...",
             "success"
         );
 
 
         try{
 
-            const result =
-                await callWorker(
-                    "/mine"
+            const idToken =
+                await getFirebaseToken();
+
+
+            const response =
+                await fetch(
+                    MINING_WORKER + "/mine",
+                    {
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:JSON.stringify({
+                            idToken:idToken
+                        })
+
+                    }
                 );
 
 
-            if(result.success){
-
-                showMessage(
-                    "⛏️ +" +
-                    result.reward +
-                    " ON1Coin added successfully.",
-                    "success"
-                );
+            const data =
+                await response.json();
 
 
-                await loadUser();
-
-            }else{
+            if(!response.ok){
 
                 throw new Error(
-                    result.error ||
+                    data.error ||
+                    data.message ||
+                    "Mining request failed."
+                );
+
+            }
+
+
+            if(!data.success){
+
+                throw new Error(
+                    data.error ||
                     "Mining was not completed."
                 );
+
             }
 
-        }
 
-        catch(error){
+            /*
+               Refresh Firestore.
 
-            console.error(
-                "Mining error:",
-                error
-            );
+               This updates the dashboard with the
+               balance and streak saved by Worker.
+            */
 
-
-            showMessage(
-                error.message ||
-                "Unable to complete mining.",
-                "error"
-            );
-
-
-            await loadUser();
-        }
-
-    }
-);
-
-
-/* ==========================================
-   STREAK BUTTON
-========================================== */
-
-streakBtn.addEventListener(
-    "click",
-    async function(){
-
-        if(!currentUser){
-            return;
-        }
-
-
-        mineBtn.disabled = true;
-        streakBtn.disabled = true;
-
-        streakBtn.textContent =
-            "CLAIMING...";
-
-
-        showMessage(
-            "Processing your streak bonus...",
-            "success"
-        );
-
-
-        try{
-
-            const result =
-                await callWorker(
-                    "/streak"
-                );
-
-
-            if(result.success){
-
-                showMessage(
-                    "🔥 +" +
-                    result.bonus +
-                    " ON1Coin streak bonus added.",
-                    "success"
-                );
-
-
-                await loadUser();
-
-            }else{
-
-                throw new Error(
-                    result.error ||
-                    "Streak bonus was not completed."
-                );
-            }
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Streak error:",
-                error
-            );
+            await refreshUser();
 
 
             showMessage(
-                error.message ||
-                "Unable to claim streak bonus.",
-                "error"
-            );
-
-
-            await loadUser();
-        }
-
-    }
-);
-
-
-/* ==========================================
-   AUTH STATE
-========================================== */
-
-onAuthStateChanged(
-    auth,
-    async function(user){
-
-        if(!user){
-
-            window.location.href =
-                "login.html";
-
-            return;
-        }
-
-
-        currentUser = user;
-
-
-        try{
-
-            await loadUser();
-
-            loading.style.display =
-                "none";
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Dashboard error:",
-                error
-            );
-
-
-            loading.style.display =
-                "none";
-
-
-            showMessage(
-                error.message ||
-                "Unable to load your dashboard.",
-                "error"
-            );
-        }
-
-    }
-);
-
-
-/* ==========================================
-   LOGOUT
-========================================== */
-
-document
-.getElementById("logoutBtn")
-.addEventListener(
-    "click",
-    async function(){
-
-        try{
-
-            await signOut(auth);
-
-            window.location.href =
-                "login.html";
-
-        }
-
-        catch(error){
-
-            console.error(
-                "Logout error:",
-                error
-            );
-        }
-
-    }
-);
-
-
-/* ==========================================
-   LIVE COUNTDOWN
-========================================== */
-
-setInterval(
-    function(){
-
-        if(!currentUser){
-            return;
-        }
-
-        updateMiningControls(
-            currentData
-        );
-
-    },
-    1000
-);
-
-</script>
-
-</body>
-
-      </html>
+                "🎉 Successfully mined +" +
+                data.reward
