@@ -643,7 +643,6 @@ Use your real name as it appears on your identification documents.
 
 <div class="name-row">
 
-
 <div class="form-group">
 
 <label for="firstName">
@@ -802,7 +801,8 @@ Leave blank if nobody referred you.
 <p>
 
 Referral is optional. If no referral code is supplied,
-the account will use the ON1 fallback sponsor.
+the account automatically uses JennyKhiss
+(ON12YBGYI9) as the default sponsor.
 
 </p>
 
@@ -903,7 +903,12 @@ import {
     getFirestore,
     doc,
     setDoc,
-    serverTimestamp
+    serverTimestamp,
+    getDocs,
+    collection,
+    query,
+    where,
+    limit
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
@@ -945,6 +950,21 @@ const db =
 
 
 /* ==========================================
+   PERMANENT DEFAULT SPONSOR
+========================================== */
+
+const DEFAULT_SPONSOR = {
+
+    username:
+        "JennyKhiss",
+
+    on1Id:
+        "ON12YBGYI9"
+
+};
+
+
+/* ==========================================
    PASSWORD TOGGLE
 ========================================== */
 
@@ -975,7 +995,6 @@ function(id,button){
 
 /* ==========================================
    GENERATE ON1 ID
-   ON1 + 7 characters = 10 characters
 ========================================== */
 
 function generateON1Id(){
@@ -983,11 +1002,11 @@ function generateON1Id(){
     const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    let result = "ON1";
+    let id = "ON1";
 
     for(let i = 0; i < 7; i++){
 
-        result += characters.charAt(
+        id += characters.charAt(
             Math.floor(
                 Math.random() *
                 characters.length
@@ -996,7 +1015,43 @@ function generateON1Id(){
 
     }
 
-    return result;
+    return id;
+
+}
+
+
+/* ==========================================
+   CHECK ON1 ID
+========================================== */
+
+async function createUniqueON1Id(){
+
+    for(let attempt = 0; attempt < 10; attempt++){
+
+        const candidate =
+            generateON1Id();
+
+        const q =
+            query(
+                collection(db,"users"),
+                where("on1Id","==",candidate),
+                limit(1)
+            );
+
+        const result =
+            await getDocs(q);
+
+        if(result.empty){
+
+            return candidate;
+
+        }
+
+    }
+
+    throw new Error(
+        "Unable to create a unique ON1 ID. Please try again."
+    );
 
 }
 
@@ -1059,7 +1114,6 @@ form.addEventListener(
     async function(event){
 
         event.preventDefault();
-
 
         const firstName =
             document
@@ -1141,9 +1195,8 @@ form.addEventListener(
 
         try{
 
-
             /* ==================================
-               1. FIREBASE AUTH
+               1. CREATE FIREBASE AUTH ACCOUNT
             ================================== */
 
             const userCredential =
@@ -1158,7 +1211,7 @@ form.addEventListener(
 
 
             /* ==================================
-               2. AUTH DISPLAY NAME
+               2. DISPLAY NAME
             ================================== */
 
             await updateProfile(
@@ -1171,40 +1224,53 @@ form.addEventListener(
 
 
             /* ==================================
-               3. GENERATE ON1 ID
+               3. CREATE PERMANENT UNIQUE ON1 ID
             ================================== */
 
             const on1Id =
-                generateON1Id();
+                await createUniqueON1Id();
 
 
             /* ==================================
-               4. REFERRAL
-               
-               IMPORTANT:
-               The fallback sponsor is currently
-               represented by the constant below.
-               
-               Replace the value later with the
-               actual sponsor ON1 ID.
+               4. REFERRAL SYSTEM
             ================================== */
 
-            const FALLBACK_SPONSOR_ON1_ID =
-                "ON1FALLBACK";
+            let referredByUsername =
+                DEFAULT_SPONSOR.username;
+
+            let referredById =
+                DEFAULT_SPONSOR.on1Id;
 
 
-            const referredBy =
-                referralInput ||
-                FALLBACK_SPONSOR_ON1_ID;
+            /*
+               If a referral was supplied, keep
+               what the user entered.
+
+               The referral can later be resolved
+               against the ON1 member database.
+            */
+
+            if(referralInput){
+
+                referredByUsername =
+                    referralInput;
+
+                referredById =
+                    referralInput;
+
+            }
 
 
             /* ==================================
-               5. CREATE USER PROFILE
+               5. CREATE ON1 PROFILE
             ================================== */
 
             await setDoc(
                 doc(db,"users",user.uid),
                 {
+
+                    uid:
+                        user.uid,
 
                     firstName:
                         firstName,
@@ -1218,14 +1284,32 @@ form.addEventListener(
                     email:
                         email,
 
+                    /*
+                       Permanent public ON1 ID.
+                       Firebase UID remains separate.
+                    */
+
                     on1Id:
                         on1Id,
+
+                    /*
+                       Initial ecosystem balance.
+                    */
 
                     balance:
                         100,
 
+                    /*
+                       Welcome XP.
+                       Awarded exactly during account
+                       creation.
+                    */
+
                     XP:
                         1000,
+
+                    welcomeXpGranted:
+                        true,
 
                     level:
                         0,
@@ -1236,14 +1320,31 @@ form.addEventListener(
                     streak:
                         0,
 
+                    lastClaim:
+                        0,
+
+                    lastStreakClaim:
+                        0,
+
                     lastMine:
                         null,
+
+                    /*
+                       Referral information.
+                    */
 
                     referralCode:
                         referralInput || null,
 
                     referredBy:
-                        referredBy,
+                        referredByUsername,
+
+                    referredById:
+                        referredById,
+
+                    /*
+                       Account status.
+                    */
 
                     isAdmin:
                         false,
@@ -1261,7 +1362,7 @@ form.addEventListener(
 
             showMessage(
                 "Account created successfully! " +
-                "Your ON1 ID is " +
+                "Your permanent ON1 ID is " +
                 on1Id +
                 ". You received 100 ON1 and 1,000 XP.",
                 "success"
