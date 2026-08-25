@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Join ON1Ecosystem</title>
 
-<meta name="theme-color"
-      content="#06101d">
-
+<meta name="theme-color" content="#06101d">
 <meta name="description"
       content="Join ON1Ecosystem and receive your permanent ON1 ID, ON1Coin and XP.">
 
@@ -33,6 +28,7 @@
     --blue:#087cff;
     --blue2:#3aa0ff;
     --green:#00df88;
+    --gold:#f5c451;
     --text:#ffffff;
     --muted:#8ea2b8;
     --danger:#ff6075;
@@ -499,7 +495,6 @@ footer p{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -510,8 +505,7 @@ footer p{
 
 <a href="../index.html" class="brand">
 
-<img src="../logo.png"
-     alt="ON1Ecosystem">
+<img src="../logo.png" alt="ON1Ecosystem">
 
 <div class="brand-text">
 
@@ -527,8 +521,7 @@ ONE DIGITAL ECOSYSTEM
 
 </a>
 
-<a href="login.html"
-   class="login-link">
+<a href="login.html" class="login-link">
 Already a member? Login
 </a>
 
@@ -800,9 +793,9 @@ Leave blank if nobody referred you.
 
 <p>
 
-Referral is optional. If no referral code is supplied,
-the account automatically uses JennyKhiss
-(ON12YBGYI9) as the default sponsor.
+If no referral code is supplied, the account
+automatically uses JennyKhiss as the fallback
+sponsor with ON1 ID ON12YBGYI9.
 
 </p>
 
@@ -828,9 +821,7 @@ and acknowledge the
 </div>
 
 
-<div id="message"
-     class="message">
-</div>
+<div id="message" class="message"></div>
 
 
 <button
@@ -903,12 +894,7 @@ import {
     getFirestore,
     doc,
     setDoc,
-    serverTimestamp,
-    getDocs,
-    collection,
-    query,
-    where,
-    limit
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
@@ -950,10 +936,10 @@ const db =
 
 
 /* ==========================================
-   PERMANENT DEFAULT SPONSOR
+   PERMANENT ON1 REFERRAL FALLBACK
 ========================================== */
 
-const DEFAULT_SPONSOR = {
+const FALLBACK_SPONSOR = {
 
     username:
         "JennyKhiss",
@@ -978,15 +964,13 @@ function(id,button){
 
         input.type = "text";
 
-        button.textContent =
-            "HIDE";
+        button.textContent = "HIDE";
 
     }else{
 
         input.type = "password";
 
-        button.textContent =
-            "SHOW";
+        button.textContent = "SHOW";
 
     }
 
@@ -994,7 +978,9 @@ function(id,button){
 
 
 /* ==========================================
-   GENERATE ON1 ID
+   GENERATE UNIQUE-STYLE ON1 ID
+   FORMAT:
+   ON1 + 7 CHARACTERS
 ========================================== */
 
 function generateON1Id(){
@@ -1002,56 +988,21 @@ function generateON1Id(){
     const characters =
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    let id = "ON1";
+    let result = "ON1";
 
     for(let i = 0; i < 7; i++){
 
-        id += characters.charAt(
-            Math.floor(
-                Math.random() *
-                characters.length
-            )
-        );
-
-    }
-
-    return id;
-
-}
-
-
-/* ==========================================
-   CHECK ON1 ID
-========================================== */
-
-async function createUniqueON1Id(){
-
-    for(let attempt = 0; attempt < 10; attempt++){
-
-        const candidate =
-            generateON1Id();
-
-        const q =
-            query(
-                collection(db,"users"),
-                where("on1Id","==",candidate),
-                limit(1)
+        result +=
+            characters.charAt(
+                Math.floor(
+                    Math.random() *
+                    characters.length
+                )
             );
 
-        const result =
-            await getDocs(q);
-
-        if(result.empty){
-
-            return candidate;
-
-        }
-
     }
 
-    throw new Error(
-        "Unable to create a unique ON1 ID. Please try again."
-    );
+    return result;
 
 }
 
@@ -1077,7 +1028,7 @@ if(referralFromURL){
 
 
 /* ==========================================
-   FORM
+   FORM ELEMENTS
 ========================================== */
 
 const form =
@@ -1114,6 +1065,7 @@ form.addEventListener(
     async function(event){
 
         event.preventDefault();
+
 
         const firstName =
             document
@@ -1156,12 +1108,13 @@ form.addEventListener(
             .trim();
 
 
-        message.className =
-            "message";
+        message.className = "message";
+        message.textContent = "";
 
-        message.textContent =
-            "";
 
+        /* ======================================
+           BASIC VALIDATION
+        ====================================== */
 
         if(password.length < 8){
 
@@ -1187,6 +1140,18 @@ form.addEventListener(
         }
 
 
+        if(username.length < 3){
+
+            showMessage(
+                "Username must contain at least 3 characters.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
         createBtn.disabled = true;
 
         createBtn.textContent =
@@ -1194,6 +1159,7 @@ form.addEventListener(
 
 
         try{
+
 
             /* ==================================
                1. CREATE FIREBASE AUTH ACCOUNT
@@ -1211,158 +1177,152 @@ form.addEventListener(
 
 
             /* ==================================
-               2. DISPLAY NAME
+               2. SET AUTH DISPLAY NAME
             ================================== */
 
             await updateProfile(
                 user,
                 {
                     displayName:
-                        firstName + " " + lastName
+                        firstName +
+                        " " +
+                        lastName
                 }
             );
 
 
             /* ==================================
-               3. CREATE PERMANENT UNIQUE ON1 ID
+               3. CREATE ON1 ID
             ================================== */
 
             const on1Id =
-                await createUniqueON1Id();
+                generateON1Id();
 
 
             /* ==================================
-               4. REFERRAL SYSTEM
+               4. REFERRAL FALLBACK
+               
+               Blank referral:
+               JennyKhiss
+               ON12YBGYI9
             ================================== */
 
-            let referredByUsername =
-                DEFAULT_SPONSOR.username;
+            const hasReferral =
+                referralInput.length > 0;
 
-            let referredById =
-                DEFAULT_SPONSOR.on1Id;
+
+            const referredBy =
+                hasReferral
+                    ? referralInput
+                    : FALLBACK_SPONSOR.username;
+
+
+            const referredById =
+                hasReferral
+                    ? referralInput
+                    : FALLBACK_SPONSOR.on1Id;
 
 
             /*
-               If a referral was supplied, keep
-               what the user entered.
-
-               The referral can later be resolved
-               against the ON1 member database.
+               IMPORTANT:
+               referralCode is always a STRING.
+               We do NOT send null.
             */
 
-            if(referralInput){
-
-                referredByUsername =
-                    referralInput;
-
-                referredById =
-                    referralInput;
-
-            }
+            const referralCode =
+                hasReferral
+                    ? referralInput
+                    : "";
 
 
             /* ==================================
-               5. CREATE ON1 PROFILE
+               5. CREATE INITIAL ON1 PROFILE
+               
+               100 ON1
+               1,000 XP
+               Level 0
+            ================================== */
+
+            const userProfile = {
+
+                firstName:
+                    firstName,
+
+                lastName:
+                    lastName,
+
+                username:
+                    username,
+
+                email:
+                    email,
+
+                on1Id:
+                    on1Id,
+
+                balance:
+                    100,
+
+                XP:
+                    1000,
+
+                level:
+                    0,
+
+                kycLevel:
+                    0,
+
+                streak:
+                    0,
+
+                lastMine:
+                    null,
+
+                lastClaim:
+                    0,
+
+                lastStreakClaim:
+                    0,
+
+                referralCode:
+                    referralCode,
+
+                referredBy:
+                    referredBy,
+
+                referredById:
+                    referredById,
+
+                isAdmin:
+                    false,
+
+                createdAt:
+                    serverTimestamp()
+
+            };
+
+
+            /* ==================================
+               6. SAVE FIRESTORE PROFILE
             ================================== */
 
             await setDoc(
-                doc(db,"users",user.uid),
-                {
-
-                    uid:
-                        user.uid,
-
-                    firstName:
-                        firstName,
-
-                    lastName:
-                        lastName,
-
-                    username:
-                        username,
-
-                    email:
-                        email,
-
-                    /*
-                       Permanent public ON1 ID.
-                       Firebase UID remains separate.
-                    */
-
-                    on1Id:
-                        on1Id,
-
-                    /*
-                       Initial ecosystem balance.
-                    */
-
-                    balance:
-                        100,
-
-                    /*
-                       Welcome XP.
-                       Awarded exactly during account
-                       creation.
-                    */
-
-                    XP:
-                        1000,
-
-                    welcomeXpGranted:
-                        true,
-
-                    level:
-                        0,
-
-                    kycLevel:
-                        0,
-
-                    streak:
-                        0,
-
-                    lastClaim:
-                        0,
-
-                    lastStreakClaim:
-                        0,
-
-                    lastMine:
-                        null,
-
-                    /*
-                       Referral information.
-                    */
-
-                    referralCode:
-                        referralInput || null,
-
-                    referredBy:
-                        referredByUsername,
-
-                    referredById:
-                        referredById,
-
-                    /*
-                       Account status.
-                    */
-
-                    isAdmin:
-                        false,
-
-                    createdAt:
-                        serverTimestamp()
-
-                }
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                ),
+                userProfile
             );
 
 
             /* ==================================
-               6. SUCCESS
+               7. SUCCESS
             ================================== */
 
             showMessage(
                 "Account created successfully! " +
-                "Your permanent ON1 ID is " +
+                "Your ON1 ID is " +
                 on1Id +
                 ". You received 100 ON1 and 1,000 XP.",
                 "success"
@@ -1373,6 +1333,11 @@ form.addEventListener(
                 "ACCOUNT CREATED";
 
 
+            /*
+               Give Firestore a moment to finish,
+               then open Dashboard.
+            */
+
             setTimeout(
                 function(){
 
@@ -1380,7 +1345,7 @@ form.addEventListener(
                         "dashboard.html";
 
                 },
-                2200
+                1800
             );
 
 
@@ -1395,6 +1360,10 @@ form.addEventListener(
             let text =
                 "Unable to create your account. Please try again.";
 
+
+            /* ==================================
+               FIREBASE AUTH ERRORS
+            ================================== */
 
             if(
                 error.code ===
@@ -1426,15 +1395,20 @@ form.addEventListener(
 
             }
 
+            /* ==================================
+               FIRESTORE PERMISSION
+            ================================== */
+
             else if(
                 error.code ===
-                "permission-denied" ||
+                "permission-denied"
+                ||
                 error.code ===
                 "firestore/permission-denied"
             ){
 
                 text =
-                    "Your account was created in Firebase Authentication, but the ON1 profile could not be saved. Check Firestore Rules.";
+                    "Firebase Authentication succeeded, but Firestore rejected the ON1 profile. Please check the Firestore Rules.";
 
             }
 
@@ -1466,5 +1440,4 @@ form.addEventListener(
 </script>
 
 </body>
-
 </html>
