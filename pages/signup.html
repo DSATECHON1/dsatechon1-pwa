@@ -783,7 +783,7 @@ required>
 <button
 type="button"
 class="password-toggle"
-onclick="togglePassword('password',this)">
+id="passwordToggle">
 
 SHOW
 
@@ -816,7 +816,7 @@ required>
 <button
 type="button"
 class="password-toggle"
-onclick="togglePassword('confirmPassword',this)">
+id="confirmPasswordToggle">
 
 SHOW
 
@@ -856,7 +856,7 @@ Leave blank if nobody referred you.
 </div>
 
 
-<!-- REFERRAL DETECTION -->
+<!-- REFERRAL DETECTION BOX -->
 
 <div
 id="referralBox"
@@ -880,9 +880,7 @@ class="sponsor-name">
 <div
 id="referralStatus"
 class="referral-status">
-
-Referral code captured.
-
+Referral sponsor identified.
 </div>
 
 </div>
@@ -941,8 +939,9 @@ Privacy Policy
 </div>
 
 
-<div id="message"
-     class="message">
+<div
+id="message"
+class="message">
 </div>
 
 
@@ -1066,13 +1065,15 @@ const firebaseConfig = {
 };
 
 
+/* =====================================================
+   START FIREBASE
+===================================================== */
+
 const app =
     initializeApp(firebaseConfig);
 
-
 const auth =
     getAuth(app);
-
 
 const db =
     getFirestore(app);
@@ -1082,26 +1083,26 @@ const db =
    PERMANENT FALLBACK SPONSOR
 ===================================================== */
 
-/*
-   IMPORTANT:
-
-   Correct permanent fallback ON1 ID:
-
-   ON1 + 7 characters = 10 characters total
-
-   ON12YBGY19
-*/
-
 const FALLBACK_SPONSOR_USERNAME =
     "JennyKhiss";
 
+
+/*
+   IMPORTANT:
+
+   ON1 + 7 characters
+   = 10 characters total
+
+   Correct fallback:
+   ON12YBGY19
+*/
 
 const FALLBACK_SPONSOR_ON1_ID =
     "ON12YBGY19";
 
 
 /* =====================================================
-   PAGE ELEMENTS
+   DOM ELEMENTS
 ===================================================== */
 
 const form =
@@ -1152,851 +1153,77 @@ const referredByIdHidden =
     );
 
 
+const passwordInput =
+    document.getElementById(
+        "password"
+    );
+
+
+const confirmPasswordInput =
+    document.getElementById(
+        "confirmPassword"
+    );
+
+
+const passwordToggle =
+    document.getElementById(
+        "passwordToggle"
+    );
+
+
+const confirmPasswordToggle =
+    document.getElementById(
+        "confirmPasswordToggle"
+    );
+
+
 /* =====================================================
    PASSWORD TOGGLE
 ===================================================== */
 
-window.togglePassword =
-function(id,button){
+function togglePassword(
+    input,
+    button
+){
 
-    const input =
-        document.getElementById(id);
+    if(
+        input.type === "password"
+    ){
 
-
-    if(input.type === "password"){
-
-        input.type = "text";
+        input.type =
+            "text";
 
         button.textContent =
             "HIDE";
 
     }else{
 
-        input.type = "password";
+        input.type =
+            "password";
 
         button.textContent =
             "SHOW";
 
     }
 
-};
-
-
-/* =====================================================
-   REFERRAL HANDLING
-===================================================== */
-
-/*
-   This function handles both:
-
-   ?ref=ON1MWU11Y9
-
-   and manual referral entry.
-*/
-
-function applyReferral(code){
-
-    const clean =
-        String(code || "").trim();
-
-
-    if(!clean){
-
-        return;
-
-    }
-
-
-    referralInputElement.value =
-        clean;
-
-
-    /*
-       The referral code is currently treated
-       as the sponsor ON1 ID.
-    */
-
-    referredByIdHidden.value =
-        clean;
-
-
-    referralName.textContent =
-        clean;
-
-
-    referralStatus.textContent =
-        "Referral code captured successfully.";
-
-
-    referralBox.style.display =
-        "block";
-
 }
 
 
-/* =====================================================
-   AUTO-CAPTURE REFERRAL FROM URL
-===================================================== */
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
-const referralFromURL =
-    params.get("ref");
-
-
-if(
-    referralFromURL &&
-    referralFromURL.trim() !== ""
-){
-
-    applyReferral(
-        referralFromURL
-    );
-
-}
-
-
-/* =====================================================
-   MANUAL REFERRAL INPUT
-===================================================== */
-
-referralInputElement.addEventListener(
-    "input",
+passwordToggle.addEventListener(
+    "click",
     function(){
 
-        const value =
-            referralInputElement
-            .value
-            .trim();
-
-
-        if(value){
-
-            applyReferral(value);
-
-        }else{
-
-            /*
-               Empty referral field.
-
-               Use permanent fallback.
-            */
-
-            referredByIdHidden.value =
-                FALLBACK_SPONSOR_ON1_ID;
-
-
-            referralBox.style.display =
-                "none";
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   SET FALLBACK IMMEDIATELY
-===================================================== */
-
-/*
-   If there is no referral URL,
-   the hidden sponsor ID starts with
-   the permanent fallback.
-*/
-
-if(
-    !referralFromURL ||
-    referralFromURL.trim() === ""
-){
-
-    referredByIdHidden.value =
-        FALLBACK_SPONSOR_ON1_ID;
-
-}
-
-
-/* =====================================================
-   GENERATE UNIQUE ON1 ID
-===================================================== */
-
-/*
-   Format:
-
-   ON1 + 7 uppercase letters/numbers
-
-   Example:
-
-   ON1A7K92Q
-
-   Total = 10 characters.
-*/
-
-function generateON1Id(){
-
-    const characters =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-
-    let result =
-        "ON1";
-
-
-    for(
-        let i = 0;
-        i < 7;
-        i++
-    ){
-
-        result +=
-            characters.charAt(
-                Math.floor(
-                    Math.random() *
-                    characters.length
-                )
-            );
-
-    }
-
-
-    return result;
-
-}
-
-
-/* =====================================================
-   SHOW MESSAGE
-===================================================== */
-
-function showMessage(
-    text,
-    type
-){
-
-    message.textContent =
-        text;
-
-    message.className =
-        "message " + type;
-
-}
-
-
-/* =====================================================
-   FIREBASE ERROR MESSAGE
-===================================================== */
-
-function getFriendlyError(error){
-
-    console.error(
-        "Full Firebase error:",
-        error
-    );
-
-
-    if(
-        error.code ===
-        "auth/email-already-in-use"
-    ){
-
-        return "This email is already registered. Please login or use another email.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/invalid-email"
-    ){
-
-        return "Please enter a valid email address.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/weak-password"
-    ){
-
-        return "Password is too weak. Please use at least 8 characters.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/network-request-failed"
-    ){
-
-        return "Network error. Please check your internet connection and try again.";
-
-    }
-
-
-    if(
-        error.code ===
-        "permission-denied"
-    ){
-
-        return "Firestore permission denied. Please check the published Firestore Rules.";
-
-    }
-
-
-    if(
-        error.code ===
-        "auth/operation-not-allowed"
-    ){
-
-        return "Email/password registration is not enabled in Firebase Authentication.";
-
-    }
-
-
-    if(error.code){
-
-        return "Signup failed (" +
-               error.code +
-               "). Please try again.";
-
-    }
-
-
-    if(error.message){
-
-        return error.message;
-
-    }
-
-
-    return "Unable to create your account. Please try again.";
-
-}
-
-
-/* =====================================================
-   SIGNUP FORM
-===================================================== */
-
-form.addEventListener(
-    "submit",
-    async function(event){
-
-        event.preventDefault();
-
-
-        /* =============================================
-           READ FORM VALUES
-        ============================================= */
-
-        const firstName =
-            document
-            .getElementById("firstName")
-            .value
-            .trim();
-
-
-        const lastName =
-            document
-            .getElementById("lastName")
-            .value
-            .trim();
-
-
-        const username =
-            document
-            .getElementById("username")
-            .value
-            .trim();
-
-
-        const email =
-            document
-            .getElementById("email")
-            .value
-            .trim();
-
-
-        const password =
-            document
-            .getElementById("password")
-            .value;
-
-
-        const confirmPassword =
-            document
-            .getElementById("confirmPassword")
-            .value;
-
-
-        const referralInput =
-            referralInputElement
-            .value
-            .trim();
-
-
-        /* =============================================
-           VALIDATION
-        ============================================= */
-
-        if(!firstName){
-
-            showMessage(
-                "Please enter your first name.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(!lastName){
-
-            showMessage(
-                "Please enter your last name.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(!username){
-
-            showMessage(
-                "Please choose a username.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(!email){
-
-            showMessage(
-                "Please enter your email address.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(password.length < 8){
-
-            showMessage(
-                "Password must contain at least 8 characters.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(password !== confirmPassword){
-
-            showMessage(
-                "The passwords do not match.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /* =============================================
-           DETERMINE SPONSOR
-        ============================================= */
-
-        let referredBy = "";
-
-        let referredById = "";
-
-
-        if(referralInput){
-
-            /*
-               User supplied a referral.
-
-               Example:
-
-               ON1MWU11Y9
-            */
-
-            referredBy =
-                referralInput;
-
-
-            referredById =
-                referredByIdHidden
-                .value
-                .trim();
-
-
-            /*
-               Safety fallback if hidden value
-               somehow did not update.
-            */
-
-            if(!referredById){
-
-                referredById =
-                    referralInput;
-
-            }
-
-        }else{
-
-            /*
-               No referral supplied.
-
-               Permanent fallback sponsor.
-            */
-
-            referredBy =
-                FALLBACK_SPONSOR_USERNAME;
-
-
-            referredById =
-                FALLBACK_SPONSOR_ON1_ID;
-
-        }
-
-
-        /* =============================================
-           FINAL SAFETY CHECK
-        ============================================= */
-
-        if(!referredBy){
-
-            showMessage(
-                "Referral sponsor could not be determined.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if(!referredById){
-
-            showMessage(
-                "Referral sponsor ID is missing. Please try again.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /* =============================================
-           CHECK REFERRAL ID FORMAT WHEN IT LOOKS
-           LIKE AN ON1 ID
-        ============================================= */
-
-        if(
-            referredById.startsWith("ON1") &&
-            !/^ON1[A-Z0-9]{7}$/.test(
-                referredById
-            )
-        ){
-
-            showMessage(
-                "Invalid ON1 referral ID. An ON1 ID must contain exactly 10 characters.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /* =============================================
-           BUTTON STATE
-        ============================================= */
-
-        createBtn.disabled =
-            true;
-
-
-        createBtn.textContent =
-            "CREATING ACCOUNT...";
-
-
-        showMessage(
-            "Creating your ON1Ecosystem account...",
-            "success"
+        togglePassword(
+            passwordInput,
+            passwordToggle
         );
 
-
-        try{
-
-
-            /* =========================================
-               1. CREATE FIREBASE AUTH USER
-            ========================================= */
-
-            const userCredential =
-                await createUserWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-
-            const user =
-                userCredential.user;
-
-
-            /* =========================================
-               2. SET FIREBASE DISPLAY NAME
-            ========================================= */
-
-            await updateProfile(
-                user,
-                {
-                    displayName:
-                        firstName +
-                        " " +
-                        lastName
-                }
-            );
-
-
-            /* =========================================
-               3. GENERATE PERMANENT ON1 ID
-            ========================================= */
-
-            const on1Id =
-                generateON1Id();
-
-
-            /* =========================================
-               4. CREATE FIRESTORE PROFILE
-            ========================================= */
-
-            await setDoc(
-
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                ),
-
-                {
-
-                    /* ================================
-                       PERSONAL PROFILE
-                    ================================= */
-
-                    firstName:
-                        firstName,
-
-                    lastName:
-                        lastName,
-
-                    username:
-                        username,
-
-                    email:
-                        email,
-
-
-                    /* ================================
-                       PERMANENT ON1 ID
-                    ================================= */
-
-                    on1Id:
-                        on1Id,
-
-
-                    /* ================================
-                       INITIAL ON1COIN
-                    ================================= */
-
-                    balance:
-                        100,
-
-
-                    /* ================================
-                       INITIAL XP
-                    ================================= */
-
-                    XP:
-                        1000,
-
-
-                    /* ================================
-                       INITIAL LEVEL
-                    ================================= */
-
-                    level:
-                        0,
-
-
-                    /* ================================
-                       KYC
-                    ================================= */
-
-                    kycLevel:
-                        0,
-
-
-                    /* ================================
-                       MINING STREAK
-                    ================================= */
-
-                    streak:
-                        0,
-
-
-                    /* ================================
-                       MINING TIMESTAMPS
-                    ================================= */
-
-                    lastClaim:
-                        0,
-
-                    lastStreakClaim:
-                        0,
-
-                    lastMine:
-                        null,
-
-
-                    /* ================================
-                       REFERRAL CODE
-                    ================================= */
-
-                    referralCode:
-                        referralInput ||
-                        null,
-
-
-                    /* ================================
-                       REFERRAL SPONSOR
-                    ================================= */
-
-                    referredBy:
-                        referredBy,
-
-
-                    /* ================================
-                       SPONSOR ON1 ID
-                    ================================= */
-
-                    referredById:
-                        referredById,
-
-
-                    /* ================================
-                       REFERRAL STATISTICS
-                    ================================= */
-
-                    referralCount:
-                        0,
-
-                    referralBonus:
-                        0,
-
-
-                    /* ================================
-                       ADMIN SECURITY
-                    ================================= */
-
-                    isAdmin:
-                        false,
-
-
-                    /* ================================
-                       ACCOUNT CREATION
-                    ================================= */
-
-                    createdAt:
-                        serverTimestamp()
-
-                }
-
-            );
-
-
-            /* =========================================
-               5. SUCCESS
-            ========================================= */
-
-            showMessage(
-
-                "Account created successfully! " +
-                "Your ON1 ID is " +
-                on1Id +
-                ". You received 100 ON1 and 1,000 XP.",
-
-                "success"
-
-            );
-
-
-            createBtn.textContent =
-                "ACCOUNT CREATED";
-
-
-            /* =========================================
-               6. DASHBOARD
-            ========================================= */
-
-            setTimeout(
-                function(){
-
-                    window.location.href =
-                        "dashboard.html";
-
-                },
-                2200
-            );
-
-
-        }catch(error){
-
-            console.error(
-                "ON1 signup error:",
-                error
-            );
-
-
-            showMessage(
-                getFriendlyError(error),
-                "error"
-            );
-
-
-            createBtn.disabled =
-                false;
-
-
-            createBtn.textContent =
-                "CREATE ON1 ACCOUNT";
-
-        }
-
     }
 );
 
-</script>
 
-</body>
+confirmPasswordToggle.addEventListener(
+    "click",
+    function(){
 
-</html>
+        togglePassword(
