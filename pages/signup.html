@@ -33,7 +33,6 @@
     --blue:#087cff;
     --blue2:#3aa0ff;
     --green:#00df88;
-    --gold:#f5c542;
     --text:#ffffff;
     --muted:#8ea2b8;
     --danger:#ff6075;
@@ -220,52 +219,6 @@ a{
     line-height:1.5;
 }
 
-/* =========================================
-   REFERRAL INVITATION
-========================================= */
-
-.invite-box{
-    display:none;
-    margin-bottom:18px;
-    padding:13px;
-    border-radius:12px;
-    background:rgba(0,223,136,.055);
-    border:1px solid rgba(0,223,136,.20);
-}
-
-.invite-box.visible{
-    display:block;
-}
-
-.invite-title{
-    color:var(--green);
-    font-size:11px;
-    font-weight:800;
-}
-
-.invite-text{
-    margin-top:5px;
-    color:var(--muted);
-    font-size:9px;
-    line-height:1.5;
-}
-
-.invite-code{
-    display:inline-block;
-    margin-top:7px;
-    padding:5px 8px;
-    border-radius:6px;
-    background:rgba(0,223,136,.08);
-    color:var(--green);
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:.4px;
-}
-
-/* =========================================
-   FORM
-========================================= */
-
 .form-group{
     margin-top:16px;
 }
@@ -342,16 +295,17 @@ input:focus{
 }
 
 .referral-box{
-    margin-top:18px;
-    padding:13px;
+    display:none;
+    margin-top:12px;
+    padding:12px;
     border-radius:12px;
-    background:rgba(0,223,136,.045);
-    border:1px solid rgba(0,223,136,.17);
+    background:rgba(0,223,136,.06);
+    border:1px solid rgba(0,223,136,.20);
 }
 
 .referral-box strong{
     color:var(--green);
-    font-size:11px;
+    font-size:10px;
 }
 
 .referral-box p{
@@ -359,6 +313,17 @@ input:focus{
     color:var(--muted);
     font-size:9px;
     line-height:1.5;
+}
+
+.referral-box .sponsor-name{
+    color:white;
+    font-weight:800;
+}
+
+.referral-status{
+    margin-top:5px;
+    color:#61758b;
+    font-size:8px;
 }
 
 .terms{
@@ -477,10 +442,6 @@ footer p{
     color:#40536a;
     font-size:9px;
 }
-
-/* =========================================
-   RESPONSIVE
-========================================= */
 
 @media(max-width:850px){
 
@@ -715,31 +676,6 @@ Use your real name as it appears on your identification documents.
 </div>
 
 
-<!-- =========================================
-     REFERRAL INVITATION FROM DASHBOARD LINK
-========================================= -->
-
-<div id="inviteBox"
-     class="invite-box">
-
-<div class="invite-title">
-🤝 You were invited to ON1Ecosystem
-</div>
-
-<div class="invite-text">
-
-Your account will be connected to the
-member whose referral link you used.
-
-</div>
-
-<div id="inviteCode"
-     class="invite-code">
-</div>
-
-</div>
-
-
 <form id="signupForm">
 
 
@@ -891,10 +827,6 @@ SHOW
 </div>
 
 
-<!-- =========================================
-     REFERRAL CODE
-========================================= -->
-
 <div class="form-group">
 
 <label for="referral">
@@ -917,15 +849,57 @@ autocomplete="off">
 
 <div class="field-note">
 
-If you came through a referral link, the referral
-code will be filled automatically.
+Leave blank if nobody referred you.
 
 </div>
 
 </div>
 
 
-<div class="referral-box">
+<!-- =================================================
+     REFERRAL INFORMATION
+================================================== -->
+
+<div
+id="referralBox"
+class="referral-box">
+
+<strong>
+🤝 Referral detected
+</strong>
+
+<p>
+You were invited by:
+<span
+id="referralName"
+class="sponsor-name">
+</span>
+</p>
+
+<div
+id="referralStatus"
+class="referral-status">
+Referral sponsor identified.
+</div>
+
+</div>
+
+
+<!-- =================================================
+     HIDDEN SPONSOR ID
+
+     This stores the actual ON1 ID used for referral
+     processing.
+================================================== -->
+
+<input
+type="hidden"
+id="referredByIdHidden"
+value="">
+
+
+<div class="referral-box"
+     style="display:block;">
 
 <strong>
 🤝 Referral participation
@@ -940,21 +914,6 @@ your account will automatically use
 </p>
 
 </div>
-
-
-<!-- =========================================
-     HIDDEN REFERRAL DATA
-========================================= -->
-
-<input
-type="hidden"
-id="referredBy"
-name="referredBy">
-
-<input
-type="hidden"
-id="referredById"
-name="referredById">
 
 
 <div class="terms">
@@ -1073,7 +1032,8 @@ import {
     getFirestore,
     doc,
     setDoc,
-    serverTimestamp
+    serverTimestamp,
+    getDoc
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -1123,6 +1083,7 @@ const db =
 const FALLBACK_SPONSOR_USERNAME =
     "JennyKhiss";
 
+
 const FALLBACK_SPONSOR_ON1_ID =
     "ON12YBGYI9";
 
@@ -1158,18 +1119,177 @@ function(id,button){
 
 
 /* =====================================================
+   FORM ELEMENTS
+===================================================== */
+
+const form =
+    document.getElementById(
+        "signupForm"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+const createBtn =
+    document.getElementById(
+        "createBtn"
+    );
+
+
+const referralInputElement =
+    document.getElementById(
+        "referral"
+    );
+
+
+const referralBox =
+    document.getElementById(
+        "referralBox"
+    );
+
+
+const referralName =
+    document.getElementById(
+        "referralName"
+    );
+
+
+const referralStatus =
+    document.getElementById(
+        "referralStatus"
+    );
+
+
+const referredByIdHidden =
+    document.getElementById(
+        "referredByIdHidden"
+    );
+
+
+/* =====================================================
+   REFERRAL URL AUTO-CAPTURE
+===================================================== */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const referralFromURL =
+    params.get("ref");
+
+
+/*
+   If the visitor arrives with:
+
+   ?ref=ON1MWU11Y9
+
+   automatically place that value inside
+   the visible Referral Code field.
+*/
+
+if(
+    referralFromURL &&
+    referralFromURL.trim() !== ""
+){
+
+    const cleanReferral =
+        referralFromURL.trim();
+
+
+    referralInputElement.value =
+        cleanReferral;
+
+
+    /*
+       Because the referral value is an ON1 ID,
+       use it as the sponsor ON1 ID.
+    */
+
+    referredByIdHidden.value =
+        cleanReferral;
+
+
+    referralName.textContent =
+        cleanReferral;
+
+
+    referralStatus.textContent =
+        "Referral code captured from your invitation link.";
+
+
+    referralBox.style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   MANUAL REFERRAL INPUT
+===================================================== */
+
+/*
+   If the user manually types:
+
+   ON1MWU11Y9
+
+   the hidden sponsor ID must also update.
+*/
+
+referralInputElement.addEventListener(
+    "input",
+    function(){
+
+        const value =
+            referralInputElement.value.trim();
+
+
+        if(value){
+
+            referredByIdHidden.value =
+                value;
+
+
+            referralName.textContent =
+                value;
+
+
+            referralStatus.textContent =
+                "Referral code entered manually.";
+
+
+            referralBox.style.display =
+                "block";
+
+        }else{
+
+            referredByIdHidden.value =
+                FALLBACK_SPONSOR_ON1_ID;
+
+
+            referralBox.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
    GENERATE UNIQUE ON1 ID
 =====================================================
 
    Format:
 
-   ON1 + 7 uppercase letters/numbers
+   ON1 + 7 characters
 
    Total = 10 characters.
-
-   Example:
-
-   ON1A1B2C3D
 ===================================================== */
 
 function generateON1Id(){
@@ -1182,7 +1302,11 @@ function generateON1Id(){
         "ON1";
 
 
-    for(let i = 0; i < 7; i++){
+    for(
+        let i = 0;
+        i < 7;
+        i++
+    ){
 
         result +=
             characters.charAt(
@@ -1193,3 +1317,587 @@ function generateON1Id(){
             );
 
     }
+
+
+    return result;
+
+}
+
+
+/* =====================================================
+   SHOW MESSAGE
+===================================================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    message.textContent =
+        text;
+
+    message.className =
+        "message " + type;
+
+}
+
+
+/* =====================================================
+   FIREBASE ERROR TRANSLATOR
+===================================================== */
+
+function getFriendlyError(error){
+
+    if(
+        error.code ===
+        "auth/email-already-in-use"
+    ){
+
+        return "This email is already registered. Please sign in or use another email.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/invalid-email"
+    ){
+
+        return "Please enter a valid email address.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/weak-password"
+    ){
+
+        return "Password is too weak. Use at least 8 characters.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/network-request-failed"
+    ){
+
+        return "Network error. Check your internet connection and try again.";
+
+    }
+
+
+    if(
+        error.code ===
+        "permission-denied" ||
+
+        error.code ===
+        "firestore/permission-denied"
+    ){
+
+        return "Firebase created the account, but Firestore rejected the profile. Please check the Firestore Rules.";
+
+    }
+
+
+    if(error.message){
+
+        return error.message;
+
+    }
+
+
+    return "Unable to create your account. Please try again.";
+
+}
+
+
+/* =====================================================
+   SIGNUP
+===================================================== */
+
+form.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+
+        /* =============================================
+           FORM VALUES
+        ============================================= */
+
+        const firstName =
+            document
+            .getElementById("firstName")
+            .value
+            .trim();
+
+
+        const lastName =
+            document
+            .getElementById("lastName")
+            .value
+            .trim();
+
+
+        const username =
+            document
+            .getElementById("username")
+            .value
+            .trim();
+
+
+        const email =
+            document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+            document
+            .getElementById("password")
+            .value;
+
+
+        const confirmPassword =
+            document
+            .getElementById("confirmPassword")
+            .value;
+
+
+        const referralInput =
+            referralInputElement
+            .value
+            .trim();
+
+
+        /* =============================================
+           CLEAR MESSAGE
+        ============================================= */
+
+        message.className =
+            "message";
+
+        message.textContent =
+            "";
+
+
+        /* =============================================
+           BASIC VALIDATION
+        ============================================= */
+
+        if(!firstName){
+
+            showMessage(
+                "Please enter your first name.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!lastName){
+
+            showMessage(
+                "Please enter your last name.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!username){
+
+            showMessage(
+                "Please choose a username.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(password.length < 8){
+
+            showMessage(
+                "Password must contain at least 8 characters.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(password !== confirmPassword){
+
+            showMessage(
+                "The passwords do not match.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* =============================================
+           DETERMINE REFERRAL
+        ============================================= */
+
+        let referredBy;
+
+        let referredById;
+
+
+        if(referralInput){
+
+            /*
+               A supplied referral is treated as the
+               sponsor's ON1 ID.
+
+               Example:
+
+               ON1MWU11Y9
+            */
+
+            referredBy =
+                referralInput;
+
+
+            referredById =
+                referredByIdHidden.value.trim();
+
+
+            if(!referredById){
+
+                referredById =
+                    referralInput;
+
+            }
+
+        }else{
+
+            /*
+               No referral supplied.
+
+               Use permanent fallback sponsor.
+            */
+
+            referredBy =
+                FALLBACK_SPONSOR_USERNAME;
+
+
+            referredById =
+                FALLBACK_SPONSOR_ON1_ID;
+
+        }
+
+
+        /* =============================================
+           FINAL REFERRAL SAFETY CHECK
+        ============================================= */
+
+        if(!referredBy){
+
+            showMessage(
+                "Referral information could not be determined.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!referredById){
+
+            showMessage(
+                "Referral sponsor ID could not be determined.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* =============================================
+           DISABLE BUTTON
+        ============================================= */
+
+        createBtn.disabled =
+            true;
+
+        createBtn.textContent =
+            "CREATING ACCOUNT...";
+
+
+        try{
+
+
+            /* =========================================
+               1. CREATE FIREBASE AUTH ACCOUNT
+            ========================================= */
+
+            const userCredential =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+            const user =
+                userCredential.user;
+
+
+            /* =========================================
+               2. SAVE DISPLAY NAME
+            ========================================= */
+
+            await updateProfile(
+                user,
+                {
+                    displayName:
+                        firstName +
+                        " " +
+                        lastName
+                }
+            );
+
+
+            /* =========================================
+               3. GENERATE NEW USER'S ON1 ID
+            ========================================= */
+
+            const on1Id =
+                generateON1Id();
+
+
+            /* =========================================
+               4. CREATE FIRESTORE PROFILE
+            ========================================= */
+
+            await setDoc(
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                ),
+                {
+
+                    /* ================================
+                       BASIC PROFILE
+                    ================================= */
+
+                    firstName:
+                        firstName,
+
+                    lastName:
+                        lastName,
+
+                    username:
+                        username,
+
+                    email:
+                        email,
+
+
+                    /* ================================
+                       USER'S OWN PERMANENT ON1 ID
+                    ================================= */
+
+                    on1Id:
+                        on1Id,
+
+
+                    /* ================================
+                       INITIAL ON1COIN
+                    ================================= */
+
+                    balance:
+                        100,
+
+
+                    /* ================================
+                       WELCOME XP
+                    ================================= */
+
+                    XP:
+                        1000,
+
+
+                    /* ================================
+                       LEVEL
+                    ================================= */
+
+                    level:
+                        0,
+
+
+                    /* ================================
+                       KYC
+                    ================================= */
+
+                    kycLevel:
+                        0,
+
+
+                    /* ================================
+                       MINING STREAK
+                    ================================= */
+
+                    streak:
+                        0,
+
+
+                    /* ================================
+                       MINING TIMESTAMPS
+                    ================================= */
+
+                    lastClaim:
+                        0,
+
+                    lastStreakClaim:
+                        0,
+
+                    lastMine:
+                        null,
+
+
+                    /* ================================
+                       REFERRAL CODE
+
+                       Save the supplied code.
+
+                       If none was supplied, save null.
+                    ================================= */
+
+                    referralCode:
+                        referralInput ||
+                        null,
+
+
+                    /* ================================
+                       REFERRAL USERNAME / CODE
+                    ================================= */
+
+                    referredBy:
+                        referredBy,
+
+
+                    /* ================================
+                       REFERRAL SPONSOR ON1 ID
+                    ================================= */
+
+                    referredById:
+                        referredById,
+
+
+                    /* ================================
+                       REFERRAL STATISTICS
+                    ================================= */
+
+                    referralCount:
+                        0,
+
+                    referralBonus:
+                        0,
+
+
+                    /* ================================
+                       ADMIN SECURITY
+                    ================================= */
+
+                    isAdmin:
+                        false,
+
+
+                    /* ================================
+                       ACCOUNT CREATION
+                    ================================= */
+
+                    createdAt:
+                        serverTimestamp()
+
+                }
+            );
+
+
+            /* =========================================
+               5. SUCCESS MESSAGE
+            ========================================= */
+
+            showMessage(
+
+                "Account created successfully! " +
+
+                "Your ON1 ID is " +
+
+                on1Id +
+
+                ". You received 100 ON1 and 1,000 XP.",
+
+                "success"
+
+            );
+
+
+            createBtn.textContent =
+                "ACCOUNT CREATED";
+
+
+            /* =========================================
+               6. GO TO DASHBOARD
+            ========================================= */
+
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "dashboard.html";
+
+                },
+                2200
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "ON1 signup error:",
+                error
+            );
+
+
+            showMessage(
+                getFriendlyError(error),
+                "error"
+            );
+
+
+            createBtn.disabled =
+                false;
+
+            createBtn.textContent =
+                "CREATE ON1 ACCOUNT";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>
