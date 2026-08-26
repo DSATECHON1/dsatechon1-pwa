@@ -33,6 +33,7 @@
     --blue:#087cff;
     --blue2:#3aa0ff;
     --green:#00df88;
+    --gold:#f5c542;
     --text:#ffffff;
     --muted:#8ea2b8;
     --danger:#ff6075;
@@ -181,4 +182,1014 @@ a{
     place-items:center;
     background:rgba(8,124,255,.09);
     border-radius:9px;
-    margin
+    margin-bottom:10px;
+}
+
+.benefit strong{
+    display:block;
+    font-size:12px;
+}
+
+.benefit p{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.5;
+}
+
+.signup-card{
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
+    border-radius:23px;
+    padding:28px;
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+
+.card-header{
+    margin-bottom:22px;
+}
+
+.card-header h2{
+    font-size:23px;
+}
+
+.card-header p{
+    margin-top:7px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* =========================================
+   REFERRAL INVITATION
+========================================= */
+
+.invite-box{
+    display:none;
+    margin-bottom:18px;
+    padding:13px;
+    border-radius:12px;
+    background:rgba(0,223,136,.055);
+    border:1px solid rgba(0,223,136,.20);
+}
+
+.invite-box.visible{
+    display:block;
+}
+
+.invite-title{
+    color:var(--green);
+    font-size:11px;
+    font-weight:800;
+}
+
+.invite-text{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.5;
+}
+
+.invite-code{
+    display:inline-block;
+    margin-top:7px;
+    padding:5px 8px;
+    border-radius:6px;
+    background:rgba(0,223,136,.08);
+    color:var(--green);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.4px;
+}
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-group{
+    margin-top:16px;
+}
+
+.form-group:first-child{
+    margin-top:0;
+}
+
+label{
+    display:block;
+    margin-bottom:7px;
+    color:#d9e4ef;
+    font-size:11px;
+    font-weight:700;
+}
+
+.required{
+    color:var(--danger);
+}
+
+input{
+    width:100%;
+    height:48px;
+    padding:0 14px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    background:var(--input);
+    color:white;
+    outline:none;
+    font-size:13px;
+}
+
+input::placeholder{
+    color:#52657a;
+}
+
+input:focus{
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(8,124,255,.10);
+}
+
+.name-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.field-note{
+    margin-top:6px;
+    color:#61758b;
+    font-size:9px;
+    line-height:1.4;
+}
+
+.password-wrap{
+    position:relative;
+}
+
+.password-wrap input{
+    padding-right:60px;
+}
+
+.password-toggle{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    cursor:pointer;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.referral-box{
+    margin-top:18px;
+    padding:13px;
+    border-radius:12px;
+    background:rgba(0,223,136,.045);
+    border:1px solid rgba(0,223,136,.17);
+}
+
+.referral-box strong{
+    color:var(--green);
+    font-size:11px;
+}
+
+.referral-box p{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.5;
+}
+
+.terms{
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+    margin-top:18px;
+}
+
+.terms input{
+    width:15px;
+    height:15px;
+    margin-top:1px;
+    accent-color:var(--blue);
+}
+
+.terms label{
+    margin:0;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.5;
+    font-weight:normal;
+}
+
+.terms a{
+    color:var(--blue2);
+}
+
+.message{
+    display:none;
+    margin-top:12px;
+    padding:10px;
+    border-radius:9px;
+    text-align:center;
+    font-size:10px;
+    line-height:1.5;
+}
+
+.message.error{
+    display:block;
+    background:rgba(255,96,117,.08);
+    border:1px solid rgba(255,96,117,.2);
+    color:#ff8192;
+}
+
+.message.success{
+    display:block;
+    background:rgba(0,223,136,.07);
+    border:1px solid rgba(0,223,136,.18);
+    color:var(--green);
+}
+
+.create-btn{
+    width:100%;
+    height:50px;
+    margin-top:19px;
+    border:0;
+    border-radius:11px;
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        #0065d8
+    );
+    color:white;
+    font-weight:800;
+    font-size:13px;
+    cursor:pointer;
+}
+
+.create-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+}
+
+.already{
+    text-align:center;
+    margin-top:17px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.already a{
+    color:var(--blue2);
+    font-weight:700;
+}
+
+.trust{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    margin-top:16px;
+    color:#64778c;
+    font-size:9px;
+}
+
+.trust span{
+    color:var(--green);
+}
+
+footer{
+    margin-top:65px;
+    padding-top:20px;
+    border-top:1px solid rgba(29,48,72,.55);
+    text-align:center;
+}
+
+footer p{
+    color:#61748a;
+    font-size:9px;
+    line-height:1.6;
+}
+
+.footer-brand{
+    margin-top:6px;
+    color:#40536a;
+    font-size:9px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:850px){
+
+    .main{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+
+    .intro{
+        max-width:650px;
+        margin:auto;
+        text-align:center;
+    }
+
+    .signup-card{
+        width:100%;
+        max-width:500px;
+        margin:auto;
+    }
+
+}
+
+@media(max-width:520px){
+
+    .page{
+        padding:15px;
+    }
+
+    .header{
+        margin-bottom:35px;
+    }
+
+    .brand img{
+        width:37px;
+        height:37px;
+    }
+
+    .brand-text strong{
+        font-size:16px;
+    }
+
+    .login-link{
+        padding:9px 11px;
+        font-size:10px;
+    }
+
+    .intro h1{
+        font-size:38px;
+    }
+
+    .intro-text{
+        font-size:13px;
+    }
+
+    .signup-card{
+        padding:21px;
+    }
+
+}
+
+@media(max-width:400px){
+
+    .name-row{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<header class="header">
+
+<a href="../index.html" class="brand">
+
+<img src="../logo.png"
+     alt="ON1Ecosystem">
+
+<div class="brand-text">
+
+<strong>
+ON1<span>Ecosystem</span>
+</strong>
+
+<small>
+ONE DIGITAL ECOSYSTEM
+</small>
+
+</div>
+
+</a>
+
+
+<a href="login.html"
+   class="login-link">
+
+Already a member? Login
+
+</a>
+
+</header>
+
+
+<main class="main">
+
+
+<section class="intro">
+
+
+<div class="eyebrow">
+
+<span class="eyebrow-dot"></span>
+
+Welcome to ON1Ecosystem
+
+</div>
+
+
+<h1>
+
+One ecosystem.
+
+<span>More possibilities.</span>
+
+</h1>
+
+
+<p class="intro-text">
+
+Create your ON1Ecosystem account and receive
+your permanent ON1 ID, welcome ON1Coin and XP.
+
+</p>
+
+
+<div class="benefits">
+
+
+<div class="benefit">
+
+<div class="benefit-icon">
+⛏️
+</div>
+
+<strong>
+ON1Coin
+</strong>
+
+<p>
+Receive 100 ON1 as your initial ecosystem balance.
+</p>
+
+</div>
+
+
+<div class="benefit">
+
+<div class="benefit-icon">
+⭐
+</div>
+
+<strong>
+XP
+</strong>
+
+<p>
+Start with 1,000 XP at Level 0.
+</p>
+
+</div>
+
+
+<div class="benefit">
+
+<div class="benefit-icon">
+🆔
+</div>
+
+<strong>
+ON1 ID
+</strong>
+
+<p>
+Every member receives a permanent 10-character ON1 ID.
+</p>
+
+</div>
+
+
+<div class="benefit">
+
+<div class="benefit-icon">
+👛
+</div>
+
+<strong>
+Your Wallet
+</strong>
+
+<p>
+Your ON1Coin and XP balances are connected to your profile.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="signup-card">
+
+
+<div class="card-header">
+
+<h2>
+Create your account
+</h2>
+
+<p>
+Use your real name as it appears on your identification documents.
+</p>
+
+</div>
+
+
+<!-- =========================================
+     REFERRAL INVITATION FROM DASHBOARD LINK
+========================================= -->
+
+<div id="inviteBox"
+     class="invite-box">
+
+<div class="invite-title">
+🤝 You were invited to ON1Ecosystem
+</div>
+
+<div class="invite-text">
+
+Your account will be connected to the
+member whose referral link you used.
+
+</div>
+
+<div id="inviteCode"
+     class="invite-code">
+</div>
+
+</div>
+
+
+<form id="signupForm">
+
+
+<div class="name-row">
+
+
+<div class="form-group">
+
+<label for="firstName">
+
+First Name
+<span class="required">*</span>
+
+</label>
+
+<input
+id="firstName"
+type="text"
+placeholder="Your first name"
+autocomplete="given-name"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="lastName">
+
+Last Name
+<span class="required">*</span>
+
+</label>
+
+<input
+id="lastName"
+type="text"
+placeholder="Your last name"
+autocomplete="family-name"
+required>
+
+</div>
+
+
+</div>
+
+
+<div class="form-group">
+
+<label for="username">
+
+Username
+<span class="required">*</span>
+
+</label>
+
+<input
+id="username"
+type="text"
+placeholder="Choose a username"
+autocomplete="username"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="email">
+
+Email
+<span class="required">*</span>
+
+</label>
+
+<input
+id="email"
+type="email"
+placeholder="you@example.com"
+autocomplete="email"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="password">
+
+Password
+<span class="required">*</span>
+
+</label>
+
+<div class="password-wrap">
+
+<input
+id="password"
+type="password"
+placeholder="Minimum 8 characters"
+autocomplete="new-password"
+minlength="8"
+required>
+
+<button
+type="button"
+class="password-toggle"
+onclick="togglePassword('password',this)">
+
+SHOW
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="confirmPassword">
+
+Confirm Password
+<span class="required">*</span>
+
+</label>
+
+<div class="password-wrap">
+
+<input
+id="confirmPassword"
+type="password"
+placeholder="Enter password again"
+autocomplete="new-password"
+minlength="8"
+required>
+
+<button
+type="button"
+class="password-toggle"
+onclick="togglePassword('confirmPassword',this)">
+
+SHOW
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =========================================
+     REFERRAL CODE
+========================================= -->
+
+<div class="form-group">
+
+<label for="referral">
+
+Referral Code
+
+<span style="color:#61758b;font-weight:normal;">
+
+(Optional)
+
+</span>
+
+</label>
+
+<input
+id="referral"
+type="text"
+placeholder="Enter referral code if you have one"
+autocomplete="off">
+
+<div class="field-note">
+
+If you came through a referral link, the referral
+code will be filled automatically.
+
+</div>
+
+</div>
+
+
+<div class="referral-box">
+
+<strong>
+🤝 Referral participation
+</strong>
+
+<p>
+
+Referral is optional. If no referral code is supplied,
+your account will automatically use
+<strong>JennyKhiss</strong> as the fallback sponsor.
+
+</p>
+
+</div>
+
+
+<!-- =========================================
+     HIDDEN REFERRAL DATA
+========================================= -->
+
+<input
+type="hidden"
+id="referredBy"
+name="referredBy">
+
+<input
+type="hidden"
+id="referredById"
+name="referredById">
+
+
+<div class="terms">
+
+<input
+id="terms"
+type="checkbox"
+required>
+
+<label for="terms">
+
+I agree to the
+<a href="#" onclick="return false;">
+Terms of Use
+</a>
+
+and acknowledge the
+<a href="#" onclick="return false;">
+Privacy Policy
+</a>.
+
+</label>
+
+</div>
+
+
+<div id="message"
+     class="message">
+</div>
+
+
+<button
+type="submit"
+id="createBtn"
+class="create-btn">
+
+CREATE ON1 ACCOUNT
+
+</button>
+
+
+<div class="already">
+
+Already have an account?
+
+<a href="login.html">
+Sign in
+</a>
+
+</div>
+
+
+</form>
+
+
+<div class="trust">
+
+<span>●</span>
+
+Secure account experience
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<p>
+
+ON1Ecosystem connects digital services,
+opportunities and participation in one ecosystem.
+
+</p>
+
+<div class="footer-brand">
+
+A DSATECHON1 initiative
+
+</div>
+
+</footer>
+
+
+</div>
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    updateProfile
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
+
+    authDomain:
+        "dsatechon1-c8b41.firebaseapp.com",
+
+    projectId:
+        "dsatechon1-c8b41",
+
+    storageBucket:
+        "dsatechon1-c8b41.firebasestorage.app",
+
+    messagingSenderId:
+        "5740594058",
+
+    appId:
+        "1:5740594058:web:23fbbca5392f12db863e73"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* =====================================================
+   PERMANENT FALLBACK SPONSOR
+===================================================== */
+
+const FALLBACK_SPONSOR_USERNAME =
+    "JennyKhiss";
+
+const FALLBACK_SPONSOR_ON1_ID =
+    "ON12YBGYI9";
+
+
+/* =====================================================
+   PASSWORD TOGGLE
+===================================================== */
+
+window.togglePassword =
+function(id,button){
+
+    const input =
+        document.getElementById(id);
+
+
+    if(input.type === "password"){
+
+        input.type = "text";
+
+        button.textContent =
+            "HIDE";
+
+    }else{
+
+        input.type = "password";
+
+        button.textContent =
+            "SHOW";
+
+    }
+
+};
+
+
+/* =====================================================
+   GENERATE UNIQUE ON1 ID
+=====================================================
+
+   Format:
+
+   ON1 + 7 uppercase letters/numbers
+
+   Total = 10 characters.
+
+   Example:
+
+   ON1A1B2C3D
+===================================================== */
+
+function generateON1Id(){
+
+    const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+
+    let result =
+        "ON1";
+
+
+    for(let i = 0; i < 7; i++){
+
+        result +=
+            characters.charAt(
+                Math.floor(
+                    Math.random() *
+                    characters.length
+                )
+            );
+
+    }
