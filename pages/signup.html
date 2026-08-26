@@ -856,9 +856,7 @@ Leave blank if nobody referred you.
 </div>
 
 
-<!-- =================================================
-     REFERRAL INFORMATION
-================================================== -->
+<!-- REFERRAL DETECTION -->
 
 <div
 id="referralBox"
@@ -869,28 +867,28 @@ class="referral-box">
 </strong>
 
 <p>
+
 You were invited by:
+
 <span
 id="referralName"
 class="sponsor-name">
 </span>
+
 </p>
 
 <div
 id="referralStatus"
 class="referral-status">
-Referral sponsor identified.
-</div>
+
+Referral code captured.
 
 </div>
 
+</div>
 
-<!-- =================================================
-     HIDDEN SPONSOR ID
 
-     This stores the actual ON1 ID used for referral
-     processing.
-================================================== -->
+<!-- HIDDEN SPONSOR ID -->
 
 <input
 type="hidden"
@@ -898,8 +896,11 @@ id="referredByIdHidden"
 value="">
 
 
-<div class="referral-box"
-     style="display:block;">
+<!-- FALLBACK INFORMATION -->
+
+<div
+class="referral-box"
+style="display:block;">
 
 <strong>
 🤝 Referral participation
@@ -1032,8 +1033,7 @@ import {
     getFirestore,
     doc,
     setDoc,
-    serverTimestamp,
-    getDoc
+    serverTimestamp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
@@ -1069,8 +1069,10 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
+
 const auth =
     getAuth(app);
+
 
 const db =
     getFirestore(app);
@@ -1080,46 +1082,26 @@ const db =
    PERMANENT FALLBACK SPONSOR
 ===================================================== */
 
+/*
+   IMPORTANT:
+
+   Correct permanent fallback ON1 ID:
+
+   ON1 + 7 characters = 10 characters total
+
+   ON12YBGY19
+*/
+
 const FALLBACK_SPONSOR_USERNAME =
     "JennyKhiss";
 
 
 const FALLBACK_SPONSOR_ON1_ID =
-    "ON12YBGYI9";
+    "ON12YBGY19";
 
 
 /* =====================================================
-   PASSWORD TOGGLE
-===================================================== */
-
-window.togglePassword =
-function(id,button){
-
-    const input =
-        document.getElementById(id);
-
-
-    if(input.type === "password"){
-
-        input.type = "text";
-
-        button.textContent =
-            "HIDE";
-
-    }else{
-
-        input.type = "password";
-
-        button.textContent =
-            "SHOW";
-
-    }
-
-};
-
-
-/* =====================================================
-   FORM ELEMENTS
+   PAGE ELEMENTS
 ===================================================== */
 
 const form =
@@ -1171,7 +1153,89 @@ const referredByIdHidden =
 
 
 /* =====================================================
-   REFERRAL URL AUTO-CAPTURE
+   PASSWORD TOGGLE
+===================================================== */
+
+window.togglePassword =
+function(id,button){
+
+    const input =
+        document.getElementById(id);
+
+
+    if(input.type === "password"){
+
+        input.type = "text";
+
+        button.textContent =
+            "HIDE";
+
+    }else{
+
+        input.type = "password";
+
+        button.textContent =
+            "SHOW";
+
+    }
+
+};
+
+
+/* =====================================================
+   REFERRAL HANDLING
+===================================================== */
+
+/*
+   This function handles both:
+
+   ?ref=ON1MWU11Y9
+
+   and manual referral entry.
+*/
+
+function applyReferral(code){
+
+    const clean =
+        String(code || "").trim();
+
+
+    if(!clean){
+
+        return;
+
+    }
+
+
+    referralInputElement.value =
+        clean;
+
+
+    /*
+       The referral code is currently treated
+       as the sponsor ON1 ID.
+    */
+
+    referredByIdHidden.value =
+        clean;
+
+
+    referralName.textContent =
+        clean;
+
+
+    referralStatus.textContent =
+        "Referral code captured successfully.";
+
+
+    referralBox.style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   AUTO-CAPTURE REFERRAL FROM URL
 ===================================================== */
 
 const params =
@@ -1184,47 +1248,14 @@ const referralFromURL =
     params.get("ref");
 
 
-/*
-   If the visitor arrives with:
-
-   ?ref=ON1MWU11Y9
-
-   automatically place that value inside
-   the visible Referral Code field.
-*/
-
 if(
     referralFromURL &&
     referralFromURL.trim() !== ""
 ){
 
-    const cleanReferral =
-        referralFromURL.trim();
-
-
-    referralInputElement.value =
-        cleanReferral;
-
-
-    /*
-       Because the referral value is an ON1 ID,
-       use it as the sponsor ON1 ID.
-    */
-
-    referredByIdHidden.value =
-        cleanReferral;
-
-
-    referralName.textContent =
-        cleanReferral;
-
-
-    referralStatus.textContent =
-        "Referral code captured from your invitation link.";
-
-
-    referralBox.style.display =
-        "block";
+    applyReferral(
+        referralFromURL
+    );
 
 }
 
@@ -1233,40 +1264,27 @@ if(
    MANUAL REFERRAL INPUT
 ===================================================== */
 
-/*
-   If the user manually types:
-
-   ON1MWU11Y9
-
-   the hidden sponsor ID must also update.
-*/
-
 referralInputElement.addEventListener(
     "input",
     function(){
 
         const value =
-            referralInputElement.value.trim();
+            referralInputElement
+            .value
+            .trim();
 
 
         if(value){
 
-            referredByIdHidden.value =
-                value;
-
-
-            referralName.textContent =
-                value;
-
-
-            referralStatus.textContent =
-                "Referral code entered manually.";
-
-
-            referralBox.style.display =
-                "block";
+            applyReferral(value);
 
         }else{
+
+            /*
+               Empty referral field.
+
+               Use permanent fallback.
+            */
 
             referredByIdHidden.value =
                 FALLBACK_SPONSOR_ON1_ID;
@@ -1282,15 +1300,41 @@ referralInputElement.addEventListener(
 
 
 /* =====================================================
-   GENERATE UNIQUE ON1 ID
-=====================================================
+   SET FALLBACK IMMEDIATELY
+===================================================== */
 
+/*
+   If there is no referral URL,
+   the hidden sponsor ID starts with
+   the permanent fallback.
+*/
+
+if(
+    !referralFromURL ||
+    referralFromURL.trim() === ""
+){
+
+    referredByIdHidden.value =
+        FALLBACK_SPONSOR_ON1_ID;
+
+}
+
+
+/* =====================================================
+   GENERATE UNIQUE ON1 ID
+===================================================== */
+
+/*
    Format:
 
-   ON1 + 7 characters
+   ON1 + 7 uppercase letters/numbers
+
+   Example:
+
+   ON1A7K92Q
 
    Total = 10 characters.
-===================================================== */
+*/
 
 function generateON1Id(){
 
@@ -1343,17 +1387,23 @@ function showMessage(
 
 
 /* =====================================================
-   FIREBASE ERROR TRANSLATOR
+   FIREBASE ERROR MESSAGE
 ===================================================== */
 
 function getFriendlyError(error){
+
+    console.error(
+        "Full Firebase error:",
+        error
+    );
+
 
     if(
         error.code ===
         "auth/email-already-in-use"
     ){
 
-        return "This email is already registered. Please sign in or use another email.";
+        return "This email is already registered. Please login or use another email.";
 
     }
 
@@ -1373,7 +1423,7 @@ function getFriendlyError(error){
         "auth/weak-password"
     ){
 
-        return "Password is too weak. Use at least 8 characters.";
+        return "Password is too weak. Please use at least 8 characters.";
 
     }
 
@@ -1383,20 +1433,36 @@ function getFriendlyError(error){
         "auth/network-request-failed"
     ){
 
-        return "Network error. Check your internet connection and try again.";
+        return "Network error. Please check your internet connection and try again.";
 
     }
 
 
     if(
         error.code ===
-        "permission-denied" ||
-
-        error.code ===
-        "firestore/permission-denied"
+        "permission-denied"
     ){
 
-        return "Firebase created the account, but Firestore rejected the profile. Please check the Firestore Rules.";
+        return "Firestore permission denied. Please check the published Firestore Rules.";
+
+    }
+
+
+    if(
+        error.code ===
+        "auth/operation-not-allowed"
+    ){
+
+        return "Email/password registration is not enabled in Firebase Authentication.";
+
+    }
+
+
+    if(error.code){
+
+        return "Signup failed (" +
+               error.code +
+               "). Please try again.";
 
     }
 
@@ -1414,7 +1480,7 @@ function getFriendlyError(error){
 
 
 /* =====================================================
-   SIGNUP
+   SIGNUP FORM
 ===================================================== */
 
 form.addEventListener(
@@ -1425,7 +1491,7 @@ form.addEventListener(
 
 
         /* =============================================
-           FORM VALUES
+           READ FORM VALUES
         ============================================= */
 
         const firstName =
@@ -1475,18 +1541,7 @@ form.addEventListener(
 
 
         /* =============================================
-           CLEAR MESSAGE
-        ============================================= */
-
-        message.className =
-            "message";
-
-        message.textContent =
-            "";
-
-
-        /* =============================================
-           BASIC VALIDATION
+           VALIDATION
         ============================================= */
 
         if(!firstName){
@@ -1525,6 +1580,18 @@ form.addEventListener(
         }
 
 
+        if(!email){
+
+            showMessage(
+                "Please enter your email address.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
         if(password.length < 8){
 
             showMessage(
@@ -1550,19 +1617,18 @@ form.addEventListener(
 
 
         /* =============================================
-           DETERMINE REFERRAL
+           DETERMINE SPONSOR
         ============================================= */
 
-        let referredBy;
+        let referredBy = "";
 
-        let referredById;
+        let referredById = "";
 
 
         if(referralInput){
 
             /*
-               A supplied referral is treated as the
-               sponsor's ON1 ID.
+               User supplied a referral.
 
                Example:
 
@@ -1574,8 +1640,15 @@ form.addEventListener(
 
 
             referredById =
-                referredByIdHidden.value.trim();
+                referredByIdHidden
+                .value
+                .trim();
 
+
+            /*
+               Safety fallback if hidden value
+               somehow did not update.
+            */
 
             if(!referredById){
 
@@ -1589,7 +1662,7 @@ form.addEventListener(
             /*
                No referral supplied.
 
-               Use permanent fallback sponsor.
+               Permanent fallback sponsor.
             */
 
             referredBy =
@@ -1603,13 +1676,13 @@ form.addEventListener(
 
 
         /* =============================================
-           FINAL REFERRAL SAFETY CHECK
+           FINAL SAFETY CHECK
         ============================================= */
 
         if(!referredBy){
 
             showMessage(
-                "Referral information could not be determined.",
+                "Referral sponsor could not be determined.",
                 "error"
             );
 
@@ -1621,7 +1694,7 @@ form.addEventListener(
         if(!referredById){
 
             showMessage(
-                "Referral sponsor ID could not be determined.",
+                "Referral sponsor ID is missing. Please try again.",
                 "error"
             );
 
@@ -1631,21 +1704,50 @@ form.addEventListener(
 
 
         /* =============================================
-           DISABLE BUTTON
+           CHECK REFERRAL ID FORMAT WHEN IT LOOKS
+           LIKE AN ON1 ID
+        ============================================= */
+
+        if(
+            referredById.startsWith("ON1") &&
+            !/^ON1[A-Z0-9]{7}$/.test(
+                referredById
+            )
+        ){
+
+            showMessage(
+                "Invalid ON1 referral ID. An ON1 ID must contain exactly 10 characters.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        /* =============================================
+           BUTTON STATE
         ============================================= */
 
         createBtn.disabled =
             true;
 
+
         createBtn.textContent =
             "CREATING ACCOUNT...";
+
+
+        showMessage(
+            "Creating your ON1Ecosystem account...",
+            "success"
+        );
 
 
         try{
 
 
             /* =========================================
-               1. CREATE FIREBASE AUTH ACCOUNT
+               1. CREATE FIREBASE AUTH USER
             ========================================= */
 
             const userCredential =
@@ -1661,7 +1763,7 @@ form.addEventListener(
 
 
             /* =========================================
-               2. SAVE DISPLAY NAME
+               2. SET FIREBASE DISPLAY NAME
             ========================================= */
 
             await updateProfile(
@@ -1676,7 +1778,7 @@ form.addEventListener(
 
 
             /* =========================================
-               3. GENERATE NEW USER'S ON1 ID
+               3. GENERATE PERMANENT ON1 ID
             ========================================= */
 
             const on1Id =
@@ -1688,15 +1790,17 @@ form.addEventListener(
             ========================================= */
 
             await setDoc(
+
                 doc(
                     db,
                     "users",
                     user.uid
                 ),
+
                 {
 
                     /* ================================
-                       BASIC PROFILE
+                       PERSONAL PROFILE
                     ================================= */
 
                     firstName:
@@ -1713,7 +1817,7 @@ form.addEventListener(
 
 
                     /* ================================
-                       USER'S OWN PERMANENT ON1 ID
+                       PERMANENT ON1 ID
                     ================================= */
 
                     on1Id:
@@ -1729,7 +1833,7 @@ form.addEventListener(
 
 
                     /* ================================
-                       WELCOME XP
+                       INITIAL XP
                     ================================= */
 
                     XP:
@@ -1737,7 +1841,7 @@ form.addEventListener(
 
 
                     /* ================================
-                       LEVEL
+                       INITIAL LEVEL
                     ================================= */
 
                     level:
@@ -1776,10 +1880,6 @@ form.addEventListener(
 
                     /* ================================
                        REFERRAL CODE
-
-                       Save the supplied code.
-
-                       If none was supplied, save null.
                     ================================= */
 
                     referralCode:
@@ -1788,7 +1888,7 @@ form.addEventListener(
 
 
                     /* ================================
-                       REFERRAL USERNAME / CODE
+                       REFERRAL SPONSOR
                     ================================= */
 
                     referredBy:
@@ -1796,7 +1896,7 @@ form.addEventListener(
 
 
                     /* ================================
-                       REFERRAL SPONSOR ON1 ID
+                       SPONSOR ON1 ID
                     ================================= */
 
                     referredById:
@@ -1830,21 +1930,19 @@ form.addEventListener(
                         serverTimestamp()
 
                 }
+
             );
 
 
             /* =========================================
-               5. SUCCESS MESSAGE
+               5. SUCCESS
             ========================================= */
 
             showMessage(
 
                 "Account created successfully! " +
-
                 "Your ON1 ID is " +
-
                 on1Id +
-
                 ". You received 100 ON1 and 1,000 XP.",
 
                 "success"
@@ -1857,7 +1955,7 @@ form.addEventListener(
 
 
             /* =========================================
-               6. GO TO DASHBOARD
+               6. DASHBOARD
             ========================================= */
 
             setTimeout(
@@ -1887,6 +1985,7 @@ form.addEventListener(
 
             createBtn.disabled =
                 false;
+
 
             createBtn.textContent =
                 "CREATE ON1 ACCOUNT";
