@@ -479,6 +479,226 @@ button{
 }
 
 /* =====================================================
+   REFERRAL PROGRAM
+===================================================== */
+
+.referral-card{
+    margin-top:14px;
+}
+
+.referral-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.referral-icon{
+    width:42px;
+    height:42px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:12px;
+
+    background:rgba(0,223,136,.08);
+
+    font-size:20px;
+}
+
+.referral-intro{
+    flex:1;
+}
+
+.referral-reward{
+    margin-top:13px;
+
+    padding:12px;
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245,196,81,.07),
+            rgba(0,223,136,.045)
+        );
+
+    border:1px solid rgba(245,196,81,.16);
+}
+
+.referral-reward strong{
+    display:block;
+
+    color:var(--gold);
+
+    font-size:12px;
+}
+
+.referral-reward p{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.5;
+}
+
+.referral-link-box{
+    margin-top:14px;
+}
+
+.referral-label{
+    display:block;
+
+    margin-bottom:7px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+.referral-link-row{
+    display:flex;
+
+    gap:7px;
+}
+
+.referral-link{
+    flex:1;
+
+    min-width:0;
+
+    height:42px;
+
+    padding:0 11px;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    background:#07101b;
+
+    color:#cfe0f2;
+
+    font-size:9px;
+
+    outline:none;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.copy-btn{
+    width:82px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            #0065d8
+        );
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.copy-btn:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+}
+
+.referral-stats{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:9px;
+
+    margin-top:12px;
+}
+
+.referral-stat{
+    padding:12px;
+
+    border-radius:10px;
+
+    background:rgba(7,16,27,.75);
+
+    border:1px solid var(--border);
+}
+
+.referral-stat-label{
+    color:var(--muted);
+
+    font-size:8px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.4px;
+}
+
+.referral-stat-value{
+    margin-top:5px;
+
+    font-size:17px;
+
+    font-weight:900;
+}
+
+.referral-count{
+    color:var(--blue2);
+}
+
+.referral-bonus{
+    color:var(--gold);
+}
+
+.referral-note{
+    margin-top:10px;
+
+    color:#60758b;
+
+    font-size:8px;
+
+    line-height:1.5;
+
+    text-align:center;
+}
+
+.copy-message{
+    display:none;
+
+    margin-top:8px;
+
+    text-align:center;
+
+    color:var(--green);
+
+    font-size:8px;
+}
+
+.copy-message.show{
+    display:block;
+}
+
+/* =====================================================
    PROFILE
 ===================================================== */
 
@@ -600,6 +820,14 @@ footer{
     .brand img{
         width:34px;
         height:34px;
+    }
+
+    .referral-link-row{
+        flex-direction:column;
+    }
+
+    .copy-btn{
+        width:100%;
     }
 
 }
@@ -768,7 +996,7 @@ footer{
 
 
 <!-- =====================================================
-     MAIN
+     MAIN GRID
 ===================================================== -->
 
 <div class="main-grid">
@@ -1055,6 +1283,153 @@ footer{
 </div>
 
 
+<!-- =====================================================
+     REFERRAL PROGRAM
+===================================================== -->
+
+<section class="card referral-card">
+
+
+    <div class="referral-header">
+
+
+        <div class="referral-intro">
+
+            <div class="card-title">
+                Referral Program
+            </div>
+
+            <div class="card-subtitle">
+
+                Invite new members to ON1Ecosystem
+                using your personal referral link.
+
+            </div>
+
+        </div>
+
+
+        <div class="referral-icon">
+            🤝
+        </div>
+
+
+    </div>
+
+
+    <!-- REWARD -->
+
+    <div class="referral-reward">
+
+        <strong>
+            🎁 Referral Reward: 25 ON1 + 250 XP
+        </strong>
+
+        <p>
+            Earn 25 ON1Coin and 250 XP for each
+            successful referral, subject to the
+            ON1Ecosystem referral rules.
+        </p>
+
+    </div>
+
+
+    <!-- REFERRAL LINK -->
+
+    <div class="referral-link-box">
+
+        <label class="referral-label">
+            YOUR REFERRAL LINK
+        </label>
+
+
+        <div class="referral-link-row">
+
+            <input
+                type="text"
+                class="referral-link"
+                id="referralLink"
+                readonly
+                value="Generating your referral link...">
+
+
+            <button
+                type="button"
+                class="copy-btn"
+                id="copyReferralBtn">
+
+                COPY LINK
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="copy-message"
+            id="copyMessage">
+
+            Referral link copied successfully.
+
+        </div>
+
+    </div>
+
+
+    <!-- REFERRAL STATS -->
+
+    <div class="referral-stats">
+
+
+        <div class="referral-stat">
+
+            <div class="referral-stat-label">
+                Referral Count
+            </div>
+
+            <div
+                class="referral-stat-value referral-count"
+                id="referralCount">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="referral-stat">
+
+            <div class="referral-stat-label">
+                Referral Bonus
+            </div>
+
+            <div
+                class="referral-stat-value referral-bonus"
+                id="referralBonus">
+
+                0 ON1
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="referral-note">
+
+        Referral rewards are processed by the
+        ON1Ecosystem reward system. Your dashboard
+        does not directly modify your balance or XP.
+
+    </div>
+
+
+</section>
+
+
 <footer>
 
     ON1Ecosystem — One Ecosystem. Multiple Solutions.
@@ -1166,6 +1541,17 @@ const DEFAULT_REFERRER = {
 
 
 /* =====================================================
+   REFERRAL SETTINGS
+===================================================== */
+
+const REFERRAL_REWARD_ON1 =
+    25;
+
+const REFERRAL_REWARD_XP =
+    250;
+
+
+/* =====================================================
    CONSTANTS
 ===================================================== */
 
@@ -1204,6 +1590,21 @@ const streakStatus =
 const logoutBtn =
     document.getElementById("logoutBtn");
 
+const referralLink =
+    document.getElementById("referralLink");
+
+const copyReferralBtn =
+    document.getElementById("copyReferralBtn");
+
+const copyMessage =
+    document.getElementById("copyMessage");
+
+const referralCount =
+    document.getElementById("referralCount");
+
+const referralBonus =
+    document.getElementById("referralBonus");
+
 
 /* =====================================================
    CURRENT USER
@@ -1235,11 +1636,6 @@ function calculateLevel(xp){
 ===================================================== */
 
 function getXP(data){
-
-    /*
-       Support the different possible field names
-       without changing Firestore.
-    */
 
     if(data.XP !== undefined){
 
@@ -1337,14 +1733,6 @@ function generateON1Id(uid){
 
     }
 
-    /*
-       IMPORTANT:
-
-       Firebase UID is NEVER displayed directly.
-
-       ON1 ID = ON1 + exactly 7 characters.
-    */
-
     const clean =
         String(uid)
         .replace(
@@ -1366,11 +1754,6 @@ function generateON1Id(uid){
 ===================================================== */
 
 function getON1Id(data,user){
-
-    /*
-       Accept a properly formatted ON1 ID
-       if one already exists.
-    */
 
     const possibleIds = [
 
@@ -1395,13 +1778,6 @@ function getON1Id(data,user){
             .toUpperCase();
 
 
-        /*
-           Valid ON1 ID must be:
-
-           ON1 + 7 characters
-           = 10 characters total
-        */
-
         if(
             /^ON1[A-Z0-9]{7}$/.test(id)
         ){
@@ -1412,13 +1788,6 @@ function getON1Id(data,user){
 
     }
 
-
-    /*
-       If Firestore contains the Firebase UID
-       instead of an ON1 ID, ignore it.
-
-       Generate the proper ON1 ID.
-    */
 
     return generateON1Id(
         user.uid
@@ -1474,11 +1843,6 @@ function getReferralId(data){
         String(possible).trim() !== ""
     ){
 
-        /*
-           If it is already an ON1 ID,
-           use it.
-        */
-
         const value =
             String(possible)
             .trim()
@@ -1496,13 +1860,198 @@ function getReferralId(data){
     }
 
 
-    /*
-       No valid referral ID.
+    return DEFAULT_REFERRER.on1Id;
 
-       Use your default referral.
+}
+
+
+/* =====================================================
+   GET REFERRAL COUNT
+===================================================== */
+
+function getReferralCount(data){
+
+    const possibleValues = [
+
+        data.referralCount,
+        data.referrals,
+        data.referredCount,
+        data.totalReferrals
+
+    ];
+
+
+    for(
+        const value of possibleValues
+    ){
+
+        if(
+            value !== undefined &&
+            value !== null
+        ){
+
+            const number =
+                Number(value);
+
+            if(
+                Number.isFinite(number) &&
+                number >= 0
+            ){
+
+                return Math.floor(number);
+
+            }
+
+        }
+
+    }
+
+
+    return 0;
+
+}
+
+
+/* =====================================================
+   GET REFERRAL BONUS
+===================================================== */
+
+function getReferralBonus(data,count){
+
+    const possibleValues = [
+
+        data.referralBonus,
+        data.referralBonusON1,
+        data.totalReferralBonus
+
+    ];
+
+
+    for(
+        const value of possibleValues
+    ){
+
+        if(
+            value !== undefined &&
+            value !== null
+        ){
+
+            const number =
+                Number(value);
+
+            if(
+                Number.isFinite(number) &&
+                number >= 0
+            ){
+
+                return number;
+
+            }
+
+        }
+
+    }
+
+
+    /*
+       Until the trusted reward system writes
+       the actual bonus, calculate the displayed
+       expected referral bonus from the count.
+
+       This does NOT change Firestore balance.
     */
 
-    return DEFAULT_REFERRER.on1Id;
+    return (
+        count *
+        REFERRAL_REWARD_ON1
+    );
+
+}
+
+
+/* =====================================================
+   BUILD REFERRAL LINK
+===================================================== */
+
+function buildReferralLink(on1Id){
+
+    if(
+        !on1Id ||
+        !/^ON1[A-Z0-9]{7}$/.test(on1Id)
+    ){
+
+        return "";
+
+    }
+
+
+    const signupURL =
+        new URL(
+            "signup.html",
+            window.location.href
+        );
+
+
+    signupURL.searchParams.set(
+        "ref",
+        on1Id
+    );
+
+
+    return signupURL.toString();
+
+}
+
+
+/* =====================================================
+   UPDATE REFERRAL PROGRAM
+===================================================== */
+
+function updateReferralProgram(
+    data,
+    user
+){
+
+    const on1Id =
+        getON1Id(
+            data,
+            user
+        );
+
+
+    const count =
+        getReferralCount(data);
+
+
+    const bonus =
+        getReferralBonus(
+            data,
+            count
+        );
+
+
+    const link =
+        buildReferralLink(
+            on1Id
+        );
+
+
+    referralLink.value =
+        link ||
+        "Your referral link is being prepared...";
+
+
+    referralCount.textContent =
+        count.toLocaleString();
+
+
+    referralBonus.textContent =
+        Number(bonus).toLocaleString() +
+        " ON1";
+
+
+    copyReferralBtn.disabled =
+        !link;
 
 }
 
@@ -1606,13 +2155,17 @@ function updateDashboard(data){
 
     /* ON1 ID */
 
-    document.getElementById(
-        "on1Id"
-    ).textContent =
+    const on1Id =
         getON1Id(
             data,
             currentUser
         );
+
+
+    document.getElementById(
+        "on1Id"
+    ).textContent =
+        on1Id;
 
 
     /* REFERRAL */
@@ -1627,6 +2180,14 @@ function updateDashboard(data){
         "referralId"
     ).textContent =
         getReferralId(data);
+
+
+    /* REFERRAL PROGRAM */
+
+    updateReferralProgram(
+        data,
+        currentUser
+    );
 
 
     /* XP PROGRESS */
@@ -1708,9 +2269,7 @@ function updateMiningState(data){
         Date.now();
 
 
-    /* ===============================================
-       NEVER MINED
-    =============================================== */
+    /* NEVER MINED */
 
     if(!lastClaim){
 
@@ -1742,9 +2301,7 @@ function updateMiningState(data){
         now - lastClaim;
 
 
-    /* ===============================================
-       NEXT CYCLE READY
-    =============================================== */
+    /* NEXT CYCLE READY */
 
     if(elapsed >= DAY){
 
@@ -1772,9 +2329,7 @@ function updateMiningState(data){
     }
 
 
-    /* ===============================================
-       MINING ACTIVE
-    =============================================== */
+    /* MINING ACTIVE */
 
     mineBtn.disabled =
         true;
@@ -1792,9 +2347,7 @@ function updateMiningState(data){
         formatTime(remaining);
 
 
-    /* ===============================================
-       STREAK
-    =============================================== */
+    /* STREAK */
 
     const streakAlreadyClaimed =
         lastStreakClaim >= lastClaim;
@@ -1933,6 +2486,111 @@ function showMessage(
 
 
 /* =====================================================
+   COPY REFERRAL LINK
+===================================================== */
+
+copyReferralBtn.addEventListener(
+    "click",
+    async function(){
+
+        const link =
+            referralLink.value;
+
+
+        if(
+            !link ||
+            link.indexOf(
+                "http"
+            ) !== 0
+        ){
+
+            return;
+
+        }
+
+
+        try{
+
+            await navigator.clipboard.writeText(
+                link
+            );
+
+
+            copyMessage.textContent =
+                "Referral link copied successfully.";
+
+            copyMessage.classList.add(
+                "show"
+            );
+
+
+            copyReferralBtn.textContent =
+                "COPIED";
+
+
+            setTimeout(
+                function(){
+
+                    copyMessage.classList.remove(
+                        "show"
+                    );
+
+                    copyReferralBtn.textContent =
+                        "COPY LINK";
+
+                },
+                2200
+            );
+
+
+        }catch(error){
+
+            /*
+               Fallback for browsers where
+               navigator.clipboard is unavailable.
+            */
+
+            referralLink.focus();
+
+            referralLink.select();
+
+            document.execCommand(
+                "copy"
+            );
+
+
+            copyMessage.textContent =
+                "Referral link copied successfully.";
+
+            copyMessage.classList.add(
+                "show"
+            );
+
+            copyReferralBtn.textContent =
+                "COPIED";
+
+
+            setTimeout(
+                function(){
+
+                    copyMessage.classList.remove(
+                        "show"
+                    );
+
+                    copyReferralBtn.textContent =
+                        "COPY LINK";
+
+                },
+                2200
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
    LOAD USER
 ===================================================== */
 
@@ -1966,8 +2624,6 @@ async function loadUser(user){
 
 
     /*
-       IMPORTANT:
-
        Dashboard only READS the user's data.
 
        It does NOT create XP.
