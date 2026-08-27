@@ -1,1 +1,44 @@
+name: ON1 Referral Reward Worker
 
+on:
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: "*/30 * * * *"
+
+
+permissions:
+  contents: read
+
+
+jobs:
+
+  referral-rewards:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "referral-worker/package-lock.json"
+
+
+      - name: Install referral worker dependencies
+        working-directory: referral-worker
+        run: npm ci
+
+
+      - name: Run ON1 referral worker
+        working-directory: referral-worker
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: npm start
