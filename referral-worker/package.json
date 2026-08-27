@@ -1,0 +1,16 @@
+{
+  "name": "on1-referral-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ON1Ecosystem referral reward worker",
+  "type": "module",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "start": "node worker.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.6.0"
+  }
+}
