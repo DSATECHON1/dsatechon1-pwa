@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>ON1 Dashboard</title>
-
-<meta name="theme-color"
-      content="#06101d">
+<title>ON1 Dashboard</title><meta name="theme-color"
+content="#06101d">
 
 <style>
 
@@ -558,6 +549,54 @@ button{
         );
 
     transition:width .5s ease;
+}
+
+
+/* =====================================================
+   ADVERTISEMENT
+===================================================== */
+
+.ad-section{
+    margin-top:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+
+    min-height:250px;
+
+    overflow:hidden;
+}
+
+.ad-container{
+    width:300px;
+
+    height:250px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.ad-label{
+    position:absolute;
+
+    width:1px;
+    height:1px;
+
+    overflow:hidden;
+
+    clip:rect(0 0 0 0);
+
+    white-space:nowrap;
 }
 
 
@@ -1137,678 +1176,616 @@ footer{
 
 }
 
-</style>
-
-</head>
-
-
-<body>
-
-
-<!-- =====================================================
+</style></head><body><!-- =====================================================
      LOADING
-===================================================== -->
+===================================================== --><div class="loading" id="loading"><div class="loading-box">
 
-<div class="loading" id="loading">
-
-    <div class="loading-box">
-
-        <div style="font-size:27px;">
-            ◉
-        </div>
-
-        <strong>
-            Loading ON1 Dashboard
-        </strong>
-
-        <p id="loadingText">
-            Connecting to your account...
-        </p>
-
+    <div style="font-size:27px;">
+        ◉
     </div>
 
-</div>
+    <strong>
+        Loading ON1 Dashboard
+    </strong>
 
-
-<div class="page">
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="header">
-
-    <a href="../index.html"
-       class="brand">
-
-        <img
-            src="../logo.png"
-            alt="ON1Ecosystem">
-
-        <div>
-
-            <strong>
-                ON1<span>Ecosystem</span>
-            </strong>
-
-            <small>
-                MEMBER DASHBOARD
-            </small>
-
-        </div>
-
-    </a>
-
-
-    <button
-        class="logout"
-        id="logoutBtn">
-
-        LOGOUT
-
-    </button>
-
-</header>
-
-
-<!-- =====================================================
-     WELCOME
-===================================================== -->
-
-<section class="welcome">
-
-    <h1>
-        Welcome,
-        <span id="firstName">Member</span>
-        👋
-    </h1>
-
-    <p>
-        Your ON1Ecosystem account and activities.
+    <p id="loadingText">
+        Connecting to your account...
     </p>
 
-    <div
-        class="welcome-bonus"
-        id="welcomeBonus">
+</div>
 
-        🎁 Welcome bonus: 1,000 XP
+</div><div class="page"><!-- =====================================================
+     HEADER
+===================================================== --><header class="header"><a href="../index.html"
+   class="brand">
+
+    <img
+        src="../logo.png"
+        alt="ON1Ecosystem">
+
+    <div>
+
+        <strong>
+            ON1<span>Ecosystem</span>
+        </strong>
+
+        <small>
+            MEMBER DASHBOARD
+        </small>
 
     </div>
 
-</section>
+</a>
 
 
-<!-- =====================================================
+<button
+    class="logout"
+    id="logoutBtn">
+
+    LOGOUT
+
+</button>
+
+</header><!-- =====================================================
+     WELCOME
+===================================================== --><section class="welcome"><h1>
+    Welcome,
+    <span id="firstName">Member</span>
+    👋
+</h1>
+
+<p>
+    Your ON1Ecosystem account and activities.
+</p>
+
+<div
+    class="welcome-bonus"
+    id="welcomeBonus">
+
+    🎁 Welcome bonus: 1,000 XP
+
+</div>
+
+</section><!-- =====================================================
      STATS
-===================================================== -->
+===================================================== --><section class="stats"><div class="stat-card">
 
-<section class="stats">
+    <div class="stat-label">
+        ON1Coin Balance
+    </div>
 
+    <div
+        class="stat-value coin"
+        id="balance">
 
-    <div class="stat-card">
-
-        <div class="stat-label">
-            ON1Coin Balance
-        </div>
-
-        <div
-            class="stat-value coin"
-            id="balance">
-
-            0.000
-
-        </div>
+        0.000
 
     </div>
 
+</div>
 
-    <div class="stat-card">
 
-        <div class="stat-label">
-            Experience Points
-        </div>
+<div class="stat-card">
 
-        <div
-            class="stat-value xp"
-            id="xp">
+    <div class="stat-label">
+        Experience Points
+    </div>
 
-            0
+    <div
+        class="stat-value xp"
+        id="xp">
 
-        </div>
+        0
 
     </div>
 
+</div>
 
-    <div class="stat-card">
 
-        <div class="stat-label">
-            Current Level
-        </div>
+<div class="stat-card">
 
-        <div
-            class="stat-value level"
-            id="level">
+    <div class="stat-label">
+        Current Level
+    </div>
 
-            0
+    <div
+        class="stat-value level"
+        id="level">
 
-        </div>
+        0
 
     </div>
 
+</div>
 
-</section>
-
-
-<!-- =====================================================
+</section><!-- =====================================================
      MAIN GRID
-===================================================== -->
-
-<div class="main-grid">
-
-
-<!-- =====================================================
+===================================================== --><div class="main-grid"><!-- =====================================================
      MINING CARD
-===================================================== -->
+===================================================== --><section class="card mining-card"><div class="mining-top">
 
-<section class="card mining-card">
+    <div>
 
-
-    <div class="mining-top">
-
-        <div>
-
-            <div class="card-title">
-                ON1Coin Mining
-            </div>
-
-            <div class="card-subtitle">
-
-                Claim your 50 ON1Coin base mining
-                reward once every 24 hours.
-
-            </div>
-
+        <div class="card-title">
+            ON1Coin Mining
         </div>
 
+        <div class="card-subtitle">
 
-        <div class="mining-icon">
-            ⛏️
+            Claim your 50 ON1Coin base mining
+            reward once every 24 hours.
+
         </div>
 
     </div>
 
 
-    <div class="rate">
+    <div class="mining-icon">
+        ⛏️
+    </div>
 
-        <div class="rate-number">
-            50.000
-        </div>
+</div>
 
-        <div class="rate-label">
-            ON1Coin base reward / 24 hours
-        </div>
+
+<div class="rate">
+
+    <div class="rate-number">
+        50.000
+    </div>
+
+    <div class="rate-label">
+        ON1Coin base reward / 24 hours
+    </div>
+
+</div>
+
+
+<!-- STREAK -->
+
+<div class="streak">
+
+    <div class="streak-label">
+        Current mining streak
+    </div>
+
+    <div
+        class="streak-value"
+        id="streak">
+
+        Day 0
 
     </div>
 
+</div>
 
-    <!-- STREAK -->
 
-    <div class="streak">
+<!-- BASE MINING -->
 
-        <div class="streak-label">
-            Current mining streak
+<button
+    class="mine-btn"
+    id="mineBtn">
+
+    START MINING — +50 ON1
+
+</button>
+
+
+<div
+    class="next-mine"
+    id="nextMine">
+
+    Your 24-hour mining cycle is ready.
+
+</div>
+
+
+<!-- STREAK BONUS -->
+
+<button
+    class="streak-btn"
+    id="streakBtn"
+    disabled>
+
+    CLAIM STREAK BONUS
+
+</button>
+
+
+<div
+    class="streak-status"
+    id="streakStatus">
+
+    Claim today's base mining first.
+
+</div>
+
+
+<!-- MESSAGE -->
+
+<div
+    class="message"
+    id="message">
+</div>
+
+
+<!-- LEVEL PROGRESS -->
+
+<div class="level-box">
+
+    <div class="level-head">
+
+        <div
+            class="level-name"
+            id="levelName">
+
+            PROGRESS TO LEVEL 1
+
         </div>
 
         <div
-            class="streak-value"
-            id="streak">
+            class="level-xp"
+            id="levelXP">
 
-            Day 0
-
-        </div>
-
-    </div>
-
-
-    <!-- BASE MINING -->
-
-    <button
-        class="mine-btn"
-        id="mineBtn">
-
-        START MINING — +50 ON1
-
-    </button>
-
-
-    <div
-        class="next-mine"
-        id="nextMine">
-
-        Your 24-hour mining cycle is ready.
-
-    </div>
-
-
-    <!-- STREAK BONUS -->
-
-    <button
-        class="streak-btn"
-        id="streakBtn"
-        disabled>
-
-        CLAIM STREAK BONUS
-
-    </button>
-
-
-    <div
-        class="streak-status"
-        id="streakStatus">
-
-        Claim today's base mining first.
-
-    </div>
-
-
-    <!-- MESSAGE -->
-
-    <div
-        class="message"
-        id="message">
-    </div>
-
-
-    <!-- LEVEL PROGRESS -->
-
-    <div class="level-box">
-
-        <div class="level-head">
-
-            <div
-                class="level-name"
-                id="levelName">
-
-                PROGRESS TO LEVEL 1
-
-            </div>
-
-            <div
-                class="level-xp"
-                id="levelXP">
-
-                0 / 2,500 XP
-
-            </div>
-
-        </div>
-
-
-        <div class="progress">
-
-            <div
-                class="progress-bar"
-                id="progressBar">
-            </div>
+            0 / 2,500 XP
 
         </div>
 
     </div>
 
 
-</section>
+    <div class="progress">
 
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
 
-<!-- =====================================================
+    </div>
+
+</div>
+
+</section><!-- =====================================================
      PROFILE
-===================================================== -->
+===================================================== --><section class="card"><div class="card-title">
+    Your ON1 Profile
+</div>
 
-<section class="card">
-
-    <div class="card-title">
-        Your ON1 Profile
-    </div>
-
-    <div class="card-subtitle">
-        Your account information.
-    </div>
+<div class="card-subtitle">
+    Your account information.
+</div>
 
 
-    <div style="margin-top:14px;">
+<div style="margin-top:14px;">
 
 
-        <div class="profile-row">
+    <div class="profile-row">
 
-            <div class="profile-label">
-                ON1 ID
-            </div>
-
-            <div
-                class="profile-value on1-id"
-                id="on1Id">
-
-                —
-
-            </div>
-
+        <div class="profile-label">
+            ON1 ID
         </div>
 
+        <div
+            class="profile-value on1-id"
+            id="on1Id">
 
-        <div class="profile-row">
-
-            <div class="profile-label">
-                Username
-            </div>
-
-            <div
-                class="profile-value"
-                id="username">
-
-                —
-
-            </div>
+            —
 
         </div>
-
-
-        <div class="profile-row">
-
-            <div class="profile-label">
-                Email
-            </div>
-
-            <div
-                class="profile-value"
-                id="email">
-
-                —
-
-            </div>
-
-        </div>
-
-
-        <div class="profile-row">
-
-            <div class="profile-label">
-                KYC Level
-            </div>
-
-            <div
-                class="profile-value"
-                id="kycLevel">
-
-                0
-
-            </div>
-
-        </div>
-
-
-        <div class="profile-row">
-
-            <div class="profile-label">
-                Referral
-            </div>
-
-            <div
-                class="profile-value"
-                id="referral">
-
-                JennyKhiss
-
-            </div>
-
-        </div>
-
-
-        <div class="profile-row">
-
-            <div class="profile-label">
-                Referral ON1 ID
-            </div>
-
-            <div
-                class="profile-value on1-id"
-                id="referralId">
-
-                ON12YBGYI9
-
-            </div>
-
-        </div>
-
 
     </div>
 
-</section>
+
+    <div class="profile-row">
+
+        <div class="profile-label">
+            Username
+        </div>
+
+        <div
+            class="profile-value"
+            id="username">
+
+            —
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-row">
+
+        <div class="profile-label">
+            Email
+        </div>
+
+        <div
+            class="profile-value"
+            id="email">
+
+            —
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-row">
+
+        <div class="profile-label">
+            KYC Level
+        </div>
+
+        <div
+            class="profile-value"
+            id="kycLevel">
+
+            0
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-row">
+
+        <div class="profile-label">
+            Referral
+        </div>
+
+        <div
+            class="profile-value"
+            id="referral">
+
+            JennyKhiss
+
+        </div>
+
+    </div>
+
+
+    <div class="profile-row">
+
+        <div class="profile-label">
+            Referral ON1 ID
+        </div>
+
+        <div
+            class="profile-value on1-id"
+            id="referralId">
+
+            ON12YBGYI9
+
+        </div>
+
+    </div>
+
+
+</div>
+
+</section></div><!-- =====================================================
+     ADVERTISEMENT
+===================================================== --><section class="ad-section"><div class="ad-container">
+
+    <span class="ad-label">
+        Advertisement
+    </span>
+
+    <script>
+      atOptions = {
+        'key' : '596737d882e5e2b61fad4b39ff34ce62',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+
+    <script src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js"></script>
+
+</div>
+
+</section><!-- =====================================================
+     REFERRAL PROGRAM
+===================================================== --><section class="card referral-card"><div class="referral-header">
+
+
+    <div class="referral-intro">
+
+        <div class="card-title">
+            Referral Program
+        </div>
+
+        <div class="card-subtitle">
+
+            Invite friends and new members to
+            ON1Ecosystem using your personal link.
+
+        </div>
+
+    </div>
+
+
+    <div class="referral-icon">
+        🤝
+    </div>
 
 
 </div>
 
 
-<!-- =====================================================
-     REFERRAL PROGRAM
-===================================================== -->
+<!-- REWARD -->
 
-<section class="card referral-card">
+<div class="referral-reward">
 
+    <strong>
+        🎁 Earn 25 ON1 + 250 XP
+    </strong>
 
-    <div class="referral-header">
+    <p>
 
+        You receive 25 ON1Coin and 250 XP for
+        each successful referral according to
+        the ON1Ecosystem referral rules.
 
-        <div class="referral-intro">
+    </p>
 
-            <div class="card-title">
-                Referral Program
-            </div>
-
-            <div class="card-subtitle">
-
-                Invite friends and new members to
-                ON1Ecosystem using your personal link.
-
-            </div>
-
-        </div>
+</div>
 
 
-        <div class="referral-icon">
-            🤝
-        </div>
+<!-- REFERRAL OWNER -->
 
+<div class="referral-owner">
 
-    </div>
+    <div class="referral-owner-badge">
 
-
-    <!-- REWARD -->
-
-    <div class="referral-reward">
-
-        <strong>
-            🎁 Earn 25 ON1 + 250 XP
+        Referral ID:
+        <strong id="referralProgramId">
+            ON12YBGYI9
         </strong>
 
-        <p>
-
-            You receive 25 ON1Coin and 250 XP for
-            each successful referral according to
-            the ON1Ecosystem referral rules.
-
-        </p>
-
     </div>
 
 
-    <!-- REFERRAL OWNER -->
+    <div class="referral-owner-badge">
 
-    <div class="referral-owner">
-
-        <div class="referral-owner-badge">
-
-            Referral ID:
-            <strong id="referralProgramId">
-                ON12YBGYI9
-            </strong>
-
-        </div>
-
-
-        <div class="referral-owner-badge">
-
-            Username:
-            <strong id="referralProgramUsername">
-                JennyKhiss
-            </strong>
-
-        </div>
+        Username:
+        <strong id="referralProgramUsername">
+            JennyKhiss
+        </strong>
 
     </div>
 
-
-    <!-- REFERRAL LINK -->
-
-    <div class="referral-link-box">
-
-        <label
-            class="referral-label"
-            for="referralLink">
-
-            YOUR PERSONAL REFERRAL LINK
-
-        </label>
+</div>
 
 
-        <div class="referral-link-row">
+<!-- REFERRAL LINK -->
 
-            <input
-                type="text"
-                class="referral-link"
-                id="referralLink"
-                readonly
-                value="Generating your referral link...">
+<div class="referral-link-box">
+
+    <label
+        class="referral-label"
+        for="referralLink">
+
+        YOUR PERSONAL REFERRAL LINK
+
+    </label>
 
 
-            <button
-                type="button"
-                class="copy-btn"
-                id="copyReferralBtn">
+    <div class="referral-link-row">
 
-                COPY LINK
-
-            </button>
-
-        </div>
+        <input
+            type="text"
+            class="referral-link"
+            id="referralLink"
+            readonly
+            value="Generating your referral link...">
 
 
         <button
             type="button"
-            class="share-btn"
-            id="shareReferralBtn">
+            class="copy-btn"
+            id="copyReferralBtn">
 
-            📤 SHARE REFERRAL LINK
+            COPY LINK
 
         </button>
 
+    </div>
+
+
+    <button
+        type="button"
+        class="share-btn"
+        id="shareReferralBtn">
+
+        📤 SHARE REFERRAL LINK
+
+    </button>
+
+
+    <div
+        class="copy-message"
+        id="copyMessage">
+
+        Referral link copied successfully.
+
+    </div>
+
+</div>
+
+
+<!-- REFERRAL STATS -->
+
+<div class="referral-stats">
+
+
+    <div class="referral-stat">
+
+        <div class="referral-stat-label">
+            Successful Referrals
+        </div>
 
         <div
-            class="copy-message"
-            id="copyMessage">
+            class="referral-stat-value referral-count"
+            id="referralCount">
 
-            Referral link copied successfully.
+            0
+
+        </div>
+
+    </div>
+
+
+    <div class="referral-stat">
+
+        <div class="referral-stat-label">
+            Referral ON1 Bonus
+        </div>
+
+        <div
+            class="referral-stat-value referral-bonus"
+            id="referralBonus">
+
+            0 ON1
 
         </div>
 
     </div>
-
-
-    <!-- REFERRAL STATS -->
-
-    <div class="referral-stats">
-
-
-        <div class="referral-stat">
-
-            <div class="referral-stat-label">
-                Successful Referrals
-            </div>
-
-            <div
-                class="referral-stat-value referral-count"
-                id="referralCount">
-
-                0
-
-            </div>
-
-        </div>
-
-
-        <div class="referral-stat">
-
-            <div class="referral-stat-label">
-                Referral ON1 Bonus
-            </div>
-
-            <div
-                class="referral-stat-value referral-bonus"
-                id="referralBonus">
-
-                0 ON1
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- XP REFERRAL BONUS -->
-
-    <div class="referral-xp-box">
-
-        <strong id="referralXPBonus">
-            0 XP
-        </strong>
-
-        <span>
-            expected referral XP bonus
-        </span>
-
-    </div>
-
-
-    <div class="referral-note">
-
-        Referral rewards are processed by the
-        secure ON1Ecosystem reward system.
-        This dashboard only displays referral
-        information and never directly changes
-        your ON1Coin balance or XP.
-
-    </div>
-
-
-</section>
-
-
-<footer>
-
-    ON1Ecosystem — One Ecosystem. Multiple Solutions.
-
-</footer>
 
 
 </div>
 
 
-<!-- =====================================================
-     FIREBASE
-===================================================== -->
+<!-- XP REFERRAL BONUS -->
 
-<script type="module">
+<div class="referral-xp-box">
+
+    <strong id="referralXPBonus">
+        0 XP
+    </strong>
+
+    <span>
+        expected referral XP bonus
+    </span>
+
+</div>
+
+
+<div class="referral-note">
+
+    Referral rewards are processed by the
+    secure ON1Ecosystem reward system.
+    This dashboard only displays referral
+    information and never directly changes
+    your ON1Coin balance or XP.
+
+</div>
+
+</section><footer>ON1Ecosystem — One Ecosystem. Multiple Solutions.
+
+</footer></div><!-- =====================================================
+     FIREBASE
+===================================================== --><script type="module">
 
 
 /* =====================================================
@@ -2330,10 +2307,9 @@ function getReferralBonus(data,count){
 
 
     /*
-       This is a DISPLAY calculation only.
-
-       It does not write anything to
-       Firestore or change the user's balance.
+       DISPLAY ONLY.
+       This calculation never writes
+       to Firestore or changes balance.
     */
 
     return (
@@ -2386,7 +2362,7 @@ function getReferralXPBonus(data,count){
 
 
     /*
-       Display-only expected amount.
+       DISPLAY ONLY.
     */
 
     return (
@@ -2449,7 +2425,7 @@ function updateReferralProgram(
 
     const username =
         data.username ||
-        DEFAULT_REFERRER.username;
+        "Member";
 
 
     const count =
@@ -2588,10 +2564,24 @@ function updateDashboard(data){
 
     /* STREAK */
 
+    /*
+       Day 10 is the maximum display streak.
+       The secure worker is responsible for
+       enforcing the actual streak state.
+    */
+
+    const displayStreak =
+        Math.min(
+            Math.max(streak,0),
+            10
+        );
+
+
     document.getElementById(
         "streak"
     ).textContent =
-        "Day " + streak;
+        "Day " +
+        displayStreak;
 
 
     /* PROFILE */
@@ -2832,9 +2822,30 @@ function updateMiningState(data){
     }
 
 
-    const streak =
+    /*
+       Day 10 is the permanent maximum.
+
+       Day 1 = 5 ON1
+       Day 2 = 10 ON1
+       ...
+       Day 9 = 45 ON1
+       Day 10 = 100 ON1
+
+       Once the user reaches Day 10,
+       the bonus remains 100 ON1 every cycle
+       while the streak is maintained.
+    */
+
+    const rawStreak =
         Number(
             data.streak || 0
+        );
+
+
+    const streak =
+        Math.min(
+            Math.max(rawStreak,0),
+            10
         );
 
 
@@ -3091,13 +3102,6 @@ shareReferralBtn.addEventListener(
         }
 
 
-        const username =
-            document.getElementById(
-                "username"
-            ).textContent ||
-            "an ON1 member";
-
-
         const shareText =
             "Join me on ON1Ecosystem and become part of the ecosystem. Use my referral link to sign up.";
 
@@ -3129,9 +3133,26 @@ shareReferralBtn.addEventListener(
             /* If Web Share is unavailable,
                copy the link instead. */
 
-            await navigator.clipboard.writeText(
-                link
-            );
+            if(
+                navigator.clipboard &&
+                navigator.clipboard.writeText
+            ){
+
+                await navigator.clipboard.writeText(
+                    link
+                );
+
+            }else{
+
+                referralLink.focus();
+
+                referralLink.select();
+
+                document.execCommand(
+                    "copy"
+                );
+
+            }
 
 
             copyMessage.textContent =
@@ -3652,8 +3673,4 @@ setTimeout(
 );
 
 
-</script>
-
-</body>
-
-      </html>
+</script></body></html>
