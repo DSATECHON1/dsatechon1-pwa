@@ -1,20 +1,27 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
+<!DOCTYPE html>
+<html lang="en">
 
-«»
+<head>
 
-<title>Sign In — ON1Ecosystem</title><meta
-name="theme-color"
-content="#050b13"
-
-«»
+<meta charset="UTF-8">
 
 <meta
-name="description"
-content="Sign in to your ON1Ecosystem account."
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-«»
+<title>Sign In — ON1Ecosystem</title>
+
+<meta
+    name="theme-color"
+    content="#050b13"
+>
+
+<meta
+    name="description"
+    content="Sign in to your ON1Ecosystem account."
+>
+
 
 <style>
 
@@ -562,6 +569,69 @@ body{
 
 
 /* =========================================
+   ADSTERRA
+========================================= */
+
+.ad-section{
+
+    width:100%;
+
+    margin-top:22px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+
+.ad-label{
+
+    margin-bottom:8px;
+
+    color:#52667c;
+
+    font-size:8px;
+
+    letter-spacing:.8px;
+
+    text-transform:uppercase;
+
+}
+
+
+.ad-container{
+
+    width:300px;
+
+    min-height:250px;
+
+    max-width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+}
+
+
+/*
+   ADSTERRA IS CURRENTLY DISABLED.
+
+   When we decide to activate the login-page
+   advertisement, the approved Adsterra code
+   can be placed inside .ad-container.
+
+*/
+
+
+/* =========================================
    FOOTER
 ========================================= */
 
@@ -590,6 +660,7 @@ body{
 
     }
 
+
     .login-card{
 
         padding:23px;
@@ -598,215 +669,256 @@ body{
 
 }
 
-</style></head><body><div class="page"><!-- =====================================
-     BRAND
-====================================== -->
+</style>
 
-<div class="brand">
-
-    <div class="brand-circle">
-
-        <span>ON1</span>
-
-    </div>
+</head>
 
 
-    <h1>
-        ON1<span>Ecosystem</span>
-    </h1>
+<body>
 
 
-    <p>
-        ONE ECOSYSTEM. MULTIPLE SOLUTIONS.
-    </p>
-
-</div>
+<div class="page">
 
 
+    <!-- =====================================
+         BRAND
+    ====================================== -->
 
-<!-- =====================================
-     LOGIN CARD
-====================================== -->
+    <div class="brand">
 
-<div class="login-card">
+        <div class="brand-circle">
+
+            <span>ON1</span>
+
+        </div>
 
 
-    <div class="card-header">
-
-        <h2>
-            Welcome Back
-        </h2>
+        <h1>
+            ON1<span>Ecosystem</span>
+        </h1>
 
 
         <p>
-            Sign in to access your ON1Ecosystem
-            account, wallet and dashboard.
+            ONE ECOSYSTEM. MULTIPLE SOLUTIONS.
         </p>
 
     </div>
 
 
 
-    <!-- ===================================
-         LOGIN FORM
-    ==================================== -->
+    <!-- =====================================
+         LOGIN CARD
+    ====================================== -->
 
-    <form id="loginForm">
-
-
-        <!-- EMAIL -->
-
-        <div class="form-group">
-
-            <label for="email">
-                Email Address
-            </label>
+    <div class="login-card">
 
 
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                autocomplete="email"
-                required
-            >
+        <div class="card-header">
+
+            <h2>
+                Welcome Back
+            </h2>
+
+
+            <p>
+                Sign in to access your ON1Ecosystem
+                account, wallet and dashboard.
+            </p>
 
         </div>
 
 
 
-        <!-- PASSWORD -->
+        <!-- ===================================
+             LOGIN FORM
+        ==================================== -->
 
-        <div class="form-group">
-
-            <label for="password">
-                Password
-            </label>
+        <form id="loginForm">
 
 
-            <div class="input-wrap">
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
 
                 <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    autocomplete="current-password"
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
                     required
                 >
 
+            </div>
 
-                <button
-                    type="button"
-                    class="password-toggle"
-                    id="togglePassword"
-                >
-                    SHOW
-                </button>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+
+                <div class="input-wrap">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="togglePassword"
+                    >
+                        SHOW
+                    </button>
+
+                </div>
 
             </div>
 
-        </div>
 
 
+            <!-- OPTIONS -->
 
-        <!-- OPTIONS -->
-
-        <div class="options">
+            <div class="options">
 
 
-            <label class="remember">
+                <label class="remember">
 
-                <input
-                    type="checkbox"
-                    id="rememberMe"
+                    <input
+                        type="checkbox"
+                        id="rememberMe"
+                    >
+
+                    Remember me
+
+                </label>
+
+
+                <a
+                    href="#"
+                    class="forgot"
+                    id="forgotPassword"
                 >
+                    Forgot password?
+                </a>
 
-                Remember me
-
-            </label>
+            </div>
 
 
-            <a
-                href="#"
-                class="forgot"
-                id="forgotPassword"
+
+            <!-- MESSAGE -->
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn"
             >
-                Forgot password?
+                SIGN IN
+            </button>
+
+
+        </form>
+
+
+
+        <!-- ===================================
+             SIGN UP
+        ==================================== -->
+
+        <div class="signup-link">
+
+            Don't have an ON1Ecosystem account?
+
+            <a href="signup.html">
+                Create one
             </a>
 
         </div>
 
 
 
-        <!-- MESSAGE -->
+        <!-- ===================================
+             HOME
+        ==================================== -->
 
-        <div
-            id="message"
-            class="message"
-        ></div>
-
-
-
-        <!-- LOGIN -->
-
-        <button
-            type="submit"
-            class="login-btn"
-            id="loginBtn"
+        <a
+            href="../index.html"
+            class="home-link"
         >
-            SIGN IN
-        </button>
-
-
-    </form>
-
-
-
-    <!-- ===================================
-         SIGN UP
-    ==================================== -->
-
-    <div class="signup-link">
-
-        Don't have an ON1Ecosystem account?
-
-        <a href="signup.html">
-            Create one
+            ← Back to ON1Ecosystem
         </a>
+
+
+        <!-- ===================================
+             ADSTERRA AREA
+        ==================================== -->
+
+        <div class="ad-section">
+
+            <div class="ad-label">
+                Advertisement
+            </div>
+
+
+            <div class="ad-container">
+
+                <!--
+                ADSTERRA CODE WILL GO HERE
+                WHEN WE DECIDE TO ACTIVATE IT.
+                -->
+
+            </div>
+
+        </div>
+
 
     </div>
 
 
 
-    <!-- ===================================
-         HOME
-    ==================================== -->
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
 
-    <a
-        href="../index.html"
-        class="home-link"
-    >
-        ← Back to ON1Ecosystem
-    </a>
+    <div class="footer">
+
+        © 2026 ON1Ecosystem
+
+    </div>
 
 
 </div>
 
 
 
-<!-- =====================================
-     FOOTER
-====================================== -->
-
-<div class="footer">
-
-    © 2026 ON1Ecosystem
-
-</div>
-
-</div><!-- =========================================
+<!-- =========================================
      FIREBASE
-========================================= --><script type="module">
+========================================= -->
+
+<script type="module">
 
 
 /* =========================================
@@ -1320,4 +1432,9 @@ form.addEventListener(
 );
 
 
-</script></body></html>
+</script>
+
+
+</body>
+
+</html>
