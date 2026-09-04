@@ -1,3495 +1,4239 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport"  content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<title>ON1 Dashboard</title><meta name="theme-color"  
-content="#06101d">  <style>  
-  
-/* =====================================================  
-   RESET  
-===================================================== */  
-  
-*{  
-    margin:0;  
-    padding:0;  
-    box-sizing:border-box;  
-    font-family:Arial,Helvetica,sans-serif;  
-}  
-  
-:root{  
-    --bg:#050b13;  
-    --surface:#0c1624;  
-    --surface2:#101d2d;  
-    --border:#1d3048;  
-  
-    --blue:#087cff;  
-    --blue2:#3aa0ff;  
-  
-    --green:#00df88;  
-    --gold:#f5c451;  
-  
-    --text:#ffffff;  
-    --muted:#8ea2b8;  
-  
-    --danger:#ff6075;  
-}  
-  
-body{  
-    min-height:100vh;  
-  
-    background:  
-        radial-gradient(  
-            circle at 50% -10%,  
-            rgba(8,124,255,.18),  
-            transparent 42%  
-        ),  
-        var(--bg);  
-  
-    color:var(--text);  
-}  
-  
-a{  
-    color:inherit;  
-    text-decoration:none;  
-}  
-  
-button{  
-    font-family:inherit;  
-}  
-  
-  
-/* =====================================================  
-   PAGE  
-===================================================== */  
-  
-.page{  
-    width:100%;  
-    max-width:1100px;  
-    margin:auto;  
-    padding:15px;  
-}  
-  
-  
-/* =====================================================  
-   HEADER  
-===================================================== */  
-  
-.header{  
-    display:flex;  
-    align-items:center;  
-    justify-content:space-between;  
-  
-    padding:10px 0;  
-    margin-bottom:20px;  
-}  
-  
-.brand{  
-    display:flex;  
-    align-items:center;  
-    gap:9px;  
-}  
-  
-.brand img{  
-    width:38px;  
-    height:38px;  
-    object-fit:contain;  
-}  
-  
-.brand strong{  
-    display:block;  
-    font-size:16px;  
-}  
-  
-.brand strong span{  
-    color:var(--blue2);  
-}  
-  
-.brand small{  
-    display:block;  
-    margin-top:2px;  
-  
-    color:var(--muted);  
-  
-    font-size:8px;  
-    letter-spacing:.5px;  
-}  
-  
-.logout{  
-    border:1px solid var(--border);  
-  
-    background:var(--surface);  
-    color:#dce8f5;  
-  
-    padding:8px 12px;  
-  
-    border-radius:9px;  
-  
-    cursor:pointer;  
-  
-    font-size:10px;  
-}  
-  
-  
-/* =====================================================  
-   WELCOME  
-===================================================== */  
-  
-.welcome{  
-    margin-bottom:16px;  
-}  
-  
-.welcome h1{  
-    font-size:24px;  
-}  
-  
-.welcome p{  
-    margin-top:5px;  
-  
-    color:var(--muted);  
-  
-    font-size:11px;  
-}  
-  
-.welcome-bonus{  
-    margin-top:10px;  
-  
-    padding:9px 11px;  
-  
-    border-radius:9px;  
-  
-    background:rgba(8,124,255,.06);  
-  
-    border:1px solid rgba(8,124,255,.14);  
-  
-    color:var(--blue2);  
-  
-    font-size:8px;  
-}  
-  
-  
-/* =====================================================  
-   STATS  
-===================================================== */  
-  
-.stats{  
-    display:grid;  
-  
-    grid-template-columns:  
-        repeat(3,1fr);  
-  
-    gap:10px;  
-}  
-  
-.stat-card{  
-    background:rgba(12,22,36,.94);  
-  
-    border:1px solid var(--border);  
-  
-    border-radius:13px;  
-  
-    padding:10px 12px;  
-}  
-  
-.stat-label{  
-    color:var(--muted);  
-  
-    font-size:8px;  
-  
-    text-transform:uppercase;  
-  
-    letter-spacing:.5px;  
-}  
-  
-.stat-value{  
-    margin-top:4px;  
-  
-    font-size:18px;  
-  
-    font-weight:800;  
-}  
-  
-.stat-value.coin{  
-    color:var(--gold);  
-}  
-  
-.stat-value.xp{  
-    color:var(--blue2);  
-}  
-  
-.stat-value.level{  
-    color:var(--green);  
-}  
-  
-  
-/* =====================================================  
-   MAIN GRID  
-===================================================== */  
-  
-.main-grid{  
-    display:grid;  
-  
-    grid-template-columns:  
-        1.25fr .75fr;  
-  
-    gap:14px;  
-  
-    margin-top:14px;  
-}  
-  
-  
-/* =====================================================  
-   CARD  
-===================================================== */  
-  
-.card{  
-    background:rgba(12,22,36,.94);  
-  
-    border:1px solid var(--border);  
-  
-    border-radius:17px;  
-  
-    padding:18px;  
-}  
-  
-.card-title{  
-    font-size:15px;  
-  
-    font-weight:800;  
-}  
-  
-.card-subtitle{  
-    margin-top:5px;  
-  
-    color:var(--muted);  
-  
-    font-size:9px;  
-  
-    line-height:1.5;  
-}  
-  
-  
-/* =====================================================  
-   MINING  
-===================================================== */  
-  
-.mining-card{  
-    position:relative;  
-  
-    overflow:hidden;  
-}  
-  
-.mining-card::before{  
-    content:"";  
-  
-    position:absolute;  
-  
-    width:150px;  
-    height:150px;  
-  
-    border-radius:50%;  
-  
-    background:rgba(8,124,255,.07);  
-  
-    right:-60px;  
-    top:-60px;  
-}  
-  
-.mining-top{  
-    display:flex;  
-  
-    align-items:center;  
-  
-    justify-content:space-between;  
-}  
-  
-.mining-icon{  
-    width:42px;  
-    height:42px;  
-  
-    display:grid;  
-  
-    place-items:center;  
-  
-    border-radius:12px;  
-  
-    background:rgba(8,124,255,.10);  
-  
-    font-size:20px;  
-}  
-  
-.rate{  
-    margin-top:18px;  
-  
-    text-align:center;  
-}  
-  
-.rate-number{  
-    font-size:34px;  
-  
-    font-weight:900;  
-  
-    color:var(--gold);  
-}  
-  
-.rate-label{  
-    margin-top:3px;  
-  
-    color:var(--muted);  
-  
-    font-size:9px;  
-}  
-  
-  
-/* =====================================================  
-   STREAK  
-===================================================== */  
-  
-.streak{  
-    margin-top:16px;  
-  
-    padding:11px;  
-  
-    border-radius:11px;  
-  
-    background:rgba(0,223,136,.045);  
-  
-    border:1px solid rgba(0,223,136,.15);  
-  
-    display:flex;  
-  
-    justify-content:space-between;  
-  
-    align-items:center;  
-}  
-  
-.streak-label{  
-    color:var(--muted);  
-  
-    font-size:9px;  
-}  
-  
-.streak-value{  
-    color:var(--green);  
-  
-    font-weight:800;  
-  
-    font-size:13px;  
-}  
-  
-  
-/* =====================================================  
-   BUTTONS  
-===================================================== */  
-  
-.mine-btn,  
-.streak-btn{  
-    width:100%;  
-  
-    height:45px;  
-  
-    margin-top:12px;  
-  
-    border:none;  
-  
-    border-radius:10px;  
-  
-    color:white;  
-  
-    font-size:11px;  
-  
-    font-weight:800;  
-  
-    cursor:pointer;  
-}  
-  
-.mine-btn{  
-    background:  
-        linear-gradient(  
-            135deg,  
-            var(--blue),  
-            #0065d8  
-        );  
-}  
-  
-.streak-btn{  
-    background:  
-        linear-gradient(  
-            135deg,  
-            #d99d00,  
-            #f5c451  
-        );  
-  
-    color:#111;  
-}  
-  
-.mine-btn:disabled,  
-.streak-btn:disabled{  
-    opacity:.5;  
-  
-    cursor:not-allowed;  
-}  
-  
-.next-mine{  
-    margin-top:8px;  
-  
-    text-align:center;  
-  
-    color:var(--muted);  
-  
-    font-size:8px;  
-}  
-  
-.streak-status{  
-    margin-top:7px;  
-  
-    text-align:center;  
-  
-    color:var(--muted);  
-  
-    font-size:8px;  
-}  
-  
-  
-/* =====================================================  
-   MESSAGE  
-===================================================== */  
-  
-.message{  
-    display:none;  
-  
-    margin-top:12px;  
-  
-    padding:10px;  
-  
-    border-radius:9px;  
-  
-    text-align:center;  
-  
-    font-size:9px;  
-  
-    line-height:1.5;  
-}  
-  
-.message.success{  
-    display:block;  
-  
-    background:rgba(0,223,136,.07);  
-  
-    border:1px solid rgba(0,223,136,.18);  
-  
-    color:var(--green);  
-}  
-  
-.message.error{  
-    display:block;  
-  
-    background:rgba(255,96,117,.08);  
-  
-    border:1px solid rgba(255,96,117,.2);  
-  
-    color:#ff8192;  
-}  
-  
-  
-/* =====================================================  
-   LEVEL PROGRESS  
-===================================================== */  
-  
-.level-box{  
-    margin-top:15px;  
-}  
-  
-.level-head{  
-    display:flex;  
-  
-    justify-content:space-between;  
-  
-    align-items:center;  
-}  
-  
-.level-name{  
-    color:var(--green);  
-  
-    font-size:10px;  
-  
-    font-weight:800;  
-}  
-  
-.level-xp{  
-    color:var(--muted);  
-  
-    font-size:8px;  
-}  
-  
-.progress{  
-    height:7px;  
-  
-    margin-top:7px;  
-  
-    background:#07101b;  
-  
-    border-radius:20px;  
-  
-    overflow:hidden;  
-  
-    border:1px solid var(--border);  
-}  
-  
-.progress-bar{  
-    height:100%;  
-  
-    width:0%;  
-  
-    background:  
-        linear-gradient(  
-            90deg,  
-            var(--blue),  
-            var(--green)  
-        );  
-  
-    transition:width .5s ease;  
-}  
-  
-  
-/* =====================================================  
-   ADVERTISEMENT  
-===================================================== */  
-  
-.ad-section{  
-    margin-top:14px;  
-  
-    display:flex;  
-  
-    justify-content:center;  
-  
-    align-items:center;  
-  
-    width:100%;  
-  
-    min-height:250px;  
-  
-    overflow:hidden;  
-}  
-  
-.ad-container{  
-    width:300px;  
-  
-    height:250px;  
-  
-    display:flex;  
-  
-    justify-content:center;  
-  
-    align-items:center;  
-  
-    overflow:hidden;  
-}  
-  
-.ad-label{  
-    position:absolute;  
-  
-    width:1px;  
-    height:1px;  
-  
-    overflow:hidden;  
-  
-    clip:rect(0 0 0 0);  
-  
-    white-space:nowrap;  
-}  
-  
-  
-/* =====================================================  
-   REFERRAL PROGRAM  
-===================================================== */  
-  
-.referral-card{  
-    margin-top:14px;  
-  
-    position:relative;  
-  
-    overflow:hidden;  
-}  
-  
-.referral-card::before{  
-    content:"";  
-  
-    position:absolute;  
-  
-    width:180px;  
-    height:180px;  
-  
-    border-radius:50%;  
-  
-    background:rgba(0,223,136,.035);  
-  
-    right:-90px;  
-    top:-90px;  
-  
-    pointer-events:none;  
-}  
-  
-.referral-header{  
-    display:flex;  
-  
-    align-items:center;  
-  
-    justify-content:space-between;  
-  
-    gap:10px;  
-  
-    position:relative;  
-  
-    z-index:1;  
-}  
-  
-.referral-icon{  
-    width:44px;  
-    height:44px;  
-  
-    display:grid;  
-  
-    place-items:center;  
-  
-    flex-shrink:0;  
-  
-    border-radius:13px;  
-  
-    background:rgba(0,223,136,.08);  
-  
-    border:1px solid rgba(0,223,136,.12);  
-  
-    font-size:21px;  
-}  
-  
-.referral-intro{  
-    flex:1;  
-}  
-  
-  
-/* =====================================================  
-   REFERRAL REWARD  
-===================================================== */  
-  
-.referral-reward{  
-    margin-top:13px;  
-  
-    padding:13px;  
-  
-    border-radius:11px;  
-  
-    background:  
-        linear-gradient(  
-            135deg,  
-            rgba(245,196,81,.07),  
-            rgba(0,223,136,.045)  
-        );  
-  
-    border:1px solid rgba(245,196,81,.16);  
-  
-    position:relative;  
-  
-    z-index:1;  
-}  
-  
-.referral-reward strong{  
-    display:block;  
-  
-    color:var(--gold);  
-  
-    font-size:12px;  
-}  
-  
-.referral-reward p{  
-    margin-top:4px;  
-  
-    color:var(--muted);  
-  
-    font-size:9px;  
-  
-    line-height:1.5;  
-}  
-  
-  
-/* =====================================================  
-   REFERRAL IDENTITY  
-===================================================== */  
-  
-.referral-owner{  
-    margin-top:10px;  
-  
-    display:flex;  
-  
-    flex-wrap:wrap;  
-  
-    gap:7px;  
-}  
-  
-.referral-owner-badge{  
-    padding:6px 9px;  
-  
-    border-radius:8px;  
-  
-    background:rgba(7,16,27,.75);  
-  
-    border:1px solid var(--border);  
-  
-    color:#b9cde1;  
-  
-    font-size:8px;  
-}  
-  
-.referral-owner-badge strong{  
-    color:var(--gold);  
-  
-    font-size:8px;  
-}  
-  
-  
-/* =====================================================  
-   REFERRAL LINK  
-===================================================== */  
-  
-.referral-link-box{  
-    margin-top:14px;  
-  
-    position:relative;  
-  
-    z-index:1;  
-}  
-  
-.referral-label{  
-    display:block;  
-  
-    margin-bottom:7px;  
-  
-    color:var(--muted);  
-  
-    font-size:9px;  
-  
-    font-weight:700;  
-}  
-  
-.referral-link-row{  
-    display:flex;  
-  
-    gap:7px;  
-}  
-  
-.referral-link{  
-    flex:1;  
-  
-    min-width:0;  
-  
-    height:42px;  
-  
-    padding:0 11px;  
-  
-    border:1px solid var(--border);  
-  
-    border-radius:9px;  
-  
-    background:#07101b;  
-  
-    color:#cfe0f2;  
-  
-    font-size:9px;  
-  
-    outline:none;  
-  
-    overflow:hidden;  
-  
-    text-overflow:ellipsis;  
-}  
-  
-.copy-btn{  
-    width:90px;  
-  
-    height:42px;  
-  
-    border:none;  
-  
-    border-radius:9px;  
-  
-    background:  
-        linear-gradient(  
-            135deg,  
-            var(--blue),  
-            #0065d8  
-        );  
-  
-    color:white;  
-  
-    font-size:9px;  
-  
-    font-weight:800;  
-  
-    cursor:pointer;  
-}  
-  
-.copy-btn:disabled{  
-    opacity:.65;  
-  
-    cursor:not-allowed;  
-}  
-  
-  
-/* =====================================================  
-   SHARE BUTTON  
-===================================================== */  
-  
-.share-btn{  
-    width:100%;  
-  
-    height:40px;  
-  
-    margin-top:8px;  
-  
-    border:1px solid rgba(0,223,136,.20);  
-  
-    border-radius:9px;  
-  
-    background:rgba(0,223,136,.06);  
-  
-    color:var(--green);  
-  
-    font-size:9px;  
-  
-    font-weight:800;  
-  
-    cursor:pointer;  
-}  
-  
-.share-btn:disabled{  
-    opacity:.5;  
-  
-    cursor:not-allowed;  
-}  
-  
-  
-/* =====================================================  
-   COPY MESSAGE  
-===================================================== */  
-  
-.copy-message{  
-    display:none;  
-  
-    margin-top:8px;  
-  
-    text-align:center;  
-  
-    color:var(--green);  
-  
-    font-size:8px;  
-}  
-  
-.copy-message.show{  
-    display:block;  
-}  
-  
-  
-/* =====================================================  
-   REFERRAL STATS  
-===================================================== */  
-  
-.referral-stats{  
-    display:grid;  
-  
-    grid-template-columns:  
-        1fr 1fr;  
-  
-    gap:9px;  
-  
-    margin-top:12px;  
-  
-    position:relative;  
-  
-    z-index:1;  
-}  
-  
-.referral-stat{  
-    padding:12px;  
-  
-    border-radius:10px;  
-  
-    background:rgba(7,16,27,.75);  
-  
-    border:1px solid var(--border);  
-}  
-  
-.referral-stat-label{  
-    color:var(--muted);  
-  
-    font-size:8px;  
-  
-    text-transform:uppercase;  
-  
-    letter-spacing:.4px;  
-}  
-  
-.referral-stat-value{  
-    margin-top:5px;  
-  
-    font-size:17px;  
-  
-    font-weight:900;  
-}  
-  
-.referral-count{  
-    color:var(--blue2);  
-}  
-  
-.referral-bonus{  
-    color:var(--gold);  
-}  
-  
-  
-/* =====================================================  
-   REFERRAL XP BONUS  
-===================================================== */  
-  
-.referral-xp-box{  
-    margin-top:9px;  
-  
-    padding:10px;  
-  
-    border-radius:10px;  
-  
-    background:rgba(8,124,255,.045);  
-  
-    border:1px solid rgba(8,124,255,.12);  
-  
-    text-align:center;  
-  
-    position:relative;  
-  
-    z-index:1;  
-}  
-  
-.referral-xp-box strong{  
-    color:var(--blue2);  
-  
-    font-size:10px;  
-}  
-  
-.referral-xp-box span{  
-    color:var(--muted);  
-  
-    font-size:8px;  
-  
-    margin-left:4px;  
-}  
-  
-  
-/* =====================================================  
-   REFERRAL NOTE  
-===================================================== */  
-  
-.referral-note{  
-    margin-top:10px;  
-  
-    color:#60758b;  
-  
-    font-size:8px;  
-  
-    line-height:1.5;  
-  
-    text-align:center;  
-  
-    position:relative;  
-  
-    z-index:1;  
-}  
-  
-  
-/* =====================================================  
-   PROFILE  
-===================================================== */  
-  
-.profile-row{  
-    display:flex;  
-  
-    justify-content:space-between;  
-  
-    gap:10px;  
-  
-    padding:10px 0;  
-  
-    border-bottom:  
-        1px solid rgba(29,48,72,.55);  
-}  
-  
-.profile-row:last-child{  
-    border-bottom:none;  
-}  
-  
-.profile-label{  
-    color:var(--muted);  
-  
-    font-size:9px;  
-}  
-  
-.profile-value{  
-    font-size:10px;  
-  
-    font-weight:700;  
-  
-    text-align:right;  
-  
-    word-break:break-word;  
-}  
-  
-.on1-id{  
-    color:var(--gold);  
-}  
-  
-  
-/* =====================================================  
-   LOADING  
-===================================================== */  
-  
-.loading{  
-    position:fixed;  
-  
-    inset:0;  
-  
-    background:var(--bg);  
-  
-    display:flex;  
-  
-    align-items:center;  
-  
-    justify-content:center;  
-  
-    z-index:999;  
-}  
-  
-.loading-box{  
-    text-align:center;  
-}  
-  
-.loading-box strong{  
-    display:block;  
-  
-    margin-top:10px;  
-  
-    font-size:13px;  
-}  
-  
-.loading-box p{  
-    margin-top:5px;  
-  
-    color:var(--muted);  
-  
-    font-size:9px;  
-}  
-  
-  
-/* =====================================================  
-   FOOTER  
-===================================================== */  
-  
-footer{  
-    margin-top:25px;  
-  
-    padding-top:14px;  
-  
-    border-top:  
-        1px solid rgba(29,48,72,.55);  
-  
-    text-align:center;  
-  
-    color:#61748a;  
-  
-    font-size:8px;  
-}  
-  
-  
-/* =====================================================  
-   MOBILE  
-===================================================== */  
-  
-@media(max-width:800px){  
-  
-    .main-grid{  
-        grid-template-columns:1fr;  
-    }  
-  
-}  
-  
-@media(max-width:500px){  
-  
-    .page{  
-        padding:12px;  
-    }  
-  
-    .stats{  
-        gap:7px;  
-    }  
-  
-    .stat-card{  
-        padding:9px;  
-    }  
-  
-    .stat-value{  
-        font-size:16px;  
-    }  
-  
-    .welcome h1{  
-        font-size:21px;  
-    }  
-  
-    .brand img{  
-        width:34px;  
-        height:34px;  
-    }  
-  
-    .referral-link-row{  
-        flex-direction:column;  
-    }  
-  
-    .copy-btn{  
-        width:100%;  
-    }  
-  
-    .referral-owner{  
-        flex-direction:column;  
-    }  
-  
-}  
-  
-  
-/* =====================================================  
-   VERY SMALL SCREENS  
-===================================================== */  
-  
-@media(max-width:350px){  
-  
-    .stats{  
-        grid-template-columns:1fr;  
-    }  
-  
-    .referral-stats{  
-        grid-template-columns:1fr;  
-    }  
-  
-}  
-  
-</style></head><body><!-- =====================================================  LOADING
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-===================================================== --><div class="loading" id="loading"><div class="loading-box">
+<title>ON1 Dashboard</title>
 
-<div style="font-size:27px;">  
-    ◉  
-</div>  
+<meta name="theme-color" content="#06101d">
 
-<strong>  
-    Loading ON1 Dashboard  
-</strong>  
+<style>
 
-<p id="loadingText">  
-    Connecting to your account...  
-</p>
+/* =====================================================
+   RESET
+===================================================== */
 
-</div>  </div><div class="page"><!-- =====================================================  
-     HEADER  
-===================================================== --><header class="header"><a href="../index.html"  
-   class="brand">  <img  
-    src="../logo.png"  
-    alt="ON1Ecosystem">  
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
 
-<div>  
+:root{
+    --bg:#050b13;
+    --surface:#0c1624;
+    --surface2:#101d2d;
+    --border:#1d3048;
 
-    <strong>  
-        ON1<span>Ecosystem</span>  
-    </strong>  
+    --blue:#087cff;
+    --blue2:#3aa0ff;
 
-    <small>  
-        MEMBER DASHBOARD  
-    </small>  
+    --green:#00df88;
+    --gold:#f5c451;
 
-</div>
+    --text:#ffffff;
+    --muted:#8ea2b8;
 
-</a>  <button  
-class="logout"  
-id="logoutBtn">
+    --danger:#ff6075;
+}
 
-LOGOUT
+body{
+    min-height:100vh;
 
-</button>  </header><!-- =====================================================  
-     WELCOME  
-===================================================== --><section class="welcome"><h1>  
-    Welcome,  
-    <span id="firstName">Member</span>  
-    👋  
-</h1>  <p>  
-    Your ON1Ecosystem account and activities.  
-</p>  <div  
-    class="welcome-bonus"  
-    id="welcomeBonus">  🎁 Welcome bonus: 1,000 XP
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(8,124,255,.18),
+            transparent 42%
+        ),
+        var(--bg);
 
-</div>  </section><!-- =====================================================  
-     STATS  
-===================================================== --><section class="stats"><div class="stat-card">  <div class="stat-label">  
-    ON1Coin Balance  
-</div>  
+    color:var(--text);
+}
 
-<div  
-    class="stat-value coin"  
-    id="balance">  
+a{
+    color:inherit;
+    text-decoration:none;
+}
 
-    0.000  
-
-</div>
-
-</div>  <div class="stat-card">  <div class="stat-label">  
-    Experience Points  
-</div>  
-
-<div  
-    class="stat-value xp"  
-    id="xp">  
-
-    0  
-
-</div>
-
-</div>  <div class="stat-card">  <div class="stat-label">  
-    Current Level  
-</div>  
-
-<div  
-    class="stat-value level"  
-    id="level">  
-
-    0  
-
-</div>
-
-</div>  </section><!-- =====================================================  
-     MAIN GRID  
-===================================================== --><div class="main-grid"><!-- =====================================================  
-     MINING CARD  
-===================================================== --><section class="card mining-card"><div class="mining-top">  <div>  
-
-    <div class="card-title">  
-        ON1Coin Mining  
-    </div>  
-
-    <div class="card-subtitle">  
-
-        Claim your 50 ON1Coin base mining  
-        reward once every 24 hours.  
-
-    </div>  
-
-</div>  
+button{
+    font-family:inherit;
+}
 
 
-<div class="mining-icon">  
-    ⛏️  
-</div>
+/* =====================================================
+   PAGE
+===================================================== */
 
-</div>  <div class="rate">  <div class="rate-number">  
-    50.000  
-</div>  
-
-<div class="rate-label">  
-    ON1Coin base reward / 24 hours  
-</div>
-
-</div>  <!-- STREAK -->  <div class="streak">  <div class="streak-label">  
-    Current mining streak  
-</div>  
-
-<div  
-    class="streak-value"  
-    id="streak">  
-
-    Day 0  
-
-</div>
-
-</div>  <!-- BASE MINING -->  <button  
-class="mine-btn"  
-id="mineBtn">
-
-START MINING — +50 ON1
-
-</button>  <div  
-    class="next-mine"  
-    id="nextMine">  Your 24-hour mining cycle is ready.
-
-</div>  <!-- STREAK BONUS -->  <button  
-class="streak-btn"  
-id="streakBtn"  
-disabled>
-
-CLAIM STREAK BONUS
-
-</button>  <div  
-    class="streak-status"  
-    id="streakStatus">  Claim today's base mining first.
-
-</div>  <!-- MESSAGE -->  <div  
-    class="message"  
-    id="message">  
-</div>  <!-- LEVEL PROGRESS -->  <div class="level-box">  <div class="level-head">  
-
-    <div  
-        class="level-name"  
-        id="levelName">  
-
-        PROGRESS TO LEVEL 1  
-
-    </div>  
-
-    <div  
-        class="level-xp"  
-        id="levelXP">  
-
-        0 / 2,500 XP  
-
-    </div>  
-
-</div>  
+.page{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:15px;
+}
 
 
-<div class="progress">  
+/* =====================================================
+   HEADER
+===================================================== */
 
-    <div  
-        class="progress-bar"  
-        id="progressBar">  
-    </div>  
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:10px 0;
+    margin-bottom:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.brand img{
+    width:38px;
+    height:38px;
+    object-fit:contain;
+}
+
+.brand strong{
+    display:block;
+    font-size:16px;
+}
+
+.brand strong span{
+    color:var(--blue2);
+}
+
+.brand small{
+    display:block;
+    margin-top:2px;
+
+    color:var(--muted);
+
+    font-size:8px;
+    letter-spacing:.5px;
+}
+
+.logout{
+    border:1px solid var(--border);
+
+    background:var(--surface);
+    color:#dce8f5;
+
+    padding:8px 12px;
+
+    border-radius:9px;
+
+    cursor:pointer;
+
+    font-size:10px;
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome{
+    margin-bottom:16px;
+}
+
+.welcome h1{
+    font-size:24px;
+}
+
+.welcome p{
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+.welcome-bonus{
+    margin-top:10px;
+
+    padding:9px 11px;
+
+    border-radius:9px;
+
+    background:rgba(8,124,255,.06);
+
+    border:1px solid rgba(8,124,255,.14);
+
+    color:var(--blue2);
+
+    font-size:8px;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+}
+
+.stat-card{
+    background:rgba(12,22,36,.94);
+
+    border:1px solid var(--border);
+
+    border-radius:13px;
+
+    padding:10px 12px;
+}
+
+.stat-label{
+    color:var(--muted);
+
+    font-size:8px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+}
+
+.stat-value{
+    margin-top:4px;
+
+    font-size:18px;
+
+    font-weight:800;
+}
+
+.stat-value.coin{
+    color:var(--gold);
+}
+
+.stat-value.xp{
+    color:var(--blue2);
+}
+
+.stat-value.level{
+    color:var(--green);
+}
+
+
+/* =====================================================
+   MAIN GRID
+===================================================== */
+
+.main-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.25fr .75fr;
+
+    gap:14px;
+
+    margin-top:14px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+    background:rgba(12,22,36,.94);
+
+    border:1px solid var(--border);
+
+    border-radius:17px;
+
+    padding:18px;
+}
+
+.card-title{
+    font-size:15px;
+
+    font-weight:800;
+}
+
+.card-subtitle{
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   MINING
+===================================================== */
+
+.mining-card{
+    position:relative;
+
+    overflow:hidden;
+}
+
+.mining-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    border-radius:50%;
+
+    background:rgba(8,124,255,.07);
+
+    right:-60px;
+    top:-60px;
+}
+
+.mining-top{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.mining-icon{
+    width:42px;
+    height:42px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:12px;
+
+    background:rgba(8,124,255,.10);
+
+    font-size:20px;
+}
+
+.rate{
+    margin-top:18px;
+
+    text-align:center;
+}
+
+.rate-number{
+    font-size:34px;
+
+    font-weight:900;
+
+    color:var(--gold);
+}
+
+.rate-label{
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+
+/* =====================================================
+   STREAK
+===================================================== */
+
+.streak{
+    margin-top:16px;
+
+    padding:11px;
+
+    border-radius:11px;
+
+    background:rgba(0,223,136,.045);
+
+    border:1px solid rgba(0,223,136,.15);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.streak-label{
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.streak-value{
+    color:var(--green);
+
+    font-weight:800;
+
+    font-size:13px;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.mine-btn,
+.streak-btn{
+    width:100%;
+
+    height:45px;
+
+    margin-top:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    color:white;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.mine-btn{
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            #0065d8
+        );
+}
+
+.streak-btn{
+    background:
+        linear-gradient(
+            135deg,
+            #d99d00,
+            #f5c451
+        );
+
+    color:#111;
+}
+
+.mine-btn:disabled,
+.streak-btn:disabled{
+    opacity:.5;
+
+    cursor:not-allowed;
+}
+
+.next-mine{
+    margin-top:8px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+.streak-status{
+    margin-top:7px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message{
+    display:none;
+
+    margin-top:12px;
+
+    padding:10px;
+
+    border-radius:9px;
+
+    text-align:center;
+
+    font-size:9px;
+
+    line-height:1.5;
+}
+
+.message.success{
+    display:block;
+
+    background:rgba(0,223,136,.07);
+
+    border:1px solid rgba(0,223,136,.18);
+
+    color:var(--green);
+}
+
+.message.error{
+    display:block;
+
+    background:rgba(255,96,117,.08);
+
+    border:1px solid rgba(255,96,117,.2);
+
+    color:#ff8192;
+}
+
+
+/* =====================================================
+   LEVEL PROGRESS
+===================================================== */
+
+.level-box{
+    margin-top:15px;
+}
+
+.level-head{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.level-name{
+    color:var(--green);
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+.level-xp{
+    color:var(--muted);
+
+    font-size:8px;
+}
+
+.progress{
+    height:7px;
+
+    margin-top:7px;
+
+    background:#07101b;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:1px solid var(--border);
+}
+
+.progress-bar{
+    height:100%;
+
+    width:0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--green)
+        );
+
+    transition:width .5s ease;
+}
+
+
+/* =====================================================
+   ADVERTISEMENT
+===================================================== */
+
+.ad-section{
+    margin-top:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+
+    min-height:250px;
+
+    overflow:hidden;
+}
+
+.ad-container{
+    width:300px;
+
+    height:250px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.ad-label{
+    position:absolute;
+
+    width:1px;
+    height:1px;
+
+    overflow:hidden;
+
+    clip:rect(0 0 0 0);
+
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   CPX SURVEY SOLUTIONS
+   COMPACT ADDITION
+===================================================== */
+
+.cpx-card{
+    margin-top:14px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.cpx-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+
+    background:rgba(8,124,255,.035);
+
+    right:-80px;
+    top:-80px;
+
+    pointer-events:none;
+}
+
+.cpx-header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    position:relative;
+
+    z-index:1;
+}
+
+.cpx-intro{
+    flex:1;
+}
+
+.cpx-icon{
+    width:42px;
+    height:42px;
+
+    display:grid;
+
+    place-items:center;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    background:rgba(8,124,255,.08);
+
+    border:1px solid rgba(8,124,255,.14);
+
+    font-size:20px;
+}
+
+.cpx-box{
+    margin-top:12px;
+
+    position:relative;
+
+    z-index:1;
+
+    width:100%;
+
+    min-height:150px;
+
+    border-radius:11px;
+
+    overflow:hidden;
+
+    background:#07101b;
+
+    border:1px solid var(--border);
+}
+
+#cpx-surveys{
+    width:100%;
+
+    min-height:150px;
+}
+
+.cpx-loading{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-height:150px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    text-align:center;
+
+    padding:15px;
+}
+
+
+/* =====================================================
+   REFERRAL PROGRAM
+===================================================== */
+
+.referral-card{
+    margin-top:14px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.referral-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(0,223,136,.035);
+
+    right:-90px;
+    top:-90px;
+
+    pointer-events:none;
+}
+
+.referral-header{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    position:relative;
+
+    z-index:1;
+}
+
+.referral-icon{
+    width:44px;
+    height:44px;
+
+    display:grid;
+
+    place-items:center;
+
+    flex-shrink:0;
+
+    border-radius:13px;
+
+    background:rgba(0,223,136,.08);
+
+    border:1px solid rgba(0,223,136,.12);
+
+    font-size:21px;
+}
+
+.referral-intro{
+    flex:1;
+}
+
+
+/* =====================================================
+   REFERRAL REWARD
+===================================================== */
+
+.referral-reward{
+    margin-top:13px;
+
+    padding:13px;
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(245,196,81,.07),
+            rgba(0,223,136,.045)
+        );
+
+    border:1px solid rgba(245,196,81,.16);
+
+    position:relative;
+
+    z-index:1;
+}
+
+.referral-reward strong{
+    display:block;
+
+    color:var(--gold);
+
+    font-size:12px;
+}
+
+.referral-reward p{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   REFERRAL IDENTITY
+===================================================== */
+
+.referral-owner{
+    margin-top:10px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:7px;
+}
+
+.referral-owner-badge{
+    padding:6px 9px;
+
+    border-radius:8px;
+
+    background:rgba(7,16,27,.75);
+
+    border:1px solid var(--border);
+
+    color:#b9cde1;
+
+    font-size:8px;
+}
+
+.referral-owner-badge strong{
+    color:var(--gold);
+
+    font-size:8px;
+}
+
+
+/* =====================================================
+   REFERRAL LINK
+===================================================== */
+
+.referral-link-box{
+    margin-top:14px;
+
+    position:relative;
+
+    z-index:1;
+}
+
+.referral-label{
+    display:block;
+
+    margin-bottom:7px;
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+.referral-link-row{
+    display:flex;
+
+    gap:7px;
+}
+
+.referral-link{
+    flex:1;
+
+    min-width:0;
+
+    height:42px;
+
+    padding:0 11px;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    background:#07101b;
+
+    color:#cfe0f2;
+
+    font-size:9px;
+
+    outline:none;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.copy-btn{
+    width:90px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--blue),
+            #0065d8
+        );
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.copy-btn:disabled{
+    opacity:.65;
+
+    cursor:not-allowed;
+}
+
+
+/* =====================================================
+   SHARE BUTTON
+===================================================== */
+
+.share-btn{
+    width:100%;
+
+    height:40px;
+
+    margin-top:8px;
+
+    border:1px solid rgba(0,223,136,.20);
+
+    border-radius:9px;
+
+    background:rgba(0,223,136,.06);
+
+    color:var(--green);
+
+    font-size:9px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.share-btn:disabled{
+    opacity:.5;
+
+    cursor:not-allowed;
+}
+
+
+/* =====================================================
+   COPY MESSAGE
+===================================================== */
+
+.copy-message{
+    display:none;
+
+    margin-top:8px;
+
+    text-align:center;
+
+    color:var(--green);
+
+    font-size:8px;
+}
+
+.copy-message.show{
+    display:block;
+}
+
+
+/* =====================================================
+   REFERRAL STATS
+===================================================== */
+
+.referral-stats{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:9px;
+
+    margin-top:12px;
+
+    position:relative;
+
+    z-index:1;
+}
+
+.referral-stat{
+    padding:12px;
+
+    border-radius:10px;
+
+    background:rgba(7,16,27,.75);
+
+    border:1px solid var(--border);
+}
+
+.referral-stat-label{
+    color:var(--muted);
+
+    font-size:8px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.4px;
+}
+
+.referral-stat-value{
+    margin-top:5px;
+
+    font-size:17px;
+
+    font-weight:900;
+}
+
+.referral-count{
+    color:var(--blue2);
+}
+
+.referral-bonus{
+    color:var(--gold);
+}
+
+
+/* =====================================================
+   REFERRAL XP BONUS
+===================================================== */
+
+.referral-xp-box{
+    margin-top:9px;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    background:rgba(8,124,255,.045);
+
+    border:1px solid rgba(8,124,255,.12);
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:1;
+}
+
+.referral-xp-box strong{
+    color:var(--blue2);
+
+    font-size:10px;
+}
+
+.referral-xp-box span{
+    color:var(--muted);
+
+    font-size:8px;
+
+    margin-left:4px;
+}
+
+
+/* =====================================================
+   REFERRAL NOTE
+===================================================== */
+
+.referral-note{
+    margin-top:10px;
+
+    color:#60758b;
+
+    font-size:8px;
+
+    line-height:1.5;
+
+    text-align:center;
+
+    position:relative;
+
+    z-index:1;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:10px 0;
+
+    border-bottom:
+        1px solid rgba(29,48,72,.55);
+}
+
+.profile-row:last-child{
+    border-bottom:none;
+}
+
+.profile-label{
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.profile-value{
+    font-size:10px;
+
+    font-weight:700;
+
+    text-align:right;
+
+    word-break:break-word;
+}
+
+.on1-id{
+    color:var(--gold);
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading{
+    position:fixed;
+
+    inset:0;
+
+    background:var(--bg);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:999;
+}
+
+.loading-box{
+    text-align:center;
+}
+
+.loading-box strong{
+    display:block;
+
+    margin-top:10px;
+
+    font-size:13px;
+}
+
+.loading-box p{
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    margin-top:25px;
+
+    padding-top:14px;
+
+    border-top:
+        1px solid rgba(29,48,72,.55);
+
+    text-align:center;
+
+    color:#61748a;
+
+    font-size:8px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:800px){
+
+    .main-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .page{
+        padding:12px;
+    }
+
+    .stats{
+        gap:7px;
+    }
+
+    .stat-card{
+        padding:9px;
+    }
+
+    .stat-value{
+        font-size:16px;
+    }
+
+    .welcome h1{
+        font-size:21px;
+    }
+
+    .brand img{
+        width:34px;
+        height:34px;
+    }
+
+    .referral-link-row{
+        flex-direction:column;
+    }
+
+    .copy-btn{
+        width:100%;
+    }
+
+    .referral-owner{
+        flex-direction:column;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL SCREENS
+===================================================== */
+
+@media(max-width:350px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .referral-stats{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div class="loading" id="loading">
+
+    <div class="loading-box">
+
+        <div style="font-size:27px;">
+            ◉
+        </div>
+
+        <strong>
+            Loading ON1 Dashboard
+        </strong>
+
+        <p id="loadingText">
+            Connecting to your account...
+        </p>
+
+    </div>
 
 </div>
 
-</div>  </section><!-- =====================================================  
-     PROFILE  
-===================================================== --><section class="card"><div class="card-title">  
-    Your ON1 Profile  
-</div>  <div class="card-subtitle">  
-    Your account information.  
-</div>  <div style="margin-top:14px;">  <div class="profile-row">  
 
-    <div class="profile-label">  
-        ON1 ID  
-    </div>  
-
-    <div  
-        class="profile-value on1-id"  
-        id="on1Id">  
-
-        —  
-
-    </div>  
-
-</div>  
+<div class="page">
 
 
-<div class="profile-row">  
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <div class="profile-label">  
-        Username  
-    </div>  
+<header class="header">
 
-    <div  
-        class="profile-value"  
-        id="username">  
+    <a href="../index.html"
+       class="brand">
 
-        —  
+        <img
+            src="../logo.png"
+            alt="ON1Ecosystem">
 
-    </div>  
+        <div>
 
-</div>  
+            <strong>
+                ON1<span>Ecosystem</span>
+            </strong>
 
+            <small>
+                MEMBER DASHBOARD
+            </small>
 
-<div class="profile-row">  
+        </div>
 
-    <div class="profile-label">  
-        Email  
-    </div>  
-
-    <div  
-        class="profile-value"  
-        id="email">  
-
-        —  
-
-    </div>  
-
-</div>  
+    </a>
 
 
-<div class="profile-row">  
+    <button
+        class="logout"
+        id="logoutBtn">
 
-    <div class="profile-label">  
-        KYC Level  
-    </div>  
+        LOGOUT
 
-    <div  
-        class="profile-value"  
-        id="kycLevel">  
+    </button>
 
-        0  
-
-    </div>  
-
-</div>  
+</header>
 
 
-<div class="profile-row">  
+<!-- =====================================================
+     WELCOME
+===================================================== -->
 
-    <div class="profile-label">  
-        Referral  
-    </div>  
+<section class="welcome">
 
-    <div  
-        class="profile-value"  
-        id="referral">  
+    <h1>
+        Welcome,
+        <span id="firstName">Member</span>
+        👋
+    </h1>
 
-        JennyKhiss  
+    <p>
+        Your ON1Ecosystem account and activities.
+    </p>
 
-    </div>  
+    <div
+        class="welcome-bonus"
+        id="welcomeBonus">
 
-</div>  
+        🎁 Welcome bonus: 1,000 XP
+
+    </div>
+
+</section>
 
 
-<div class="profile-row">  
+<!-- =====================================================
+     STATS
+===================================================== -->
 
-    <div class="profile-label">  
-        Referral ON1 ID  
-    </div>  
+<section class="stats">
 
-    <div  
-        class="profile-value on1-id"  
-        id="referralId">  
+    <div class="stat-card">
 
-        ON12YBGYI9  
+        <div class="stat-label">
+            ON1Coin Balance
+        </div>
 
-    </div>  
+        <div
+            class="stat-value coin"
+            id="balance">
+
+            0.000
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Experience Points
+        </div>
+
+        <div
+            class="stat-value xp"
+            id="xp">
+
+            0
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Current Level
+        </div>
+
+        <div
+            class="stat-value level"
+            id="level">
+
+            0
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN GRID
+===================================================== -->
+
+<div class="main-grid">
+
+
+<!-- =====================================================
+     MINING CARD
+===================================================== -->
+
+<section class="card mining-card">
+
+    <div class="mining-top">
+
+        <div>
+
+            <div class="card-title">
+                ON1Coin Mining
+            </div>
+
+            <div class="card-subtitle">
+
+                Claim your 50 ON1Coin base mining
+                reward once every 24 hours.
+
+            </div>
+
+        </div>
+
+
+        <div class="mining-icon">
+            ⛏️
+        </div>
+
+    </div>
+
+
+    <div class="rate">
+
+        <div class="rate-number">
+            50.000
+        </div>
+
+        <div class="rate-label">
+            ON1Coin base reward / 24 hours
+        </div>
+
+    </div>
+
+
+    <!-- STREAK -->
+
+    <div class="streak">
+
+        <div class="streak-label">
+            Current mining streak
+        </div>
+
+        <div
+            class="streak-value"
+            id="streak">
+
+            Day 0
+
+        </div>
+
+    </div>
+
+
+    <!-- BASE MINING -->
+
+    <button
+        class="mine-btn"
+        id="mineBtn">
+
+        START MINING — +50 ON1
+
+    </button>
+
+
+    <div
+        class="next-mine"
+        id="nextMine">
+
+        Your 24-hour mining cycle is ready.
+
+    </div>
+
+
+    <!-- STREAK BONUS -->
+
+    <button
+        class="streak-btn"
+        id="streakBtn"
+        disabled>
+
+        CLAIM STREAK BONUS
+
+    </button>
+
+
+    <div
+        class="streak-status"
+        id="streakStatus">
+
+        Claim today's base mining first.
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <div
+        class="message"
+        id="message">
+    </div>
+
+
+    <!-- LEVEL PROGRESS -->
+
+    <div class="level-box">
+
+        <div class="level-head">
+
+            <div
+                class="level-name"
+                id="levelName">
+
+                PROGRESS TO LEVEL 1
+
+            </div>
+
+            <div
+                class="level-xp"
+                id="levelXP">
+
+                0 / 2,500 XP
+
+            </div>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROFILE
+===================================================== -->
+
+<section class="card">
+
+    <div class="card-title">
+        Your ON1 Profile
+    </div>
+
+    <div class="card-subtitle">
+        Your account information.
+    </div>
+
+
+    <div style="margin-top:14px;">
+
+
+        <div class="profile-row">
+
+            <div class="profile-label">
+                ON1 ID
+            </div>
+
+            <div
+                class="profile-value on1-id"
+                id="on1Id">
+
+                —
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-row">
+
+            <div class="profile-label">
+                Username
+            </div>
+
+            <div
+                class="profile-value"
+                id="username">
+
+                —
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-row">
+
+            <div class="profile-label">
+                Email
+            </div>
+
+            <div
+                class="profile-value"
+                id="email">
+
+                —
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-row">
+
+            <div class="profile-label">
+                KYC Level
+            </div>
+
+            <div
+                class="profile-value"
+                id="kycLevel">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-row">
+
+            <div class="profile-label">
+                Referral
+            </div>
+
+            <div
+                class="profile-value"
+                id="referral">
+
+                JennyKhiss
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-row">
+
+            <div class="profile-label">
+                Referral ON1 ID
+            </div>
+
+            <div
+                class="profile-value on1-id"
+                id="referralId">
+
+                ON12YBGYI9
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 </div>
 
-</div>  </section></div><!-- =====================================================  
-     ADVERTISEMENT  
-===================================================== --><section class="ad-section"><div class="ad-container">  <span class="ad-label">  
-    Advertisement  
-</span>  
 
-<script>  
-  atOptions = {  
-    'key' : '596737d882e5e2b61fad4b39ff34ce62',  
-    'format' : 'iframe',  
-    'height' : 250,  
-    'width' : 300,  
-    'params' : {}  
-  };  
-</script>  
+<!-- =====================================================
+     ADVERTISEMENT
+===================================================== -->
 
-<script src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js"></script>
+<section class="ad-section">
 
-</div>  </section><!-- =====================================================  
-     REFERRAL PROGRAM  
-===================================================== --><section class="card referral-card"><div class="referral-header">  <div class="referral-intro">  
+    <div class="ad-container">
 
-    <div class="card-title">  
-        Referral Program  
-    </div>  
+        <span class="ad-label">
+            Advertisement
+        </span>
 
-    <div class="card-subtitle">  
+        <script>
 
-        Invite friends and new members to  
-        ON1Ecosystem using your personal link.  
+            atOptions = {
+                'key' : '596737d882e5e2b61fad4b39ff34ce62',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
 
-    </div>  
+        </script>
 
-</div>  
+        <script
+            src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js">
+        </script>
+
+    </div>
+
+</section>
 
 
-<div class="referral-icon">  
-    🤝  
+<!-- =====================================================
+     CPX SURVEY SOLUTIONS
+===================================================== -->
+
+<section class="card cpx-card">
+
+    <div class="cpx-header">
+
+        <div class="cpx-intro">
+
+            <div class="card-title">
+                Survey Solutions
+            </div>
+
+            <div class="card-subtitle">
+
+                Complete available surveys and earn
+                rewards through ON1Ecosystem.
+
+            </div>
+
+        </div>
+
+        <div class="cpx-icon">
+            🎯
+        </div>
+
+    </div>
+
+
+    <div class="cpx-box">
+
+        <div
+            class="cpx-loading"
+            id="cpxLoading">
+
+            Loading available surveys...
+
+        </div>
+
+        <div
+            id="cpx-surveys">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     REFERRAL PROGRAM
+===================================================== -->
+
+<section class="card referral-card">
+
+
+    <div class="referral-header">
+
+        <div class="referral-intro">
+
+            <div class="card-title">
+                Referral Program
+            </div>
+
+            <div class="card-subtitle">
+
+                Invite friends and new members to
+                ON1Ecosystem using your personal link.
+
+            </div>
+
+        </div>
+
+
+        <div class="referral-icon">
+            🤝
+        </div>
+
+    </div>
+
+
+    <!-- REWARD -->
+
+    <div class="referral-reward">
+
+        <strong>
+            🎁 Earn 25 ON1 + 250 XP
+        </strong>
+
+        <p>
+
+            You receive 25 ON1Coin and 250 XP for
+            each successful referral according to
+            the ON1Ecosystem referral rules.
+
+        </p>
+
+    </div>
+
+
+    <!-- REFERRAL OWNER -->
+
+    <div class="referral-owner">
+
+        <div class="referral-owner-badge">
+
+            Referral ID:
+
+            <strong id="referralProgramId">
+                ON12YBGYI9
+            </strong>
+
+        </div>
+
+
+        <div class="referral-owner-badge">
+
+            Username:
+
+            <strong id="referralProgramUsername">
+                JennyKhiss
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- REFERRAL LINK -->
+
+    <div class="referral-link-box">
+
+        <label
+            class="referral-label"
+            for="referralLink">
+
+            YOUR PERSONAL REFERRAL LINK
+
+        </label>
+
+
+        <div class="referral-link-row">
+
+            <input
+                type="text"
+                class="referral-link"
+                id="referralLink"
+                readonly
+                value="Generating your referral link...">
+
+
+            <button
+                type="button"
+                class="copy-btn"
+                id="copyReferralBtn">
+
+                COPY LINK
+
+            </button>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="share-btn"
+            id="shareReferralBtn">
+
+            📤 SHARE REFERRAL LINK
+
+        </button>
+
+
+        <div
+            class="copy-message"
+            id="copyMessage">
+
+            Referral link copied successfully.
+
+        </div>
+
+    </div>
+
+
+    <!-- REFERRAL STATS -->
+
+    <div class="referral-stats">
+
+        <div class="referral-stat">
+
+            <div class="referral-stat-label">
+                Successful Referrals
+            </div>
+
+            <div
+                class="referral-stat-value referral-count"
+                id="referralCount">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="referral-stat">
+
+            <div class="referral-stat-label">
+                Referral ON1 Bonus
+            </div>
+
+            <div
+                class="referral-stat-value referral-bonus"
+                id="referralBonus">
+
+                0 ON1
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- XP REFERRAL BONUS -->
+
+    <div class="referral-xp-box">
+
+        <strong id="referralXPBonus">
+            0 XP
+        </strong>
+
+        <span>
+            expected referral XP bonus
+        </span>
+
+    </div>
+
+
+    <div class="referral-note">
+
+        Referral rewards are processed by the
+        secure ON1Ecosystem reward system.
+        This dashboard only displays referral
+        information and never directly changes
+        your ON1Coin balance or XP.
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    ON1Ecosystem — One Ecosystem. Multiple Solutions.
+
+</footer>
+
+
 </div>
 
-</div>  <!-- REWARD -->  <div class="referral-reward">  <strong>  
-    🎁 Earn 25 ON1 + 250 XP  
-</strong>  
 
-<p>  
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
 
-    You receive 25 ON1Coin and 250 XP for  
-    each successful referral according to  
-    the ON1Ecosystem referral rules.  
-
-</p>
-
-</div>  <!-- REFERRAL OWNER -->  <div class="referral-owner">  <div class="referral-owner-badge">  
-
-    Referral ID:  
-    <strong id="referralProgramId">  
-        ON12YBGYI9  
-    </strong>  
-
-</div>  
+<script type="module">
 
 
-<div class="referral-owner-badge">  
-
-    Username:  
-    <strong id="referralProgramUsername">  
-        JennyKhiss  
-    </strong>  
-
-</div>
-
-</div>  <!-- REFERRAL LINK -->  <div class="referral-link-box">  <label  
-    class="referral-label"  
-    for="referralLink">  
-
-    YOUR PERSONAL REFERRAL LINK  
-
-</label>  
-
-
-<div class="referral-link-row">  
-
-    <input  
-        type="text"  
-        class="referral-link"  
-        id="referralLink"  
-        readonly  
-        value="Generating your referral link...">  
-
-
-    <button  
-        type="button"  
-        class="copy-btn"  
-        id="copyReferralBtn">  
-
-        COPY LINK  
-
-    </button>  
-
-</div>  
-
-
-<button  
-    type="button"  
-    class="share-btn"  
-    id="shareReferralBtn">  
-
-    📤 SHARE REFERRAL LINK  
-
-</button>  
-
-
-<div  
-    class="copy-message"  
-    id="copyMessage">  
-
-    Referral link copied successfully.  
-
-</div>
-
-</div>  <!-- REFERRAL STATS -->  <div class="referral-stats">  <div class="referral-stat">  
-
-    <div class="referral-stat-label">  
-        Successful Referrals  
-    </div>  
-
-    <div  
-        class="referral-stat-value referral-count"  
-        id="referralCount">  
-
-        0  
-
-    </div>  
-
-</div>  
-
-
-<div class="referral-stat">  
-
-    <div class="referral-stat-label">  
-        Referral ON1 Bonus  
-    </div>  
-
-    <div  
-        class="referral-stat-value referral-bonus"  
-        id="referralBonus">  
-
-        0 ON1  
-
-    </div>  
-
-</div>
-
-</div>  <!-- XP REFERRAL BONUS -->  <div class="referral-xp-box">  <strong id="referralXPBonus">  
-    0 XP  
-</strong>  
-
-<span>  
-    expected referral XP bonus  
-</span>
-
-</div>  <div class="referral-note">  Referral rewards are processed by the  
-secure ON1Ecosystem reward system.  
-This dashboard only displays referral  
-information and never directly changes  
-your ON1Coin balance or XP.
-
-</div>  </section><footer>ON1Ecosystem — One Ecosystem. Multiple Solutions.  </footer></div><!-- =====================================================  
-     FIREBASE  
-===================================================== --><script type="module">  /* =====================================================
-FIREBASE IMPORTS
+/* =====================================================
+   FIREBASE IMPORTS
 ===================================================== */
 
 import {
-initializeApp
+    initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
+
 import {
-getAuth,
-onAuthStateChanged,
-signOut
+    getAuth,
+    onAuthStateChanged,
+    signOut
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+
 import {
-getFirestore,
-doc,
-getDoc
+    getFirestore,
+    doc,
+    getDoc
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
 /* =====================================================
-FIREBASE CONFIG
+   FIREBASE CONFIG
 ===================================================== */
 
 const firebaseConfig = {
 
-apiKey:  
-    "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",  
+    apiKey:
+        "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
 
-authDomain:  
-    "dsatechon1-c8b41.firebaseapp.com",  
+    authDomain:
+        "dsatechon1-c8b41.firebaseapp.com",
 
-projectId:  
-    "dsatechon1-c8b41",  
+    projectId:
+        "dsatechon1-c8b41",
 
-storageBucket:  
-    "dsatechon1-c8b41.firebasestorage.app",  
+    storageBucket:
+        "dsatechon1-c8b41.firebasestorage.app",
 
-messagingSenderId:  
-    "5740594058",  
+    messagingSenderId:
+        "5740594058",
 
-appId:  
-    "1:5740594058:web:23fbbca5392f12db863e73"
+    appId:
+        "1:5740594058:web:23fbbca5392f12db863e73"
 
 };
 
+
 /* =====================================================
-INITIALIZE FIREBASE
+   INITIALIZE FIREBASE
 ===================================================== */
 
 const app =
-initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
 
 const auth =
-getAuth(app);
+    getAuth(app);
 
 const db =
-getFirestore(app);
+    getFirestore(app);
+
 
 /* =====================================================
-SECURE MINING WORKER
+   SECURE MINING WORKER
 ===================================================== */
 
 const MINING_WORKER =
-"https://on1-mining-engine.dsatechon1official.workers.dev";
+    "https://on1-mining-engine.dsatechon1official.workers.dev";
+
 
 /* =====================================================
-DEFAULT REFERRER
+   DEFAULT REFERRER
 ===================================================== */
 
 const DEFAULT_REFERRER = {
 
-username:  
-    "JennyKhiss",  
+    username:
+        "JennyKhiss",
 
-on1Id:  
-    "ON12YBGYI9"
+    on1Id:
+        "ON12YBGYI9"
 
 };
 
+
 /* =====================================================
-REFERRAL REWARD SETTINGS
+   REFERRAL REWARD SETTINGS
 ===================================================== */
 
 const REFERRAL_REWARD_ON1 =
-25;
+    25;
 
 const REFERRAL_REWARD_XP =
-250;
+    250;
+
 
 /* =====================================================
-CONSTANTS
+   CONSTANTS
 ===================================================== */
 
 const DAY =
-24 * 60 * 60 * 1000;
+    24 * 60 * 60 * 1000;
 
 const XP_PER_LEVEL =
-2500;
+    2500;
+
 
 /* =====================================================
-ELEMENTS
+   CPX CONFIGURATION
+===================================================== */
+
+const CPX_APP_ID =
+    35802;
+
+
+/*
+
+IMPORTANT:
+
+The CPX Secure Hash is intentionally NOT stored
+inside this public dashboard.
+
+CPX will therefore receive:
+
+    app_id
+    ext_user_id
+    username
+    email
+
+The ext_user_id is the Firebase UID and remains
+stable for the logged-in user.
+
+*/
+
+const CPX_SECURE_HASH =
+    "";
+
+
+/* =====================================================
+   ELEMENTS
 ===================================================== */
 
 const loading =
-document.getElementById("loading");
+    document.getElementById("loading");
 
 const loadingText =
-document.getElementById("loadingText");
+    document.getElementById("loadingText");
 
 const mineBtn =
-document.getElementById("mineBtn");
+    document.getElementById("mineBtn");
 
 const streakBtn =
-document.getElementById("streakBtn");
+    document.getElementById("streakBtn");
 
 const message =
-document.getElementById("message");
+    document.getElementById("message");
 
 const nextMine =
-document.getElementById("nextMine");
+    document.getElementById("nextMine");
 
 const streakStatus =
-document.getElementById("streakStatus");
+    document.getElementById("streakStatus");
 
 const logoutBtn =
-document.getElementById("logoutBtn");
+    document.getElementById("logoutBtn");
 
 const referralLink =
-document.getElementById("referralLink");
+    document.getElementById("referralLink");
 
 const copyReferralBtn =
-document.getElementById("copyReferralBtn");
+    document.getElementById("copyReferralBtn");
 
 const shareReferralBtn =
-document.getElementById("shareReferralBtn");
+    document.getElementById("shareReferralBtn");
 
 const copyMessage =
-document.getElementById("copyMessage");
+    document.getElementById("copyMessage");
 
 const referralCount =
-document.getElementById("referralCount");
+    document.getElementById("referralCount");
 
 const referralBonus =
-document.getElementById("referralBonus");
+    document.getElementById("referralBonus");
 
 const referralXPBonus =
-document.getElementById("referralXPBonus");
+    document.getElementById("referralXPBonus");
 
 const referralProgramId =
-document.getElementById("referralProgramId");
+    document.getElementById("referralProgramId");
 
 const referralProgramUsername =
-document.getElementById("referralProgramUsername");
+    document.getElementById("referralProgramUsername");
+
+const cpxLoading =
+    document.getElementById("cpxLoading");
+
 
 /* =====================================================
-CURRENT USER
+   CURRENT USER
 ===================================================== */
 
 let currentUser =
-null;
+    null;
 
 let currentData =
-null;
+    null;
+
 
 /* =====================================================
-LEVEL
+   LEVEL
 ===================================================== */
 
 function calculateLevel(xp){
 
-return Math.floor(  
-    Number(xp || 0) /  
-    XP_PER_LEVEL  
-);
+    return Math.floor(
+        Number(xp || 0) /
+        XP_PER_LEVEL
+    );
 
 }
 
+
 /* =====================================================
-XP READER
+   XP READER
 ===================================================== */
 
 function getXP(data){
 
-if(data.XP !== undefined){  
+    if(data.XP !== undefined){
 
-    return Number(data.XP) || 0;  
+        return Number(data.XP) || 0;
 
-}  
+    }
 
-if(data.xp !== undefined){  
+    if(data.xp !== undefined){
 
-    return Number(data.xp) || 0;  
+        return Number(data.xp) || 0;
 
-}  
+    }
 
-if(  
-    data.experiencePoints !== undefined  
-){  
+    if(
+        data.experiencePoints !== undefined
+    ){
 
-    return Number(  
-        data.experiencePoints  
-    ) || 0;  
+        return Number(
+            data.experiencePoints
+        ) || 0;
 
-}  
+    }
 
-return 0;
+    return 0;
 
 }
 
+
 /* =====================================================
-TIMESTAMP
+   TIMESTAMP
 ===================================================== */
 
 function timestampToMillis(value){
 
-if(!value){  
-    return 0;  
-}  
+    if(!value){
 
-if(  
-    typeof value.toMillis ===  
-    "function"  
-){  
+        return 0;
 
-    return value.toMillis();  
+    }
 
-}  
+    if(
+        typeof value.toMillis ===
+        "function"
+    ){
 
-if(  
-    value.seconds !== undefined  
-){  
+        return value.toMillis();
 
-    return Number(value.seconds) * 1000;  
+    }
 
-}  
+    if(
+        value.seconds !== undefined
+    ){
 
-if(value instanceof Date){  
+        return Number(value.seconds) * 1000;
 
-    return value.getTime();  
+    }
 
-}  
+    if(value instanceof Date){
 
-if(typeof value === "number"){  
+        return value.getTime();
 
-    return value;  
+    }
 
-}  
+    if(typeof value === "number"){
 
-if(typeof value === "string"){  
+        return value;
 
-    const parsed =  
-        Date.parse(value);  
+    }
 
-    if(!isNaN(parsed)){  
+    if(typeof value === "string"){
 
-        return parsed;  
+        const parsed =
+            Date.parse(value);
 
-    }  
+        if(!isNaN(parsed)){
 
-}  
+            return parsed;
 
-return 0;
+        }
+
+    }
+
+    return 0;
 
 }
 
+
 /* =====================================================
-GENERATE ON1 ID
+   GENERATE ON1 ID
 ===================================================== */
 
 function generateON1Id(uid){
 
-if(!uid){  
+    if(!uid){
 
-    return "ON1XXXXXXX";  
+        return "ON1XXXXXXX";
 
-}  
+    }
 
-const clean =  
-    String(uid)  
-    .replace(  
-        /[^a-zA-Z0-9]/g,  
-        ""  
-    )  
-    .toUpperCase();  
+    const clean =
+        String(uid)
+        .replace(
+            /[^a-zA-Z0-9]/g,
+            ""
+        )
+        .toUpperCase();
 
-return (  
-    "ON1" +  
-    clean.substring(0,7)  
-);
+    return (
+        "ON1" +
+        clean.substring(0,7)
+    );
 
 }
 
+
 /* =====================================================
-GET ON1 ID
+   GET ON1 ID
 ===================================================== */
 
 function getON1Id(data,user){
 
-const possibleIds = [  
+    const possibleIds = [
 
-    data.on1Id,  
-    data.ON1Id,  
-    data.on1ID  
+        data.on1Id,
+        data.ON1Id,
+        data.on1ID
 
-];  
-
-
-for(  
-    const value of possibleIds  
-){  
-
-    if(!value){  
-        continue;  
-    }  
-
-    const id =  
-        String(value)  
-        .trim()  
-        .toUpperCase();  
+    ];
 
 
-    if(  
-        /^ON1[A-Z0-9]{7}$/.test(id)  
-    ){  
+    for(
+        const value of possibleIds
+    ){
 
-        return id;  
+        if(!value){
 
-    }  
+            continue;
 
-}  
+        }
+
+        const id =
+            String(value)
+            .trim()
+            .toUpperCase();
 
 
-return generateON1Id(  
-    user.uid  
-);
+        if(
+            /^ON1[A-Z0-9]{7}$/.test(id)
+        ){
+
+            return id;
+
+        }
+
+    }
+
+
+    return generateON1Id(
+        user.uid
+    );
 
 }
 
+
 /* =====================================================
-GET REFERRAL USERNAME
+   GET REFERRAL USERNAME
 ===================================================== */
 
 function getReferral(data){
 
-const possible =  
-    data.referredBy ||  
-    data.referrer ||  
-    data.referralUsername ||  
-    data.referralCode ||  
-    "";  
+    const possible =
+        data.referredBy ||
+        data.referrer ||
+        data.referralUsername ||
+        data.referralCode ||
+        "";
 
 
-if(  
-    possible &&  
-    String(possible).trim() !== ""  
-){  
+    if(
+        possible &&
+        String(possible).trim() !== ""
+    ){
 
-    return String(possible);  
+        return String(possible);
 
-}  
+    }
 
 
-return DEFAULT_REFERRER.username;
+    return DEFAULT_REFERRER.username;
 
 }
 
+
 /* =====================================================
-GET REFERRAL ID
+   GET REFERRAL ID
 ===================================================== */
 
 function getReferralId(data){
 
-const possible =  
-    data.referredById ||  
-    data.referrerId ||  
-    data.referralId ||  
-    "";  
+    const possible =
+        data.referredById ||
+        data.referrerId ||
+        data.referralId ||
+        "";
 
 
-if(  
-    possible &&  
-    String(possible).trim() !== ""  
-){  
+    if(
+        possible &&
+        String(possible).trim() !== ""
+    ){
 
-    const value =  
-        String(possible)  
-        .trim()  
-        .toUpperCase();  
-
-
-    if(  
-        /^ON1[A-Z0-9]{7}$/.test(value)  
-    ){  
-
-        return value;  
-
-    }  
-
-}  
+        const value =
+            String(possible)
+            .trim()
+            .toUpperCase();
 
 
-return DEFAULT_REFERRER.on1Id;
+        if(
+            /^ON1[A-Z0-9]{7}$/.test(value)
+        ){
+
+            return value;
+
+        }
+
+    }
+
+
+    return DEFAULT_REFERRER.on1Id;
 
 }
 
+
 /* =====================================================
-GET REFERRAL COUNT
+   GET REFERRAL COUNT
 ===================================================== */
 
 function getReferralCount(data){
 
-const possibleValues = [  
+    const possibleValues = [
 
-    data.referralCount,  
-    data.referrals,  
-    data.referredCount,  
-    data.totalReferrals  
+        data.referralCount,
+        data.referrals,
+        data.referredCount,
+        data.totalReferrals
 
-];  
-
-
-for(  
-    const value of possibleValues  
-){  
-
-    if(  
-        value !== undefined &&  
-        value !== null  
-    ){  
-
-        const number =  
-            Number(value);  
-
-        if(  
-            Number.isFinite(number) &&  
-            number >= 0  
-        ){  
-
-            return Math.floor(number);  
-
-        }  
-
-    }  
-
-}  
+    ];
 
 
-return 0;
+    for(
+        const value of possibleValues
+    ){
+
+        if(
+            value !== undefined &&
+            value !== null
+        ){
+
+            const number =
+                Number(value);
+
+            if(
+                Number.isFinite(number) &&
+                number >= 0
+            ){
+
+                return Math.floor(number);
+
+            }
+
+        }
+
+    }
+
+
+    return 0;
 
 }
 
+
 /* =====================================================
-GET ACTUAL REFERRAL BONUS
+   GET ACTUAL REFERRAL BONUS
 ===================================================== */
 
 function getReferralBonus(data,count){
 
-const possibleValues = [  
+    const possibleValues = [
 
-    data.referralBonus,  
-    data.referralBonusON1,  
-    data.totalReferralBonus  
+        data.referralBonus,
+        data.referralBonusON1,
+        data.totalReferralBonus
 
-];  
-
-
-for(  
-    const value of possibleValues  
-){  
-
-    if(  
-        value !== undefined &&  
-        value !== null  
-    ){  
-
-        const number =  
-            Number(value);  
-
-        if(  
-            Number.isFinite(number) &&  
-            number >= 0  
-        ){  
-
-            return number;  
-
-        }  
-
-    }  
-
-}  
+    ];
 
 
-/*  
-   DISPLAY ONLY.  
-   This calculation never writes  
-   to Firestore or changes balance.  
-*/  
+    for(
+        const value of possibleValues
+    ){
 
-return (  
-    count *  
-    REFERRAL_REWARD_ON1  
-);
+        if(
+            value !== undefined &&
+            value !== null
+        ){
+
+            const number =
+                Number(value);
+
+            if(
+                Number.isFinite(number) &&
+                number >= 0
+            ){
+
+                return number;
+
+            }
+
+        }
+
+    }
+
+
+    return (
+        count *
+        REFERRAL_REWARD_ON1
+    );
 
 }
 
+
 /* =====================================================
-GET REFERRAL XP BONUS
+   GET REFERRAL XP BONUS
 ===================================================== */
 
 function getReferralXPBonus(data,count){
 
-const possibleValues = [  
+    const possibleValues = [
 
-    data.referralBonusXP,  
-    data.referralXPBonus,  
-    data.totalReferralXP  
+        data.referralBonusXP,
+        data.referralXPBonus,
+        data.totalReferralXP
 
-];  
-
-
-for(  
-    const value of possibleValues  
-){  
-
-    if(  
-        value !== undefined &&  
-        value !== null  
-    ){  
-
-        const number =  
-            Number(value);  
-
-        if(  
-            Number.isFinite(number) &&  
-            number >= 0  
-        ){  
-
-            return number;  
-
-        }  
-
-    }  
-
-}  
+    ];
 
 
-/*  
-   DISPLAY ONLY.  
-*/  
+    for(
+        const value of possibleValues
+    ){
 
-return (  
-    count *  
-    REFERRAL_REWARD_XP  
-);
+        if(
+            value !== undefined &&
+            value !== null
+        ){
+
+            const number =
+                Number(value);
+
+            if(
+                Number.isFinite(number) &&
+                number >= 0
+            ){
+
+                return number;
+
+            }
+
+        }
+
+    }
+
+
+    return (
+        count *
+        REFERRAL_REWARD_XP
+    );
 
 }
 
+
 /* =====================================================
-BUILD REFERRAL LINK
+   BUILD REFERRAL LINK
 ===================================================== */
 
 function buildReferralLink(on1Id){
 
-if(  
-    !on1Id ||  
-    !/^ON1[A-Z0-9]{7}$/.test(on1Id)  
-){  
+    if(
+        !on1Id ||
+        !/^ON1[A-Z0-9]{7}$/.test(on1Id)
+    ){
 
-    return "";  
+        return "";
 
-}  
-
-
-const signupURL =  
-    new URL(  
-        "signup.html",  
-        window.location.href  
-    );  
+    }
 
 
-signupURL.searchParams.set(  
-    "ref",  
-    on1Id  
-);  
+    const signupURL =
+        new URL(
+            "signup.html",
+            window.location.href
+        );
 
 
-return signupURL.toString();
+    signupURL.searchParams.set(
+        "ref",
+        on1Id
+    );
+
+
+    return signupURL.toString();
 
 }
 
+
 /* =====================================================
-UPDATE REFERRAL PROGRAM
+   UPDATE REFERRAL PROGRAM
 ===================================================== */
 
 function updateReferralProgram(
-data,
-user
+    data,
+    user
 ){
 
-const on1Id =  
-    getON1Id(  
-        data,  
-        user  
-    );  
+    const on1Id =
+        getON1Id(
+            data,
+            user
+        );
 
 
-const username =  
-    data.username ||  
-    "Member";  
+    const username =
+        data.username ||
+        "Member";
 
 
-const count =  
-    getReferralCount(data);  
+    const count =
+        getReferralCount(data);
 
 
-const bonus =  
-    getReferralBonus(  
-        data,  
-        count  
-    );  
+    const bonus =
+        getReferralBonus(
+            data,
+            count
+        );
 
 
-const xpBonus =  
-    getReferralXPBonus(  
-        data,  
-        count  
-    );  
+    const xpBonus =
+        getReferralXPBonus(
+            data,
+            count
+        );
 
 
-const link =  
-    buildReferralLink(  
-        on1Id  
-    );  
+    const link =
+        buildReferralLink(
+            on1Id
+        );
 
 
-/* LINK */  
-
-referralLink.value =  
-    link ||  
-    "Your referral link is being prepared...";  
+    referralLink.value =
+        link ||
+        "Your referral link is being prepared...";
 
 
-/* STATS */  
-
-referralCount.textContent =  
-    count.toLocaleString();  
+    referralCount.textContent =
+        count.toLocaleString();
 
 
-referralBonus.textContent =  
-    Number(bonus).toLocaleString() +  
-    " ON1";  
+    referralBonus.textContent =
+        Number(bonus).toLocaleString() +
+        " ON1";
 
 
-referralXPBonus.textContent =  
-    Number(xpBonus).toLocaleString() +  
-    " XP";  
+    referralXPBonus.textContent =
+        Number(xpBonus).toLocaleString() +
+        " XP";
 
 
-/* IDENTITY */  
-
-referralProgramId.textContent =  
-    on1Id;  
+    referralProgramId.textContent =
+        on1Id;
 
 
-referralProgramUsername.textContent =  
-    username;  
+    referralProgramUsername.textContent =
+        username;
 
 
-/* BUTTONS */  
+    copyReferralBtn.disabled =
+        !link;
 
-copyReferralBtn.disabled =  
-    !link;  
-
-shareReferralBtn.disabled =  
-    !link;
+    shareReferralBtn.disabled =
+        !link;
 
 }
 
+
 /* =====================================================
-UPDATE DASHBOARD
+   CPX SURVEY INTEGRATION
+===================================================== */
+
+function loadCPXSurveys(
+    user,
+    data
+){
+
+    if(!user){
+
+        return;
+
+    }
+
+
+    const cpxContainer =
+        document.getElementById(
+            "cpx-surveys"
+        );
+
+
+    if(!cpxContainer){
+
+        return;
+
+    }
+
+
+    /*
+       Remove any previous CPX configuration.
+    */
+
+    window.config =
+        undefined;
+
+
+    /*
+       CPX uses the Firebase UID as the
+       permanent external user identifier.
+
+       This is unique per ON1Ecosystem account.
+    */
+
+    const extUserId =
+        String(user.uid);
+
+
+    const username =
+        String(
+            data?.username ||
+            user.displayName ||
+            "Member"
+        );
+
+
+    const email =
+        String(
+            data?.email ||
+            user.email ||
+            ""
+        );
+
+
+    /*
+       CPX Single Sidebar / Compact Widget.
+
+       This keeps the dashboard compact instead
+       of creating a huge survey wall.
+    */
+
+    const script3 = {
+
+        div_id:
+            "cpx-surveys",
+
+        theme_style:
+            3,
+
+        display_mode:
+            1
+
+    };
+
+
+    window.config = {
+
+        general_config: {
+
+            app_id:
+                CPX_APP_ID,
+
+            ext_user_id:
+                extUserId,
+
+            email:
+                email,
+
+            username:
+                username,
+
+            secure_hash:
+                CPX_SECURE_HASH,
+
+            subid_1:
+                "ON1Ecosystem",
+
+            subid_2:
+                ""
+
+        },
+
+
+        style_config: {
+
+            text_color:
+                "#dce8f5",
+
+            survey_box: {
+
+                topbar_background_color:
+                    "#087cff",
+
+                box_background_color:
+                    "#0c1624",
+
+                rounded_borders:
+                    true,
+
+                stars_filled:
+                    "#f5c451"
+
+            }
+
+        },
+
+
+        script_config: [
+            script3
+        ],
+
+
+        debug:
+            false,
+
+
+        useIFrame:
+            true,
+
+
+        iFramePosition:
+            1,
+
+
+        functions: {
+
+            no_surveys_available:
+                () => {
+
+                    if(cpxLoading){
+
+                        cpxLoading.textContent =
+                            "No matching surveys are available right now. Please check again later.";
+
+                    }
+
+                },
+
+
+            count_new_surveys:
+                (countsurveys) => {
+
+                    if(cpxLoading){
+
+                        if(
+                            Number(countsurveys) > 0
+                        ){
+
+                            cpxLoading.style.display =
+                                "none";
+
+                        }else{
+
+                            cpxLoading.textContent =
+                                "No matching surveys are available right now.";
+
+                        }
+
+                    }
+
+                },
+
+
+            get_all_surveys:
+                (surveys) => {
+
+                    if(cpxLoading){
+
+                        cpxLoading.style.display =
+                            "none";
+
+                    }
+
+                    console.log(
+                        "CPX surveys:",
+                        surveys
+                    );
+
+                },
+
+
+            get_transaction:
+                (transactions) => {
+
+                    console.log(
+                        "CPX transaction:",
+                        transactions
+                    );
+
+                }
+
+        }
+
+    };
+
+
+    /*
+       CPX requires its configuration before
+       loading the library.
+    */
+
+    const existing =
+        document.getElementById(
+            "cpx-script-tag"
+        );
+
+
+    if(existing){
+
+        existing.remove();
+
+    }
+
+
+    const script =
+        document.createElement(
+            "script"
+        );
+
+
+    script.id =
+        "cpx-script-tag";
+
+    script.type =
+        "text/javascript";
+
+    script.src =
+        "https://cdn.cpx-research.com/assets/js/script_tag_v2.0.js";
+
+
+    script.onload =
+        function(){
+
+            if(cpxLoading){
+
+                cpxLoading.style.display =
+                    "none";
+
+            }
+
+        };
+
+
+    script.onerror =
+        function(){
+
+            if(cpxLoading){
+
+                cpxLoading.textContent =
+                    "Survey service is temporarily unavailable. Please try again later.";
+
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE DASHBOARD
 ===================================================== */
 
 function updateDashboard(data){
 
-currentData =  
-    data;  
+    currentData =
+        data;
 
 
-const xp =  
-    getXP(data);  
+    const xp =
+        getXP(data);
 
 
-const balance =  
-    Number(  
-        data.balance || 0  
-    );  
+    const balance =
+        Number(
+            data.balance || 0
+        );
 
 
-const streak =  
-    Number(  
-        data.streak || 0  
-    );  
+    const streak =
+        Number(
+            data.streak || 0
+        );
 
 
-const level =  
-    calculateLevel(xp);  
+    const level =
+        calculateLevel(xp);
 
 
-/* NAME */  
+    document.getElementById(
+        "firstName"
+    ).textContent =
+        data.firstName ||
+        data.firstname ||
+        data.name ||
+        data.username ||
+        "Member";
 
-document.getElementById(  
-    "firstName"  
-).textContent =  
-    data.firstName ||  
-    data.firstname ||  
-    data.name ||  
-    data.username ||  
-    "Member";  
 
+    document.getElementById(
+        "balance"
+    ).textContent =
+        balance.toFixed(3);
 
-/* BALANCE */  
 
-document.getElementById(  
-    "balance"  
-).textContent =  
-    balance.toFixed(3);  
+    document.getElementById(
+        "xp"
+    ).textContent =
+        xp.toLocaleString();
 
 
-/* XP */  
+    document.getElementById(
+        "level"
+    ).textContent =
+        level;
 
-document.getElementById(  
-    "xp"  
-).textContent =  
-    xp.toLocaleString();  
 
+    /*
+       Day 10 is the maximum display streak.
+       The secure worker enforces the actual
+       streak state.
+    */
 
-/* LEVEL */  
+    const displayStreak =
+        Math.min(
+            Math.max(streak,0),
+            10
+        );
 
-document.getElementById(  
-    "level"  
-).textContent =  
-    level;  
 
+    document.getElementById(
+        "streak"
+    ).textContent =
+        "Day " +
+        displayStreak;
 
-/* STREAK */  
 
-/*  
-   Day 10 is the maximum display streak.  
-   The secure worker is responsible for  
-   enforcing the actual streak state.  
-*/  
+    document.getElementById(
+        "username"
+    ).textContent =
+        data.username ||
+        "—";
 
-const displayStreak =  
-    Math.min(  
-        Math.max(streak,0),  
-        10  
-    );  
 
+    document.getElementById(
+        "email"
+    ).textContent =
+        data.email ||
+        currentUser?.email ||
+        "—";
 
-document.getElementById(  
-    "streak"  
-).textContent =  
-    "Day " +  
-    displayStreak;  
 
+    document.getElementById(
+        "kycLevel"
+    ).textContent =
+        data.kycLevel ?? 0;
 
-/* PROFILE */  
 
-document.getElementById(  
-    "username"  
-).textContent =  
-    data.username ||  
-    "—";  
+    const on1Id =
+        getON1Id(
+            data,
+            currentUser
+        );
 
 
-document.getElementById(  
-    "email"  
-).textContent =  
-    data.email ||  
-    currentUser?.email ||  
-    "—";  
+    document.getElementById(
+        "on1Id"
+    ).textContent =
+        on1Id;
 
 
-document.getElementById(  
-    "kycLevel"  
-).textContent =  
-    data.kycLevel ?? 0;  
+    document.getElementById(
+        "referral"
+    ).textContent =
+        getReferral(data);
 
 
-/* ON1 ID */  
+    document.getElementById(
+        "referralId"
+    ).textContent =
+        getReferralId(data);
 
-const on1Id =  
-    getON1Id(  
-        data,  
-        currentUser  
-    );  
 
+    updateReferralProgram(
+        data,
+        currentUser
+    );
 
-document.getElementById(  
-    "on1Id"  
-).textContent =  
-    on1Id;  
 
+    /*
+       XP PROGRESS
+    */
 
-/* REFERRAL */  
+    const currentXP =
+        xp % XP_PER_LEVEL;
 
-document.getElementById(  
-    "referral"  
-).textContent =  
-    getReferral(data);  
 
+    const progress =
+        (
+            currentXP /
+            XP_PER_LEVEL
+        ) * 100;
 
-document.getElementById(  
-    "referralId"  
-).textContent =  
-    getReferralId(data);  
 
+    const nextLevel =
+        level + 1;
 
-/* REFERRAL PROGRAM */  
 
-updateReferralProgram(  
-    data,  
-    currentUser  
-);  
+    document.getElementById(
+        "levelName"
+    ).textContent =
+        "PROGRESS TO LEVEL " +
+        nextLevel;
 
 
-/* XP PROGRESS */  
+    document.getElementById(
+        "levelXP"
+    ).textContent =
+        currentXP.toLocaleString() +
+        " / 2,500 XP";
 
-const currentXP =  
-    xp % XP_PER_LEVEL;  
 
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        Math.min(
+            progress,
+            100
+        ) + "%";
 
-const progress =  
-    (  
-        currentXP /  
-        XP_PER_LEVEL  
-    ) * 100;  
 
+    /*
+       Display only.
+       No XP is added here.
+    */
 
-const nextLevel =  
-    level + 1;  
+    document.getElementById(
+        "welcomeBonus"
+    ).textContent =
+        "🎁 Welcome bonus: 1,000 XP";
 
 
-document.getElementById(  
-    "levelName"  
-).textContent =  
-    "PROGRESS TO LEVEL " +  
-    nextLevel;  
-
-
-document.getElementById(  
-    "levelXP"  
-).textContent =  
-    currentXP.toLocaleString() +  
-    " / 2,500 XP";  
-
-
-document.getElementById(  
-    "progressBar"  
-).style.width =  
-    Math.min(  
-        progress,  
-        100  
-    ) + "%";  
-
-
-/*  
-   Display only.  
-   No XP is added here.  
-*/  
-
-document.getElementById(  
-    "welcomeBonus"  
-).textContent =  
-    "🎁 Welcome bonus: 1,000 XP";  
-
-
-updateMiningState(data);
+    updateMiningState(data);
 
 }
 
+
 /* =====================================================
-MINING STATE
+   MINING STATE
 ===================================================== */
 
 function updateMiningState(data){
 
-const lastClaim =  
-    Number(  
-        data.lastClaim || 0  
-    );  
+    const lastClaim =
+        Number(
+            data.lastClaim || 0
+        );
 
 
-const lastStreakClaim =  
-    Number(  
-        data.lastStreakClaim || 0  
-    );  
+    const lastStreakClaim =
+        Number(
+            data.lastStreakClaim || 0
+        );
 
 
-const now =  
-    Date.now();  
+    const now =
+        Date.now();
 
 
-/* NEVER MINED */  
+    /*
+       NEVER MINED
+    */
 
-if(!lastClaim){  
+    if(!lastClaim){
 
-    mineBtn.disabled =  
-        false;  
+        mineBtn.disabled =
+            false;
 
-    mineBtn.textContent =  
-        "START MINING — +50 ON1";  
+        mineBtn.textContent =
+            "START MINING — +50 ON1";
 
-    nextMine.textContent =  
-        "Your 24-hour mining cycle is ready.";  
+        nextMine.textContent =
+            "Your 24-hour mining cycle is ready.";
 
 
-    streakBtn.disabled =  
-        true;  
+        streakBtn.disabled =
+            true;
 
-    streakBtn.textContent =  
-        "CLAIM STREAK BONUS";  
+        streakBtn.textContent =
+            "CLAIM STREAK BONUS";
 
-    streakStatus.textContent =  
-        "Claim today's base mining first.";  
+        streakStatus.textContent =
+            "Claim today's base mining first.";
 
-    return;  
+        return;
 
-}  
+    }
 
 
-const elapsed =  
-    now - lastClaim;  
+    const elapsed =
+        now - lastClaim;
 
 
-/* NEXT CYCLE READY */  
+    /*
+       NEXT CYCLE READY
+    */
 
-if(elapsed >= DAY){  
+    if(elapsed >= DAY){
 
-    mineBtn.disabled =  
-        false;  
+        mineBtn.disabled =
+            false;
 
-    mineBtn.textContent =  
-        "START MINING — +50 ON1";  
+        mineBtn.textContent =
+            "START MINING — +50 ON1";
 
-    nextMine.textContent =  
-        "Your next 24-hour mining cycle is ready.";  
+        nextMine.textContent =
+            "Your next 24-hour mining cycle is ready.";
 
 
-    streakBtn.disabled =  
-        true;  
+        streakBtn.disabled =
+            true;
 
-    streakBtn.textContent =  
-        "CLAIM STREAK BONUS";  
+        streakBtn.textContent =
+            "CLAIM STREAK BONUS";
 
-    streakStatus.textContent =  
-        "Start today's mining cycle first.";  
+        streakStatus.textContent =
+            "Start today's mining cycle first.";
 
-    return;  
+        return;
 
-}  
+    }
 
 
-/* MINING ACTIVE */  
+    /*
+       MINING ACTIVE
+    */
 
-mineBtn.disabled =  
-    true;  
+    mineBtn.disabled =
+        true;
 
-mineBtn.textContent =  
-    "MINING ACTIVE";  
+    mineBtn.textContent =
+        "MINING ACTIVE";
 
 
-const remaining =  
-    DAY - elapsed;  
+    const remaining =
+        DAY - elapsed;
 
 
-nextMine.textContent =  
-    "Next mining cycle in " +  
-    formatTime(remaining);  
+    nextMine.textContent =
+        "Next mining cycle in " +
+        formatTime(remaining);
 
 
-/* STREAK */  
+    /*
+       STREAK
+    */
 
-const streakAlreadyClaimed =  
-    lastStreakClaim >= lastClaim;  
+    const streakAlreadyClaimed =
+        lastStreakClaim >= lastClaim;
 
 
-if(streakAlreadyClaimed){  
+    if(streakAlreadyClaimed){
 
-    streakBtn.disabled =  
-        true;  
+        streakBtn.disabled =
+            true;
 
-    streakBtn.textContent =  
-        "STREAK BONUS CLAIMED";  
+        streakBtn.textContent =
+            "STREAK BONUS CLAIMED";
 
-    streakStatus.textContent =  
-        "Today's streak bonus has already been claimed.";  
+        streakStatus.textContent =
+            "Today's streak bonus has already been claimed.";
 
-    return;  
+        return;
 
-}  
+    }
 
 
-/*  
-   Day 10 is the permanent maximum.  
+    /*
+       Day 10 is the permanent maximum.
 
-   Day 1 = 5 ON1  
-   Day 2 = 10 ON1  
-   ...  
-   Day 9 = 45 ON1  
-   Day 10 = 100 ON1  
+       Day 1 = 5 ON1
+       Day 2 = 10 ON1
+       ...
+       Day 9 = 45 ON1
+       Day 10 = 100 ON1
 
-   Once the user reaches Day 10,  
-   the bonus remains 100 ON1 every cycle  
-   while the streak is maintained.  
-*/  
+       Day 10 remains 100 ON1 while
+       the streak is maintained.
+    */
 
-const rawStreak =  
-    Number(  
-        data.streak || 0  
-    );  
+    const rawStreak =
+        Number(
+            data.streak || 0
+        );
 
 
-const streak =  
-    Math.min(  
-        Math.max(rawStreak,0),  
-        10  
-    );  
+    const streak =
+        Math.min(
+            Math.max(rawStreak,0),
+            10
+        );
 
 
-let bonus;  
+    let bonus;
 
 
-if(streak >= 10){  
+    if(streak >= 10){
 
-    bonus = 100;  
+        bonus = 100;
 
-}else{  
+    }else{
 
-    bonus =  
-        streak * 5;  
+        bonus =
+            streak * 5;
 
-}  
+    }
 
 
-if(bonus <= 0){  
+    if(bonus <= 0){
 
-    streakBtn.disabled =  
-        true;  
+        streakBtn.disabled =
+            true;
 
-    streakStatus.textContent =  
-        "Complete a mining cycle to unlock the streak bonus.";  
+        streakStatus.textContent =
+            "Complete a mining cycle to unlock the streak bonus.";
 
-    return;  
+        return;
 
-}  
+    }
 
 
-streakBtn.disabled =  
-    false;  
+    streakBtn.disabled =
+        false;
 
-streakBtn.textContent =  
-    "CLAIM +" +  
-    bonus +  
-    " STREAK BONUS";  
+    streakBtn.textContent =
+        "CLAIM +" +
+        bonus +
+        " STREAK BONUS";
 
-streakStatus.textContent =  
-    "Your Day " +  
-    streak +  
-    " streak bonus is ready.";
+    streakStatus.textContent =
+        "Your Day " +
+        streak +
+        " streak bonus is ready.";
 
 }
 
+
 /* =====================================================
-FORMAT TIME
+   FORMAT TIME
 ===================================================== */
 
 function formatTime(milliseconds){
 
-const totalSeconds =  
-    Math.ceil(  
-        milliseconds / 1000  
-    );  
+    const totalSeconds =
+        Math.ceil(
+            milliseconds / 1000
+        );
 
 
-const hours =  
-    Math.floor(  
-        totalSeconds / 3600  
-    );  
+    const hours =
+        Math.floor(
+            totalSeconds / 3600
+        );
 
 
-const minutes =  
-    Math.floor(  
-        (totalSeconds % 3600) / 60  
-    );  
+    const minutes =
+        Math.floor(
+            (totalSeconds % 3600) / 60
+        );
 
 
-const seconds =  
-    totalSeconds % 60;  
+    const seconds =
+        totalSeconds % 60;
 
 
-return (  
+    return (
 
-    String(hours)  
-    .padStart(2,"0")  
+        String(hours)
+        .padStart(2,"0")
 
-    + ":" +  
+        + ":" +
 
-    String(minutes)  
-    .padStart(2,"0")  
+        String(minutes)
+        .padStart(2,"0")
 
-    + ":" +  
+        + ":" +
 
-    String(seconds)  
-    .padStart(2,"0")  
+        String(seconds)
+        .padStart(2,"0")
 
-);
+    );
 
 }
 
+
 /* =====================================================
-MESSAGE
+   MESSAGE
 ===================================================== */
 
 function showMessage(
-text,
-type
+    text,
+    type
 ){
 
-message.textContent =  
-    text;  
+    message.textContent =
+        text;
 
-message.className =  
-    "message " + type;
+    message.className =
+        "message " + type;
 
 }
 
+
 /* =====================================================
-REFERRAL COPY FEEDBACK
+   REFERRAL COPY FEEDBACK
 ===================================================== */
 
 function showCopySuccess(){
 
-copyMessage.textContent =  
-    "Referral link copied successfully.";  
-
-copyMessage.classList.add(  
-    "show"  
-);  
+    copyMessage.textContent =
+        "Referral link copied successfully.";
 
 
-copyReferralBtn.textContent =  
-    "COPIED";  
+    copyMessage.classList.add(
+        "show"
+    );
 
 
-setTimeout(  
-    function(){  
+    copyReferralBtn.textContent =
+        "COPIED";
 
-        copyMessage.classList.remove(  
-            "show"  
-        );  
 
-        copyReferralBtn.textContent =  
-            "COPY LINK";  
+    setTimeout(
+        function(){
 
-    },  
-    2200  
-);
+            copyMessage.classList.remove(
+                "show"
+            );
+
+            copyReferralBtn.textContent =
+                "COPY LINK";
+
+        },
+        2200
+    );
 
 }
 
+
 /* =====================================================
-COPY REFERRAL LINK
+   COPY REFERRAL LINK
 ===================================================== */
 
 copyReferralBtn.addEventListener(
-"click",
-async function(){
+    "click",
+    async function(){
 
-const link =  
-        referralLink.value;  
-
-
-    if(  
-        !link ||  
-        link.indexOf("http") !== 0  
-    ){  
-
-        return;  
-
-    }  
+        const link =
+            referralLink.value;
 
 
-    try{  
+        if(
+            !link ||
+            link.indexOf("http") !== 0
+        ){
 
-        if(  
-            navigator.clipboard &&  
-            navigator.clipboard.writeText  
-        ){  
+            return;
 
-            await navigator.clipboard.writeText(  
-                link  
-            );  
-
-        }else{  
-
-            referralLink.focus();  
-
-            referralLink.select();  
-
-            document.execCommand(  
-                "copy"  
-            );  
-
-        }  
+        }
 
 
-        showCopySuccess();  
+        try{
+
+            if(
+                navigator.clipboard &&
+                navigator.clipboard.writeText
+            ){
+
+                await navigator.clipboard.writeText(
+                    link
+                );
+
+            }else{
+
+                referralLink.focus();
+
+                referralLink.select();
+
+                document.execCommand(
+                    "copy"
+                );
+
+            }
 
 
-    }catch(error){  
-
-        console.error(  
-            "Copy failed:",  
-            error  
-        );  
+            showCopySuccess();
 
 
-        try{  
+        }catch(error){
 
-            referralLink.focus();  
+            console.error(
+                "Copy failed:",
+                error
+            );
 
-            referralLink.select();  
 
-            document.execCommand(  
-                "copy"  
-            );  
+            try{
 
-            showCopySuccess();  
+                referralLink.focus();
 
-        }catch(fallbackError){  
+                referralLink.select();
 
-            copyMessage.textContent =  
-                "Please select and copy the link manually.";  
+                document.execCommand(
+                    "copy"
+                );
 
-            copyMessage.classList.add(  
-                "show"  
-            );  
+                showCopySuccess();
 
-        }  
+            }catch(fallbackError){
 
-    }  
+                copyMessage.textContent =
+                    "Please select and copy the link manually.";
 
-}
+                copyMessage.classList.add(
+                    "show"
+                );
+
+            }
+
+        }
+
+    }
 
 );
 
+
 /* =====================================================
-SHARE REFERRAL LINK
+   SHARE REFERRAL LINK
 ===================================================== */
 
 shareReferralBtn.addEventListener(
-"click",
-async function(){
+    "click",
+    async function(){
 
-const link =  
-        referralLink.value;  
-
-
-    if(  
-        !link ||  
-        link.indexOf("http") !== 0  
-    ){  
-
-        return;  
-
-    }  
+        const link =
+            referralLink.value;
 
 
-    const shareText =  
-        "Join me on ON1Ecosystem and become part of the ecosystem. Use my referral link to sign up.";  
+        if(
+            !link ||
+            link.indexOf("http") !== 0
+        ){
+
+            return;
+
+        }
 
 
-    try{  
-
-        if(  
-            navigator.share  
-        ){  
-
-            await navigator.share({  
-
-                title:  
-                    "Join ON1Ecosystem",  
-
-                text:  
-                    shareText,  
-
-                url:  
-                    link  
-
-            });  
-
-            return;  
-
-        }  
+        const shareText =
+            "Join me on ON1Ecosystem and become part of the ecosystem. Use my referral link to sign up.";
 
 
-        /* If Web Share is unavailable,  
-           copy the link instead. */  
+        try{
 
-        if(  
-            navigator.clipboard &&  
-            navigator.clipboard.writeText  
-        ){  
+            if(
+                navigator.share
+            ){
 
-            await navigator.clipboard.writeText(  
-                link  
-            );  
+                await navigator.share({
 
-        }else{  
+                    title:
+                        "Join ON1Ecosystem",
 
-            referralLink.focus();  
+                    text:
+                        shareText,
 
-            referralLink.select();  
+                    url:
+                        link
 
-            document.execCommand(  
-                "copy"  
-            );  
+                });
 
-        }  
+                return;
 
-
-        copyMessage.textContent =  
-            "Sharing is unavailable here. Referral link copied instead.";  
-
-        copyMessage.classList.add(  
-            "show"  
-        );  
+            }
 
 
-        setTimeout(  
-            function(){  
+            if(
+                navigator.clipboard &&
+                navigator.clipboard.writeText
+            ){
 
-                copyMessage.classList.remove(  
-                    "show"  
-                );  
+                await navigator.clipboard.writeText(
+                    link
+                );
 
-            },  
-            2500  
-        );  
+            }else{
+
+                referralLink.focus();
+
+                referralLink.select();
+
+                document.execCommand(
+                    "copy"
+                );
+
+            }
 
 
-    }catch(error){  
+            copyMessage.textContent =
+                "Sharing is unavailable here. Referral link copied instead.";
 
-        /*  
-           User may simply have closed  
-           the native share dialog.  
-        */  
+            copyMessage.classList.add(
+                "show"
+            );
 
-        console.log(  
-            "Share cancelled or unavailable:",  
-            error  
-        );  
 
-    }  
+            setTimeout(
+                function(){
 
-}
+                    copyMessage.classList.remove(
+                        "show"
+                    );
+
+                },
+                2500
+            );
+
+
+        }catch(error){
+
+            console.log(
+                "Share cancelled or unavailable:",
+                error
+            );
+
+        }
+
+    }
 
 );
 
+
 /* =====================================================
-LOAD USER
+   LOAD USER
 ===================================================== */
 
 async function loadUser(user){
 
-const userRef =  
-    doc(  
-        db,  
-        "users",  
-        user.uid  
-    );  
+    const userRef =
+        doc(
+            db,
+            "users",
+            user.uid
+        );
 
 
-const snapshot =  
-    await getDoc(  
-        userRef  
-    );  
+    const snapshot =
+        await getDoc(
+            userRef
+        );
 
 
-if(!snapshot.exists()){  
+    if(!snapshot.exists()){
 
-    throw new Error(  
-        "Your ON1 profile could not be found."  
-    );  
+        throw new Error(
+            "Your ON1 profile could not be found."
+        );
 
-}  
-
-
-const data =  
-    snapshot.data();  
+    }
 
 
-/*  
-   Dashboard only READS the user's data.  
+    const data =
+        snapshot.data();
 
-   It does NOT create XP.  
 
-   It does NOT reset XP.  
+    /*
+       Dashboard only READS user data.
+    */
 
-   It does NOT change balance.  
-*/  
+    updateDashboard(data);
 
-updateDashboard(data);
+
+    /*
+       CPX is loaded only after the authenticated
+       Firebase user and Firestore profile are ready.
+    */
+
+    loadCPXSurveys(
+        user,
+        data
+    );
 
 }
 
+
 /* =====================================================
-REFRESH USER
+   REFRESH USER
 ===================================================== */
 
 async function refreshUser(){
 
-if(!currentUser){  
+    if(!currentUser){
 
-    return null;  
+        return null;
 
-}  
-
-
-const snapshot =  
-    await getDoc(  
-        doc(  
-            db,  
-            "users",  
-            currentUser.uid  
-        )  
-    );  
+    }
 
 
-if(!snapshot.exists()){  
-
-    throw new Error(  
-        "User profile not found."  
-    );  
-
-}  
-
-
-const data =  
-    snapshot.data();  
+    const snapshot =
+        await getDoc(
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            )
+        );
 
 
-updateDashboard(data);  
+    if(!snapshot.exists()){
+
+        throw new Error(
+            "User profile not found."
+        );
+
+    }
 
 
-return data;
+    const data =
+        snapshot.data();
+
+
+    updateDashboard(data);
+
+
+    return data;
 
 }
 
+
 /* =====================================================
-FIREBASE TOKEN
+   FIREBASE TOKEN
 ===================================================== */
 
 async function getFirebaseToken(){
 
-if(!currentUser){  
+    if(!currentUser){
 
-    throw new Error(  
-        "You are not signed in."  
-    );  
+        throw new Error(
+            "You are not signed in."
+        );
 
-}  
+    }
 
 
-return await currentUser.getIdToken(  
-    true  
-);
+    return await currentUser.getIdToken(
+        true
+    );
 
 }
 
+
 /* =====================================================
-BASE MINING
+   BASE MINING
 ===================================================== */
 
 mineBtn.addEventListener(
-"click",
-async function(){
+    "click",
+    async function(){
 
-if(!currentUser){  
+        if(!currentUser){
 
-        showMessage(  
-            "Please sign in again.",  
-            "error"  
-        );  
+            showMessage(
+                "Please sign in again.",
+                "error"
+            );
 
-        return;  
+            return;
 
-    }  
-
-
-    mineBtn.disabled =  
-        true;  
-
-    mineBtn.textContent =  
-        "MINING...";  
+        }
 
 
-    showMessage(  
-        "Connecting to the secure ON1 Mining Engine...",  
-        "success"  
-    );  
+        mineBtn.disabled =
+            true;
+
+        mineBtn.textContent =
+            "MINING...";
 
 
-    try{  
-
-        const idToken =  
-            await getFirebaseToken();  
-
-
-        const response =  
-            await fetch(  
-                MINING_WORKER + "/mine",  
-                {  
-                    method:"POST",  
-
-                    headers:{  
-                        "Content-Type":  
-                            "application/json"  
-                    },  
-
-                    body:JSON.stringify({  
-                        idToken:idToken  
-                    })  
-                }  
-            );  
+        showMessage(
+            "Connecting to the secure ON1 Mining Engine...",
+            "success"
+        );
 
 
-        const data =  
-            await response.json();  
+        try{
+
+            const idToken =
+                await getFirebaseToken();
 
 
-        if(!response.ok){  
+            const response =
+                await fetch(
+                    MINING_WORKER + "/mine",
+                    {
+                        method:"POST",
 
-            throw new Error(  
-                data.error ||  
-                data.message ||  
-                "Mining request failed."  
-            );  
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
 
-        }  
-
-
-        if(!data.success){  
-
-            throw new Error(  
-                data.error ||  
-                "Mining was not completed."  
-            );  
-
-        }  
+                        body:JSON.stringify({
+                            idToken:idToken
+                        })
+                    }
+                );
 
 
-        await refreshUser();  
+            const data =
+                await response.json();
 
 
-        showMessage(  
-            "🎉 Successfully mined +" +  
-            data.reward +  
-            " ON1Coin. Your balance has been updated.",  
-            "success"  
-        );  
+            if(!response.ok){
+
+                throw new Error(
+                    data.error ||
+                    data.message ||
+                    "Mining request failed."
+                );
+
+            }
 
 
-    }catch(error){  
+            if(!data.success){
 
-        console.error(error);  
+                throw new Error(
+                    data.error ||
+                    "Mining was not completed."
+                );
 
-
-        showMessage(  
-            error.message ||  
-            "Mining failed.",  
-            "error"  
-        );  
+            }
 
 
-        await refreshUser()  
-            .catch(()=>{});  
+            await refreshUser();
 
-    }  
 
-}
+            showMessage(
+                "🎉 Successfully mined +" +
+                data.reward +
+                " ON1Coin. Your balance has been updated.",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showMessage(
+                error.message ||
+                "Mining failed.",
+                "error"
+            );
+
+
+            await refreshUser()
+                .catch(()=>{});
+
+        }
+
+    }
 
 );
 
+
 /* =====================================================
-STREAK BONUS
+   STREAK BONUS
 ===================================================== */
 
 streakBtn.addEventListener(
-"click",
-async function(){
+    "click",
+    async function(){
 
-if(!currentUser){  
+        if(!currentUser){
 
-        showMessage(  
-            "Please sign in again.",  
-            "error"  
-        );  
+            showMessage(
+                "Please sign in again.",
+                "error"
+            );
 
-        return;  
+            return;
 
-    }  
-
-
-    streakBtn.disabled =  
-        true;  
-
-    streakBtn.textContent =  
-        "CLAIMING...";  
+        }
 
 
-    showMessage(  
-        "Processing your ON1 streak bonus...",  
-        "success"  
-    );  
+        streakBtn.disabled =
+            true;
+
+        streakBtn.textContent =
+            "CLAIMING...";
 
 
-    try{  
-
-        const idToken =  
-            await getFirebaseToken();  
-
-
-        const response =  
-            await fetch(  
-                MINING_WORKER + "/streak",  
-                {  
-                    method:"POST",  
-
-                    headers:{  
-                        "Content-Type":  
-                            "application/json"  
-                    },  
-
-                    body:JSON.stringify({  
-                        idToken:idToken  
-                    })  
-                }  
-            );  
+        showMessage(
+            "Processing your ON1 streak bonus...",
+            "success"
+        );
 
 
-        const data =  
-            await response.json();  
+        try{
+
+            const idToken =
+                await getFirebaseToken();
 
 
-        if(!response.ok){  
+            const response =
+                await fetch(
+                    MINING_WORKER + "/streak",
+                    {
+                        method:"POST",
 
-            throw new Error(  
-                data.error ||  
-                data.message ||  
-                "Streak bonus failed."  
-            );  
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
 
-        }  
-
-
-        if(!data.success){  
-
-            throw new Error(  
-                data.error ||  
-                "Streak bonus was not completed."  
-            );  
-
-        }  
+                        body:JSON.stringify({
+                            idToken:idToken
+                        })
+                    }
+                );
 
 
-        await refreshUser();  
+            const data =
+                await response.json();
 
 
-        showMessage(  
-            "🔥 Successfully claimed +" +  
-            data.bonus +  
-            " ON1Coin streak bonus. Added to your balance.",  
-            "success"  
-        );  
+            if(!response.ok){
+
+                throw new Error(
+                    data.error ||
+                    data.message ||
+                    "Streak bonus failed."
+                );
+
+            }
 
 
-    }catch(error){  
+            if(!data.success){
 
-        console.error(error);  
+                throw new Error(
+                    data.error ||
+                    "Streak bonus was not completed."
+                );
 
-
-        showMessage(  
-            error.message ||  
-            "Streak bonus failed.",  
-            "error"  
-        );  
+            }
 
 
-        await refreshUser()  
-            .catch(()=>{});  
+            await refreshUser();
 
-    }  
 
-}
+            showMessage(
+                "🔥 Successfully claimed +" +
+                data.bonus +
+                " ON1Coin streak bonus. Added to your balance.",
+                "success"
+            );
+
+
+        }catch(error){
+
+            console.error(error);
+
+
+            showMessage(
+                error.message ||
+                "Streak bonus failed.",
+                "error"
+            );
+
+
+            await refreshUser()
+                .catch(()=>{});
+
+        }
+
+    }
 
 );
 
+
 /* =====================================================
-LOGOUT
+   LOGOUT
 ===================================================== */
 
 logoutBtn.addEventListener(
-"click",
-async function(){
+    "click",
+    async function(){
 
-try{  
+        try{
 
-        await signOut(auth);  
+            await signOut(auth);
 
-        window.location.href =  
-            "login.html";  
+            window.location.href =
+                "login.html";
 
-    }catch(error){  
+        }catch(error){
 
-        console.error(error);  
+            console.error(error);
 
-        showMessage(  
-            "Unable to log out. Please try again.",  
-            "error"  
-        );  
+            showMessage(
+                "Unable to log out. Please try again.",
+                "error"
+            );
 
-    }  
+        }
 
-}
+    }
 
 );
 
+
 /* =====================================================
-AUTH STATE
+   AUTH STATE
 ===================================================== */
 
 onAuthStateChanged(
-auth,
-async function(user){
+    auth,
+    async function(user){
 
-console.log(  
-        "Auth state:",  
-        user  
-            ? user.email  
-            : "No user"  
-    );  
-
-
-    if(!user){  
-
-        loadingText.textContent =  
-            "No active session. Redirecting...";  
+        console.log(
+            "Auth state:",
+            user
+                ? user.email
+                : "No user"
+        );
 
 
-        setTimeout(  
-            function(){  
+        if(!user){
 
-                window.location.href =  
-                    "login.html";  
-
-            },  
-            800  
-        );  
-
-        return;  
-
-    }  
+            loadingText.textContent =
+                "No active session. Redirecting...";
 
 
-    currentUser =  
-        user;  
+            setTimeout(
+                function(){
+
+                    window.location.href =
+                        "login.html";
+
+                },
+                800
+            );
+
+            return;
+
+        }
 
 
-    try{  
-
-        loadingText.textContent =  
-            "Loading your ON1 profile...";  
+        currentUser =
+            user;
 
 
-        await loadUser(user);  
+        try{
+
+            loadingText.textContent =
+                "Loading your ON1 profile...";
 
 
-        loading.style.display =  
-            "none";  
+            await loadUser(user);
 
 
-    }catch(error){  
-
-        console.error(error);  
-
-
-        loadingText.textContent =  
-            error.message ||  
-            "Unable to load your account.";  
+            loading.style.display =
+                "none";
 
 
-        setTimeout(  
-            function(){  
+        }catch(error){
 
-                loading.style.display =  
-                    "none";  
+            console.error(error);
 
-                showMessage(  
-                    error.message ||  
-                    "Unable to load your account.",  
-                    "error"  
-                );  
 
-            },  
-            1000  
-        );  
+            loadingText.textContent =
+                error.message ||
+                "Unable to load your account.";
 
-    }  
 
-}
+            setTimeout(
+                function(){
+
+                    loading.style.display =
+                        "none";
+
+
+                    showMessage(
+                        error.message ||
+                        "Unable to load your account.",
+                        "error"
+                    );
+
+                },
+                1000
+            );
+
+        }
+
+    }
 
 );
 
+
 /* =====================================================
-FALLBACK LOADING TIMEOUT
+   FALLBACK LOADING TIMEOUT
 ===================================================== */
 
 setTimeout(
-function(){
+    function(){
 
-if(  
-        loading.style.display !==  
-        "none"  
-    ){  
+        if(
+            loading.style.display !==
+            "none"
+        ){
 
-        loadingText.textContent =  
-            "Authentication is taking longer than expected...";  
+            loadingText.textContent =
+                "Authentication is taking longer than expected...";
 
-    }  
+        }
 
-},  
-10000
-
+    },
+    10000
 );
 
-</script></body></html>
+</script>
+
+</body>
+</html>
