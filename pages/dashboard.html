@@ -27,22 +27,17 @@
     --surface:#0c1624;
     --surface2:#101d2d;
     --border:#1d3048;
-
     --blue:#087cff;
     --blue2:#3aa0ff;
-
     --green:#00df88;
     --gold:#f5c451;
-
     --text:#ffffff;
     --muted:#8ea2b8;
-
     --danger:#ff6075;
 }
 
 body{
     min-height:100vh;
-
     background:
         radial-gradient(
             circle at 50% -10%,
@@ -50,7 +45,6 @@ body{
             transparent 42%
         ),
         var(--bg);
-
     color:var(--text);
 }
 
@@ -84,7 +78,6 @@ button{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     padding:10px 0;
     margin-bottom:20px;
 }
@@ -113,25 +106,18 @@ button{
 .brand small{
     display:block;
     margin-top:2px;
-
     color:var(--muted);
-
     font-size:8px;
     letter-spacing:.5px;
 }
 
 .logout{
     border:1px solid var(--border);
-
     background:var(--surface);
     color:#dce8f5;
-
     padding:8px 12px;
-
     border-radius:9px;
-
     cursor:pointer;
-
     font-size:10px;
 }
 
@@ -150,25 +136,17 @@ button{
 
 .welcome p{
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:11px;
 }
 
 .welcome-bonus{
     margin-top:10px;
-
     padding:9px 11px;
-
     border-radius:9px;
-
     background:rgba(8,124,255,.06);
-
     border:1px solid rgba(8,124,255,.14);
-
     color:var(--blue2);
-
     font-size:8px;
 }
 
@@ -179,38 +157,27 @@ button{
 
 .stats{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
 }
 
 .stat-card{
     background:rgba(12,22,36,.94);
-
     border:1px solid var(--border);
-
     border-radius:13px;
-
     padding:10px 12px;
 }
 
 .stat-label{
     color:var(--muted);
-
     font-size:8px;
-
     text-transform:uppercase;
-
     letter-spacing:.5px;
 }
 
 .stat-value{
     margin-top:4px;
-
     font-size:18px;
-
     font-weight:800;
 }
 
@@ -233,12 +200,8 @@ button{
 
 .main-grid{
     display:grid;
-
-    grid-template-columns:
-        1.25fr .75fr;
-
+    grid-template-columns:1.25fr .75fr;
     gap:14px;
-
     margin-top:14px;
 }
 
@@ -249,27 +212,20 @@ button{
 
 .card{
     background:rgba(12,22,36,.94);
-
     border:1px solid var(--border);
-
     border-radius:17px;
-
     padding:18px;
 }
 
 .card-title{
     font-size:15px;
-
     font-weight:800;
 }
 
 .card-subtitle{
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:9px;
-
     line-height:1.5;
 }
 
@@ -280,68 +236,50 @@ button{
 
 .mining-card{
     position:relative;
-
     overflow:hidden;
 }
 
 .mining-card::before{
     content:"";
-
     position:absolute;
-
     width:150px;
     height:150px;
-
     border-radius:50%;
-
     background:rgba(8,124,255,.07);
-
     right:-60px;
     top:-60px;
 }
 
 .mining-top{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 }
 
 .mining-icon{
     width:42px;
     height:42px;
-
     display:grid;
-
     place-items:center;
-
     border-radius:12px;
-
     background:rgba(8,124,255,.10);
-
     font-size:20px;
 }
 
 .rate{
     margin-top:18px;
-
     text-align:center;
 }
 
 .rate-number{
     font-size:34px;
-
     font-weight:900;
-
     color:var(--gold);
 }
 
 .rate-label{
     margin-top:3px;
-
     color:var(--muted);
-
     font-size:9px;
 }
 
@@ -352,33 +290,23 @@ button{
 
 .streak{
     margin-top:16px;
-
     padding:11px;
-
     border-radius:11px;
-
     background:rgba(0,223,136,.045);
-
     border:1px solid rgba(0,223,136,.15);
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 }
 
 .streak-label{
     color:var(--muted);
-
     font-size:9px;
 }
 
 .streak-value{
     color:var(--green);
-
     font-weight:800;
-
     font-size:13px;
 }
 
@@ -390,68 +318,42 @@ button{
 .mine-btn,
 .streak-btn{
     width:100%;
-
     height:45px;
-
     margin-top:12px;
-
     border:none;
-
     border-radius:10px;
-
     color:white;
-
     font-size:11px;
-
     font-weight:800;
-
     cursor:pointer;
 }
 
 .mine-btn{
-    background:
-        linear-gradient(
-            135deg,
-            var(--blue),
-            #0065d8
-        );
+    background:linear-gradient(135deg,var(--blue),#0065d8);
 }
 
 .streak-btn{
-    background:
-        linear-gradient(
-            135deg,
-            #d99d00,
-            #f5c451
-        );
-
+    background:linear-gradient(135deg,#d99d00,#f5c451);
     color:#111;
 }
 
 .mine-btn:disabled,
 .streak-btn:disabled{
     opacity:.5;
-
     cursor:not-allowed;
 }
 
 .next-mine{
     margin-top:8px;
-
     text-align:center;
-
     color:var(--muted);
-
     font-size:8px;
 }
 
 .streak-status{
     margin-top:7px;
-
     text-align:center;
-
     color:var(--muted);
-
     font-size:8px;
 }
 
@@ -462,37 +364,25 @@ button{
 
 .message{
     display:none;
-
     margin-top:12px;
-
     padding:10px;
-
     border-radius:9px;
-
     text-align:center;
-
     font-size:9px;
-
     line-height:1.5;
 }
 
 .message.success{
     display:block;
-
     background:rgba(0,223,136,.07);
-
     border:1px solid rgba(0,223,136,.18);
-
     color:var(--green);
 }
 
 .message.error{
     display:block;
-
     background:rgba(255,96,117,.08);
-
     border:1px solid rgba(255,96,117,.2);
-
     color:#ff8192;
 }
 
@@ -507,52 +397,34 @@ button{
 
 .level-head{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 }
 
 .level-name{
     color:var(--green);
-
     font-size:10px;
-
     font-weight:800;
 }
 
 .level-xp{
     color:var(--muted);
-
     font-size:8px;
 }
 
 .progress{
     height:7px;
-
     margin-top:7px;
-
     background:#07101b;
-
     border-radius:20px;
-
     overflow:hidden;
-
     border:1px solid var(--border);
 }
 
 .progress-bar{
     height:100%;
-
     width:0%;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--blue),
-            var(--green)
-        );
-
+    background:linear-gradient(90deg,var(--blue),var(--green));
     transition:width .5s ease;
 }
 
@@ -563,90 +435,61 @@ button{
 
 .ad-section{
     margin-top:14px;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     width:100%;
-
     min-height:250px;
-
     overflow:hidden;
 }
 
 .ad-container{
     width:300px;
-
     height:250px;
-
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     overflow:hidden;
 }
 
 .ad-label{
     position:absolute;
-
     width:1px;
     height:1px;
-
     overflow:hidden;
-
     clip:rect(0 0 0 0);
-
     white-space:nowrap;
 }
 
 
 /* =====================================================
    CPX SURVEY SOLUTIONS
-   COMPACT ADDITION
 ===================================================== */
 
 .cpx-card{
     margin-top:14px;
-
     position:relative;
-
     overflow:hidden;
 }
 
 .cpx-card::before{
     content:"";
-
     position:absolute;
-
     width:160px;
     height:160px;
-
     border-radius:50%;
-
     background:rgba(8,124,255,.035);
-
     right:-80px;
     top:-80px;
-
     pointer-events:none;
 }
 
 .cpx-header{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:10px;
-
     position:relative;
-
     z-index:1;
 }
 
@@ -657,64 +500,55 @@ button{
 .cpx-icon{
     width:42px;
     height:42px;
-
     display:grid;
-
     place-items:center;
-
     flex-shrink:0;
-
     border-radius:12px;
-
     background:rgba(8,124,255,.08);
-
     border:1px solid rgba(8,124,255,.14);
-
     font-size:20px;
 }
 
 .cpx-box{
     margin-top:12px;
-
     position:relative;
-
     z-index:1;
-
     width:100%;
-
     min-height:150px;
-
     border-radius:11px;
-
     overflow:hidden;
-
     background:#07101b;
-
     border:1px solid var(--border);
 }
 
 #cpx-surveys{
     width:100%;
-
     min-height:150px;
 }
 
 .cpx-loading{
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     min-height:150px;
-
     color:var(--muted);
-
     font-size:9px;
-
     text-align:center;
-
     padding:15px;
+}
+
+
+/* =====================================================
+   CPX IFRAME
+===================================================== */
+
+.cpx-iframe{
+    display:block;
+    width:100%;
+    height:520px;
+    min-height:150px;
+    border:0;
+    background:#07101b;
 }
 
 
@@ -724,60 +558,40 @@ button{
 
 .referral-card{
     margin-top:14px;
-
     position:relative;
-
     overflow:hidden;
 }
 
 .referral-card::before{
     content:"";
-
     position:absolute;
-
     width:180px;
     height:180px;
-
     border-radius:50%;
-
     background:rgba(0,223,136,.035);
-
     right:-90px;
     top:-90px;
-
     pointer-events:none;
 }
 
 .referral-header{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:10px;
-
     position:relative;
-
     z-index:1;
 }
 
 .referral-icon{
     width:44px;
     height:44px;
-
     display:grid;
-
     place-items:center;
-
     flex-shrink:0;
-
     border-radius:13px;
-
     background:rgba(0,223,136,.08);
-
     border:1px solid rgba(0,223,136,.12);
-
     font-size:21px;
 }
 
@@ -792,40 +606,29 @@ button{
 
 .referral-reward{
     margin-top:13px;
-
     padding:13px;
-
     border-radius:11px;
-
     background:
         linear-gradient(
             135deg,
             rgba(245,196,81,.07),
             rgba(0,223,136,.045)
         );
-
     border:1px solid rgba(245,196,81,.16);
-
     position:relative;
-
     z-index:1;
 }
 
 .referral-reward strong{
     display:block;
-
     color:var(--gold);
-
     font-size:12px;
 }
 
 .referral-reward p{
     margin-top:4px;
-
     color:var(--muted);
-
     font-size:9px;
-
     line-height:1.5;
 }
 
@@ -836,31 +639,22 @@ button{
 
 .referral-owner{
     margin-top:10px;
-
     display:flex;
-
     flex-wrap:wrap;
-
     gap:7px;
 }
 
 .referral-owner-badge{
     padding:6px 9px;
-
     border-radius:8px;
-
     background:rgba(7,16,27,.75);
-
     border:1px solid var(--border);
-
     color:#b9cde1;
-
     font-size:8px;
 }
 
 .referral-owner-badge strong{
     color:var(--gold);
-
     font-size:8px;
 }
 
@@ -871,84 +665,52 @@ button{
 
 .referral-link-box{
     margin-top:14px;
-
     position:relative;
-
     z-index:1;
 }
 
 .referral-label{
     display:block;
-
     margin-bottom:7px;
-
     color:var(--muted);
-
     font-size:9px;
-
     font-weight:700;
 }
 
 .referral-link-row{
     display:flex;
-
     gap:7px;
 }
 
 .referral-link{
     flex:1;
-
     min-width:0;
-
     height:42px;
-
     padding:0 11px;
-
     border:1px solid var(--border);
-
     border-radius:9px;
-
     background:#07101b;
-
     color:#cfe0f2;
-
     font-size:9px;
-
     outline:none;
-
     overflow:hidden;
-
     text-overflow:ellipsis;
 }
 
 .copy-btn{
     width:90px;
-
     height:42px;
-
     border:none;
-
     border-radius:9px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--blue),
-            #0065d8
-        );
-
+    background:linear-gradient(135deg,var(--blue),#0065d8);
     color:white;
-
     font-size:9px;
-
     font-weight:800;
-
     cursor:pointer;
 }
 
 .copy-btn:disabled{
     opacity:.65;
-
     cursor:not-allowed;
 }
 
@@ -959,29 +721,19 @@ button{
 
 .share-btn{
     width:100%;
-
     height:40px;
-
     margin-top:8px;
-
     border:1px solid rgba(0,223,136,.20);
-
     border-radius:9px;
-
     background:rgba(0,223,136,.06);
-
     color:var(--green);
-
     font-size:9px;
-
     font-weight:800;
-
     cursor:pointer;
 }
 
 .share-btn:disabled{
     opacity:.5;
-
     cursor:not-allowed;
 }
 
@@ -992,13 +744,9 @@ button{
 
 .copy-message{
     display:none;
-
     margin-top:8px;
-
     text-align:center;
-
     color:var(--green);
-
     font-size:8px;
 }
 
@@ -1013,44 +761,30 @@ button{
 
 .referral-stats{
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:9px;
-
     margin-top:12px;
-
     position:relative;
-
     z-index:1;
 }
 
 .referral-stat{
     padding:12px;
-
     border-radius:10px;
-
     background:rgba(7,16,27,.75);
-
     border:1px solid var(--border);
 }
 
 .referral-stat-label{
     color:var(--muted);
-
     font-size:8px;
-
     text-transform:uppercase;
-
     letter-spacing:.4px;
 }
 
 .referral-stat-value{
     margin-top:5px;
-
     font-size:17px;
-
     font-weight:900;
 }
 
@@ -1069,33 +803,23 @@ button{
 
 .referral-xp-box{
     margin-top:9px;
-
     padding:10px;
-
     border-radius:10px;
-
     background:rgba(8,124,255,.045);
-
     border:1px solid rgba(8,124,255,.12);
-
     text-align:center;
-
     position:relative;
-
     z-index:1;
 }
 
 .referral-xp-box strong{
     color:var(--blue2);
-
     font-size:10px;
 }
 
 .referral-xp-box span{
     color:var(--muted);
-
     font-size:8px;
-
     margin-left:4px;
 }
 
@@ -1106,17 +830,11 @@ button{
 
 .referral-note{
     margin-top:10px;
-
     color:#60758b;
-
     font-size:8px;
-
     line-height:1.5;
-
     text-align:center;
-
     position:relative;
-
     z-index:1;
 }
 
@@ -1127,15 +845,10 @@ button{
 
 .profile-row{
     display:flex;
-
     justify-content:space-between;
-
     gap:10px;
-
     padding:10px 0;
-
-    border-bottom:
-        1px solid rgba(29,48,72,.55);
+    border-bottom:1px solid rgba(29,48,72,.55);
 }
 
 .profile-row:last-child{
@@ -1144,17 +857,13 @@ button{
 
 .profile-label{
     color:var(--muted);
-
     font-size:9px;
 }
 
 .profile-value{
     font-size:10px;
-
     font-weight:700;
-
     text-align:right;
-
     word-break:break-word;
 }
 
@@ -1169,17 +878,11 @@ button{
 
 .loading{
     position:fixed;
-
     inset:0;
-
     background:var(--bg);
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     z-index:999;
 }
 
@@ -1189,17 +892,13 @@ button{
 
 .loading-box strong{
     display:block;
-
     margin-top:10px;
-
     font-size:13px;
 }
 
 .loading-box p{
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:9px;
 }
 
@@ -1210,16 +909,10 @@ button{
 
 footer{
     margin-top:25px;
-
     padding-top:14px;
-
-    border-top:
-        1px solid rgba(29,48,72,.55);
-
+    border-top:1px solid rgba(29,48,72,.55);
     text-align:center;
-
     color:#61748a;
-
     font-size:8px;
 }
 
@@ -1275,6 +968,10 @@ footer{
         flex-direction:column;
     }
 
+    .cpx-iframe{
+        height:520px;
+    }
+
 }
 
 @media(max-width:350px){
@@ -1295,10 +992,6 @@ footer{
 
 <body>
 
-
-<!-- =====================================================
-     LOADING
-===================================================== -->
 
 <div class="loading" id="loading">
 
@@ -1324,14 +1017,9 @@ footer{
 <div class="page">
 
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header class="header">
 
-    <a href="../index.html"
-       class="brand">
+    <a href="../index.html" class="brand">
 
         <img
             src="../logo.png"
@@ -1363,10 +1051,6 @@ footer{
 </header>
 
 
-<!-- =====================================================
-     WELCOME
-===================================================== -->
-
 <section class="welcome">
 
     <h1>
@@ -1389,10 +1073,6 @@ footer{
 
 </section>
 
-
-<!-- =====================================================
-     STATS
-===================================================== -->
 
 <section class="stats">
 
@@ -1449,16 +1129,8 @@ footer{
 </section>
 
 
-<!-- =====================================================
-     MAIN GRID
-===================================================== -->
-
 <div class="main-grid">
 
-
-<!-- =====================================================
-     MINING CARD
-===================================================== -->
 
 <section class="card mining-card">
 
@@ -1597,10 +1269,6 @@ footer{
 </section>
 
 
-<!-- =====================================================
-     PROFILE
-===================================================== -->
-
 <section class="card">
 
     <div class="card-title">
@@ -1722,10 +1390,6 @@ footer{
 </div>
 
 
-<!-- =====================================================
-     ADVERTISEMENT
-===================================================== -->
-
 <section class="ad-section">
 
     <div class="ad-container">
@@ -1754,10 +1418,6 @@ footer{
 
 </section>
 
-
-<!-- =====================================================
-     CPX SURVEY SOLUTIONS
-===================================================== -->
 
 <section class="card cpx-card">
 
@@ -1795,18 +1455,12 @@ footer{
 
         </div>
 
-        <div
-            id="cpx-surveys">
-        </div>
+        <div id="cpx-surveys"></div>
 
     </div>
 
 </section>
 
-
-<!-- =====================================================
-     REFERRAL PROGRAM
-===================================================== -->
 
 <section class="card referral-card">
 
@@ -2007,10 +1661,6 @@ footer{
 </div>
 
 
-<!-- =====================================================
-     FIREBASE
-===================================================== -->
-
 <script type="module">
 
 
@@ -2024,7 +1674,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-
 import {
     getAuth,
     onAuthStateChanged,
@@ -2032,7 +1681,6 @@ import {
 }
 from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
 
 import {
     getFirestore,
@@ -2137,6 +1785,22 @@ const CPX_APP_ID =
     35802;
 
 
+/*
+   IMPORTANT:
+
+   NO CPX SECURITY HASH IS STORED HERE.
+
+   The dashboard sends the Firebase ID token
+   to the secure Cloudflare Worker.
+
+   The Worker verifies the Firebase user and
+   generates the CPX secure hash server-side.
+
+   The secret therefore remains inside
+   Cloudflare Worker environment variables.
+*/
+
+
 /* =====================================================
    ELEMENTS
 ===================================================== */
@@ -2194,6 +1858,9 @@ const referralProgramUsername =
 
 const cpxLoading =
     document.getElementById("cpxLoading");
+
+const cpxContainer =
+    document.getElementById("cpx-surveys");
 
 
 /* =====================================================
@@ -2720,8 +2387,7 @@ function updateReferralProgram(
 
 
 /* =====================================================
-   CPX SURVEY INTEGRATION
-   SECURE WORKER ARCHITECTURE
+   SECURE CPX SURVEY INTEGRATION
 ===================================================== */
 
 async function loadCPXSurveys(
@@ -2736,12 +2402,6 @@ async function loadCPXSurveys(
     }
 
 
-    const cpxContainer =
-        document.getElementById(
-            "cpx-surveys"
-        );
-
-
     if(!cpxContainer){
 
         return;
@@ -2750,7 +2410,7 @@ async function loadCPXSurveys(
 
 
     /*
-       Clear previous CPX content.
+       Clear previous survey content.
     */
 
     cpxContainer.innerHTML = "";
@@ -2770,10 +2430,11 @@ async function loadCPXSurveys(
     try{
 
         /*
-           Get the current Firebase ID token.
+           Get the current authenticated
+           Firebase ID token.
 
-           The token proves to the Worker that
-           this is an authenticated ON1Ecosystem user.
+           The token is sent only to our
+           Cloudflare Worker.
         */
 
         const idToken =
@@ -2781,16 +2442,15 @@ async function loadCPXSurveys(
 
 
         /*
+           Ask the secure Worker to create
+           the CPX survey URL.
+
            IMPORTANT:
 
-           The dashboard does NOT generate or
-           contain the CPX secure hash.
+           The CPX security hash is NOT
+           calculated in this dashboard.
 
-           The secure Worker handles:
-               Firebase verification
-               Firebase UID
-               CPX secure hash
-               CPX survey URL
+           The Worker does it securely.
         */
 
         const response =
@@ -2818,7 +2478,7 @@ async function loadCPXSurveys(
             result =
                 await response.json();
 
-        }catch(error){
+        }catch(parseError){
 
             throw new Error(
                 "Survey service returned an invalid response."
@@ -2827,53 +2487,62 @@ async function loadCPXSurveys(
         }
 
 
-        console.log(
-            "CPX start response:",
-            {
-                ok:response.ok,
-                success:result?.success,
-                appId:result?.appId,
-                extUserId:result?.extUserId
-            }
-        );
-
-
         if(!response.ok){
 
             throw new Error(
-                result?.error ||
-                result?.message ||
+                result.error ||
+                result.message ||
                 "Unable to connect to Survey Solutions."
             );
 
         }
 
 
-        if(!result?.success){
+        if(!result.success){
 
             throw new Error(
-                result?.error ||
-                "Survey Solutions could not be started."
+                result.error ||
+                "Survey service could not be started."
             );
 
         }
 
 
-        if(!result?.url){
+        if(!result.url){
 
             throw new Error(
-                "Survey Solutions did not return a survey URL."
+                "Survey service did not return a survey URL."
             );
 
         }
 
 
         /*
-           The Worker has generated the secure
-           CPX URL.
+           Optional verification.
 
-           The secure hash never appears in the
-           dashboard source code.
+           The Worker should return our
+           configured CPX App ID.
+        */
+
+        if(
+            result.appId &&
+            String(result.appId) !==
+            String(CPX_APP_ID)
+        ){
+
+            throw new Error(
+                "Survey App ID verification failed."
+            );
+
+        }
+
+
+        /*
+           Create the CPX iframe.
+
+           The URL comes from our Worker,
+           not from a secret stored in the
+           public dashboard.
         */
 
         const iframe =
@@ -2882,49 +2551,29 @@ async function loadCPXSurveys(
             );
 
 
-        iframe.src =
-            result.url;
+        iframe.className =
+            "cpx-iframe";
 
 
         iframe.title =
             "ON1Ecosystem Survey Solutions";
 
 
-        iframe.style.width =
-            "100%";
+        iframe.loading =
+            "lazy";
 
 
-        iframe.style.height =
-            "520px";
+        iframe.referrerPolicy =
+            "strict-origin-when-cross-origin";
 
 
-        iframe.style.minHeight =
-            "520px";
+        iframe.src =
+            result.url;
 
 
-        iframe.style.border =
-            "0";
-
-
-        iframe.style.display =
-            "block";
-
-
-        iframe.style.background =
-            "#07101b";
-
-
-        iframe.setAttribute(
-            "loading",
-            "lazy"
-        );
-
-
-        iframe.setAttribute(
-            "referrerpolicy",
-            "strict-origin-when-cross-origin"
-        );
-
+        /*
+           Show iframe after it begins loading.
+        */
 
         iframe.onload =
             function(){
@@ -2961,32 +2610,31 @@ async function loadCPXSurveys(
 
 
         /*
-           Keep the loading message temporarily
-           while the iframe loads.
+           Hide the loading message after
+           a short delay as a fallback.
         */
 
-        if(cpxLoading){
+        setTimeout(
+            function(){
 
-            cpxLoading.style.position =
-                "absolute";
+                if(cpxLoading){
 
-            cpxLoading.style.left =
-                "0";
+                    cpxLoading.style.display =
+                        "none";
 
-            cpxLoading.style.right =
-                "0";
+                }
 
-            cpxLoading.style.top =
-                "0";
-
-            cpxLoading.style.zIndex =
-                "2";
-
-        }
+            },
+            2500
+        );
 
 
         console.log(
-            "CPX Survey Solutions loaded successfully."
+            "CPX Survey Solutions started securely.",
+            {
+                appId:result.appId,
+                extUserId:result.extUserId
+            }
         );
 
 
@@ -2999,9 +2647,6 @@ async function loadCPXSurveys(
 
 
         if(cpxLoading){
-
-            cpxLoading.style.position =
-                "static";
 
             cpxLoading.style.display =
                 "flex";
@@ -3691,6 +3336,11 @@ async function loadUser(user){
 
     updateDashboard(data);
 
+
+    /*
+       CPX is loaded only after the authenticated
+       Firebase user and Firestore profile are ready.
+    */
 
     loadCPXSurveys(
         user,
