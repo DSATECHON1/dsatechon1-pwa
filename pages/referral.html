@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B5ED7">
 
-  <title>Referral Program — ON1Ecosystem</title>
+  <title>ON1Ecosystem — Referral Program</title>
 
   <style>
     * {
@@ -14,417 +15,552 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #172033;
-      line-height: 1.5;
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+      background:
+        linear-gradient(
+          180deg,
+          #eef6ff 0%,
+          #f7fbff 42%,
+          #ffffff 100%
+        );
+
+      color: #12243a;
+      min-height: 100vh;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+    button,
+    input {
+      font: inherit;
     }
 
-    .header {
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-      padding: 16px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    button {
+      cursor: pointer;
     }
 
-    .header-inner {
-      max-width: 1000px;
-      margin: auto;
+    .app {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .top-header {
+      background:
+        linear-gradient(
+          135deg,
+          #084b9b 0%,
+          #0b63ce 52%,
+          #1683ff 100%
+        );
+
+      color: white;
+      padding: 18px 18px 22px;
+      border-radius: 0 0 24px 24px;
+      box-shadow: 0 8px 28px rgba(11, 94, 215, 0.18);
+    }
+
+    .header-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      gap: 12px;
     }
 
     .brand {
+      font-size: 21px;
       font-weight: 800;
-      font-size: 20px;
-      color: #111827;
+      letter-spacing: -0.4px;
     }
 
     .brand span {
-      display: block;
-      font-size: 11px;
-      font-weight: 600;
-      color: #6b7280;
-      letter-spacing: .8px;
-      margin-top: 2px;
+      opacity: 0.78;
+      font-weight: 500;
     }
 
-    .dashboard-btn {
-      background: #111827;
-      color: #fff;
-      padding: 9px 14px;
-      border-radius: 9px;
+    .home-btn {
+      border: 1px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.14);
+      color: white;
+      padding: 9px 13px;
+      border-radius: 12px;
       font-size: 13px;
       font-weight: 700;
+      backdrop-filter: blur(8px);
     }
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 22px 15px 40px;
+    .home-btn:active {
+      transform: scale(0.97);
     }
 
     .page-title {
-      margin-bottom: 18px;
+      margin-top: 22px;
     }
 
     .page-title h1 {
-      font-size: 25px;
-      margin-bottom: 4px;
+      font-size: 28px;
+      line-height: 1.15;
+      font-weight: 800;
     }
 
     .page-title p {
-      color: #6b7280;
+      margin-top: 7px;
+      color: rgba(255,255,255,0.82);
       font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       MAIN
+    ========================== */
+
+    main {
+      padding: 18px;
+    }
+
+    .section {
+      margin-bottom: 16px;
     }
 
     .card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid #dcecff;
+      border-radius: 20px;
       padding: 18px;
-      margin-bottom: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,.04);
+      box-shadow: 0 7px 25px rgba(24, 87, 145, 0.07);
     }
 
     .card-title {
       font-size: 17px;
       font-weight: 800;
-      margin-bottom: 5px;
+      color: #103b69;
+      margin-bottom: 6px;
     }
 
     .card-subtitle {
       font-size: 13px;
-      color: #6b7280;
-      margin-bottom: 15px;
+      line-height: 1.5;
+      color: #6a7f95;
     }
 
-    /* Reward banner */
+    /* =========================
+       REWARD BANNER
+    ========================== */
 
     .reward-banner {
-      background: #111827;
-      color: #fff;
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 15px;
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0754ae 0%,
+          #0878e8 50%,
+          #20a0ff 100%
+        );
+
+      color: white;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(8, 103, 210, 0.20);
     }
 
-    .reward-banner h2 {
-      font-size: 20px;
-      margin-bottom: 5px;
+    .reward-banner::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      right: -70px;
+      top: -80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.10);
     }
 
-    .reward-banner p {
-      font-size: 13px;
-      color: #d1d5db;
+    .reward-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.82);
     }
 
-    .reward-values {
-      display: flex;
+    .reward-title {
+      margin-top: 7px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .reward-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 14px;
-      flex-wrap: wrap;
+      margin-top: 17px;
     }
 
     .reward-box {
-      background: rgba(255,255,255,.1);
-      border-radius: 10px;
-      padding: 10px 14px;
-      min-width: 120px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 15px;
+      padding: 14px;
     }
 
-    .reward-box strong {
-      display: block;
-      font-size: 18px;
+    .reward-number {
+      font-size: 24px;
+      font-weight: 850;
     }
 
-    .reward-box span {
+    .reward-unit {
+      margin-top: 2px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.82);
+    }
+
+    /* =========================
+       REFERRAL CODE
+    ========================== */
+
+    .code-box {
+      margin-top: 16px;
+      background: #eef6ff;
+      border: 1px solid #cfe5ff;
+      border-radius: 16px;
+      padding: 15px;
+    }
+
+    .small-label {
       font-size: 11px;
-      color: #d1d5db;
-    }
-
-    /* Referral code */
-
-    .referral-code-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      background: #f8fafc;
-      border: 1px solid #e5e7eb;
-      border-radius: 11px;
-      padding: 13px;
-      margin-bottom: 12px;
-    }
-
-    .label {
-      font-size: 11px;
-      color: #6b7280;
       text-transform: uppercase;
-      letter-spacing: .6px;
-      margin-bottom: 3px;
-    }
-
-    .code {
-      font-size: 21px;
+      letter-spacing: 0.8px;
       font-weight: 800;
+      color: #64809c;
+    }
+
+    .referral-code {
+      margin-top: 7px;
+      color: #0758ad;
+      font-size: 25px;
+      font-weight: 850;
       letter-spacing: 1px;
-      word-break: break-all;
+      word-break: break-word;
     }
 
-    .copy-btn,
-    .share-btn {
-      border: none;
-      border-radius: 9px;
-      padding: 10px 14px;
-      font-weight: 700;
-      cursor: pointer;
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 13px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      width: 100%;
+      border-radius: 13px;
+      padding: 12px 13px;
       font-size: 13px;
-      white-space: nowrap;
+      font-weight: 800;
+      border: none;
+      transition: 0.15s ease;
     }
 
-    .copy-btn {
-      background: #111827;
-      color: #fff;
+    .primary-btn {
+      background: #0b63ce;
+      color: white;
+      box-shadow: 0 6px 16px rgba(11, 99, 206, 0.18);
     }
 
-    .share-btn {
-      background: #e5e7eb;
-      color: #111827;
-      margin-left: 6px;
+    .secondary-btn {
+      background: #eaf4ff;
+      color: #0758ad;
+      border: 1px solid #cde4ff;
+    }
+
+    .primary-btn:active,
+    .secondary-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* =========================
+       REFERRAL LINK
+    ========================== */
+
+    .link-box {
+      margin-top: 14px;
+      padding: 13px;
+      border-radius: 14px;
+      background: #f7fbff;
+      border: 1px solid #dcecff;
     }
 
     .referral-link {
-      width: 100%;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      border-radius: 9px;
-      padding: 11px;
+      margin-top: 7px;
+      color: #2d587e;
       font-size: 12px;
-      color: #4b5563;
-      margin-bottom: 10px;
+      line-height: 1.5;
+      word-break: break-all;
     }
 
-    .button-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    /* Statistics */
+    /* =========================
+       STATS
+    ========================== */
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-bottom: 15px;
+      margin-top: 14px;
     }
 
-    .stat {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 14px;
+    .stat-card {
+      background: #f6faff;
+      border: 1px solid #dcecff;
+      border-radius: 16px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    .stat-number {
+      color: #0758ad;
+      font-size: 23px;
+      font-weight: 850;
     }
 
     .stat-label {
+      margin-top: 5px;
+      color: #6b8096;
       font-size: 11px;
-      color: #6b7280;
-      margin-bottom: 4px;
+      line-height: 1.3;
     }
 
-    .stat-value {
-      font-size: 21px;
-      font-weight: 800;
-    }
-
-    /* Referral list */
+    /* =========================
+       REFERRAL LIST
+    ========================== */
 
     .referral-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .referral-item {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 14px;
-      background: #fff;
-    }
-
-    .referral-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .referral-user {
-      font-weight: 800;
-      font-size: 15px;
-    }
-
-    .referral-id {
-      font-size: 11px;
-      color: #6b7280;
-      margin-top: 2px;
-    }
-
-    .status {
-      font-size: 11px;
-      font-weight: 800;
-      padding: 5px 9px;
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-
-    .status.pending {
-      background: #fff7ed;
-      color: #c2410c;
-    }
-
-    .status.qualified {
-      background: #ecfdf5;
-      color: #047857;
-    }
-
-    .referral-details {
-      margin-top: 12px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    .detail {
-      background: #f8fafc;
-      border-radius: 8px;
-      padding: 9px;
-    }
-
-    .detail small {
-      display: block;
-      color: #6b7280;
-      font-size: 10px;
-      margin-bottom: 2px;
-    }
-
-    .detail strong {
-      font-size: 12px;
-    }
-
-    .progress-wrapper {
-      margin-top: 12px;
-    }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: #6b7280;
-      margin-bottom: 5px;
-    }
-
-    .progress-bar {
-      height: 7px;
-      background: #e5e7eb;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: #111827;
-      border-radius: 20px;
-      transition: width .3s ease;
-    }
-
-    .reward-status {
-      margin-top: 10px;
-      font-size: 12px;
-      font-weight: 700;
+      margin-top: 14px;
     }
 
     .empty-state {
       text-align: center;
-      padding: 30px 15px;
-      border: 1px dashed #d1d5db;
-      border-radius: 12px;
-      color: #6b7280;
+      padding: 25px 15px;
+      border-radius: 16px;
+      background: #f7fbff;
+      border: 1px dashed #cfe2f5;
+      color: #71859a;
     }
 
-    .empty-state strong {
-      display: block;
-      color: #374151;
-      margin-bottom: 4px;
+    .empty-icon {
+      font-size: 31px;
+      margin-bottom: 8px;
     }
 
-    /* Message */
+    .empty-title {
+      color: #315878;
+      font-size: 15px;
+      font-weight: 800;
+    }
 
-    #message {
-      display: none;
-      position: fixed;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #111827;
-      color: #fff;
-      padding: 11px 16px;
+    .empty-text {
+      margin-top: 5px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .referral-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      margin-bottom: 9px;
+      border-radius: 15px;
+      background: #f8fbff;
+      border: 1px solid #deecfa;
+    }
+
+    .referral-avatar {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #dceeff;
+      color: #0758ad;
+      font-weight: 850;
+    }
+
+    .referral-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .referral-name {
+      color: #173e63;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .referral-id {
+      margin-top: 3px;
+      color: #758ba1;
+      font-size: 11px;
+      word-break: break-word;
+    }
+
+    .status {
+      padding: 6px 8px;
       border-radius: 9px;
-      font-size: 13px;
-      z-index: 100;
-      max-width: 90%;
-      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
     }
+
+    .status-qualified {
+      color: #087443;
+      background: #e4f8ee;
+    }
+
+    .status-pending {
+      color: #986000;
+      background: #fff3d9;
+    }
+
+    /* =========================
+       HOW IT WORKS
+    ========================== */
+
+    .steps {
+      margin-top: 15px;
+      display: grid;
+      gap: 11px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .step-number {
+      width: 31px;
+      height: 31px;
+      flex: 0 0 31px;
+      border-radius: 10px;
+      background: #e3f1ff;
+      color: #0758ad;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .step-content strong {
+      display: block;
+      color: #234c70;
+      font-size: 13px;
+    }
+
+    .step-content p {
+      margin-top: 3px;
+      color: #71869b;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    /* =========================
+       MESSAGE
+    ========================== */
+
+    .message {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(20px);
+
+      max-width: calc(100% - 35px);
+      width: max-content;
+
+      padding: 11px 16px;
+      border-radius: 12px;
+
+      background: #0a5fba;
+      color: white;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+
+      box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+      z-index: 1000;
+    }
+
+    .message.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* =========================
+       LOADING
+    ========================== */
 
     .loading {
-      color: #6b7280;
-      font-size: 13px;
-      padding: 10px 0;
-    }
-
-    footer {
       text-align: center;
-      padding: 20px 10px;
-      color: #9ca3af;
-      font-size: 11px;
+      padding: 35px 15px;
+      color: #6e849a;
+      font-size: 13px;
     }
 
-    @media (max-width: 700px) {
-      .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    .spinner {
+      width: 28px;
+      height: 28px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      border: 3px solid #dcecff;
+      border-top-color: #0b63ce;
+      animation: spin 0.8s linear infinite;
+    }
 
-      .referral-details {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .referral-code-box {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .copy-btn {
-        width: 100%;
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
     }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 18px 12px 35px;
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 430px) {
+      .top-header {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      main {
+        padding: 15px;
       }
 
       .page-title h1 {
+        font-size: 25px;
+      }
+
+      .reward-number {
         font-size: 22px;
       }
 
@@ -432,21 +568,16 @@
         gap: 7px;
       }
 
-      .stat {
-        padding: 11px 8px;
+      .stat-card {
+        padding: 12px 7px;
       }
 
-      .stat-value {
-        font-size: 18px;
+      .stat-number {
+        font-size: 21px;
       }
 
-      .referral-details {
+      .action-row {
         grid-template-columns: 1fr;
-      }
-
-      .reward-box {
-        flex: 1;
-        min-width: 100px;
       }
     }
   </style>
@@ -454,307 +585,550 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-inner">
+  <div class="app">
 
-      <a href="../index.html" class="brand">
-        ON1Ecosystem
-        <span>REFERRAL PROGRAM</span>
-      </a>
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-      <a href="dashboard.html" class="dashboard-btn">
-        ← Dashboard
-      </a>
+    <header class="top-header">
 
-    </div>
-  </header>
+      <div class="header-row">
 
-
-  <main class="container">
-
-    <!-- PAGE TITLE -->
-    <div class="page-title">
-      <h1>Referral Program</h1>
-      <p>Invite people to ON1Ecosystem and earn rewards when they become qualified members.</p>
-    </div>
-
-
-    <!-- REWARD INFORMATION -->
-    <section class="reward-banner">
-
-      <h2>Earn From Qualified Referrals</h2>
-
-      <p>
-        Your referral earns a reward after the person you referred
-        successfully completes 3 days of mining.
-      </p>
-
-      <div class="reward-values">
-
-        <div class="reward-box">
-          <strong>25 ON1</strong>
-          <span>ON1Coin reward</span>
+        <div class="brand">
+          ON1Ecosystem <span>•</span>
         </div>
 
-        <div class="reward-box">
-          <strong>250 XP</strong>
-          <span>ON1XP reward</span>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- YOUR REFERRAL CODE -->
-    <section class="card">
-
-      <div class="card-title">
-        Your Referral Code
-      </div>
-
-      <div class="card-subtitle">
-        Share your referral code or personal link with new members.
-      </div>
-
-      <div class="referral-code-box">
-
-        <div>
-          <div class="label">ON1 Referral Code</div>
-          <div class="code" id="referralCode">Loading...</div>
-        </div>
-
-        <button class="copy-btn" id="copyCodeBtn">
-          Copy Code
+        <button
+          class="home-btn"
+          id="homeBtn"
+          type="button"
+        >
+          ← Dashboard
         </button>
 
       </div>
 
-      <div class="label">
-        Your Personal Referral Link
-      </div>
-
-      <div class="referral-link" id="referralLink">
-        Loading...
-      </div>
-
-      <div class="button-row">
-
-        <button class="copy-btn" id="copyLinkBtn">
-          Copy Referral Link
-        </button>
-
-        <button class="share-btn" id="shareBtn">
-          Share
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- STATISTICS -->
-    <div class="stats-grid">
-
-      <div class="stat">
-        <div class="stat-label">Total Referrals</div>
-        <div class="stat-value" id="totalReferrals">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-label">Qualified</div>
-        <div class="stat-value" id="qualifiedReferrals">0</div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-label">Pending</div>
-        <div class="stat-value" id="pendingReferrals">0</div>
-      </div>
-
-    </div>
-
-
-    <!-- ALL REFERRALS -->
-    <section class="card">
-
-      <div class="card-title">
-        All My Referrals
-      </div>
-
-      <div class="card-subtitle">
-        Track the people who joined using your referral code.
-      </div>
-
-      <div id="referralList" class="referral-list">
-
-        <div class="loading">
-          Loading your referrals...
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- HOW IT WORKS -->
-    <section class="card">
-
-      <div class="card-title">
-        How Referral Rewards Work
-      </div>
-
-      <div class="card-subtitle">
-        Your referral must complete the required mining activity before the reward becomes qualified.
-      </div>
-
-      <div style="font-size:13px; color:#4b5563;">
-
-        <p style="margin-bottom:8px;">
-          <strong>1.</strong> Share your referral code or referral link.
-        </p>
-
-        <p style="margin-bottom:8px;">
-          <strong>2.</strong> A new member registers using your referral.
-        </p>
-
-        <p style="margin-bottom:8px;">
-          <strong>3.</strong> The referred member completes mining for 3 days.
-        </p>
-
-        <p style="margin-bottom:8px;">
-          <strong>4.</strong> The referral becomes <strong>Qualified</strong>.
-        </p>
+      <div class="page-title">
+        <h1>Referral Program</h1>
 
         <p>
-          <strong>5.</strong> The secure reward system pays you
-          <strong>25 ON1 + 250 XP</strong>.
+          Invite people to ON1Ecosystem and earn ON1Coin and ON1XP
+          when your referrals become qualified.
         </p>
-
       </div>
 
-    </section>
-
-  </main>
+    </header>
 
 
-  <footer>
-    ON1Ecosystem · Referral Program
-  </footer>
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main>
+
+      <!-- Reward -->
+      <section class="section">
+
+        <div class="reward-banner">
+
+          <div class="reward-label">
+            Referral Reward
+          </div>
+
+          <div class="reward-title">
+            Earn From Qualified Referrals
+          </div>
+
+          <div class="reward-grid">
+
+            <div class="reward-box">
+              <div class="reward-number">
+                25
+              </div>
+
+              <div class="reward-unit">
+                ON1Coin
+              </div>
+            </div>
+
+            <div class="reward-box">
+              <div class="reward-number">
+                250
+              </div>
+
+              <div class="reward-unit">
+                ON1XP
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
 
 
-  <div id="message"></div>
+      <!-- Referral Code -->
+      <section class="section">
+
+        <div class="card">
+
+          <div class="card-title">
+            Your Referral Code
+          </div>
+
+          <div class="card-subtitle">
+            Share your personal ON1 ID with people you invite.
+          </div>
+
+          <div class="code-box">
+
+            <div class="small-label">
+              Referral Code
+            </div>
+
+            <div
+              class="referral-code"
+              id="referralCode"
+            >
+              Loading...
+            </div>
+
+            <div class="action-row">
+
+              <button
+                class="primary-btn"
+                id="copyCodeBtn"
+                type="button"
+              >
+                COPY CODE
+              </button>
+
+              <button
+                class="secondary-btn"
+                id="shareBtn"
+                type="button"
+              >
+                SHARE
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="link-box">
+
+            <div class="small-label">
+              Your Personal Referral Link
+            </div>
+
+            <div
+              class="referral-link"
+              id="referralLink"
+            >
+              Loading...
+            </div>
+
+            <button
+              class="primary-btn"
+              id="copyLinkBtn"
+              type="button"
+              style="margin-top:11px;"
+            >
+              COPY LINK
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
 
 
-  <!-- FIREBASE -->
+      <!-- Statistics -->
+      <section class="section">
+
+        <div class="card">
+
+          <div class="card-title">
+            Referral Statistics
+          </div>
+
+          <div class="card-subtitle">
+            Your current referral performance.
+          </div>
+
+          <div class="stats-grid">
+
+            <div class="stat-card">
+
+              <div
+                class="stat-number"
+                id="totalReferrals"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                Total Referrals
+              </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+              <div
+                class="stat-number"
+                id="qualifiedReferrals"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                Qualified
+              </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+              <div
+                class="stat-number"
+                id="pendingReferrals"
+              >
+                0
+              </div>
+
+              <div class="stat-label">
+                Pending
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Referral List -->
+      <section class="section">
+
+        <div class="card">
+
+          <div class="card-title">
+            Your Referrals
+          </div>
+
+          <div class="card-subtitle">
+            People connected to your referral account.
+          </div>
+
+          <div
+            class="referral-list"
+            id="referralList"
+          >
+
+            <div class="loading">
+              <div class="spinner"></div>
+              Loading referrals...
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- How It Works -->
+      <section class="section">
+
+        <div class="card">
+
+          <div class="card-title">
+            How It Works
+          </div>
+
+          <div class="card-subtitle">
+            Follow these simple steps to earn referral rewards.
+          </div>
+
+          <div class="steps">
+
+            <div class="step">
+
+              <div class="step-number">
+                1
+              </div>
+
+              <div class="step-content">
+
+                <strong>
+                  Share your referral link
+                </strong>
+
+                <p>
+                  Send your personal ON1Ecosystem referral link
+                  to friends, family or other people.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="step">
+
+              <div class="step-number">
+                2
+              </div>
+
+              <div class="step-content">
+
+                <strong>
+                  They create an account
+                </strong>
+
+                <p>
+                  Your referral should register using your
+                  referral code or personal referral link.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="step">
+
+              <div class="step-number">
+                3
+              </div>
+
+              <div class="step-content">
+
+                <strong>
+                  They complete the requirement
+                </strong>
+
+                <p>
+                  A referral becomes qualified after completing
+                  the required mining activity.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="step">
+
+              <div class="step-number">
+                4
+              </div>
+
+              <div class="step-content">
+
+                <strong>
+                  You receive your reward
+                </strong>
+
+                <p>
+                  Qualified referrals can earn you
+                  25 ON1Coin + 250 ON1XP.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- Message -->
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- =========================
+       FIREBASE
+  ========================== -->
+
   <script type="module">
 
-    import { initializeApp }
-      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
     import {
       getAuth,
       onAuthStateChanged
-    }
-      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     import {
       getFirestore,
+      doc,
+      getDoc,
       collection,
       query,
       where,
-      getDocs,
-      doc,
-      getDoc
-    }
-      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-    /* ==============================
+    /* =========================
        FIREBASE CONFIG
-       SAME CONFIG AS DASHBOARD
-       ============================== */
+    ========================== */
 
     const firebaseConfig = {
-      apiKey: "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
-      authDomain: "dsatechon1-c8b41.firebaseapp.com",
-      projectId: "dsatechon1-c8b41",
-      storageBucket: "dsatechon1-c8b41.firebasestorage.app",
-      messagingSenderId: "5740594058",
-      appId: "1:5740594058:web:23fbbca5392f12db863e73"
+
+      apiKey:
+        "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
+
+      authDomain:
+        "dsatechon1-c8b41.firebaseapp.com",
+
+      projectId:
+        "dsatechon1-c8b41",
+
+      storageBucket:
+        "dsatechon1-c8b41.firebasestorage.app",
+
+      messagingSenderId:
+        "5740594058",
+
+      appId:
+        "1:5740594058:web:23fbbca5392f12db863e73"
+
     };
 
 
-    const app = initializeApp(firebaseConfig);
+    const app =
+      initializeApp(firebaseConfig);
 
-    const auth = getAuth(app);
+    const auth =
+      getAuth(app);
 
-    const db = getFirestore(app);
-
-
-    /* ==============================
-       DEFAULT REFERRAL FALLBACK
-       ============================== */
-
-    const DEFAULT_REFERRAL_CODE = "ON12YBGYI9";
-
-    const DEFAULT_REFERRAL_USERNAME = "JennyKhiss";
+    const db =
+      getFirestore(app);
 
 
-    /* ==============================
-       HELPERS
-       ============================== */
+    /* =========================
+       REFERRAL DEFAULT
+    ========================== */
+
+    const DEFAULT_REFERRAL_CODE =
+      "ON12YBGYI9";
+
+    const DEFAULT_REFERRAL_USERNAME =
+      "JennyKhiss";
+
+
+    const REFERRAL_REWARD_ON1 =
+      25;
+
+    const REFERRAL_REWARD_XP =
+      250;
+
+    const QUALIFICATION_DAYS =
+      3;
+
+
+    /* =========================
+       ELEMENTS
+    ========================== */
+
+    const referralCodeEl =
+      document.getElementById("referralCode");
+
+    const referralLinkEl =
+      document.getElementById("referralLink");
+
+    const totalReferralsEl =
+      document.getElementById("totalReferrals");
+
+    const qualifiedReferralsEl =
+      document.getElementById("qualifiedReferrals");
+
+    const pendingReferralsEl =
+      document.getElementById("pendingReferrals");
+
+    const referralListEl =
+      document.getElementById("referralList");
+
+    const copyCodeBtn =
+      document.getElementById("copyCodeBtn");
+
+    const copyLinkBtn =
+      document.getElementById("copyLinkBtn");
+
+    const shareBtn =
+      document.getElementById("shareBtn");
+
+    const homeBtn =
+      document.getElementById("homeBtn");
+
+    const messageEl =
+      document.getElementById("message");
+
+
+    /* =========================
+       MESSAGE
+    ========================== */
+
+    let messageTimer = null;
 
     function showMessage(text) {
 
-      const message = document.getElementById("message");
+      messageEl.textContent = text;
 
-      message.textContent = text;
+      messageEl.classList.add("show");
 
-      message.style.display = "block";
+      clearTimeout(messageTimer);
 
-      setTimeout(() => {
-        message.style.display = "none";
+      messageTimer =
+        setTimeout(() => {
 
-      }, 2500);
+          messageEl.classList.remove("show");
+
+        }, 2200);
+
     }
 
 
-    function escapeHTML(value) {
+    /* =========================
+       HOME
+    ========================== */
 
-      if (value === null || value === undefined) {
-        return "";
-      }
+    homeBtn.addEventListener(
+      "click",
+      () => {
 
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-
-    function getValue(data, keys, fallback = "") {
-
-      for (const key of keys) {
-
-        if (
-          data &&
-          data[key] !== undefined &&
-          data[key] !== null &&
-          data[key] !== ""
-        ) {
-
-          return data[key];
-
-        }
+        window.location.href =
+          "dashboard.html";
 
       }
+    );
 
-      return fallback;
-    }
 
+    /* =========================
+       TIMESTAMP
+    ========================== */
 
     function timestampToMillis(value) {
 
@@ -762,647 +1136,954 @@
         return 0;
       }
 
-      if (typeof value === "number") {
-        return value;
-      }
-
-      if (typeof value === "string") {
-
-        const parsed = Date.parse(value);
-
-        return Number.isNaN(parsed) ? 0 : parsed;
-      }
-
-      if (value.toMillis) {
+      if (
+        typeof value.toMillis ===
+        "function"
+      ) {
 
         return value.toMillis();
 
       }
 
-      if (value.seconds) {
+      if (
+        value instanceof Date
+      ) {
 
-        return value.seconds * 1000;
+        return value.getTime();
+
+      }
+
+      if (
+        typeof value === "number"
+      ) {
+
+        return value;
+
+      }
+
+      if (
+        typeof value === "string"
+      ) {
+
+        const parsed =
+          Date.parse(value);
+
+        return Number.isNaN(parsed)
+          ? 0
+          : parsed;
 
       }
 
       return 0;
+
     }
 
 
-    /* ==============================
-       REFERRAL LINK
-       ============================== */
+    /* =========================
+       BUILD REFERRAL LINK
+    ========================== */
 
-    function buildReferralLink(code) {
+    function buildReferralLink(
+      referralCode
+    ) {
 
-      const baseURL =
+      const base =
         window.location.origin +
         window.location.pathname
-          .replace("/pages/referral.html", "");
+          .replace(
+            /\/pages\/referral\.html$/,
+            ""
+          );
 
       return (
-        baseURL +
+        base +
         "/pages/signup.html?ref=" +
-        encodeURIComponent(code)
+        encodeURIComponent(
+          referralCode
+        )
       );
 
     }
 
 
-    /* ==============================
-       USER REFERRAL CODE
-       ============================== */
+    /* =========================
+       GET REFERRAL CODE
+    ========================== */
 
-    function getUserReferralCode(userData, user) {
+    function getUserReferralCode(
+      userData
+    ) {
 
-      return getValue(
-        userData,
-        [
-          "referralCode",
-          "referralId",
-          "on1Id",
-          "ON1id",
-          "on1ID"
-        ],
-        user?.uid || DEFAULT_REFERRAL_CODE
-      );
+      const possibleKeys = [
+
+        "referralCode",
+
+        "referralId",
+
+        "on1Id",
+
+        "ON1id",
+
+        "on1ID",
+
+        "ON1Id"
+
+      ];
+
+
+      for (
+        const key of possibleKeys
+      ) {
+
+        const value =
+          userData?.[key];
+
+        if (
+          typeof value === "string" &&
+          value.trim()
+        ) {
+
+          return value.trim();
+
+        }
+
+      }
+
+
+      return DEFAULT_REFERRAL_CODE;
 
     }
 
 
-    /* ==============================
+    /* =========================
+       COPY TEXT
+    ========================== */
+
+    async function copyText(
+      text,
+      successMessage
+    ) {
+
+      try {
+
+        await navigator.clipboard.writeText(
+          text
+        );
+
+        showMessage(
+          successMessage
+        );
+
+      } catch (error) {
+
+        const textarea =
+          document.createElement(
+            "textarea"
+          );
+
+        textarea.value = text;
+
+        textarea.style.position =
+          "fixed";
+
+        textarea.style.opacity =
+          "0";
+
+        document.body.appendChild(
+          textarea
+        );
+
+        textarea.select();
+
+        try {
+
+          document.execCommand(
+            "copy"
+          );
+
+          showMessage(
+            successMessage
+          );
+
+        } catch (copyError) {
+
+          showMessage(
+            "Copy failed. Please copy it manually."
+          );
+
+        }
+
+        textarea.remove();
+
+      }
+
+    }
+
+
+    /* =========================
        COPY CODE
-       ============================== */
+    ========================== */
 
-    document
-      .getElementById("copyCodeBtn")
-      .addEventListener("click", async () => {
+    copyCodeBtn.addEventListener(
+      "click",
+      async () => {
 
         const code =
-          document.getElementById("referralCode").textContent;
+          referralCodeEl.textContent.trim();
 
-        if (!code || code === "Loading...") {
+        if (
+          !code ||
+          code === "Loading..."
+        ) {
+
           return;
-        }
-
-        try {
-
-          await navigator.clipboard.writeText(code);
-
-          showMessage("Referral code copied.");
-
-        } catch {
-
-          showMessage("Unable to copy referral code.");
 
         }
 
-      });
+        await copyText(
+          code,
+          "Referral code copied!"
+        );
+
+      }
+    );
 
 
-    /* ==============================
+    /* =========================
        COPY LINK
-       ============================== */
+    ========================== */
 
-    document
-      .getElementById("copyLinkBtn")
-      .addEventListener("click", async () => {
+    copyLinkBtn.addEventListener(
+      "click",
+      async () => {
 
         const link =
-          document.getElementById("referralLink").textContent;
+          referralLinkEl.textContent.trim();
 
-        if (!link || link === "Loading...") {
+        if (
+          !link ||
+          link === "Loading..."
+        ) {
+
           return;
-        }
-
-        try {
-
-          await navigator.clipboard.writeText(link);
-
-          showMessage("Referral link copied.");
-
-        } catch {
-
-          showMessage("Unable to copy referral link.");
 
         }
 
-      });
+        await copyText(
+          link,
+          "Referral link copied!"
+        );
+
+      }
+    );
 
 
-    /* ==============================
+    /* =========================
        SHARE
-       ============================== */
+    ========================== */
 
-    document
-      .getElementById("shareBtn")
-      .addEventListener("click", async () => {
-
-        const link =
-          document.getElementById("referralLink").textContent;
+    shareBtn.addEventListener(
+      "click",
+      async () => {
 
         const code =
-          document.getElementById("referralCode").textContent;
+          referralCodeEl.textContent.trim();
 
-        if (!link || link === "Loading...") {
+        const link =
+          referralLinkEl.textContent.trim();
+
+
+        if (
+          !link ||
+          link === "Loading..."
+        ) {
+
           return;
+
         }
+
 
         const shareText =
           "Join me on ON1Ecosystem. Use my referral code " +
           code +
           " to register.";
 
-        if (navigator.share) {
+
+        if (
+          navigator.share
+        ) {
 
           try {
 
             await navigator.share({
-              title: "Join ON1Ecosystem",
-              text: shareText,
-              url: link
+
+              title:
+                "Join ON1Ecosystem",
+
+              text:
+                shareText,
+
+              url:
+                link
+
             });
 
-          } catch {
+          } catch (error) {
 
-            // User cancelled sharing.
-
-          }
-
-        } else {
-
-          try {
-
-            await navigator.clipboard.writeText(
-              shareText + " " + link
-            );
-
-            showMessage("Referral message copied.");
-
-          } catch {
-
-            showMessage("Sharing is not supported on this device.");
+            /*
+              User cancelled sharing.
+              No action required.
+            */
 
           }
-
-        }
-
-      });
-
-
-    /* ==============================
-       LOAD USER
-       ============================== */
-
-    async function loadReferralPage(user) {
-
-      try {
-
-        const userRef =
-          doc(db, "users", user.uid);
-
-        const userSnap =
-          await getDoc(userRef);
-
-        if (!userSnap.exists()) {
-
-          showMessage("Member account could not be found.");
 
           return;
 
         }
 
-        const userData =
-          userSnap.data();
 
-
-        /* USER REFERRAL CODE */
-
-        const referralCode =
-          getUserReferralCode(userData, user);
-
-
-        document.getElementById("referralCode")
-          .textContent = referralCode;
-
-
-        /* REFERRAL LINK */
-
-        const referralLink =
-          buildReferralLink(referralCode);
-
-
-        document.getElementById("referralLink")
-          .textContent = referralLink;
-
-
-        /* LOAD REFERRALS */
-
-        await loadReferrals(
-          referralCode,
-          userData
-        );
-
-      } catch (error) {
-
-        console.error(error);
-
-        showMessage(
-          "Unable to load referral information."
+        await copyText(
+          link,
+          "Referral link copied!"
         );
 
       }
+    );
 
-    }
 
+    /* =========================
+       MINING DAYS
+    ========================== */
 
-    /* ==============================
-       LOAD ALL REFERRALS
-       ============================== */
-
-    async function loadReferrals(
-      referralCode,
+    function getMiningDays(
       userData
     ) {
 
-      const list =
-        document.getElementById("referralList");
+      const possibleValues = [
 
-      list.innerHTML =
-        '<div class="loading">Loading your referrals...</div>';
+        userData?.miningDays,
 
+        userData?.totalMiningDays,
 
-      let referrals = [];
+        userData?.daysMined,
 
+        userData?.miningDayCount,
 
-      try {
+        userData?.streak
 
-        /*
-         * Primary search:
-         * referredBy = current user's referral code
-         */
-
-        const referralQuery =
-          query(
-            collection(db, "users"),
-            where("referredBy", "==", referralCode)
-          );
+      ];
 
 
-        const snapshot =
-          await getDocs(referralQuery);
+      for (
+        const value of possibleValues
+      ) {
 
+        const number =
+          Number(value);
 
-        snapshot.forEach((docSnap) => {
+        if (
+          Number.isFinite(number) &&
+          number >= 0
+        ) {
 
-          referrals.push({
-            id: docSnap.id,
-            ...docSnap.data()
-          });
-
-        });
-
-
-      } catch (error) {
-
-        console.error(
-          "Referral query error:",
-          error
-        );
-
-      }
-
-
-      /*
-       * Remove current user if somehow
-       * included in the results.
-       */
-
-      referrals =
-        referrals.filter(
-          item => item.id !== auth.currentUser?.uid
-        );
-
-
-      /*
-       * Statistics
-       */
-
-      const total =
-        referrals.length;
-
-
-      let qualified = 0;
-
-
-      referrals.forEach(referral => {
-
-        const miningDays =
-          getMiningDays(referral);
-
-
-        if (miningDays >= 3) {
-
-          qualified++;
+          return number;
 
         }
 
-      });
-
-
-      const pending =
-        Math.max(
-          0,
-          total - qualified
-        );
-
-
-      document.getElementById("totalReferrals")
-        .textContent = total;
-
-
-      document.getElementById("qualifiedReferrals")
-        .textContent = qualified;
-
-
-      document.getElementById("pendingReferrals")
-        .textContent = pending;
-
-
-      /*
-       * Empty state
-       */
-
-      if (referrals.length === 0) {
-
-        list.innerHTML = `
-          <div class="empty-state">
-            <strong>No referrals yet</strong>
-            Share your referral link to invite your first member.
-          </div>
-        `;
-
-        return;
-
       }
 
-
-      /*
-       * Display referrals
-       */
-
-      list.innerHTML = "";
-
-
-      referrals.forEach(referral => {
-
-        list.appendChild(
-          createReferralCard(referral)
-        );
-
-      });
-
-    }
-
-
-    /* ==============================
-       DETERMINE MINING DAYS
-       ============================== */
-
-    function getMiningDays(referral) {
-
-      /*
-       * These fields are supported for display
-       * if your backend stores them.
-       *
-       * The secure Worker will eventually be
-       * the final authority for qualification.
-       */
-
-      const directDays =
-        getValue(
-          referral,
-          [
-            "miningDays",
-            "daysMined",
-            "minedDays",
-            "streak"
-          ],
-          0
-        );
-
-
-      const numericDays =
-        Number(directDays);
-
-
-      if (
-        Number.isFinite(numericDays) &&
-        numericDays > 0
-      ) {
-
-        return Math.min(
-          3,
-          Math.floor(numericDays)
-        );
-
-      }
-
-
-      /*
-       * If no mining-day field is currently
-       * available, show zero rather than
-       * inventing progress.
-       */
 
       return 0;
 
     }
 
 
-    /* ==============================
-       REFERRAL CARD
-       ============================== */
+    /* =========================
+       LOAD REFERRAL PAGE
+    ========================== */
 
-    function createReferralCard(referral) {
+    async function loadReferralPage(
+      user
+    ) {
 
-      const wrapper =
-        document.createElement("div");
+      try {
+
+        const userRef =
+          doc(
+            db,
+            "users",
+            user.uid
+          );
+
+        const userSnap =
+          await getDoc(userRef);
 
 
-      wrapper.className =
-        "referral-item";
+        if (
+          !userSnap.exists()
+        ) {
+
+          throw new Error(
+            "Your user profile could not be found."
+          );
+
+        }
 
 
-      const username =
-        getValue(
-          referral,
-          [
-            "username",
-            "userName",
-            "displayName"
-          ],
-          "ON1 Member"
+        const userData =
+          userSnap.data();
+
+
+        const referralCode =
+          getUserReferralCode(
+            userData
+          );
+
+
+        const referralLink =
+          buildReferralLink(
+            referralCode
+          );
+
+
+        referralCodeEl.textContent =
+          referralCode;
+
+        referralLinkEl.textContent =
+          referralLink;
+
+
+        /*
+          Important:
+
+          The account-level referral fields
+          are treated as the authoritative
+          referral statistics when available.
+
+          This prevents the referral page
+          from incorrectly showing 0 when
+          the dashboard already contains
+          referral rewards/counts.
+        */
+
+        const accountReferralCount =
+          Number(
+            userData.referralCount
+          );
+
+
+        const accountReferralBonus =
+          Number(
+            userData.referralBonus
+          );
+
+
+        const accountReferralXP =
+          Number(
+            userData.referralXP
+          );
+
+
+        let totalReferrals = 0;
+
+        let qualifiedReferrals = 0;
+
+        let pendingReferrals = 0;
+
+
+        if (
+          Number.isFinite(
+            accountReferralCount
+          ) &&
+          accountReferralCount >= 0
+        ) {
+
+          totalReferrals =
+            accountReferralCount;
+
+        }
+
+
+        if (
+          Number.isFinite(
+            accountReferralBonus
+          ) &&
+          accountReferralBonus >= 0
+        ) {
+
+          qualifiedReferrals =
+            Math.floor(
+              accountReferralBonus /
+              REFERRAL_REWARD_ON1
+            );
+
+        }
+
+
+        /*
+          If the account has a referral
+          count but no referral bonus yet,
+          all referrals remain pending.
+        */
+
+        if (
+          qualifiedReferrals >
+          totalReferrals
+        ) {
+
+          qualifiedReferrals =
+            totalReferrals;
+
+        }
+
+
+        pendingReferrals =
+          Math.max(
+            0,
+            totalReferrals -
+            qualifiedReferrals
+          );
+
+
+        totalReferralsEl.textContent =
+          totalReferrals;
+
+        qualifiedReferralsEl.textContent =
+          qualifiedReferrals;
+
+        pendingReferralsEl.textContent =
+          pendingReferrals;
+
+
+        await loadReferrals(
+          referralCode,
+          userData,
+          totalReferrals,
+          qualifiedReferrals
         );
 
+      } catch (error) {
 
-      const on1Id =
-        getValue(
-          referral,
-          [
-            "on1Id",
-            "ON1Id",
-            "on1ID"
-          ],
-          referral.id
+        console.error(
+          "Referral page error:",
+          error
         );
 
+        referralCodeEl.textContent =
+          DEFAULT_REFERRAL_CODE;
 
-      const email =
-        getValue(
-          referral,
-          ["email"],
-          "Not available"
-        );
+        referralLinkEl.textContent =
+          buildReferralLink(
+            DEFAULT_REFERRAL_CODE
+          );
 
+        referralListEl.innerHTML = `
 
-      const miningDays =
-        getMiningDays(referral);
+          <div class="empty-state">
 
-
-      const isQualified =
-        miningDays >= 3;
-
-
-      const statusClass =
-        isQualified
-          ? "qualified"
-          : "pending";
-
-
-      const statusText =
-        isQualified
-          ? "Qualified"
-          : "Pending";
-
-
-      const rewardText =
-        isQualified
-          ? "Reward qualified: 25 ON1 + 250 XP"
-          : "Complete 3 days of mining to qualify";
-
-
-      const percentage =
-        Math.min(
-          100,
-          Math.round(
-            (miningDays / 3) * 100
-          )
-        );
-
-
-      wrapper.innerHTML = `
-
-        <div class="referral-top">
-
-          <div>
-
-            <div class="referral-user">
-              ${escapeHTML(username)}
+            <div class="empty-icon">
+              ⚠️
             </div>
 
-            <div class="referral-id">
-              ON1 ID: ${escapeHTML(on1Id)}
+            <div class="empty-title">
+              Referral information unavailable
+            </div>
+
+            <div class="empty-text">
+              Your referral account information
+              could not be loaded right now.
             </div>
 
           </div>
 
-          <div class="status ${statusClass}">
-            ${statusText}
-          </div>
+        `;
 
-        </div>
+      }
 
-
-        <div class="referral-details">
-
-          <div class="detail">
-
-            <small>Email</small>
-
-            <strong>
-              ${escapeHTML(email)}
-            </strong>
-
-          </div>
+    }
 
 
-          <div class="detail">
+    /* =========================
+       LOAD REFERRALS
+    ========================== */
 
-            <small>Mining Days</small>
+    async function loadReferrals(
+      referralCode,
+      userData,
+      accountTotal,
+      accountQualified
+    ) {
 
-            <strong>
-              ${miningDays} / 3
-            </strong>
+      referralListEl.innerHTML = `
 
-          </div>
+        <div class="loading">
 
+          <div class="spinner"></div>
 
-          <div class="detail">
+          Loading referrals...
 
-            <small>Reward</small>
-
-            <strong>
-              25 ON1 + 250 XP
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        <div class="progress-wrapper">
-
-          <div class="progress-header">
-
-            <span>
-              3-Day Mining Requirement
-            </span>
-
-            <span>
-              ${percentage}%
-            </span>
-
-          </div>
-
-
-          <div class="progress-bar">
-
-            <div
-              class="progress-fill"
-              style="width:${percentage}%"
-            ></div>
-
-          </div>
-
-        </div>
-
-
-        <div class="reward-status">
-          ${rewardText}
         </div>
 
       `;
 
 
-      return wrapper;
+      try {
+
+        const usersRef =
+          collection(
+            db,
+            "users"
+          );
+
+
+        const referralQuery =
+          query(
+            usersRef,
+            where(
+              "referredBy",
+              "==",
+              referralCode
+            )
+          );
+
+
+        const snapshot =
+          await getDocs(
+            referralQuery
+          );
+
+
+        const records = [];
+
+
+        snapshot.forEach(
+          (docSnap) => {
+
+            records.push({
+
+              id:
+                docSnap.id,
+
+              data:
+                docSnap.data()
+
+            });
+
+          }
+        );
+
+
+        /*
+          The individual Firestore query is
+          useful for displaying the actual
+          referral members.
+
+          But it must NOT overwrite the
+          account-level statistics above.
+        */
+
+
+        if (
+          records.length === 0
+        ) {
+
+          if (
+            accountTotal > 0
+          ) {
+
+            referralListEl.innerHTML = `
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  👥
+                </div>
+
+                <div class="empty-title">
+                  Referral records are syncing
+                </div>
+
+                <div class="empty-text">
+                  Your account currently shows
+                  ${accountTotal} referral${accountTotal === 1 ? "" : "s"}.
+                  Individual referral details will
+                  appear here when their user records
+                  are available.
+                </div>
+
+              </div>
+
+            `;
+
+          } else {
+
+            referralListEl.innerHTML = `
+
+              <div class="empty-state">
+
+                <div class="empty-icon">
+                  🤝
+                </div>
+
+                <div class="empty-title">
+                  No referrals yet
+                </div>
+
+                <div class="empty-text">
+                  Share your referral link and start
+                  inviting people to ON1Ecosystem.
+                </div>
+
+              </div>
+
+            `;
+
+          }
+
+          return;
+
+        }
+
+
+        records.sort(
+          (a, b) => {
+
+            const aTime =
+              timestampToMillis(
+                a.data.createdAt
+              );
+
+            const bTime =
+              timestampToMillis(
+                b.data.createdAt
+              );
+
+            return bTime - aTime;
+
+          }
+        );
+
+
+        referralListEl.innerHTML = "";
+
+
+        records.forEach(
+          (record) => {
+
+            const miningDays =
+              getMiningDays(
+                record.data
+              );
+
+
+            const qualified =
+              miningDays >=
+              QUALIFICATION_DAYS;
+
+
+            const card =
+              createReferralCard(
+                record.data,
+                record.id,
+                qualified
+              );
+
+
+            referralListEl.appendChild(
+              card
+            );
+
+          }
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Referral list error:",
+          error
+        );
+
+
+        /*
+          Do not turn the whole referral page
+          into an error merely because the
+          individual referral query is not
+          available.
+        */
+
+        if (
+          accountTotal > 0
+        ) {
+
+          referralListEl.innerHTML = `
+
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                👥
+              </div>
+
+              <div class="empty-title">
+                Referral records are unavailable
+              </div>
+
+              <div class="empty-text">
+                Your referral statistics are still
+                displayed above.
+              </div>
+
+            </div>
+
+          `;
+
+        } else {
+
+          referralListEl.innerHTML = `
+
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                🤝
+              </div>
+
+              <div class="empty-title">
+                No referrals yet
+              </div>
+
+              <div class="empty-text">
+                Share your referral link to invite
+                new ON1Ecosystem members.
+              </div>
+
+            </div>
+
+          `;
+
+        }
+
+      }
 
     }
 
 
-    /* ==============================
-       AUTH STATE
-       ============================== */
+    /* =========================
+       CREATE REFERRAL CARD
+    ========================== */
+
+    function createReferralCard(
+      userData,
+      documentId,
+      qualified
+    ) {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+      item.className =
+        "referral-item";
+
+
+      const username =
+        userData.username ||
+        userData.displayName ||
+        userData.name ||
+        "ON1 Member";
+
+
+      const on1Id =
+        userData.on1Id ||
+        userData.ON1id ||
+        userData.ON1ID ||
+        userData.ON1Id ||
+        documentId;
+
+
+      const firstLetter =
+        username
+          .charAt(0)
+          .toUpperCase();
+
+
+      const statusClass =
+        qualified
+          ? "status-qualified"
+          : "status-pending";
+
+
+      const statusText =
+        qualified
+          ? "Qualified"
+          : "Pending";
+
+
+      item.innerHTML = `
+
+        <div class="referral-avatar">
+          ${escapeHtml(firstLetter)}
+        </div>
+
+        <div class="referral-info">
+
+          <div class="referral-name">
+            ${escapeHtml(username)}
+          </div>
+
+          <div class="referral-id">
+            ON1 ID: ${escapeHtml(on1Id)}
+          </div>
+
+        </div>
+
+        <div class="status ${statusClass}">
+          ${statusText}
+        </div>
+
+      `;
+
+
+      return item;
+
+    }
+
+
+    /* =========================
+       ESCAPE HTML
+    ========================== */
+
+    function escapeHtml(
+      value
+    ) {
+
+      return String(value)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* =========================
+       AUTH GUARD
+    ========================== */
 
     onAuthStateChanged(
       auth,
@@ -1417,7 +2098,10 @@
 
         }
 
-        await loadReferralPage(user);
+
+        await loadReferralPage(
+          user
+        );
 
       }
     );
