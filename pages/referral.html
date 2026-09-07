@@ -676,7 +676,7 @@
        ============================== */
 
     const firebaseConfig = {
-      apiKey: "AIzaSyCmmAfLVPs3oPCmFLSl8trLKNqWlo9YKs",
+      apiKey: "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
       authDomain: "dsatechon1-c8b41.firebaseapp.com",
       projectId: "dsatechon1-c8b41",
       storageBucket: "dsatechon1-c8b41.firebasestorage.app",
@@ -714,7 +714,6 @@
       message.style.display = "block";
 
       setTimeout(() => {
-
         message.style.display = "none";
 
       }, 2500);
@@ -772,7 +771,6 @@
         const parsed = Date.parse(value);
 
         return Number.isNaN(parsed) ? 0 : parsed;
-
       }
 
       if (value.toMillis) {
@@ -788,7 +786,6 @@
       }
 
       return 0;
-
     }
 
 
@@ -824,7 +821,7 @@
           "referralCode",
           "referralId",
           "on1Id",
-          "ON1Id",
+          "ON1id",
           "on1ID"
         ],
         user?.uid || DEFAULT_REFERRAL_CODE
@@ -1231,6 +1228,7 @@
 
       const wrapper =
         document.createElement("div");
+
 
       wrapper.className =
         "referral-item";
