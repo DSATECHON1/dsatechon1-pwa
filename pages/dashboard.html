@@ -51,7 +51,6 @@
       padding:18px;
     }
 
-    /* HEADER */
     header{
       display:flex;
       align-items:center;
@@ -110,7 +109,6 @@
       border-color:var(--blue);
     }
 
-    /* WELCOME */
     .welcome{
       margin-bottom:18px;
     }
@@ -138,7 +136,6 @@
       font-weight:700;
     }
 
-    /* STATS */
     .stats{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -171,6 +168,7 @@
     }
 
     /* APP MENU */
+
     .app-menu{
       background:var(--surface);
       border:1px solid var(--border);
@@ -195,6 +193,7 @@
     .app-menu-subtitle{
       color:var(--muted);
       font-size:11px;
+      margin-top:3px;
     }
 
     .app-menu-grid{
@@ -235,7 +234,6 @@
       line-height:1.2;
     }
 
-    /* MAIN GRID */
     .main-grid{
       display:grid;
       grid-template-columns:1.35fr .9fr;
@@ -269,7 +267,6 @@
       margin-top:3px;
     }
 
-    /* MINING */
     .mining-balance{
       text-align:center;
       padding:12px 0 16px;
@@ -408,7 +405,6 @@
       color:var(--blue2);
     }
 
-    /* LEVEL */
     .level-box{
       margin-top:18px;
       padding-top:16px;
@@ -458,7 +454,6 @@
       margin-top:6px;
     }
 
-    /* PROFILE */
     .profile-list{
       display:flex;
       flex-direction:column;
@@ -505,7 +500,6 @@
       border:1px solid rgba(58,160,255,.2);
     }
 
-    /* AD */
     .ad-section{
       margin-bottom:18px;
     }
@@ -530,7 +524,6 @@
       overflow:hidden;
     }
 
-    /* CPX */
     .cpx-card{
       margin-bottom:18px;
     }
@@ -548,7 +541,6 @@
       line-height:1.5;
     }
 
-    /* REFERRAL */
     .referral-card{
       margin-bottom:18px;
     }
@@ -644,7 +636,6 @@
       margin-top:12px;
     }
 
-    /* LOADING */
     #loading{
       position:fixed;
       inset:0;
@@ -672,7 +663,6 @@
       font-size:13px;
     }
 
-    /* FOOTER */
     footer{
       text-align:center;
       padding:20px 5px 10px;
@@ -684,8 +674,8 @@
       color:#fff;
     }
 
-    /* MOBILE */
     @media(max-width:800px){
+
       .main-grid{
         grid-template-columns:1fr;
       }
@@ -693,9 +683,11 @@
       .app-menu-grid{
         grid-template-columns:repeat(3,1fr);
       }
+
     }
 
     @media(max-width:600px){
+
       .page{
         padding:12px;
       }
@@ -757,9 +749,11 @@
       .referral-stats{
         grid-template-columns:1fr;
       }
+
     }
 
     @media(max-width:350px){
+
       .stats{
         grid-template-columns:1fr;
       }
@@ -772,227 +766,442 @@
         padding:8px 9px;
         font-size:10px;
       }
+
     }
   </style>
 </head>
 
 <body>
 
-  <!-- LOADING -->
   <div id="loading">
     <div class="loading-box">
       <img src="../logo.png" class="loading-logo" alt="ON1Ecosystem">
-      <div class="loading-text">Loading your ON1Ecosystem dashboard...</div>
+      <div class="loading-text">
+        Loading your ON1Ecosystem dashboard...
+      </div>
     </div>
   </div>
 
   <div class="page">
 
-    <!-- HEADER -->
     <header>
+
       <a href="../index.html" class="brand">
+
         <img src="../logo.png" alt="ON1Ecosystem">
+
         <div class="brand-text">
-          <div class="brand-title">ON1Ecosystem</div>
-          <div class="brand-subtitle">MEMBER DASHBOARD</div>
+          <div class="brand-title">
+            ON1Ecosystem
+          </div>
+
+          <div class="brand-subtitle">
+            MEMBER DASHBOARD
+          </div>
         </div>
+
       </a>
 
-      <button id="logoutBtn" class="logout-btn">LOGOUT</button>
+      <button id="logoutBtn" class="logout-btn">
+        LOGOUT
+      </button>
+
     </header>
 
-    <!-- WELCOME -->
+
     <section class="welcome">
+
       <h1>Welcome back 👋</h1>
-      <p>Manage your ON1Coin, XP, mining activity and ecosystem rewards from one place.</p>
-      <div class="welcome-bonus">🎁 1,000 XP Welcome Bonus</div>
+
+      <p>
+        Manage your ON1Coin, XP, mining activity and ecosystem rewards from one place.
+      </p>
+
+      <div class="welcome-bonus">
+        🎁 1,000 XP Welcome Bonus
+      </div>
+
     </section>
 
-    <!-- STATS -->
+
     <section class="stats">
 
       <div class="stat-card">
-        <div class="stat-label">ON1Coin Balance</div>
+
+        <div class="stat-label">
+          ON1Coin Balance
+        </div>
+
         <div class="stat-value">
           <span id="balance">0</span>
           <span class="stat-unit">ON1</span>
         </div>
+
       </div>
 
+
       <div class="stat-card">
-        <div class="stat-label">XP Balance</div>
+
+        <div class="stat-label">
+          XP Balance
+        </div>
+
         <div class="stat-value">
           <span id="xp">0</span>
           <span class="stat-unit">XP</span>
         </div>
+
       </div>
 
+
       <div class="stat-card">
-        <div class="stat-label">Current Level</div>
+
+        <div class="stat-label">
+          Current Level
+        </div>
+
         <div class="stat-value">
           <span id="level">0</span>
         </div>
+
       </div>
 
     </section>
 
+
     <!-- APP MENU -->
+
     <section class="app-menu">
 
       <div class="app-menu-header">
+
         <div>
-          <div class="app-menu-title">ON1Ecosystem App</div>
-          <div class="app-menu-subtitle">Quick access to your member sections</div>
+
+          <div class="app-menu-title">
+            ON1Ecosystem App
+          </div>
+
+          <div class="app-menu-subtitle">
+            Quick access to your member sections
+          </div>
+
         </div>
+
       </div>
+
 
       <div class="app-menu-grid">
 
         <a href="wallet.html" class="app-menu-item">
-          <div class="app-menu-icon">💰</div>
-          <div class="app-menu-name">Wallet</div>
+
+          <div class="app-menu-icon">
+            💰
+          </div>
+
+          <div class="app-menu-name">
+            Wallet
+          </div>
+
         </a>
+
 
         <a href="profile.html" class="app-menu-item">
-          <div class="app-menu-icon">👤</div>
-          <div class="app-menu-name">My Profile</div>
+
+          <div class="app-menu-icon">
+            👤
+          </div>
+
+          <div class="app-menu-name">
+            My Profile
+          </div>
+
         </a>
+
 
         <a href="refferal.html" class="app-menu-item">
-          <div class="app-menu-icon">🤝</div>
-          <div class="app-menu-name">Referral Program</div>
+
+          <div class="app-menu-icon">
+            🤝
+          </div>
+
+          <div class="app-menu-name">
+            Referral Program
+          </div>
+
         </a>
+
 
         <a href="notifications.html" class="app-menu-item">
-          <div class="app-menu-icon">🔔</div>
-          <div class="app-menu-name">Notifications</div>
+
+          <div class="app-menu-icon">
+            🔔
+          </div>
+
+          <div class="app-menu-name">
+            Notifications
+          </div>
+
         </a>
 
+
         <a href="partnership.html" class="app-menu-item">
-          <div class="app-menu-icon">🤝</div>
-          <div class="app-menu-name">Partnership</div>
+
+          <div class="app-menu-icon">
+            🤝
+          </div>
+
+          <div class="app-menu-name">
+            Partnership
+          </div>
+
         </a>
 
       </div>
+
     </section>
 
-    <!-- MAIN GRID -->
+
     <section class="main-grid">
 
-      <!-- MINING CARD -->
+
+      <!-- MINING -->
+
       <div class="card">
 
         <div class="card-header">
+
           <div>
-            <div class="card-title">⛏️ ON1Coin Mining</div>
-            <div class="card-subtitle">Earn ON1Coin every 24 hours</div>
+
+            <div class="card-title">
+              ⛏️ ON1Coin Mining
+            </div>
+
+            <div class="card-subtitle">
+              Earn ON1Coin every 24 hours
+            </div>
+
           </div>
+
         </div>
 
+
         <div class="mining-balance">
-          <div class="mining-balance-number">50.000</div>
-          <div class="mining-balance-label">ON1Coin base reward / 24 hours</div>
+
+          <div class="mining-balance-number">
+            50.000
+          </div>
+
+          <div class="mining-balance-label">
+            ON1Coin base reward / 24 hours
+          </div>
+
         </div>
+
 
         <div class="mining-cycle">
           Daily mining cycle
         </div>
 
+
         <div class="streak-box">
 
           <div class="streak-left">
-            <div class="streak-icon">🔥</div>
+
+            <div class="streak-icon">
+              🔥
+            </div>
 
             <div>
-              <div class="streak-title">Mining Streak</div>
-              <div class="streak-small">Keep mining daily to maintain your streak</div>
+
+              <div class="streak-title">
+                Mining Streak
+              </div>
+
+              <div class="streak-small">
+                Keep mining daily to maintain your streak
+              </div>
+
             </div>
+
           </div>
 
-          <div class="streak-day" id="streak">Day 0</div>
+          <div class="streak-day" id="streak">
+            Day 0
+          </div>
 
         </div>
+
 
         <button id="mineBtn" class="mine-btn">
           START MINING — +50 ON1
         </button>
 
+
         <div id="nextCycle" class="next-cycle"></div>
+
 
         <button id="streakBtn" class="streak-btn" disabled>
           🔥 CLAIM STREAK BONUS
         </button>
 
+
         <div id="miningStatus" class="mining-status">
           Mining system ready
         </div>
 
+
         <div id="message" class="message"></div>
 
-        <!-- LEVEL -->
+
         <div class="level-box">
 
           <div class="level-top">
-            <div class="level-title">Level Progress</div>
-            <div class="level-value" id="levelProgressText">0 / 2,500 XP</div>
+
+            <div class="level-title">
+              Level Progress
+            </div>
+
+            <div class="level-value" id="levelProgressText">
+              0 / 2,500 XP
+            </div>
+
           </div>
+
 
           <div class="progress">
-            <div id="levelProgressBar" class="progress-bar"></div>
+
+            <div
+              id="levelProgressBar"
+              class="progress-bar">
+            </div>
+
           </div>
 
+
           <div class="level-bottom">
-            <span>Current Level</span>
-            <span>2,500 XP per level</span>
+
+            <span>
+              Current Level
+            </span>
+
+            <span>
+              2,500 XP per level
+            </span>
+
           </div>
 
         </div>
 
       </div>
 
-      <!-- PROFILE CARD -->
+
+      <!-- PROFILE -->
+
       <div class="card">
 
         <div class="card-header">
+
           <div>
-            <div class="card-title">👤 Your Profile</div>
-            <div class="card-subtitle">Your ON1Ecosystem member information</div>
+
+            <div class="card-title">
+              👤 Your Profile
+            </div>
+
+            <div class="card-subtitle">
+              Your ON1Ecosystem member information
+            </div>
+
           </div>
+
         </div>
+
 
         <div class="profile-list">
 
-          <div class="profile-row">
-            <div class="profile-label">ON1 ID</div>
-            <div class="profile-value" id="on1Id">Loading...</div>
-          </div>
 
           <div class="profile-row">
-            <div class="profile-label">Username</div>
-            <div class="profile-value" id="username">Loading...</div>
-          </div>
 
-          <div class="profile-row">
-            <div class="profile-label">Email</div>
-            <div class="profile-value" id="email">Loading...</div>
-          </div>
-
-          <div class="profile-row">
-            <div class="profile-label">KYC Status</div>
-            <div class="profile-value">
-              <span class="badge badge-blue" id="kyc">Pending</span>
+            <div class="profile-label">
+              ON1 ID
             </div>
+
+            <div class="profile-value" id="on1Id">
+              Loading...
+            </div>
+
           </div>
 
-          <div class="profile-row">
-            <div class="profile-label">Referred By</div>
-            <div class="profile-value" id="referredBy">Loading...</div>
-          </div>
 
           <div class="profile-row">
-            <div class="profile-label">Referrer ID</div>
-            <div class="profile-value" id="referrerId">Loading...</div>
+
+            <div class="profile-label">
+              Username
+            </div>
+
+            <div class="profile-value" id="username">
+              Loading...
+            </div>
+
           </div>
+
+
+          <div class="profile-row">
+
+            <div class="profile-label">
+              Email
+            </div>
+
+            <div class="profile-value" id="email">
+              Loading...
+            </div>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <div class="profile-label">
+              KYC Status
+            </div>
+
+            <div class="profile-value">
+
+              <span
+                class="badge badge-blue"
+                id="kyc">
+                Pending
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <div class="profile-label">
+              Referred By
+            </div>
+
+            <div class="profile-value" id="referredBy">
+              Loading...
+            </div>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <div class="profile-label">
+              Referrer ID
+            </div>
+
+            <div class="profile-value" id="referrerId">
+              Loading...
+            </div>
+
+          </div>
+
 
         </div>
 
@@ -1000,10 +1209,14 @@
 
     </section>
 
+
     <!-- ADVERTISEMENT -->
+
     <section class="ad-section">
 
-      <div class="ad-title">Advertisement</div>
+      <div class="ad-title">
+        Advertisement
+      </div>
 
       <div class="ad-box">
 
@@ -1024,38 +1237,70 @@
 
     </section>
 
+
     <!-- CPX -->
+
     <section class="card cpx-card">
 
       <div class="card-header">
+
         <div>
-          <div class="card-title">🎯 Earn More XP</div>
-          <div class="card-subtitle">Complete available surveys and activities</div>
+
+          <div class="card-title">
+            🎯 Earn More XP
+          </div>
+
+          <div class="card-subtitle">
+            Complete available surveys and activities
+          </div>
+
         </div>
+
       </div>
 
+
       <div class="cpx-content" id="cpxContainer">
-        <p>Loading available opportunities...</p>
+
+        <p>
+          Loading available opportunities...
+        </p>
+
       </div>
 
     </section>
 
+
     <!-- REFERRAL -->
+
     <section class="card referral-card">
 
       <div class="card-header">
+
         <div>
-          <div class="card-title">🤝 Referral Program</div>
-          <div class="card-subtitle">Invite people to join ON1Ecosystem</div>
+
+          <div class="card-title">
+            🤝 Referral Program
+          </div>
+
+          <div class="card-subtitle">
+            Invite people to join ON1Ecosystem
+          </div>
+
         </div>
+
       </div>
+
 
       <div class="referral-copy">
+
         Invite new members to ON1Ecosystem and grow the ecosystem together.
         Your referral rewards and XP activity will be displayed here.
+
       </div>
 
+
       <div class="owner-badges">
+
         <span class="badge badge-green">
           +25 ON1 per referral
         </span>
@@ -1063,62 +1308,118 @@
         <span class="badge badge-blue">
           +250 XP per referral
         </span>
+
       </div>
 
+
       <div class="referral-link-box">
+
         <div id="referralLink" class="referral-link">
           Loading referral link...
         </div>
 
-        <button id="copyReferralBtn" class="small-btn">
+        <button
+          id="copyReferralBtn"
+          class="small-btn">
           COPY
         </button>
+
       </div>
 
+
       <div class="referral-actions">
-        <button id="shareReferralBtn" class="small-btn">
+
+        <button
+          id="shareReferralBtn"
+          class="small-btn">
           SHARE
         </button>
 
-        <a href="refferal.html" class="small-btn" style="text-align:center;">
+        <a
+          href="refferal.html"
+          class="small-btn"
+          style="text-align:center;">
           VIEW PROGRAM
         </a>
+
       </div>
+
 
       <div class="referral-stats">
 
-        <div class="referral-stat">
-          <div class="referral-stat-number" id="referralCount">0</div>
-          <div class="referral-stat-label">REFERRALS</div>
-        </div>
 
         <div class="referral-stat">
-          <div class="referral-stat-number" id="referralBonus">0</div>
-          <div class="referral-stat-label">ON1 BONUS</div>
+
+          <div
+            class="referral-stat-number"
+            id="referralCount">
+            0
+          </div>
+
+          <div class="referral-stat-label">
+            REFERRALS
+          </div>
+
         </div>
 
+
         <div class="referral-stat">
-          <div class="referral-stat-number" id="referralXPBonus">0</div>
-          <div class="referral-stat-label">XP BONUS</div>
+
+          <div
+            class="referral-stat-number"
+            id="referralBonus">
+            0
+          </div>
+
+          <div class="referral-stat-label">
+            ON1 BONUS
+          </div>
+
         </div>
+
+
+        <div class="referral-stat">
+
+          <div
+            class="referral-stat-number"
+            id="referralXPBonus">
+            0
+          </div>
+
+          <div class="referral-stat-label">
+            XP BONUS
+          </div>
+
+        </div>
+
 
       </div>
 
+
       <div class="referral-note">
+
         Referral rewards are processed according to the ON1Ecosystem reward system.
+
       </div>
 
     </section>
 
-    <!-- FOOTER -->
+
     <footer>
-      <strong>ON1Ecosystem</strong><br>
+
+      <strong>
+        ON1Ecosystem
+      </strong>
+
+      <br>
+
       One Ecosystem. Multiple Solutions.
+
     </footer>
 
   </div>
 
-  <!-- FIREBASE -->
+
   <script type="module">
 
     import {
@@ -1138,8 +1439,12 @@
     } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
+    /* IMPORTANT:
+       THIS IS THE CORRECT FIREBASE CONFIG
+    */
+
     const firebaseConfig = {
-      apiKey: "AIzaSyCmmOlfLVP3s9oPCmFLSl8trLKNqWlo9YKs",
+      apiKey: "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
       authDomain: "dsatechon1-c8b41.firebaseapp.com",
       projectId: "dsatechon1-c8b41",
       storageBucket: "dsatechon1-c8b41.firebasestorage.app",
@@ -1148,20 +1453,25 @@
     };
 
 
-    const app = initializeApp(firebaseConfig);
+    const app =
+      initializeApp(firebaseConfig);
 
-    const auth = getAuth(app);
+    const auth =
+      getAuth(app);
 
-    const db = getFirestore(app);
+    const db =
+      getFirestore(app);
 
 
     const MINING_WORKER =
       "https://on1-mining-engine.dsatechon1official.workers.dev";
 
+
     const DEFAULT_REFERRER = {
       username: "JennyKhiss",
       on1Id: "ON12YBGYI9"
     };
+
 
     const REFERRAL_REWARD_ON1 = 25;
 
@@ -1180,7 +1490,10 @@
         return 0;
       }
 
-      return Math.floor(xp / XP_PER_LEVEL);
+      return Math.floor(
+        xp / XP_PER_LEVEL
+      );
+
     }
 
 
@@ -1192,6 +1505,7 @@
         data.on1XP ??
         0
       );
+
     }
 
 
@@ -1205,7 +1519,9 @@
         return value;
       }
 
-      if(typeof value.toMillis === "function"){
+      if(
+        typeof value.toMillis === "function"
+      ){
         return value.toMillis();
       }
 
@@ -1214,6 +1530,7 @@
       }
 
       return 0;
+
     }
 
 
@@ -1223,10 +1540,12 @@
         return "ON1UNKNOWN";
       }
 
-      return "ON1" + uid
-        .replace(/[^a-zA-Z0-9]/g,"")
-        .substring(0,8)
-        .toUpperCase();
+      return "ON1" +
+        uid
+          .replace(/[^a-zA-Z0-9]/g,"")
+          .substring(0,8)
+          .toUpperCase();
+
     }
 
 
@@ -1236,6 +1555,7 @@
         data.ON1Id ||
         data.on1ID ||
         generateON1Id(user.uid);
+
     }
 
 
@@ -1246,6 +1566,7 @@
         data.referralUsername ||
         data.referralCode ||
         DEFAULT_REFERRER.username;
+
     }
 
 
@@ -1255,6 +1576,7 @@
         data.referrerId ||
         data.referralId ||
         DEFAULT_REFERRER.on1Id;
+
     }
 
 
@@ -1267,6 +1589,7 @@
         data.totalReferrals ||
         0
       );
+
     }
 
 
@@ -1275,22 +1598,30 @@
       if(
         data.referralBonus !== undefined
       ){
-        return Number(data.referralBonus);
+        return Number(
+          data.referralBonus
+        );
       }
 
       if(
         data.referralBonusON1 !== undefined
       ){
-        return Number(data.referralBonusON1);
+        return Number(
+          data.referralBonusON1
+        );
       }
 
       if(
         data.totalReferralBonus !== undefined
       ){
-        return Number(data.totalReferralBonus);
+        return Number(
+          data.totalReferralBonus
+        );
       }
 
-      return count * REFERRAL_REWARD_ON1;
+      return count *
+        REFERRAL_REWARD_ON1;
+
     }
 
 
@@ -1299,22 +1630,30 @@
       if(
         data.referralBonusXP !== undefined
       ){
-        return Number(data.referralBonusXP);
+        return Number(
+          data.referralBonusXP
+        );
       }
 
       if(
         data.referralXPBonus !== undefined
       ){
-        return Number(data.referralXPBonus);
+        return Number(
+          data.referralXPBonus
+        );
       }
 
       if(
         data.totalReferralXP !== undefined
       ){
-        return Number(data.totalReferralXP);
+        return Number(
+          data.totalReferralXP
+        );
       }
 
-      return count * REFERRAL_REWARD_XP;
+      return count *
+        REFERRAL_REWARD_XP;
+
     }
 
 
@@ -1323,56 +1662,89 @@
       const base =
         window.location.origin +
         window.location.pathname
-          .replace("dashboard.html","signup.html");
+          .replace(
+            "dashboard.html",
+            "signup.html"
+          );
 
-      return base + "?ref=" +
+      return base +
+        "?ref=" +
         encodeURIComponent(on1Id);
+
     }
 
 
-    function updateReferralProgram(data,user){
+    function updateReferralProgram(
+      data,
+      user
+    ){
 
-      const on1Id = getON1Id(data,user);
+      const on1Id =
+        getON1Id(
+          data,
+          user
+        );
 
-      const count = getReferralCount(data);
+      const count =
+        getReferralCount(
+          data
+        );
 
-      const bonus = getReferralBonus(
-        data,
-        count
-      );
+      const bonus =
+        getReferralBonus(
+          data,
+          count
+        );
 
-      const xpBonus = getReferralXPBonus(
-        data,
-        count
-      );
+      const xpBonus =
+        getReferralXPBonus(
+          data,
+          count
+        );
+
 
       document.getElementById(
         "referralLink"
       ).textContent =
-        buildReferralLink(on1Id);
+        buildReferralLink(
+          on1Id
+        );
+
 
       document.getElementById(
         "referralCount"
-      ).textContent = count;
+      ).textContent =
+        count;
+
 
       document.getElementById(
         "referralBonus"
-      ).textContent = bonus;
+      ).textContent =
+        bonus;
+
 
       document.getElementById(
         "referralXPBonus"
-      ).textContent = xpBonus;
+      ).textContent =
+        xpBonus;
+
     }
 
 
-    async function loadCPXSurveys(user,data){
+    async function loadCPXSurveys(
+      user,
+      data
+    ){
 
       const container =
-        document.getElementById("cpxContainer");
+        document.getElementById(
+          "cpxContainer"
+        );
 
       if(!container){
         return;
       }
+
 
       container.innerHTML = `
         <p>
@@ -1381,45 +1753,48 @@
         </p>
       `;
 
-      /*
-        CPX App ID:
-        35802
-
-        Survey launching remains connected
-        through the existing secure Worker.
-      */
 
       try{
 
         const token =
           await getFirebaseToken();
 
+
         const response =
           await fetch(
-            MINING_WORKER + "/cpx-start",
+            MINING_WORKER +
+            "/cpx-start",
             {
               method:"POST",
+
               headers:{
-                "Content-Type":"application/json",
+                "Content-Type":
+                  "application/json",
+
                 "Authorization":
                   "Bearer " + token
               },
+
               body:JSON.stringify({
                 appId:CPX_APP_ID
               })
             }
           );
 
+
         if(!response.ok){
           return;
         }
 
+
         const result =
           await response.json();
+
 
         if(result.url){
 
           container.innerHTML = `
+
             <p style="margin-bottom:10px;">
               Surveys are available.
             </p>
@@ -1433,7 +1808,9 @@
             >
               START SURVEY
             </a>
+
           `;
+
         }
 
       }catch(error){
@@ -1450,39 +1827,52 @@
 
     function updateDashboard(data){
 
-      const xp = getXP(data);
+      const xp =
+        getXP(data);
 
       const level =
         calculateLevel(xp);
 
+
       document.getElementById(
         "balance"
       ).textContent =
-        Number(data.balance || 0).toLocaleString();
+        Number(
+          data.balance || 0
+        ).toLocaleString();
+
 
       document.getElementById(
         "xp"
       ).textContent =
         xp.toLocaleString();
 
+
       document.getElementById(
         "level"
       ).textContent =
         level;
 
+
       const currentLevelXP =
         xp % XP_PER_LEVEL;
+
 
       const progress =
         Math.min(
           100,
-          (currentLevelXP / XP_PER_LEVEL) * 100
+          (
+            currentLevelXP /
+            XP_PER_LEVEL
+          ) * 100
         );
+
 
       document.getElementById(
         "levelProgressBar"
       ).style.width =
         progress + "%";
+
 
       document.getElementById(
         "levelProgressText"
@@ -1492,69 +1882,93 @@
         XP_PER_LEVEL.toLocaleString() +
         " XP";
 
+
       document.getElementById(
         "on1Id"
       ).textContent =
-        data.on1Id || "Loading...";
+        data.on1Id ||
+        "Loading...";
+
 
       document.getElementById(
         "username"
       ).textContent =
-        data.username || "Member";
+        data.username ||
+        "Member";
+
 
       document.getElementById(
         "email"
       ).textContent =
-        data.email || "—";
+        data.email ||
+        "—";
+
 
       const kyc =
         data.kycStatus ||
         data.kyc ||
         "Pending";
 
+
       document.getElementById(
         "kyc"
       ).textContent =
         kyc;
+
 
       document.getElementById(
         "referredBy"
       ).textContent =
         getReferral(data);
 
+
       document.getElementById(
         "referrerId"
       ).textContent =
         getReferralId(data);
+
     }
 
 
     function updateMiningState(data){
 
       const mineBtn =
-        document.getElementById("mineBtn");
+        document.getElementById(
+          "mineBtn"
+        );
 
       const nextCycle =
-        document.getElementById("nextCycle");
+        document.getElementById(
+          "nextCycle"
+        );
 
       const miningStatus =
-        document.getElementById("miningStatus");
+        document.getElementById(
+          "miningStatus"
+        );
 
       const streakBtn =
-        document.getElementById("streakBtn");
+        document.getElementById(
+          "streakBtn"
+        );
 
       const streakElement =
-        document.getElementById("streak");
+        document.getElementById(
+          "streak"
+        );
+
 
       const lastClaim =
         timestampToMillis(
           data.lastClaim
         );
 
+
       const lastStreakClaim =
         timestampToMillis(
           data.lastStreakClaim
         );
+
 
       const rawStreak =
         Number(
@@ -1562,6 +1976,7 @@
           data.miningStreak ||
           0
         );
+
 
       const streak =
         Math.max(
@@ -1572,11 +1987,14 @@
           )
         );
 
+
       streakElement.textContent =
         "Day " + streak;
 
+
       const now =
         Date.now();
+
 
       if(!lastClaim){
 
@@ -1595,6 +2013,7 @@
 
         const elapsed =
           now - lastClaim;
+
 
         if(elapsed >= DAY){
 
@@ -1621,31 +2040,34 @@
 
           nextCycle.textContent =
             "Next cycle in " +
-            formatTime(remaining);
+            formatTime(
+              remaining
+            );
 
           miningStatus.textContent =
             "Mining cycle active";
+
         }
+
       }
 
 
-      /*
-        STREAK BONUS LOGIC
-        KEPT UNCHANGED
-      */
-
       if(
         lastClaim &&
-        (!lastStreakClaim ||
-        lastStreakClaim < lastClaim)
+        (
+          !lastStreakClaim ||
+          lastStreakClaim < lastClaim
+        )
       ){
 
         streakBtn.disabled = false;
+
 
         const bonus =
           streak >= 10
             ? 100
             : streak * 5;
+
 
         streakBtn.textContent =
           "🔥 CLAIM STREAK BONUS — +" +
@@ -1658,6 +2080,7 @@
 
         streakBtn.textContent =
           "🔥 STREAK BONUS CLAIMED";
+
       }
 
     }
@@ -1668,18 +2091,29 @@
       let seconds =
         Math.max(
           0,
-          Math.floor(milliseconds / 1000)
+          Math.floor(
+            milliseconds / 1000
+          )
         );
 
+
       const hours =
-        Math.floor(seconds / 3600);
+        Math.floor(
+          seconds / 3600
+        );
+
 
       seconds %= 3600;
 
+
       const minutes =
-        Math.floor(seconds / 60);
+        Math.floor(
+          seconds / 60
+        );
+
 
       seconds %= 60;
+
 
       return (
         String(hours).padStart(2,"0") +
@@ -1688,19 +2122,28 @@
         ":" +
         String(seconds).padStart(2,"0")
       );
+
     }
 
 
-    function showMessage(text,type="info"){
+    function showMessage(
+      text,
+      type="info"
+    ){
 
       const message =
-        document.getElementById("message");
+        document.getElementById(
+          "message"
+        );
+
 
       message.textContent =
         text;
 
+
       message.className =
         "message " + type;
+
 
       setTimeout(
         ()=>{
@@ -1709,11 +2152,14 @@
         },
         5000
       );
+
     }
 
 
     document
-      .getElementById("copyReferralBtn")
+      .getElementById(
+        "copyReferralBtn"
+      )
       .addEventListener(
         "click",
         async ()=>{
@@ -1723,9 +2169,13 @@
               "referralLink"
             ).textContent;
 
+
           try{
 
-            await navigator.clipboard.writeText(link);
+            await navigator.clipboard.writeText(
+              link
+            );
+
 
             showMessage(
               "Referral link copied.",
@@ -1738,13 +2188,17 @@
               "Unable to copy referral link.",
               "error"
             );
+
           }
+
         }
       );
 
 
     document
-      .getElementById("shareReferralBtn")
+      .getElementById(
+        "shareReferralBtn"
+      )
       .addEventListener(
         "click",
         async ()=>{
@@ -1754,18 +2208,20 @@
               "referralLink"
             ).textContent;
 
-          if(
-            navigator.share
-          ){
+
+          if(navigator.share){
 
             try{
 
               await navigator.share({
                 title:
                   "Join ON1Ecosystem",
+
                 text:
                   "Join me on ON1Ecosystem.",
-                url:link
+
+                url:
+                  link
               });
 
             }catch(error){
@@ -1773,13 +2229,17 @@
               console.log(
                 "Share cancelled."
               );
+
             }
 
           }else{
 
             try{
 
-              await navigator.clipboard.writeText(link);
+              await navigator.clipboard.writeText(
+                link
+              );
+
 
               showMessage(
                 "Referral link copied.",
@@ -1792,8 +2252,11 @@
                 "Sharing is not available.",
                 "error"
               );
+
             }
+
           }
+
         }
       );
 
@@ -1807,34 +2270,50 @@
           user.uid
         );
 
+
       const snapshot =
-        await getDoc(userRef);
+        await getDoc(
+          userRef
+        );
+
 
       if(!snapshot.exists()){
 
         throw new Error(
           "User profile not found."
         );
+
       }
+
 
       const data =
         snapshot.data();
 
-      updateDashboard(data);
+
+      updateDashboard(
+        data
+      );
+
 
       updateReferralProgram(
         data,
         user
       );
 
-      updateMiningState(data);
+
+      updateMiningState(
+        data
+      );
+
 
       await loadCPXSurveys(
         user,
         data
       );
 
+
       return data;
+
     }
 
 
@@ -1843,16 +2322,23 @@
       const user =
         auth.currentUser;
 
+
       if(!user){
         return;
       }
 
+
       try{
 
         const data =
-          await loadUser(user);
+          await loadUser(
+            user
+          );
 
-        updateMiningState(data);
+
+        updateMiningState(
+          data
+        );
 
       }catch(error){
 
@@ -1860,7 +2346,9 @@
           "Refresh error:",
           error
         );
+
       }
+
     }
 
 
@@ -1869,52 +2357,70 @@
       const user =
         auth.currentUser;
 
+
       if(!user){
+
         throw new Error(
           "Not authenticated."
         );
+
       }
 
+
       return await user.getIdToken();
+
     }
 
 
     /* BASE MINING */
+
     document
-      .getElementById("mineBtn")
+      .getElementById(
+        "mineBtn"
+      )
       .addEventListener(
         "click",
         async ()=>{
 
           const btn =
-            document.getElementById("mineBtn");
+            document.getElementById(
+              "mineBtn"
+            );
+
 
           btn.disabled = true;
 
           btn.textContent =
             "MINING...";
 
+
           try{
 
             const token =
               await getFirebaseToken();
 
+
             const response =
               await fetch(
-                MINING_WORKER + "/mine",
+                MINING_WORKER +
+                "/mine",
                 {
                   method:"POST",
+
                   headers:{
                     "Content-Type":
                       "application/json",
+
                     "Authorization":
                       "Bearer " + token
                   }
                 }
               );
 
+
             const result =
               await response.json();
+
 
             if(!response.ok){
 
@@ -1922,13 +2428,16 @@
                 result.message ||
                 "Mining failed."
               );
+
             }
+
 
             showMessage(
               result.message ||
               "50 ON1 added successfully.",
               "success"
             );
+
 
             await refreshUser();
 
@@ -1938,13 +2447,16 @@
               error
             );
 
+
             showMessage(
               error.message ||
               "Unable to complete mining.",
               "error"
             );
 
+
             await refreshUser();
+
           }
 
         }
@@ -1952,8 +2464,11 @@
 
 
     /* STREAK */
+
     document
-      .getElementById("streakBtn")
+      .getElementById(
+        "streakBtn"
+      )
       .addEventListener(
         "click",
         async ()=>{
@@ -1963,32 +2478,40 @@
               "streakBtn"
             );
 
+
           btn.disabled = true;
 
           btn.textContent =
             "CLAIMING...";
+
 
           try{
 
             const token =
               await getFirebaseToken();
 
+
             const response =
               await fetch(
-                MINING_WORKER + "/streak",
+                MINING_WORKER +
+                "/streak",
                 {
                   method:"POST",
+
                   headers:{
                     "Content-Type":
                       "application/json",
+
                     "Authorization":
                       "Bearer " + token
                   }
                 }
               );
 
+
             const result =
               await response.json();
+
 
             if(!response.ok){
 
@@ -1996,13 +2519,16 @@
                 result.message ||
                 "Streak claim failed."
               );
+
             }
+
 
             showMessage(
               result.message ||
               "Streak bonus claimed.",
               "success"
             );
+
 
             await refreshUser();
 
@@ -2012,13 +2538,16 @@
               error
             );
 
+
             showMessage(
               error.message ||
               "Unable to claim streak bonus.",
               "error"
             );
 
+
             await refreshUser();
+
           }
 
         }
@@ -2026,15 +2555,21 @@
 
 
     /* LOGOUT */
+
     document
-      .getElementById("logoutBtn")
+      .getElementById(
+        "logoutBtn"
+      )
       .addEventListener(
         "click",
         async ()=>{
 
           try{
 
-            await signOut(auth);
+            await signOut(
+              auth
+            );
+
 
             window.location.href =
               "login.html";
@@ -2046,16 +2581,20 @@
               error
             );
 
+
             showMessage(
               "Unable to logout.",
               "error"
             );
+
           }
+
         }
       );
 
 
     /* AUTH */
+
     onAuthStateChanged(
       auth,
       async user => {
@@ -2066,16 +2605,24 @@
             "login.html";
 
           return;
+
         }
+
 
         try{
 
-          await loadUser(user);
+          await loadUser(
+            user
+          );
+
 
           document
-            .getElementById("loading")
+            .getElementById(
+              "loading"
+            )
             .style.display =
             "none";
+
 
         }catch(error){
 
@@ -2084,27 +2631,36 @@
             error
           );
 
+
           document
-            .getElementById("loading")
+            .getElementById(
+              "loading"
+            )
             .style.display =
             "none";
+
 
           showMessage(
             "Unable to load your dashboard.",
             "error"
           );
+
         }
+
       }
     );
 
 
     /* SAFETY TIMEOUT */
+
     setTimeout(
       ()=>{
+
         const loading =
           document.getElementById(
             "loading"
           );
+
 
         if(
           loading &&
@@ -2113,13 +2669,16 @@
 
           loading.style.display =
             "none";
+
         }
+
       },
       10000
     );
 
 
     /* REFRESH DASHBOARD DATA */
+
     setInterval(
       ()=>{
         refreshUser();
