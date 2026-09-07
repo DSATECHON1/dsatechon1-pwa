@@ -313,4 +313,976 @@
 
       border-radius:10px;
 
-      background
+      background:rgba(8,124,255,.12);
+      border:1px solid rgba(8,124,255,.25);
+
+      color:var(--blue2);
+
+      font-size:18px;
+    }
+
+    .xp-section .section-icon{
+      background:rgba(245,196,81,.11);
+      border-color:rgba(245,196,81,.24);
+      color:var(--gold);
+    }
+
+    .section-title{
+      margin:0;
+      color:#fff;
+      font-size:17px;
+      font-weight:800;
+    }
+
+    .section-description{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    /* ================= HISTORY ================= */
+
+    .history-empty{
+      padding:22px 12px;
+
+      text-align:center;
+
+      border:1px dashed var(--border);
+      border-radius:12px;
+
+      background:rgba(5,11,19,.35);
+    }
+
+    .history-empty-icon{
+      font-size:25px;
+      margin-bottom:8px;
+      opacity:.8;
+    }
+
+    .history-empty strong{
+      display:block;
+      color:#fff;
+      font-size:13px;
+      margin-bottom:5px;
+    }
+
+    .history-empty span{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .transaction{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:12px;
+
+      padding:13px 2px;
+
+      border-bottom:1px solid rgba(29,48,72,.65);
+    }
+
+    .transaction:last-child{
+      border-bottom:none;
+    }
+
+    .transaction-left{
+      min-width:0;
+    }
+
+    .transaction-title{
+      color:#fff;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .transaction-date{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .transaction-amount{
+      white-space:nowrap;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .positive{
+      color:var(--green);
+    }
+
+    .negative{
+      color:var(--danger);
+    }
+
+    /* ================= ACCOUNT ================= */
+
+    .account-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:15px;
+
+      padding:13px 2px;
+
+      border-bottom:1px solid rgba(29,48,72,.65);
+    }
+
+    .account-row:last-child{
+      border-bottom:none;
+    }
+
+    .account-label{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .account-value{
+      max-width:65%;
+
+      text-align:right;
+
+      color:#fff;
+
+      font-size:12px;
+      font-weight:700;
+
+      overflow-wrap:anywhere;
+    }
+
+    /* ================= FOOTER ================= */
+
+    .footer{
+      padding:8px 0 20px;
+
+      text-align:center;
+
+      color:#52667c;
+
+      font-size:10px;
+    }
+
+    /* ================= LOADING ================= */
+
+    #loading{
+      position:fixed;
+      inset:0;
+
+      z-index:9999;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      background:#050b13;
+    }
+
+    .loader-box{
+      text-align:center;
+    }
+
+    .spinner{
+      width:40px;
+      height:40px;
+
+      margin:0 auto 12px;
+
+      border:3px solid #1d3048;
+      border-top-color:#087cff;
+
+      border-radius:50%;
+
+      animation:spin .8s linear infinite;
+    }
+
+    .loader-text{
+      color:#8ea2b8;
+      font-size:12px;
+    }
+
+    @keyframes spin{
+      to{
+        transform:rotate(360deg);
+      }
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media(max-width:650px){
+
+      .page{
+        padding:13px;
+      }
+
+      header{
+        padding-bottom:17px;
+      }
+
+      .brand img{
+        width:39px;
+        height:39px;
+      }
+
+      .brand-name{
+        font-size:18px;
+      }
+
+      .brand-sub{
+        font-size:9px;
+      }
+
+      .home-btn{
+        padding:9px 11px;
+        font-size:11px;
+      }
+
+      .title-section h1{
+        font-size:24px;
+      }
+
+      .title-section p{
+        font-size:12px;
+      }
+
+      .balance-grid{
+        grid-template-columns:1fr;
+        gap:12px;
+      }
+
+      .balance-card{
+        min-height:138px;
+        padding:17px;
+      }
+
+      .balance-value{
+        font-size:29px;
+      }
+
+      .section{
+        padding:15px;
+      }
+
+      .section-title{
+        font-size:15px;
+      }
+
+      .account-value{
+        max-width:60%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= LOADING ================= -->
+
+  <div id="loading">
+    <div class="loader-box">
+      <div class="spinner"></div>
+      <div class="loader-text">
+        Loading your ON1 Wallet...
+      </div>
+    </div>
+  </div>
+
+
+  <div class="page">
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+      <div class="brand">
+
+        <img
+          src="../logo.png"
+          alt="ON1Ecosystem"
+        >
+
+        <div>
+          <div class="brand-name">
+            ON1Ecosystem
+          </div>
+
+          <div class="brand-sub">
+            MEMBER WALLET
+          </div>
+        </div>
+
+      </div>
+
+      <a
+        class="home-btn"
+        href="dashboard.html"
+      >
+        ← Dashboard
+      </a>
+
+    </header>
+
+
+    <!-- ================= TITLE ================= -->
+
+    <section class="title-section">
+
+      <h1>
+        My Wallet
+      </h1>
+
+      <p>
+        Manage and view your ON1Coin and ON1XP balances.
+      </p>
+
+    </section>
+
+
+    <!-- ================= ERROR ================= -->
+
+    <div id="errorBox"></div>
+
+
+    <!-- ================= BALANCES ================= -->
+
+    <div class="balance-grid">
+
+      <!-- ON1COIN -->
+
+      <div class="balance-card">
+
+        <div class="balance-icon">
+          ₿
+        </div>
+
+        <div class="balance-label">
+          ON1Coin Balance
+        </div>
+
+        <div class="balance-value-row">
+
+          <span
+            class="balance-value"
+            id="balance"
+          >
+            —
+          </span>
+
+          <span class="balance-unit">
+            ON1
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- XP -->
+
+      <div class="balance-card xp">
+
+        <div class="balance-icon">
+          XP
+        </div>
+
+        <div class="balance-label">
+          ON1XP Balance
+        </div>
+
+        <div class="balance-value-row">
+
+          <span
+            class="balance-value"
+            id="xp"
+          >
+            —
+          </span>
+
+          <span class="balance-unit">
+            XP
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= ON1COIN HISTORY ================= -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div class="section-title-wrap">
+
+          <div class="section-icon">
+            ₿
+          </div>
+
+          <div>
+
+            <h2 class="section-title">
+              ON1Coin History
+            </h2>
+
+            <p class="section-description">
+              Your ON1Coin transaction activity
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div id="coinHistory">
+
+        <div class="history-empty">
+
+          <div class="history-empty-icon">
+            📊
+          </div>
+
+          <strong>
+            Transaction history
+          </strong>
+
+          <span>
+            Your verified ON1Coin transactions will appear here.
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= XP HISTORY ================= -->
+
+    <section class="section xp-section">
+
+      <div class="section-header">
+
+        <div class="section-title-wrap">
+
+          <div class="section-icon">
+            XP
+          </div>
+
+          <div>
+
+            <h2 class="section-title">
+              ON1XP History
+            </h2>
+
+            <p class="section-description">
+              Your XP earning activity
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div id="xpHistory">
+
+        <div class="history-empty">
+
+          <div class="history-empty-icon">
+            ⭐
+          </div>
+
+          <strong>
+            XP activity
+          </strong>
+
+          <span>
+            Your verified XP activity will appear here.
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= ACCOUNT INFORMATION ================= -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div class="section-title-wrap">
+
+          <div class="section-icon">
+            👤
+          </div>
+
+          <div>
+
+            <h2 class="section-title">
+              Account Information
+            </h2>
+
+            <p class="section-description">
+              Your ON1Ecosystem account details
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="account-row">
+
+        <span class="account-label">
+          Username
+        </span>
+
+        <span
+          class="account-value"
+          id="username"
+        >
+          —
+        </span>
+
+      </div>
+
+
+      <div class="account-row">
+
+        <span class="account-label">
+          Email
+        </span>
+
+        <span
+          class="account-value"
+          id="email"
+        >
+          —
+        </span>
+
+      </div>
+
+
+      <div class="account-row">
+
+        <span class="account-label">
+          ON1 ID
+        </span>
+
+        <span
+          class="account-value"
+          id="on1Id"
+        >
+          —
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <div class="footer">
+      ON1Ecosystem · Member Wallet
+    </div>
+
+  </div>
+
+
+  <!-- ================= FIREBASE ================= -->
+
+  <script type="module">
+
+    import {
+      initializeApp
+    }
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+    import {
+      getAuth,
+      onAuthStateChanged
+    }
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    import {
+      getFirestore,
+      doc,
+      getDoc
+    }
+    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+    /* =========================================
+       SAME FIREBASE CONFIG AS WORKING DASHBOARD
+       ========================================= */
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
+
+      authDomain:
+        "dsatechon1-c8b41.firebaseapp.com",
+
+      projectId:
+        "dsatechon1-c8b41",
+
+      storageBucket:
+        "dsatechon1-c8b41.firebasestorage.app",
+
+      messagingSenderId:
+        "5740594058",
+
+      appId:
+        "1:5740594058:web:23fbbca5392f12db863e73"
+
+    };
+
+
+    /* =========================================
+       INITIALIZE
+       ========================================= */
+
+    const app =
+      initializeApp(firebaseConfig);
+
+    const auth =
+      getAuth(app);
+
+    const db =
+      getFirestore(app);
+
+
+    /* =========================================
+       ELEMENTS
+       ========================================= */
+
+    const loading =
+      document.getElementById("loading");
+
+    const errorBox =
+      document.getElementById("errorBox");
+
+    const balanceEl =
+      document.getElementById("balance");
+
+    const xpEl =
+      document.getElementById("xp");
+
+    const usernameEl =
+      document.getElementById("username");
+
+    const emailEl =
+      document.getElementById("email");
+
+    const on1IdEl =
+      document.getElementById("on1Id");
+
+
+    /* =========================================
+       XP READER
+       ========================================= */
+
+    function getXP(data){
+
+      return Number(
+
+        data.XP ??
+        data.xp ??
+        data.experiencePoints ??
+        0
+
+      );
+
+    }
+
+
+    /* =========================================
+       ON1 ID READER
+       ========================================= */
+
+    function getON1Id(data,user){
+
+      const possibleId =
+
+        data.on1Id ||
+        data.ON1Id ||
+        data.on1ID;
+
+
+      if(
+
+        typeof possibleId === "string" &&
+
+        /^ON1[A-Z0-9]{7}$/.test(
+          possibleId
+        )
+
+      ){
+
+        return possibleId;
+
+      }
+
+
+      const uidPart =
+
+        String(user.uid)
+          .toUpperCase()
+          .replace(
+            /[^A-Z0-9]/g,
+            ""
+          )
+          .slice(0,7);
+
+
+      return "ON1" + uidPart;
+
+    }
+
+
+    /* =========================================
+       NUMBER FORMAT
+       ========================================= */
+
+    function formatNumber(number){
+
+      return Number(
+        number || 0
+      ).toLocaleString(
+        undefined,
+        {
+          maximumFractionDigits:3
+        }
+      );
+
+    }
+
+
+    /* =========================================
+       ERROR
+       ========================================= */
+
+    function showError(message){
+
+      errorBox.textContent =
+        message;
+
+      errorBox.style.display =
+        "block";
+
+    }
+
+
+    /* =========================================
+       LOAD USER
+       ========================================= */
+
+    async function loadUser(user){
+
+      try{
+
+        /*
+         IMPORTANT:
+
+         THIS PAGE ONLY READS FIRESTORE.
+
+         IT DOES NOT:
+         - RESET BALANCE
+         - CHANGE XP
+         - CHANGE ON1COIN
+         - CHANGE MINING
+         - CHANGE REFERRALS
+         */
+
+        const userRef =
+          doc(
+            db,
+            "users",
+            user.uid
+          );
+
+
+        const snapshot =
+          await getDoc(userRef);
+
+
+        if(!snapshot.exists()){
+
+          throw new Error(
+            "Your ON1 profile could not be found."
+          );
+
+        }
+
+
+        const data =
+          snapshot.data();
+
+
+        /* =========================
+           REAL ON1 BALANCE
+           ========================= */
+
+        const balance =
+          Number(
+            data.balance ?? 0
+          );
+
+
+        /* =========================
+           REAL XP
+           ========================= */
+
+        const xp =
+          getXP(data);
+
+
+        balanceEl.textContent =
+          formatNumber(balance);
+
+
+        xpEl.textContent =
+          formatNumber(xp);
+
+
+        /* =========================
+           USERNAME
+           ========================= */
+
+        usernameEl.textContent =
+
+          data.username ||
+          data.userName ||
+          data.Username ||
+          user.displayName ||
+          "Member";
+
+
+        /* =========================
+           EMAIL
+           ========================= */
+
+        emailEl.textContent =
+
+          data.email ||
+          user.email ||
+          "—";
+
+
+        /* =========================
+           ON1 ID
+           ========================= */
+
+        on1IdEl.textContent =
+          getON1Id(
+            data,
+            user
+          );
+
+
+      }catch(error){
+
+        console.error(
+          "Wallet loading error:",
+          error
+        );
+
+
+        showError(
+
+          error.message ||
+          "Unable to load your wallet."
+
+        );
+
+      }finally{
+
+        loading.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /* =========================================
+       AUTH STATE
+       ========================================= */
+
+    onAuthStateChanged(
+
+      auth,
+
+      async user => {
+
+        if(!user){
+
+          window.location.href =
+            "login.html";
+
+          return;
+
+        }
+
+
+        await loadUser(user);
+
+      }
+
+    );
+
+
+    /* =========================================
+       LOADING SAFETY
+       ========================================= */
+
+    setTimeout(
+
+      () => {
+
+        if(
+
+          loading &&
+
+          loading.style.display !==
+            "none"
+
+        ){
+
+          loading.style.display =
+            "none";
+
+
+          showError(
+
+            "The wallet is taking too long to load. Please return to the dashboard and try again."
+
+          );
+
+        }
+
+      },
+
+      10000
+
+    );
+
+  </script>
+
+</body>
+</html>
