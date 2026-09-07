@@ -886,4 +886,545 @@
 
         } catch {
 
-         
+          showMessage("Unable to copy referral link.");
+
+        }
+
+      });
+
+
+    /* ==============================
+       SHARE
+       ============================== */
+
+    document
+      .getElementById("shareBtn")
+      .addEventListener("click", async () => {
+
+        const link =
+          document.getElementById("referralLink").textContent;
+
+        const code =
+          document.getElementById("referralCode").textContent;
+
+        if (!link || link === "Loading...") {
+          return;
+        }
+
+        const shareText =
+          "Join me on ON1Ecosystem. Use my referral code " +
+          code +
+          " to register.";
+
+        if (navigator.share) {
+
+          try {
+
+            await navigator.share({
+              title: "Join ON1Ecosystem",
+              text: shareText,
+              url: link
+            });
+
+          } catch {
+
+            // User cancelled sharing.
+
+          }
+
+        } else {
+
+          try {
+
+            await navigator.clipboard.writeText(
+              shareText + " " + link
+            );
+
+            showMessage("Referral message copied.");
+
+          } catch {
+
+            showMessage("Sharing is not supported on this device.");
+
+          }
+
+        }
+
+      });
+
+
+    /* ==============================
+       LOAD USER
+       ============================== */
+
+    async function loadReferralPage(user) {
+
+      try {
+
+        const userRef =
+          doc(db, "users", user.uid);
+
+        const userSnap =
+          await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+
+          showMessage("Member account could not be found.");
+
+          return;
+
+        }
+
+        const userData =
+          userSnap.data();
+
+
+        /* USER REFERRAL CODE */
+
+        const referralCode =
+          getUserReferralCode(userData, user);
+
+
+        document.getElementById("referralCode")
+          .textContent = referralCode;
+
+
+        /* REFERRAL LINK */
+
+        const referralLink =
+          buildReferralLink(referralCode);
+
+
+        document.getElementById("referralLink")
+          .textContent = referralLink;
+
+
+        /* LOAD REFERRALS */
+
+        await loadReferrals(
+          referralCode,
+          userData
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "Unable to load referral information."
+        );
+
+      }
+
+    }
+
+
+    /* ==============================
+       LOAD ALL REFERRALS
+       ============================== */
+
+    async function loadReferrals(
+      referralCode,
+      userData
+    ) {
+
+      const list =
+        document.getElementById("referralList");
+
+      list.innerHTML =
+        '<div class="loading">Loading your referrals...</div>';
+
+
+      let referrals = [];
+
+
+      try {
+
+        /*
+         * Primary search:
+         * referredBy = current user's referral code
+         */
+
+        const referralQuery =
+          query(
+            collection(db, "users"),
+            where("referredBy", "==", referralCode)
+          );
+
+
+        const snapshot =
+          await getDocs(referralQuery);
+
+
+        snapshot.forEach((docSnap) => {
+
+          referrals.push({
+            id: docSnap.id,
+            ...docSnap.data()
+          });
+
+        });
+
+
+      } catch (error) {
+
+        console.error(
+          "Referral query error:",
+          error
+        );
+
+      }
+
+
+      /*
+       * Remove current user if somehow
+       * included in the results.
+       */
+
+      referrals =
+        referrals.filter(
+          item => item.id !== auth.currentUser?.uid
+        );
+
+
+      /*
+       * Statistics
+       */
+
+      const total =
+        referrals.length;
+
+
+      let qualified = 0;
+
+
+      referrals.forEach(referral => {
+
+        const miningDays =
+          getMiningDays(referral);
+
+
+        if (miningDays >= 3) {
+
+          qualified++;
+
+        }
+
+      });
+
+
+      const pending =
+        Math.max(
+          0,
+          total - qualified
+        );
+
+
+      document.getElementById("totalReferrals")
+        .textContent = total;
+
+
+      document.getElementById("qualifiedReferrals")
+        .textContent = qualified;
+
+
+      document.getElementById("pendingReferrals")
+        .textContent = pending;
+
+
+      /*
+       * Empty state
+       */
+
+      if (referrals.length === 0) {
+
+        list.innerHTML = `
+          <div class="empty-state">
+            <strong>No referrals yet</strong>
+            Share your referral link to invite your first member.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      /*
+       * Display referrals
+       */
+
+      list.innerHTML = "";
+
+
+      referrals.forEach(referral => {
+
+        list.appendChild(
+          createReferralCard(referral)
+        );
+
+      });
+
+    }
+
+
+    /* ==============================
+       DETERMINE MINING DAYS
+       ============================== */
+
+    function getMiningDays(referral) {
+
+      /*
+       * These fields are supported for display
+       * if your backend stores them.
+       *
+       * The secure Worker will eventually be
+       * the final authority for qualification.
+       */
+
+      const directDays =
+        getValue(
+          referral,
+          [
+            "miningDays",
+            "daysMined",
+            "minedDays",
+            "streak"
+          ],
+          0
+        );
+
+
+      const numericDays =
+        Number(directDays);
+
+
+      if (
+        Number.isFinite(numericDays) &&
+        numericDays > 0
+      ) {
+
+        return Math.min(
+          3,
+          Math.floor(numericDays)
+        );
+
+      }
+
+
+      /*
+       * If no mining-day field is currently
+       * available, show zero rather than
+       * inventing progress.
+       */
+
+      return 0;
+
+    }
+
+
+    /* ==============================
+       REFERRAL CARD
+       ============================== */
+
+    function createReferralCard(referral) {
+
+      const wrapper =
+        document.createElement("div");
+
+      wrapper.className =
+        "referral-item";
+
+
+      const username =
+        getValue(
+          referral,
+          [
+            "username",
+            "userName",
+            "displayName"
+          ],
+          "ON1 Member"
+        );
+
+
+      const on1Id =
+        getValue(
+          referral,
+          [
+            "on1Id",
+            "ON1Id",
+            "on1ID"
+          ],
+          referral.id
+        );
+
+
+      const email =
+        getValue(
+          referral,
+          ["email"],
+          "Not available"
+        );
+
+
+      const miningDays =
+        getMiningDays(referral);
+
+
+      const isQualified =
+        miningDays >= 3;
+
+
+      const statusClass =
+        isQualified
+          ? "qualified"
+          : "pending";
+
+
+      const statusText =
+        isQualified
+          ? "Qualified"
+          : "Pending";
+
+
+      const rewardText =
+        isQualified
+          ? "Reward qualified: 25 ON1 + 250 XP"
+          : "Complete 3 days of mining to qualify";
+
+
+      const percentage =
+        Math.min(
+          100,
+          Math.round(
+            (miningDays / 3) * 100
+          )
+        );
+
+
+      wrapper.innerHTML = `
+
+        <div class="referral-top">
+
+          <div>
+
+            <div class="referral-user">
+              ${escapeHTML(username)}
+            </div>
+
+            <div class="referral-id">
+              ON1 ID: ${escapeHTML(on1Id)}
+            </div>
+
+          </div>
+
+          <div class="status ${statusClass}">
+            ${statusText}
+          </div>
+
+        </div>
+
+
+        <div class="referral-details">
+
+          <div class="detail">
+
+            <small>Email</small>
+
+            <strong>
+              ${escapeHTML(email)}
+            </strong>
+
+          </div>
+
+
+          <div class="detail">
+
+            <small>Mining Days</small>
+
+            <strong>
+              ${miningDays} / 3
+            </strong>
+
+          </div>
+
+
+          <div class="detail">
+
+            <small>Reward</small>
+
+            <strong>
+              25 ON1 + 250 XP
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="progress-wrapper">
+
+          <div class="progress-header">
+
+            <span>
+              3-Day Mining Requirement
+            </span>
+
+            <span>
+              ${percentage}%
+            </span>
+
+          </div>
+
+
+          <div class="progress-bar">
+
+            <div
+              class="progress-fill"
+              style="width:${percentage}%"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="reward-status">
+          ${rewardText}
+        </div>
+
+      `;
+
+
+      return wrapper;
+
+    }
+
+
+    /* ==============================
+       AUTH STATE
+       ============================== */
+
+    onAuthStateChanged(
+      auth,
+      async (user) => {
+
+        if (!user) {
+
+          window.location.href =
+            "login.html";
+
+          return;
+
+        }
+
+        await loadReferralPage(user);
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
