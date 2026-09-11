@@ -31,22 +31,17 @@
     --surface:#0c1624;
     --surface2:#101d2d;
     --border:#1d3048;
-
     --blue:#087cff;
     --blue2:#3aa0ff;
-
     --green:#00df88;
     --gold:#f5c451;
-
     --text:#ffffff;
     --muted:#8ea2b8;
-
     --danger:#ff6075;
 }
 
 body{
     min-height:100vh;
-
     background:
         radial-gradient(
             circle at 50% -10%,
@@ -54,7 +49,6 @@ body{
             transparent 42%
         ),
         var(--bg);
-
     color:var(--text);
 }
 
@@ -88,7 +82,6 @@ button{
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     padding:10px 0;
     margin-bottom:20px;
 }
@@ -117,25 +110,18 @@ button{
 .brand small{
     display:block;
     margin-top:2px;
-
     color:var(--muted);
-
     font-size:8px;
     letter-spacing:.5px;
 }
 
 .logout{
     border:1px solid var(--border);
-
     background:var(--surface);
     color:#dce8f5;
-
     padding:8px 12px;
-
     border-radius:9px;
-
     cursor:pointer;
-
     font-size:10px;
 }
 
@@ -154,24 +140,17 @@ button{
 
 .welcome p{
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:11px;
 }
 
 .welcome-bonus{
     margin-top:10px;
-
     padding:9px 11px;
-
     border-radius:9px;
-
     background:rgba(8,124,255,.06);
     border:1px solid rgba(8,124,255,.14);
-
     color:var(--blue2);
-
     font-size:8px;
 }
 
@@ -182,11 +161,8 @@ button{
 
 .card{
     background:rgba(12,22,36,.94);
-
     border:1px solid var(--border);
-
     border-radius:17px;
-
     padding:18px;
 }
 
@@ -197,9 +173,7 @@ button{
 
 .card-subtitle{
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:9px;
     line-height:1.5;
 }
@@ -212,25 +186,18 @@ button{
 .mining-card{
     position:relative;
     overflow:hidden;
-
     margin-top:14px;
 }
 
 .mining-card::before{
     content:"";
-
     position:absolute;
-
     width:150px;
     height:150px;
-
     border-radius:50%;
-
     background:rgba(8,124,255,.07);
-
     right:-60px;
     top:-60px;
-
     pointer-events:none;
 }
 
@@ -243,14 +210,10 @@ button{
 .mining-icon{
     width:42px;
     height:42px;
-
     display:grid;
     place-items:center;
-
     border-radius:12px;
-
     background:rgba(8,124,255,.10);
-
     font-size:20px;
 }
 
@@ -261,17 +224,13 @@ button{
 
 .rate-number{
     font-size:30px;
-
     font-weight:900;
-
     color:var(--gold);
 }
 
 .rate-label{
     margin-top:2px;
-
     color:var(--muted);
-
     font-size:8px;
 }
 
@@ -282,45 +241,31 @@ button{
 
 .mining-status-row{
     display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns:1fr 1fr;
     gap:8px;
-
     margin-top:12px;
 }
 
 .mining-status-box{
     padding:9px 10px;
-
     border-radius:10px;
-
     background:rgba(0,223,136,.045);
-
     border:1px solid rgba(0,223,136,.15);
-
     display:flex;
-
     align-items:center;
     justify-content:space-between;
-
     gap:8px;
 }
 
 .mining-status-label{
     color:var(--muted);
-
     font-size:8px;
 }
 
 .mining-status-value{
     color:var(--green);
-
     font-weight:800;
-
     font-size:11px;
-
     white-space:nowrap;
 }
 
@@ -332,21 +277,13 @@ button{
 .mine-btn,
 .streak-btn{
     width:100%;
-
     height:43px;
-
     margin-top:10px;
-
     border:none;
-
     border-radius:10px;
-
     color:white;
-
     font-size:10px;
-
     font-weight:800;
-
     cursor:pointer;
 }
 
@@ -366,34 +303,26 @@ button{
             #d99d00,
             #f5c451
         );
-
     color:#111;
 }
 
 .mine-btn:disabled,
 .streak-btn:disabled{
     opacity:.5;
-
     cursor:not-allowed;
 }
 
 .next-mine{
     margin-top:6px;
-
     text-align:center;
-
     color:var(--muted);
-
     font-size:8px;
 }
 
 .streak-status{
     margin-top:5px;
-
     text-align:center;
-
     color:var(--muted);
-
     font-size:8px;
 }
 
@@ -404,37 +333,25 @@ button{
 
 .message{
     display:none;
-
     margin-top:10px;
-
     padding:9px;
-
     border-radius:9px;
-
     text-align:center;
-
     font-size:9px;
-
     line-height:1.5;
 }
 
 .message.success{
     display:block;
-
     background:rgba(0,223,136,.07);
-
     border:1px solid rgba(0,223,136,.18);
-
     color:var(--green);
 }
 
 .message.error{
     display:block;
-
     background:rgba(255,96,117,.08);
-
     border:1px solid rgba(255,96,117,.2);
-
     color:#ff8192;
 }
 
@@ -445,64 +362,47 @@ button{
 
 .level-box{
     margin-top:11px;
-
     padding:9px 10px;
-
     border-radius:10px;
-
     background:rgba(8,124,255,.035);
-
     border:1px solid rgba(8,124,255,.10);
 }
 
 .level-head{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 }
 
 .level-name{
     color:var(--green);
-
     font-size:9px;
-
     font-weight:800;
 }
 
 .level-xp{
     color:var(--muted);
-
     font-size:8px;
 }
 
 .progress{
     height:6px;
-
     margin-top:6px;
-
     background:#07101b;
-
     border-radius:20px;
-
     overflow:hidden;
-
     border:1px solid var(--border);
 }
 
 .progress-bar{
     height:100%;
-
     width:0%;
-
     background:
         linear-gradient(
             90deg,
             var(--blue),
             var(--green)
         );
-
     transition:width .5s ease;
 }
 
@@ -513,40 +413,28 @@ button{
 
 .stats{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
-
     margin-top:14px;
 }
 
 .stat-card{
     background:rgba(12,22,36,.94);
-
     border:1px solid var(--border);
-
     border-radius:13px;
-
     padding:10px 12px;
 }
 
 .stat-label{
     color:var(--muted);
-
     font-size:8px;
-
     text-transform:uppercase;
-
     letter-spacing:.5px;
 }
 
 .stat-value{
     margin-top:4px;
-
     font-size:18px;
-
     font-weight:800;
 }
 
@@ -569,31 +457,20 @@ button{
 
 .ads-section{
     margin-top:14px;
-
     background:rgba(12,22,36,.94);
-
     border:1px solid var(--border);
-
     border-radius:17px;
-
     padding:14px;
-
     overflow:hidden;
 }
 
 .ads-title{
     margin-bottom:10px;
-
     color:var(--muted);
-
     font-size:8px;
-
     font-weight:700;
-
     letter-spacing:.5px;
-
     text-transform:uppercase;
-
     text-align:center;
 }
 
@@ -604,73 +481,85 @@ button{
 
 .adsterra-box{
     width:100%;
-
     min-height:250px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     overflow:hidden;
-
-    margin-bottom:14px;
+    margin-bottom:10px;
 }
 
 .adsterra-inner{
     width:300px;
-
     max-width:100%;
-
     min-height:250px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 }
 
 
 /* =====================================================
-   CPX
+   CPX COMPACT
 ===================================================== */
 
 .cpx-title{
     padding:10px 0;
-
     color:var(--blue2);
-
     font-size:10px;
-
     font-weight:800;
-
     text-align:center;
-
     border-top:1px solid var(--border);
 }
 
-.cpx-box{
-    width:100%;
-
-    min-height:300px;
-
-    overflow:hidden;
-
-    border-radius:10px;
-
+.cpx-compact{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
     background:#07101b;
+    border:1px solid var(--border);
+    border-radius:11px;
 }
 
-#cpxFrame{
-    width:100%;
+.cpx-compact-icon{
+    width:38px;
+    height:38px;
+    flex-shrink:0;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    background:rgba(8,124,255,.10);
+    font-size:18px;
+}
 
-    height:2000px;
+.cpx-compact-content{
+    flex:1;
+    min-width:0;
+}
 
-    border:0;
-
+.cpx-compact-content strong{
     display:block;
+    color:#fff;
+    font-size:10px;
+}
+
+.cpx-compact-content span{
+    display:block;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:8px;
+    line-height:1.4;
+}
+
+.cpx-compact-btn{
+    flex-shrink:0;
+    padding:9px 11px;
+    border-radius:8px;
+    background:var(--blue);
+    color:#fff;
+    font-size:8px;
+    font-weight:800;
 }
 
 
@@ -680,42 +569,25 @@ button{
 
 .app-nav{
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
+    grid-template-columns:repeat(2,1fr);
     gap:12px;
-
     margin-top:14px;
 }
 
 .app-nav-btn{
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:9px;
-
     min-height:58px;
-
     padding:12px 14px;
-
     background:rgba(12,22,36,.94);
-
     border:1px solid var(--border);
-
     border-radius:14px;
-
     color:#dce8f5;
-
     font-size:10px;
-
     font-weight:800;
-
     text-align:center;
-
     transition:
         border-color .2s ease,
         background .2s ease,
@@ -724,9 +596,7 @@ button{
 
 .app-nav-btn:hover{
     border-color:rgba(58,160,255,.55);
-
     background:rgba(16,29,45,.98);
-
     transform:translateY(-1px);
 }
 
@@ -745,16 +615,10 @@ button{
 
 footer{
     margin-top:25px;
-
     padding-top:14px;
-
-    border-top:
-        1px solid rgba(29,48,72,.55);
-
+    border-top:1px solid rgba(29,48,72,.55);
     text-align:center;
-
     color:#61748a;
-
     font-size:8px;
 }
 
@@ -765,17 +629,11 @@ footer{
 
 .loading{
     position:fixed;
-
     inset:0;
-
     background:var(--bg);
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     z-index:999;
 }
 
@@ -785,17 +643,13 @@ footer{
 
 .loading-box strong{
     display:block;
-
     margin-top:10px;
-
     font-size:13px;
 }
 
 .loading-box p{
     margin-top:5px;
-
     color:var(--muted);
-
     font-size:9px;
 }
 
@@ -837,9 +691,7 @@ footer{
 
     .app-nav-btn{
         min-height:58px;
-
         padding:11px 8px;
-
         font-size:8px;
     }
 
@@ -865,6 +717,31 @@ footer{
 
     .app-nav{
         grid-template-columns:1fr;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL CPX MOBILE FIX
+===================================================== */
+
+@media(max-width:400px){
+
+    .cpx-compact{
+        gap:7px;
+        padding:9px;
+    }
+
+    .cpx-compact-icon{
+        width:34px;
+        height:34px;
+        font-size:16px;
+    }
+
+    .cpx-compact-btn{
+        padding:8px 8px;
+        font-size:7px;
     }
 
 }
@@ -1201,7 +1078,7 @@ footer{
 
 
     <!-- =================================================
-         HIGH REVENUE FORMAT / ADSTERRA 300x250
+         YOUR EXACT 300x250 AD CODE
     ================================================== -->
 
     <div class="adsterra-box">
@@ -1209,14 +1086,28 @@ footer{
         <div class="adsterra-inner">
 
             <script>
+
                 var atOptions = {
-                    'key' : '596737d882e5e2b61fad4b39ff34ce62',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
+
+                    'key' :
+                    '596737d882e5e2b61fad4b39ff34ce62',
+
+                    'format' :
+                    'iframe',
+
+                    'height' :
+                    250,
+
+                    'width' :
+                    300,
+
+                    'params' :
+                    {}
+
                 };
+
             </script>
+
 
             <script
                 src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js">
@@ -1228,21 +1119,41 @@ footer{
 
 
     <!-- =================================================
-         CPX RESEARCH
+         COMPACT CPX
     ================================================== -->
 
     <div class="cpx-title">
-        🎯 Survey Solutions — Earn More ON1XP
+        🎯 Earn More ON1XP
     </div>
 
-    <div class="cpx-box">
 
-        <iframe
-            id="cpxFrame"
-            title="CPX Research Surveys"
-            frameborder="0"
-            scrolling="auto">
-        </iframe>
+    <div class="cpx-compact">
+
+        <div class="cpx-compact-icon">
+            🎯
+        </div>
+
+
+        <div class="cpx-compact-content">
+
+            <strong>
+                Surveys & Offers
+            </strong>
+
+            <span>
+                Complete available surveys and earn ON1XP.
+            </span>
+
+        </div>
+
+
+        <a
+            href="earn-xp.html"
+            class="cpx-compact-btn">
+
+            EARN ON1XP
+
+        </a>
 
     </div>
 
@@ -1319,6 +1230,10 @@ footer{
 </nav>
 
 
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
 
     ON1Ecosystem — One Ecosystem. Multiple Solutions.
@@ -1390,7 +1305,7 @@ const firebaseConfig = {
 
 
 /* =====================================================
-   INITIALIZE FIREBASE
+   INITIALIZE
 ===================================================== */
 
 const app =
@@ -1404,7 +1319,7 @@ const db =
 
 
 /* =====================================================
-   SECURE MINING WORKER
+   WORKER
 ===================================================== */
 
 const MINING_WORKER =
@@ -1455,9 +1370,6 @@ const compactStreakStatus =
 const logoutBtn =
     document.getElementById("logoutBtn");
 
-const cpxFrame =
-    document.getElementById("cpxFrame");
-
 
 /* =====================================================
    CURRENT USER
@@ -1468,802 +1380,6 @@ let currentUser =
 
 let currentData =
     null;
-
-
-/* =====================================================
-   CPX MD5
-===================================================== */
-
-function md5(string){
-
-    function rotateLeft(lValue, iShiftBits){
-        return (
-            lValue << iShiftBits
-        ) |
-        (
-            lValue >>> (
-                32 - iShiftBits
-            )
-        );
-    }
-
-    function addUnsigned(lX,lY){
-
-        const lX4 =
-            lX & 0x40000000;
-
-        const lY4 =
-            lY & 0x40000000;
-
-        const lX8 =
-            lX & 0x80000000;
-
-        const lY8 =
-            lY & 0x80000000;
-
-        const lResult =
-            (lX & 0x3fffffff) +
-            (lY & 0x3fffffff);
-
-        if(lX4 & lY4){
-
-            return lResult ^
-                0x80000000 ^
-                lX8 ^
-                lY8;
-
-        }
-
-        if(lX4 | lY4){
-
-            if(lResult & 0x40000000){
-
-                return lResult ^
-                    0xc0000000 ^
-                    lX8 ^
-                    lY8;
-
-            }else{
-
-                return lResult ^
-                    0x40000000 ^
-                    lX8 ^
-                    lY8;
-
-            }
-
-        }else{
-
-            return lResult ^
-                lX8 ^
-                lY8;
-
-        }
-    }
-
-    function F(x,y,z){
-        return (
-            (x & y) |
-            ((~x) & z)
-        );
-    }
-
-    function G(x,y,z){
-        return (
-            (x & z) |
-            (y & (~z))
-        );
-    }
-
-    function H(x,y,z){
-        return x ^ y ^ z;
-    }
-
-    function I(x,y,z){
-        return y ^ (
-            x | (~z)
-        );
-    }
-
-    function FF(a,b,c,d,x,s,ac){
-        a = addUnsigned(
-            a,
-            addUnsigned(
-                addUnsigned(
-                    F(b,c,d),
-                    x
-                ),
-                ac
-            )
-        );
-
-        return addUnsigned(
-            rotateLeft(a,s),
-            b
-        );
-    }
-
-    function GG(a,b,c,d,x,s,ac){
-        a = addUnsigned(
-            a,
-            addUnsigned(
-                addUnsigned(
-                    G(b,c,d),
-                    x
-                ),
-                ac
-            )
-        );
-
-        return addUnsigned(
-            rotateLeft(a,s),
-            b
-        );
-    }
-
-    function HH(a,b,c,d,x,s,ac){
-        a = addUnsigned(
-            a,
-            addUnsigned(
-                addUnsigned(
-                    H(b,c,d),
-                    x
-                ),
-                ac
-            )
-        );
-
-        return addUnsigned(
-            rotateLeft(a,s),
-            b
-        );
-    }
-
-    function II(a,b,c,d,x,s,ac){
-        a = addUnsigned(
-            a,
-            addUnsigned(
-                addUnsigned(
-                    I(b,c,d),
-                    x
-                ),
-                ac
-            )
-        );
-
-        return addUnsigned(
-            rotateLeft(a,s),
-            b
-        );
-    }
-
-    function convertToWordArray(string){
-
-        const lWordCount =
-            (((string.length + 8) >> 6) + 1) * 16;
-
-        const lWordArray =
-            new Array(lWordCount - 1);
-
-        let lBytePosition = 0;
-        let lByteCount = 0;
-
-        while(lByteCount < string.length){
-
-            const lWordPosition =
-                (lByteCount >> 2);
-
-            lWordArray[lWordPosition] =
-                lWordArray[lWordPosition] || 0;
-
-            lWordArray[lWordPosition] |=
-                string.charCodeAt(lByteCount)
-                << (
-                    (lByteCount % 4) * 8
-                );
-
-            lByteCount++;
-        }
-
-        const lWordPosition =
-            (lByteCount >> 2);
-
-        lWordArray[lWordPosition] =
-            lWordArray[lWordPosition] || 0;
-
-        lWordArray[lWordPosition] |=
-            0x80 <<
-            (
-                (lByteCount % 4) * 8
-            );
-
-        lWordArray[lWordCount - 2] =
-            string.length << 3;
-
-        lWordArray[lWordCount - 1] =
-            string.length >>> 29;
-
-        return lWordArray;
-    }
-
-    function wordToHex(lValue){
-
-        let wordToHexValue = "";
-
-        for(
-            let lCount = 0;
-            lCount <= 3;
-            lCount++
-        ){
-
-            const lByte =
-                (lValue >>> (lCount * 8))
-                & 255;
-
-            const word =
-                "0" +
-                lByte.toString(16);
-
-            wordToHexValue +=
-                word.substr(
-                    word.length - 2,
-                    2
-                );
-        }
-
-        return wordToHexValue;
-    }
-
-    let x =
-        convertToWordArray(string);
-
-    let a =
-        0x67452301;
-
-    let b =
-        0xefcdab89;
-
-    let c =
-        0x98badcfe;
-
-    let d =
-        0x10325476;
-
-
-    for(
-        let k = 0;
-        k < x.length;
-        k += 16
-    ){
-
-        const AA = a;
-        const BB = b;
-        const CC = c;
-        const DD = d;
-
-
-        a = FF(
-            a,b,c,d,
-            x[k+0],
-            7,
-            0xd76aa478
-        );
-
-        d = FF(
-            d,a,b,c,
-            x[k+1],
-            12,
-            0xe8c7b756
-        );
-
-        c = FF(
-            c,d,a,b,
-            x[k+2],
-            17,
-            0x242070db
-        );
-
-        b = FF(
-            b,c,d,a,
-            x[k+3],
-            22,
-            0xc1bdceee
-        );
-
-        a = FF(
-            a,b,c,d,
-            x[k+4],
-            7,
-            0xf57c0faf
-        );
-
-        d = FF(
-            d,a,b,c,
-            x[k+5],
-            12,
-            0x4787c62a
-        );
-
-        c = FF(
-            c,d,a,b,
-            x[k+6],
-            17,
-            0xa8304613
-        );
-
-        b = FF(
-            b,c,d,a,
-            x[k+7],
-            22,
-            0xfd469501
-        );
-
-        a = FF(
-            a,b,c,d,
-            x[k+8],
-            7,
-            0x698098d8
-        );
-
-        d = FF(
-            d,a,b,c,
-            x[k+9],
-            12,
-            0x8b44f7af
-        );
-
-        c = FF(
-            c,d,a,b,
-            x[k+10],
-            17,
-            0xffff5bb1
-        );
-
-        b = FF(
-            b,c,d,a,
-            x[k+11],
-            22,
-            0x895cd7be
-        );
-
-        a = FF(
-            a,b,c,d,
-            x[k+12],
-            7,
-            0x6b901122
-        );
-
-        d = FF(
-            d,a,b,c,
-            x[k+13],
-            12,
-            0xfd987193
-        );
-
-        c = FF(
-            c,d,a,b,
-            x[k+14],
-            17,
-            0xa679438e
-        );
-
-        b = FF(
-            b,c,d,a,
-            x[k+15],
-            22,
-            0x49b40821
-        );
-
-
-        a = GG(
-            a,b,c,d,
-            x[k+1],
-            5,
-            0xf61e2562
-        );
-
-        d = GG(
-            d,a,b,c,
-            x[k+6],
-            9,
-            0xc040b340
-        );
-
-        c = GG(
-            c,d,a,b,
-            x[k+11],
-            14,
-            0x265e5a51
-        );
-
-        b = GG(
-            b,c,d,a,
-            x[k+0],
-            20,
-            0xe9b6c7aa
-        );
-
-        a = GG(
-            a,b,c,d,
-            x[k+5],
-            5,
-            0xd62f105d
-        );
-
-        d = GG(
-            d,a,b,c,
-            x[k+10],
-            9,
-            0x02441453
-        );
-
-        c = GG(
-            c,d,a,b,
-            x[k+15],
-            14,
-            0xd8a1e681
-        );
-
-        b = GG(
-            b,c,d,a,
-            x[k+4],
-            20,
-            0xe7d3fbc8
-        );
-
-        a = GG(
-            a,b,c,d,
-            x[k+9],
-            5,
-            0x21e1cde6
-        );
-
-        d = GG(
-            d,a,b,c,
-            x[k+14],
-            9,
-            0xc33707d6
-        );
-
-        c = GG(
-            c,d,a,b,
-            x[k+3],
-            14,
-            0xf4d50d87
-        );
-
-        b = GG(
-            b,c,d,a,
-            x[k+8],
-            20,
-            0x455a14ed
-        );
-
-        a = GG(
-            a,b,c,d,
-            x[k+13],
-            5,
-            0xa9e3e905
-        );
-
-        d = GG(
-            d,a,b,c,
-            x[k+2],
-            9,
-            0xfcefa3f8
-        );
-
-        c = GG(
-            c,d,a,b,
-            x[k+7],
-            14,
-            0x676f02d9
-        );
-
-        b = GG(
-            b,c,d,a,
-            x[k+12],
-            20,
-            0x8d2a4c8a
-        );
-
-
-        a = HH(
-            a,b,c,d,
-            x[k+5],
-            4,
-            0xfffa3942
-        );
-
-        d = HH(
-            d,a,b,c,
-            x[k+8],
-            11,
-            0x8771f681
-        );
-
-        c = HH(
-            c,d,a,b,
-            x[k+11],
-            16,
-            0x6d9d6122
-        );
-
-        b = HH(
-            b,c,d,a,
-            x[k+14],
-            23,
-            0xfde5380c
-        );
-
-        a = HH(
-            a,b,c,d,
-            x[k+1],
-            4,
-            0xa4beea44
-        );
-
-        d = HH(
-            d,a,b,c,
-            x[k+4],
-            11,
-            0x4bdecfa9
-        );
-
-        c = HH(
-            c,d,a,b,
-            x[k+7],
-            16,
-            0xf6bb4b60
-        );
-
-        b = HH(
-            b,c,d,a,
-            x[k+10],
-            23,
-            0xbebfbc70
-        );
-
-        a = HH(
-            a,b,c,d,
-            x[k+13],
-            4,
-            0x289b7ec6
-        );
-
-        d = HH(
-            d,a,b,c,
-            x[k+0],
-            11,
-            0xeaa127fa
-        );
-
-        c = HH(
-            c,d,a,b,
-            x[k+3],
-            16,
-            0xd4ef3085
-        );
-
-        b = HH(
-            b,c,d,a,
-            x[k+6],
-            23,
-            0x04881d05
-        );
-
-        a = HH(
-            a,b,c,d,
-            x[k+9],
-            4,
-            0xd9d4d039
-        );
-
-        d = HH(
-            d,a,b,c,
-            x[k+12],
-            11,
-            0xe6db99e5
-        );
-
-        c = HH(
-            c,d,a,b,
-            x[k+15],
-            16,
-            0x1fa27cf8
-        );
-
-        b = HH(
-            b,c,d,a,
-            x[k+2],
-            23,
-            0xc4ac5665
-        );
-
-
-        a = II(
-            a,b,c,d,
-            x[k+0],
-            6,
-            0xf4292244
-        );
-
-        d = II(
-            d,a,b,c,
-            x[k+7],
-            10,
-            0x432aff97
-        );
-
-        c = II(
-            c,d,a,b,
-            x[k+14],
-            15,
-            0xab9423a7
-        );
-
-        b = II(
-            b,c,d,a,
-            x[k+5],
-            21,
-            0xfc93a039
-        );
-
-        a = II(
-            a,b,c,d,
-            x[k+12],
-            6,
-            0x655b59c3
-        );
-
-        d = II(
-            d,a,b,c,
-            x[k+3],
-            10,
-            0x8f0ccc92
-        );
-
-        c = II(
-            c,d,a,b,
-            x[k+10],
-            15,
-            0xffeff47d
-        );
-
-        b = II(
-            b,c,d,a,
-            x[k+1],
-            21,
-            0x85845dd1
-        );
-
-        a = II(
-            a,b,c,d,
-            x[k+8],
-            6,
-            0x6fa87e4f
-        );
-
-        d = II(
-            d,a,b,c,
-            x[k+15],
-            10,
-            0xfe2ce6e0
-        );
-
-        c = II(
-            c,d,a,b,
-            x[k+6],
-            15,
-            0xa3014314
-        );
-
-        b = II(
-            b,c,d,a,
-            x[k+13],
-            21,
-            0x4e0811a1
-        );
-
-        a = II(
-            a,b,c,d,
-            x[k+4],
-            6,
-            0xf7537e82
-        );
-
-        d = II(
-            d,a,b,c,
-            x[k+11],
-            10,
-            0xbd3af235
-        );
-
-        c = II(
-            c,d,a,b,
-            x[k+2],
-            15,
-            0x2ad7d2bb
-        );
-
-        b = II(
-            b,c,d,a,
-            x[k+9],
-            21,
-            0xeb86d391
-        );
-
-
-        a = addUnsigned(a,AA);
-        b = addUnsigned(b,BB);
-        c = addUnsigned(c,CC);
-        d = addUnsigned(d,DD);
-    }
-
-    return (
-        wordToHex(a) +
-        wordToHex(b) +
-        wordToHex(c) +
-        wordToHex(d)
-    ).toLowerCase();
-}
-
-
-/* =====================================================
-   BUILD CPX URL
-===================================================== */
-
-function setupCPX(data){
-
-    if(!currentUser){
-        return;
-    }
-
-    const userId =
-        currentUser.uid;
-
-    const userName =
-        data.username ||
-        data.userName ||
-        data.name ||
-        data.firstName ||
-        "Member";
-
-    const email =
-        currentUser.email ||
-        data.email ||
-        "";
-
-    /*
-      This is the same secret suffix from
-      the CPX PHP code supplied by you.
-    */
-
-    const secret =
-        "-pOP7nIXmbJWiTUKNvl8wRaVvrY0xKtc5";
-
-    const secureHash =
-        md5(
-            userId + secret
-        );
-
-    const url =
-        "https://offers.cpx-research.com/index.php" +
-        "?app_id=35802" +
-        "&ext_user_id=" +
-        encodeURIComponent(userId) +
-        "&secure_hash=" +
-        encodeURIComponent(secureHash) +
-        "&username=" +
-        encodeURIComponent(userName) +
-        "&email=" +
-        encodeURIComponent(email) +
-        "&subid_1=" +
-        "&subid_2=";
-
-    cpxFrame.src =
-        url;
-}
 
 
 /* =====================================================
@@ -2281,7 +1397,7 @@ function calculateLevel(xp){
 
 
 /* =====================================================
-   XP READER
+   XP
 ===================================================== */
 
 function getXP(data){
@@ -2309,6 +1425,7 @@ function getXP(data){
     }
 
     return 0;
+
 }
 
 
@@ -2321,18 +1438,22 @@ function updateDashboard(data){
     currentData =
         data;
 
+
     const xp =
         getXP(data);
+
 
     const balance =
         Number(
             data.balance || 0
         );
 
+
     const streak =
         Number(
             data.streak || 0
         );
+
 
     const level =
         calculateLevel(xp);
@@ -2410,15 +1531,7 @@ function updateDashboard(data){
         ) + "%";
 
 
-    document.getElementById(
-        "welcomeBonus"
-    ).textContent =
-        "🎁 Welcome bonus: 1,000 XP";
-
-
     updateMiningState(data);
-
-    setupCPX(data);
 
 }
 
@@ -2434,10 +1547,12 @@ function updateMiningState(data){
             data.lastClaim || 0
         );
 
+
     const lastStreakClaim =
         Number(
             data.lastStreakClaim || 0
         );
+
 
     const now =
         Date.now();
@@ -2451,6 +1566,7 @@ function updateMiningState(data){
         mineBtn.textContent =
             "START MINING — +50 ON1";
 
+
         nextMine.textContent =
             "Your 24-hour mining cycle is ready.";
 
@@ -2461,13 +1577,17 @@ function updateMiningState(data){
         streakBtn.textContent =
             "CLAIM STREAK BONUS";
 
+
         streakStatus.textContent =
             "Claim today's base mining first.";
+
 
         compactStreakStatus.textContent =
             "Ready";
 
+
         return;
+
     }
 
 
@@ -2483,6 +1603,7 @@ function updateMiningState(data){
         mineBtn.textContent =
             "START MINING — +50 ON1";
 
+
         nextMine.textContent =
             "Your next 24-hour mining cycle is ready.";
 
@@ -2493,13 +1614,17 @@ function updateMiningState(data){
         streakBtn.textContent =
             "CLAIM STREAK BONUS";
 
+
         streakStatus.textContent =
             "Start today's mining cycle first.";
+
 
         compactStreakStatus.textContent =
             "Ready";
 
+
         return;
+
     }
 
 
@@ -2531,13 +1656,17 @@ function updateMiningState(data){
         streakBtn.textContent =
             "STREAK BONUS CLAIMED";
 
+
         streakStatus.textContent =
             "Today's streak bonus has already been claimed.";
+
 
         compactStreakStatus.textContent =
             "Claimed";
 
+
         return;
+
     }
 
 
@@ -2574,6 +1703,7 @@ function updateMiningState(data){
             "Locked";
 
         return;
+
     }
 
 
@@ -2585,10 +1715,12 @@ function updateMiningState(data){
         bonus +
         " STREAK BONUS";
 
+
     streakStatus.textContent =
         "Your Day " +
         streak +
         " streak bonus is ready.";
+
 
     compactStreakStatus.textContent =
         "+" + bonus + " ON1";
@@ -2607,15 +1739,18 @@ function formatTime(milliseconds){
             milliseconds / 1000
         );
 
+
     const hours =
         Math.floor(
             totalSeconds / 3600
         );
 
+
     const minutes =
         Math.floor(
             (totalSeconds % 3600) / 60
         );
+
 
     const seconds =
         totalSeconds % 60;
@@ -2640,7 +1775,7 @@ function formatTime(milliseconds){
 
 
 /* =====================================================
-   LIVE COUNTDOWN
+   COUNTDOWN
 ===================================================== */
 
 setInterval(
@@ -2706,10 +1841,9 @@ async function loadUser(user){
     }
 
 
-    const data =
-        snapshot.data();
-
-    updateDashboard(data);
+    updateDashboard(
+        snapshot.data()
+    );
 
 }
 
@@ -2759,7 +1893,7 @@ async function refreshUser(){
 
 
 /* =====================================================
-   FIREBASE TOKEN
+   TOKEN
 ===================================================== */
 
 async function getFirebaseToken(){
@@ -2772,6 +1906,7 @@ async function getFirebaseToken(){
 
     }
 
+
     return await currentUser.getIdToken(
         true
     );
@@ -2780,7 +1915,7 @@ async function getFirebaseToken(){
 
 
 /* =====================================================
-   BASE MINING
+   START MINING
 ===================================================== */
 
 mineBtn.addEventListener(
@@ -2795,6 +1930,7 @@ mineBtn.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -2893,7 +2029,7 @@ mineBtn.addEventListener(
 
 
 /* =====================================================
-   STREAK BONUS
+   STREAK
 ===================================================== */
 
 streakBtn.addEventListener(
@@ -2908,6 +2044,7 @@ streakBtn.addEventListener(
             );
 
             return;
+
         }
 
 
@@ -3024,7 +2161,6 @@ logoutBtn.addEventListener(
 
             console.error(error);
 
-
             showMessage(
                 "Unable to log out. Please try again.",
                 "error"
@@ -3044,14 +2180,6 @@ onAuthStateChanged(
     auth,
     async function(user){
 
-        console.log(
-            "Auth state:",
-            user
-                ? user.email
-                : "No user"
-        );
-
-
         if(!user){
 
             loadingText.textContent =
@@ -3069,6 +2197,7 @@ onAuthStateChanged(
             );
 
             return;
+
         }
 
 
@@ -3123,7 +2252,7 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   FALLBACK LOADING TIMEOUT
+   LOADING FALLBACK
 ===================================================== */
 
 setTimeout(
