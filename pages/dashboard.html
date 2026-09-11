@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
@@ -22,37 +23,33 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-html{
-    scroll-behavior:smooth;
+:root{
+    --bg:#050b13;
+    --surface:#0c1624;
+    --surface2:#101d2d;
+    --border:#1d3048;
+    --blue:#087cff;
+    --blue2:#3aa0ff;
+    --green:#00df88;
+    --gold:#f5c451;
+    --text:#ffffff;
+    --muted:#8ea2b8;
+    --danger:#ff6075;
 }
 
 body{
-    font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
+    min-height:100vh;
     background:
         radial-gradient(
-            circle at top,
-            #0c1b2e 0%,
-            #050b13 48%,
-            #03070d 100%
-        );
-
-    color:#ffffff;
-    min-height:100vh;
-    line-height:1.5;
-}
-
-button,
-a{
-    font-family:inherit;
+            circle at 50% -10%,
+            rgba(8,124,255,.18),
+            transparent 42%
+        ),
+        var(--bg);
+    color:var(--text);
 }
 
 a{
@@ -60,27 +57,8 @@ a{
     text-decoration:none;
 }
 
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-:root{
-    --bg:#050b13;
-    --surface:#0c1624;
-    --surface2:#101d2d;
-    --border:#1d3048;
-
-    --blue:#087cff;
-    --blue2:#3aa0ff;
-
-    --green:#00df88;
-    --gold:#f5c451;
-
-    --text:#ffffff;
-    --muted:#8ea2b8;
-
-    --danger:#ff6075;
+button{
+    font-family:inherit;
 }
 
 
@@ -90,9 +68,9 @@ a{
 
 .page{
     width:100%;
-    max-width:980px;
-    margin:0 auto;
-    padding:18px 14px 40px;
+    max-width:1100px;
+    margin:auto;
+    padding:15px;
 }
 
 
@@ -100,77 +78,51 @@ a{
    HEADER
 ===================================================== */
 
-.top-header{
+.header{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    gap:12px;
-
-    margin-bottom:18px;
+    padding:10px 0;
+    margin-bottom:20px;
 }
 
 .brand{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:9px;
 }
 
-.brand-logo{
+.brand img{
     width:38px;
     height:38px;
-
-    border-radius:11px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #118cff,
-            #0756b7
-        );
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-weight:900;
-    font-size:15px;
-
-    box-shadow:
-        0 5px 0 #04376f,
-        0 10px 22px rgba(0,0,0,.35);
+    object-fit:contain;
 }
 
-.brand-text strong{
+.brand strong{
     display:block;
     font-size:16px;
-    letter-spacing:.2px;
 }
 
-.brand-text span{
+.brand strong span{
+    color:var(--blue2);
+}
+
+.brand small{
     display:block;
+    margin-top:2px;
     color:var(--muted);
-    font-size:11px;
+    font-size:8px;
+    letter-spacing:.5px;
 }
 
-.logout-btn{
-    border:1px solid #273c54;
-    background:#0d1826;
-    color:#cbd8e6;
-
-    padding:8px 13px;
+.logout{
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:#dce8f5;
+    padding:8px 12px;
     border-radius:9px;
-
-    font-size:12px;
-    font-weight:700;
-
     cursor:pointer;
-
-    transition:.18s ease;
-}
-
-.logout-btn:hover{
-    border-color:#47739f;
-    color:#fff;
+    font-size:10px;
 }
 
 
@@ -184,160 +136,102 @@ a{
 
 .welcome h1{
     font-size:24px;
-    line-height:1.15;
-    margin-bottom:5px;
 }
 
 .welcome p{
+    margin-top:5px;
     color:var(--muted);
-    font-size:13px;
+    font-size:11px;
 }
 
 .welcome-bonus{
-    margin-top:8px;
-
-    display:inline-flex;
-    align-items:center;
-
-    padding:5px 9px;
-
-    border-radius:8px;
-
-    background:rgba(0,223,136,.08);
-    border:1px solid rgba(0,223,136,.20);
-
-    color:#8ff2c7;
-    font-size:11px;
-    font-weight:700;
+    margin-top:10px;
+    padding:9px 11px;
+    border-radius:9px;
+    background:rgba(8,124,255,.06);
+    border:1px solid rgba(8,124,255,.14);
+    color:var(--blue2);
+    font-size:8px;
 }
 
 
 /* =====================================================
-   MAIN 3D MINING CARD
+   CARD
+===================================================== */
+
+.card{
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:18px;
+}
+
+.card-title{
+    font-size:15px;
+    font-weight:800;
+}
+
+.card-subtitle{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   MINING
 ===================================================== */
 
 .mining-card{
     position:relative;
-
-    background:
-        linear-gradient(
-            145deg,
-            #102238,
-            #091421
-        );
-
-    border:1px solid #24415f;
-    border-radius:18px;
-
-    padding:20px;
-
-    margin-bottom:16px;
-
-    box-shadow:
-        0 8px 0 #030810,
-        0 18px 35px rgba(0,0,0,.38),
-        inset 0 1px 0 rgba(255,255,255,.035);
-
-    transition:
-        transform .18s ease,
-        box-shadow .18s ease;
+    overflow:hidden;
+    margin-top:14px;
 }
 
-.mining-card:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 10px 0 #030810,
-        0 22px 40px rgba(0,0,0,.42),
-        inset 0 1px 0 rgba(255,255,255,.04);
+.mining-card::before{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    background:rgba(8,124,255,.07);
+    right:-60px;
+    top:-60px;
+    pointer-events:none;
 }
 
-.mining-card-header{
+.mining-top{
     display:flex;
-    align-items:flex-start;
+    align-items:center;
     justify-content:space-between;
-    gap:12px;
-
-    margin-bottom:16px;
-}
-
-.mining-title h2{
-    font-size:19px;
-    margin-bottom:4px;
-}
-
-.mining-title p{
-    color:var(--muted);
-    font-size:12px;
 }
 
 .mining-icon{
     width:42px;
     height:42px;
-
-    flex-shrink:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
+    display:grid;
+    place-items:center;
     border-radius:12px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #f7cf61,
-            #bd861c
-        );
-
-    color:#171006;
-
+    background:rgba(8,124,255,.10);
     font-size:20px;
-
-    box-shadow:
-        0 5px 0 #805a13,
-        0 9px 18px rgba(0,0,0,.3);
 }
 
-.mining-amount{
+.rate{
+    margin-top:13px;
     text-align:center;
-
-    padding:14px 10px 16px;
-
-    margin-bottom:14px;
-
-    border-radius:14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(245,196,81,.09),
-            rgba(245,196,81,.025)
-        );
-
-    border:1px solid rgba(245,196,81,.16);
 }
 
-.mining-amount strong{
-    display:block;
-
+.rate-number{
+    font-size:30px;
+    font-weight:900;
     color:var(--gold);
-
-    font-size:35px;
-    line-height:1;
-
-    letter-spacing:-1px;
 }
 
-.mining-amount span{
-    display:block;
-
-    margin-top:5px;
-
-    color:#aebed0;
-
-    font-size:11px;
-    font-weight:700;
+.rate-label{
+    margin-top:2px;
+    color:var(--muted);
+    font-size:8px;
 }
 
 
@@ -347,189 +241,89 @@ a{
 
 .mining-status-row{
     display:grid;
-    grid-template-columns:1fr;
-    gap:9px;
-
-    margin-bottom:13px;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:12px;
 }
 
 .mining-status-box{
-    background:#0a1522;
-
-    border:1px solid #1b3048;
-
-    border-radius:11px;
-
-    padding:10px 12px;
+    padding:9px 10px;
+    border-radius:10px;
+    background:rgba(0,223,136,.045);
+    border:1px solid rgba(0,223,136,.15);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
 }
 
 .mining-status-label{
     color:var(--muted);
-
-    font-size:10px;
-    font-weight:700;
-
-    text-transform:uppercase;
-    letter-spacing:.6px;
-
-    margin-bottom:3px;
+    font-size:8px;
 }
 
 .mining-status-value{
-    color:#fff;
-
-    font-size:14px;
+    color:var(--green);
     font-weight:800;
+    font-size:11px;
+    white-space:nowrap;
 }
 
 
 /* =====================================================
-   3D ACTION BUTTONS
+   MINING BUTTONS
 ===================================================== */
 
-.primary-action,
+.mine-btn,
 .streak-btn{
     width:100%;
-
-    border:0;
-    border-radius:12px;
-
-    min-height:48px;
-
-    font-size:13px;
-    font-weight:900;
-
+    height:43px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-size:10px;
+    font-weight:800;
     cursor:pointer;
-
-    transition:
-        transform .12s ease,
-        box-shadow .12s ease,
-        opacity .18s ease;
 }
 
-.primary-action{
+.mine-btn{
     background:
         linear-gradient(
-            145deg,
-            #1391ff,
-            #0665d7
+            135deg,
+            var(--blue),
+            #0065d8
         );
-
-    color:#fff;
-
-    box-shadow:
-        0 5px 0 #03478f,
-        0 10px 20px rgba(0,0,0,.30);
 }
 
-.primary-action:hover:not(:disabled){
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 7px 0 #03478f,
-        0 14px 25px rgba(0,0,0,.34);
+.streak-btn{
+    background:
+        linear-gradient(
+            135deg,
+            #d99d00,
+            #f5c451
+        );
+    color:#111;
 }
 
-.primary-action:active:not(:disabled){
-    transform:translateY(3px);
-
-    box-shadow:
-        0 2px 0 #03478f,
-        0 5px 12px rgba(0,0,0,.25);
-}
-
-.primary-action:disabled{
-    opacity:.55;
+.mine-btn:disabled,
+.streak-btn:disabled{
+    opacity:.5;
     cursor:not-allowed;
-    box-shadow:0 3px 0 #26394d;
 }
 
 .next-mine{
+    margin-top:6px;
     text-align:center;
-
     color:var(--muted);
-
-    font-size:11px;
-
-    margin:10px 0 14px;
-}
-
-
-/* =====================================================
-   STREAK
-===================================================== */
-
-.streak-section{
-    border-top:1px solid #1a2c40;
-
-    padding-top:14px;
-}
-
-.streak-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:9px;
-}
-
-.streak-title strong{
-    font-size:13px;
-}
-
-.streak-title span{
-    color:var(--gold);
-
-    font-size:11px;
-    font-weight:800;
-}
-
-.streak-btn{
-    background:
-        linear-gradient(
-            145deg,
-            #18314b,
-            #102237
-        );
-
-    color:#eaf4ff;
-
-    border:1px solid #2a4967;
-
-    box-shadow:
-        0 5px 0 #081522,
-        0 9px 17px rgba(0,0,0,.27);
-}
-
-.streak-btn:hover:not(:disabled){
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 7px 0 #081522,
-        0 13px 23px rgba(0,0,0,.32);
-}
-
-.streak-btn:active:not(:disabled){
-    transform:translateY(3px);
-
-    box-shadow:
-        0 2px 0 #081522,
-        0 5px 10px rgba(0,0,0,.25);
-}
-
-.streak-btn:disabled{
-    opacity:.6;
-    cursor:not-allowed;
+    font-size:8px;
 }
 
 .streak-status{
+    margin-top:5px;
     text-align:center;
-
     color:var(--muted);
-
-    font-size:11px;
-
-    margin-top:8px;
+    font-size:8px;
 }
 
 
@@ -539,193 +333,233 @@ a{
 
 .message{
     display:none;
-
-    margin-top:13px;
-
-    padding:11px 12px;
-
-    border-radius:10px;
-
-    font-size:12px;
-    font-weight:700;
-
-    border:1px solid transparent;
+    margin-top:10px;
+    padding:9px;
+    border-radius:9px;
+    text-align:center;
+    font-size:9px;
+    line-height:1.5;
 }
 
 .message.success{
     display:block;
-
-    background:rgba(0,223,136,.08);
-    border-color:rgba(0,223,136,.22);
-
-    color:#7ff1bd;
+    background:rgba(0,223,136,.07);
+    border:1px solid rgba(0,223,136,.18);
+    color:var(--green);
 }
 
 .message.error{
     display:block;
-
     background:rgba(255,96,117,.08);
-    border-color:rgba(255,96,117,.22);
-
-    color:#ff9aaa;
+    border:1px solid rgba(255,96,117,.2);
+    color:#ff8192;
 }
 
 
 /* =====================================================
-   LEVEL
+   LEVEL PROGRESS
 ===================================================== */
 
-.level-section{
-    margin-top:15px;
-
-    padding-top:14px;
-
-    border-top:1px solid #1a2c40;
+.level-box{
+    margin-top:11px;
+    padding:9px 10px;
+    border-radius:10px;
+    background:rgba(8,124,255,.035);
+    border:1px solid rgba(8,124,255,.10);
 }
 
-.level-top{
+.level-head{
     display:flex;
     justify-content:space-between;
-    gap:10px;
-
-    margin-bottom:7px;
+    align-items:center;
 }
 
-.level-top span{
-    font-size:10px;
+.level-name{
+    color:var(--green);
+    font-size:9px;
+    font-weight:800;
+}
+
+.level-xp{
     color:var(--muted);
-    font-weight:700;
+    font-size:8px;
 }
 
-.level-top strong{
-    font-size:10px;
-    color:#fff;
-}
-
-.progress-track{
-    width:100%;
-    height:7px;
-
+.progress{
+    height:6px;
+    margin-top:6px;
+    background:#07101b;
     border-radius:20px;
-
-    background:#07111d;
-
-    border:1px solid #1a2c3f;
-
     overflow:hidden;
+    border:1px solid var(--border);
 }
 
 .progress-bar{
     height:100%;
     width:0%;
-
-    border-radius:20px;
-
     background:
         linear-gradient(
             90deg,
-            #087cff,
-            #48b2ff
+            var(--blue),
+            var(--green)
         );
-
-    transition:width .4s ease;
+    transition:width .5s ease;
 }
 
 
 /* =====================================================
-   BALANCE STATS
+   BALANCE / XP / LEVEL
 ===================================================== */
 
-.stats-grid{
+.stats{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
-
-    margin-bottom:16px;
+    margin-top:14px;
 }
 
 .stat-card{
-    background:
-        linear-gradient(
-            145deg,
-            #0e1c2c,
-            #09131f
-        );
-
-    border:1px solid #1d3147;
-
-    border-radius:14px;
-
-    padding:13px 11px;
-
-    box-shadow:
-        0 4px 0 #040a11,
-        0 9px 18px rgba(0,0,0,.27);
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:10px 12px;
 }
 
 .stat-label{
     color:var(--muted);
-
-    font-size:9px;
-    font-weight:800;
-
+    font-size:8px;
     text-transform:uppercase;
-
     letter-spacing:.5px;
-
-    margin-bottom:5px;
 }
 
 .stat-value{
-    color:#fff;
-
-    font-size:16px;
-    font-weight:900;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    margin-top:4px;
+    font-size:18px;
+    font-weight:800;
 }
 
-.stat-card.coin .stat-value{
+.stat-value.coin{
     color:var(--gold);
 }
 
-.stat-card.xp .stat-value{
-    color:#69b7ff;
+.stat-value.xp{
+    color:var(--blue2);
 }
 
-.stat-card.level .stat-value{
-    color:#6ff0bd;
+.stat-value.level{
+    color:var(--green);
 }
 
 
 /* =====================================================
-   ADSTERRA
+   ADVERTISEMENT
 ===================================================== */
 
-.ad-section{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    margin:18px 0;
+.ads-section{
+    margin-top:14px;
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:14px;
+    overflow:hidden;
 }
 
-.ad-box{
-    width:300px;
+.ads-title{
+    margin-bottom:10px;
+    color:var(--muted);
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    text-align:center;
+}
+
+
+/* =====================================================
+   HIGH REVENUE FORMAT / ADSTERRA
+===================================================== */
+
+.adsterra-box{
+    width:100%;
     min-height:250px;
-
-    max-width:100%;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     overflow:hidden;
+    margin-bottom:10px;
+}
+
+.adsterra-inner{
+    width:300px;
+    max-width:100%;
+    min-height:250px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+/* =====================================================
+   CPX COMPACT
+===================================================== */
+
+.cpx-title{
+    padding:10px 0;
+    color:var(--blue2);
+    font-size:10px;
+    font-weight:800;
+    text-align:center;
+    border-top:1px solid var(--border);
+}
+
+.cpx-compact{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    background:#07101b;
+    border:1px solid var(--border);
+    border-radius:11px;
+}
+
+.cpx-compact-icon{
+    width:38px;
+    height:38px;
+    flex-shrink:0;
+    display:grid;
+    place-items:center;
+    border-radius:10px;
+    background:rgba(8,124,255,.10);
+    font-size:18px;
+}
+
+.cpx-compact-content{
+    flex:1;
+    min-width:0;
+}
+
+.cpx-compact-content strong{
+    display:block;
+    color:#fff;
+    font-size:10px;
+}
+
+.cpx-compact-content span{
+    display:block;
+    margin-top:3px;
+    color:var(--muted);
+    font-size:8px;
+    line-height:1.4;
+}
+
+.cpx-compact-btn{
+    flex-shrink:0;
+    padding:9px 11px;
+    border-radius:8px;
+    background:var(--blue);
+    color:#fff;
+    font-size:8px;
+    font-weight:800;
 }
 
 
@@ -733,152 +567,45 @@ a{
    APP NAVIGATION
 ===================================================== */
 
-.section-heading{
-    margin:18px 2px 10px;
-}
-
-.section-heading h2{
-    font-size:15px;
-}
-
-.section-heading p{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:2px;
-}
-
-
-/* Five-card navigation */
-
 .app-nav{
     display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:11px;
-
-    margin-bottom:20px;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:14px;
 }
 
-.app-nav-card{
-    position:relative;
-
-    min-height:105px;
-
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:space-between;
-
-    padding:15px;
-
-    border-radius:15px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #12243a,
-            #0a1625
-        );
-
-    border:1px solid #29445f;
-
-    box-shadow:
-        0 6px 0 #030912,
-        0 12px 22px rgba(0,0,0,.30);
-
-    transition:
-        transform .13s ease,
-        box-shadow .13s ease,
-        border-color .18s ease;
-}
-
-.app-nav-card:hover{
-    transform:translateY(-3px);
-
-    border-color:#3c6488;
-
-    box-shadow:
-        0 9px 0 #030912,
-        0 17px 28px rgba(0,0,0,.37);
-}
-
-.app-nav-card:active{
-    transform:translateY(3px);
-
-    box-shadow:
-        0 2px 0 #030912,
-        0 6px 12px rgba(0,0,0,.25);
-}
-
-.app-nav-card.full{
-    grid-column:1 / -1;
-
-    min-height:92px;
-}
-
-.app-nav-icon{
-    width:39px;
-    height:39px;
-
-    border-radius:11px;
-
+.app-nav-btn{
     display:flex;
     align-items:center;
     justify-content:center;
-
-    background:#162d47;
-
-    border:1px solid #2d4e6e;
-
-    font-size:19px;
-
-    box-shadow:
-        0 3px 0 #07111d;
-}
-
-.app-nav-card h3{
-    margin-top:10px;
-
-    font-size:13px;
-    line-height:1.2;
-}
-
-.app-nav-card p{
-    margin-top:3px;
-
-    color:var(--muted);
-
+    gap:9px;
+    min-height:58px;
+    padding:12px 14px;
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
+    border-radius:14px;
+    color:#dce8f5;
     font-size:10px;
-    line-height:1.35;
+    font-weight:800;
+    text-align:center;
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        transform .2s ease;
 }
 
-.app-nav-arrow{
-    position:absolute;
-
-    top:14px;
-    right:14px;
-
-    color:#6d89a4;
-
-    font-size:14px;
+.app-nav-btn:hover{
+    border-color:rgba(58,160,255,.55);
+    background:rgba(16,29,45,.98);
+    transform:translateY(-1px);
 }
 
-.app-nav-card.xp{
-    border-color:#3d4664;
-
-    background:
-        linear-gradient(
-            145deg,
-            #18213b,
-            #0b1526
-        );
+.app-nav-icon{
+    font-size:20px;
 }
 
-.app-nav-card.xp .app-nav-icon{
-    background:#25294a;
-    border-color:#4b4e78;
+.app-nav-btn.xp{
+    color:var(--blue2);
 }
 
 
@@ -886,35 +613,13 @@ a{
    FOOTER
 ===================================================== */
 
-.footer{
+footer{
+    margin-top:25px;
+    padding-top:14px;
+    border-top:1px solid rgba(29,48,72,.55);
     text-align:center;
-
-    padding:22px 8px 8px;
-
-    color:#667b91;
-
-    font-size:10px;
-}
-
-.footer-links{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:13px;
-
-    margin-bottom:9px;
-}
-
-.footer-links a{
-    color:#8296aa;
-}
-
-.footer-links a:hover{
-    color:#fff;
-}
-
-.footer strong{
-    color:#8296aa;
+    color:#61748a;
+    font-size:8px;
 }
 
 
@@ -922,77 +627,30 @@ a{
    LOADING
 ===================================================== */
 
-.loading-screen{
+.loading{
     position:fixed;
     inset:0;
-
-    z-index:9999;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #102238,
-            #050b13 70%
-        );
-
+    background:var(--bg);
     display:flex;
     align-items:center;
     justify-content:center;
-
-    padding:20px;
+    z-index:999;
 }
 
 .loading-box{
-    width:100%;
-    max-width:330px;
-
     text-align:center;
-
-    background:#0b1725;
-
-    border:1px solid #1e344c;
-
-    border-radius:16px;
-
-    padding:25px 20px;
-
-    box-shadow:
-        0 8px 0 #030810,
-        0 20px 40px rgba(0,0,0,.4);
-}
-
-.loading-spinner{
-    width:35px;
-    height:35px;
-
-    margin:0 auto 13px;
-
-    border:3px solid #1e354d;
-    border-top-color:#168bff;
-
-    border-radius:50%;
-
-    animation:spin .8s linear infinite;
 }
 
 .loading-box strong{
     display:block;
-
-    font-size:14px;
-
-    margin-bottom:4px;
+    margin-top:10px;
+    font-size:13px;
 }
 
 .loading-box p{
+    margin-top:5px;
     color:var(--muted);
-
-    font-size:11px;
-}
-
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
+    font-size:9px;
 }
 
 
@@ -1000,88 +658,120 @@ a{
    MOBILE
 ===================================================== */
 
-@media(max-width:560px){
+@media(max-width:500px){
 
     .page{
-        padding:14px 11px 32px;
+        padding:12px;
     }
 
     .welcome h1{
-        font-size:22px;
+        font-size:21px;
     }
 
-    .mining-card{
-        padding:16px;
-        border-radius:16px;
+    .brand img{
+        width:34px;
+        height:34px;
     }
 
-    .mining-amount strong{
-        font-size:32px;
-    }
-
-    .stats-grid{
+    .stats{
         gap:7px;
     }
 
     .stat-card{
-        padding:11px 8px;
+        padding:9px;
     }
 
     .stat-value{
-        font-size:14px;
+        font-size:16px;
     }
 
     .app-nav{
         gap:9px;
     }
 
-    .app-nav-card{
-        min-height:100px;
-        padding:13px;
+    .app-nav-btn{
+        min-height:58px;
+        padding:11px 8px;
+        font-size:8px;
     }
-}
 
-@media(min-width:700px){
+    .app-nav-icon{
+        font-size:18px;
+    }
 
     .mining-status-row{
         grid-template-columns:1fr;
     }
 
+    .ads-section{
+        padding:10px;
+    }
+
+}
+
+@media(max-width:350px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
     .app-nav{
-        grid-template-columns:
-            repeat(4,1fr);
+        grid-template-columns:1fr;
     }
 
-    .app-nav-card.full{
-        grid-column:1 / -1;
+}
+
+
+/* =====================================================
+   SMALL CPX MOBILE FIX
+===================================================== */
+
+@media(max-width:400px){
+
+    .cpx-compact{
+        gap:7px;
+        padding:9px;
     }
 
-    .app-nav-card{
-        min-height:120px;
+    .cpx-compact-icon{
+        width:34px;
+        height:34px;
+        font-size:16px;
     }
+
+    .cpx-compact-btn{
+        padding:8px 8px;
+        font-size:7px;
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
 
 
 <!-- =====================================================
-     LOADING SCREEN
+     LOADING
 ===================================================== -->
 
-<div class="loading-screen" id="loading">
+<div class="loading" id="loading">
 
     <div class="loading-box">
 
-        <div class="loading-spinner"></div>
+        <div style="font-size:27px;">
+            ◉
+        </div>
 
-        <strong>Loading ON1Ecosystem</strong>
+        <strong>
+            Loading ON1 Dashboard
+        </strong>
 
         <p id="loadingText">
-            Checking your ON1 account...
+            Connecting to your account...
         </p>
 
     </div>
@@ -1089,302 +779,335 @@ a{
 </div>
 
 
+<div class="page">
+
+
 <!-- =====================================================
-     PAGE
+     HEADER
 ===================================================== -->
 
-<main class="page">
+<header class="header">
+
+    <a href="../index.html"
+       class="brand">
+
+        <img
+            src="../logo.png"
+            alt="ON1Ecosystem">
+
+        <div>
+
+            <strong>
+                ON1<span>Ecosystem</span>
+            </strong>
+
+            <small>
+                MEMBER DASHBOARD
+            </small>
+
+        </div>
+
+    </a>
 
 
-    <!-- =================================================
-         HEADER
-    ================================================== -->
+    <button
+        class="logout"
+        id="logoutBtn">
 
-    <header class="top-header">
+        LOGOUT
 
-        <div class="brand">
+    </button>
 
-            <div class="brand-logo">
-                ON1
+</header>
+
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<section class="welcome">
+
+    <h1>
+        Welcome,
+        <span id="firstName">Member</span>
+        👋
+    </h1>
+
+    <p>
+        Your ON1Ecosystem account and activities.
+    </p>
+
+    <div
+        class="welcome-bonus"
+        id="welcomeBonus">
+
+        🎁 Welcome bonus: 1,000 XP
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ON1COIN MINING
+===================================================== -->
+
+<section class="card mining-card">
+
+    <div class="mining-top">
+
+        <div>
+
+            <div class="card-title">
+                ON1Coin Mining
             </div>
 
-            <div class="brand-text">
+            <div class="card-subtitle">
+                Claim your 50 ON1Coin base mining
+                reward once every 24 hours.
+            </div>
 
-                <strong>ON1Ecosystem</strong>
+        </div>
 
-                <span>
-                    One Ecosystem. Multiple Solutions.
-                </span>
+        <div class="mining-icon">
+            ⛏️
+        </div>
+
+    </div>
+
+
+    <div class="rate">
+
+        <div class="rate-number">
+            50.000
+        </div>
+
+        <div class="rate-label">
+            ON1Coin base reward / 24 hours
+        </div>
+
+    </div>
+
+
+    <div class="mining-status-row">
+
+        <div class="mining-status-box">
+
+            <div class="mining-status-label">
+                Mining Streak
+            </div>
+
+            <div
+                class="mining-status-value"
+                id="streak">
+
+                Day 0
 
             </div>
 
         </div>
 
 
-        <button
-            type="button"
-            class="logout-btn"
-            id="logoutBtn"
-        >
-            Logout
-        </button>
+        <div class="mining-status-box">
 
-    </header>
+            <div class="mining-status-label">
+                Streak Bonus
+            </div>
+
+            <div
+                class="mining-status-value"
+                id="compactStreakStatus">
+
+                —
+
+            </div>
+
+        </div>
+
+    </div>
 
 
-    <!-- =================================================
-         WELCOME
-    ================================================== -->
+    <button
+        class="mine-btn"
+        id="mineBtn">
 
-    <section class="welcome">
+        START MINING — +50 ON1
 
-        <h1>
-            Welcome, <span id="firstName">Member</span>
-        </h1>
+    </button>
 
-        <p>
-            Manage your ON1Coin, ON1XP and ecosystem activities.
-        </p>
+
+    <div
+        class="next-mine"
+        id="nextMine">
+
+        Your 24-hour mining cycle is ready.
+
+    </div>
+
+
+    <button
+        class="streak-btn"
+        id="streakBtn"
+        disabled>
+
+        CLAIM STREAK BONUS
+
+    </button>
+
+
+    <div
+        class="streak-status"
+        id="streakStatus">
+
+        Claim today's base mining first.
+
+    </div>
+
+
+    <div
+        class="message"
+        id="message">
+    </div>
+
+
+    <div class="level-box">
+
+        <div class="level-head">
+
+            <div
+                class="level-name"
+                id="levelName">
+
+                PROGRESS TO LEVEL 1
+
+            </div>
+
+            <div
+                class="level-xp"
+                id="levelXP">
+
+                0 / 2,500 XP
+
+            </div>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BALANCE / XP / LEVEL
+===================================================== -->
+
+<section class="stats">
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            ON1Coin Balance
+        </div>
 
         <div
-            class="welcome-bonus"
-            id="welcomeBonus"
-        >
-            🎁 Welcome bonus: 1,000 XP
-        </div>
+            class="stat-value coin"
+            id="balance">
 
-    </section>
-
-
-    <!-- =================================================
-         1. ON1COIN MINING — 3D CARD
-    ================================================== -->
-
-    <section class="mining-card">
-
-
-        <div class="mining-card-header">
-
-            <div class="mining-title">
-
-                <h2>
-                    ⛏️ ON1Coin Mining
-                </h2>
-
-                <p>
-                    Claim your 50 ON1Coin base mining reward once every 24 hours.
-                </p>
-
-            </div>
-
-
-            <div class="mining-icon">
-                🪙
-            </div>
+            0.000
 
         </div>
 
+    </div>
 
-        <div class="mining-amount">
 
-            <strong>50.000</strong>
+    <div class="stat-card">
 
-            <span>
-                ON1COIN BASE REWARD
-            </span>
-
+        <div class="stat-label">
+            Experience Points
         </div>
-
-
-        <!-- ONLY ONE STREAK STATUS NOW -->
-
-        <div class="mining-status-row">
-
-            <div class="mining-status-box">
-
-                <div class="mining-status-label">
-                    Mining Streak
-                </div>
-
-                <div
-                    class="mining-status-value"
-                    id="streak"
-                >
-                    Day 0
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <button
-            type="button"
-            class="primary-action"
-            id="mineBtn"
-        >
-            START MINING — +50 ON1
-        </button>
-
 
         <div
-            class="next-mine"
-            id="nextMine"
-        >
-            Your 24-hour mining cycle is ready.
-        </div>
+            class="stat-value xp"
+            id="xp">
 
-
-        <!-- STREAK -->
-
-        <div class="streak-section">
-
-            <div class="streak-title">
-
-                <strong>
-                    🔥 Daily Streak Bonus
-                </strong>
-
-                <span>
-                    Up to +100 ON1
-                </span>
-
-            </div>
-
-
-            <button
-                type="button"
-                class="streak-btn"
-                id="streakBtn"
-            >
-                CLAIM STREAK BONUS
-            </button>
-
-
-            <div
-                class="streak-status"
-                id="streakStatus"
-            >
-                Complete today's mining cycle first.
-            </div>
+            0
 
         </div>
 
+    </div>
 
-        <!-- MESSAGE -->
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Current Level
+        </div>
 
         <div
-            class="message"
-            id="message"
-        ></div>
+            class="stat-value level"
+            id="level">
 
-
-        <!-- LEVEL -->
-
-        <div class="level-section">
-
-            <div class="level-top">
-
-                <span id="levelName">
-                    PROGRESS TO LEVEL 1
-                </span>
-
-                <strong id="levelXP">
-                    0 / 2,500 XP
-                </strong>
-
-            </div>
-
-
-            <div class="progress-track">
-
-                <div
-                    class="progress-bar"
-                    id="progressBar"
-                ></div>
-
-            </div>
+            0
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADVERTISEMENT
+===================================================== -->
+
+<section class="ads-section">
+
+    <div class="ads-title">
+        Advertisement
+    </div>
 
 
     <!-- =================================================
-         BALANCES
+         YOUR EXACT 300x250 AD CODE
     ================================================== -->
 
-    <section class="stats-grid">
+    <div class="adsterra-box">
 
-
-        <div class="stat-card coin">
-
-            <div class="stat-label">
-                ON1Coin
-            </div>
-
-            <div
-                class="stat-value"
-                id="balance"
-            >
-                0.000
-            </div>
-
-        </div>
-
-
-        <div class="stat-card xp">
-
-            <div class="stat-label">
-                ON1XP
-            </div>
-
-            <div
-                class="stat-value"
-                id="xp"
-            >
-                0
-            </div>
-
-        </div>
-
-
-        <div class="stat-card level">
-
-            <div class="stat-label">
-                Level
-            </div>
-
-            <div
-                class="stat-value"
-                id="level"
-            >
-                0
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-    <!-- =================================================
-         ADSTERRA
-    ================================================== -->
-
-    <section class="ad-section">
-
-        <div class="ad-box">
+        <div class="adsterra-inner">
 
             <script>
-              atOptions = {
-                'key' : '596737d882e5e2b61fad4b39ff34ce62',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-              };
+
+                var atOptions = {
+
+                    'key' :
+                    '596737d882e5e2b61fad4b39ff34ce62',
+
+                    'format' :
+                    'iframe',
+
+                    'height' :
+                    250,
+
+                    'width' :
+                    300,
+
+                    'params' :
+                    {}
+
+                };
+
             </script>
+
 
             <script
                 src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js">
@@ -1392,211 +1115,166 @@ a{
 
         </div>
 
-    </section>
-
-
-    <!-- =================================================
-         APP NAVIGATION
-         FIVE 3D AREAS
-    ================================================== -->
-
-    <div class="section-heading">
-
-        <h2>
-            ON1Ecosystem
-        </h2>
-
-        <p>
-            Access your main ON1 services.
-        </p>
-
     </div>
 
 
-    <nav class="app-nav">
+    <!-- =================================================
+         COMPACT CPX
+    ================================================== -->
+
+    <div class="cpx-title">
+        🎯 Earn More ON1XP
+    </div>
 
 
-        <!-- 2. EARN MORE ON1XP -->
+    <div class="cpx-compact">
+
+        <div class="cpx-compact-icon">
+            🎯
+        </div>
+
+
+        <div class="cpx-compact-content">
+
+            <strong>
+                Surveys & Offers
+            </strong>
+
+            <span>
+                Complete available surveys and earn ON1XP.
+            </span>
+
+        </div>
+
 
         <a
             href="earn-xp.html"
-            class="app-nav-card xp full"
-        >
+            class="cpx-compact-btn">
 
-            <div class="app-nav-icon">
-                🎯
-            </div>
-
-            <div>
-
-                <h3>
-                    Earn More ON1XP
-                </h3>
-
-                <p>
-                    Surveys, offers and activities to earn additional ON1XP.
-                </p>
-
-            </div>
-
-            <span class="app-nav-arrow">
-                ›
-            </span>
+            EARN ON1XP
 
         </a>
 
+    </div>
 
-        <!-- 3. WALLET -->
-
-        <a
-            href="wallet.html"
-            class="app-nav-card"
-        >
-
-            <div class="app-nav-icon">
-                💰
-            </div>
-
-            <div>
-
-                <h3>
-                    Wallet
-                </h3>
-
-                <p>
-                    View your ON1Coin and ON1XP balances.
-                </p>
-
-            </div>
-
-            <span class="app-nav-arrow">
-                ›
-            </span>
-
-        </a>
-
-
-        <!-- 4. PROFILE -->
-
-        <a
-            href="profile.html"
-            class="app-nav-card"
-        >
-
-            <div class="app-nav-icon">
-                👤
-            </div>
-
-            <div>
-
-                <h3>
-                    Your Profile
-                </h3>
-
-                <p>
-                    Manage your ON1 account information.
-                </p>
-
-            </div>
-
-            <span class="app-nav-arrow">
-                ›
-            </span>
-
-        </a>
-
-
-        <!-- 5. REFERRAL -->
-
-        <a
-            href="referral.html"
-            class="app-nav-card"
-        >
-
-            <div class="app-nav-icon">
-                🤝
-            </div>
-
-            <div>
-
-                <h3>
-                    Referral Program
-                </h3>
-
-                <p>
-                    Invite others and earn referral rewards.
-                </p>
-
-            </div>
-
-            <span class="app-nav-arrow">
-                ›
-            </span>
-
-        </a>
-
-
-    </nav>
-
-
-    <!-- =================================================
-         FOOTER
-    ================================================== -->
-
-    <footer class="footer">
-
-        <div class="footer-links">
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="privacy.html">
-                Privacy
-            </a>
-
-            <a href="terms.html">
-                Terms
-            </a>
-
-        </div>
-
-        <div>
-            A <strong>DSATECHON1</strong> initiative
-        </div>
-
-        <div style="margin-top:4px;">
-            © 2026 ON1Ecosystem
-        </div>
-
-    </footer>
-
-
-</main>
+</section>
 
 
 <!-- =====================================================
-     FIREBASE + DASHBOARD LOGIC
+     APP NAVIGATION
+===================================================== -->
+
+<nav class="app-nav">
+
+
+    <a
+        href="wallet.html"
+        class="app-nav-btn">
+
+        <span class="app-nav-icon">
+            💰
+        </span>
+
+        <span>
+            Wallet
+        </span>
+
+    </a>
+
+
+    <a
+        href="profile.html"
+        class="app-nav-btn">
+
+        <span class="app-nav-icon">
+            👤
+        </span>
+
+        <span>
+            Your Profile
+        </span>
+
+    </a>
+
+
+    <a
+        href="referral.html"
+        class="app-nav-btn">
+
+        <span class="app-nav-icon">
+            🤝
+        </span>
+
+        <span>
+            Referral Program
+        </span>
+
+    </a>
+
+
+    <a
+        href="earn-xp.html"
+        class="app-nav-btn xp">
+
+        <span class="app-nav-icon">
+            🎯
+        </span>
+
+        <span>
+            Earn More ON1XP
+        </span>
+
+    </a>
+
+
+</nav>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    ON1Ecosystem — One Ecosystem. Multiple Solutions.
+
+</footer>
+
+
+</div>
+
+
+<!-- =====================================================
+     FIREBASE
 ===================================================== -->
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged,
     signOut
 }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
     getFirestore,
     doc,
     getDoc
 }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* =====================================================
@@ -1627,7 +1305,7 @@ const firebaseConfig = {
 
 
 /* =====================================================
-   FIREBASE INITIALIZATION
+   INITIALIZE
 ===================================================== */
 
 const app =
@@ -1641,76 +1319,16 @@ const db =
 
 
 /* =====================================================
-   ELEMENTS
-===================================================== */
-
-const loading =
-    document.getElementById("loading");
-
-const loadingText =
-    document.getElementById("loadingText");
-
-const firstName =
-    document.getElementById("firstName");
-
-const balance =
-    document.getElementById("balance");
-
-const xp =
-    document.getElementById("xp");
-
-const level =
-    document.getElementById("level");
-
-const streak =
-    document.getElementById("streak");
-
-const mineBtn =
-    document.getElementById("mineBtn");
-
-const nextMine =
-    document.getElementById("nextMine");
-
-const streakBtn =
-    document.getElementById("streakBtn");
-
-const streakStatus =
-    document.getElementById("streakStatus");
-
-const message =
-    document.getElementById("message");
-
-const levelName =
-    document.getElementById("levelName");
-
-const levelXP =
-    document.getElementById("levelXP");
-
-const progressBar =
-    document.getElementById("progressBar");
-
-const welcomeBonus =
-    document.getElementById("welcomeBonus");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-
-/* =====================================================
-   GLOBAL STATE
-===================================================== */
-
-let currentUser = null;
-
-let currentData = null;
-
-
-/* =====================================================
-   MINING SETTINGS
+   WORKER
 ===================================================== */
 
 const MINING_WORKER =
     "https://on1-mining-engine.dsatechon1official.workers.dev";
+
+
+/* =====================================================
+   CONSTANTS
+===================================================== */
 
 const DAY =
     24 * 60 * 60 * 1000;
@@ -1720,32 +1338,91 @@ const XP_PER_LEVEL =
 
 
 /* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loading =
+    document.getElementById("loading");
+
+const loadingText =
+    document.getElementById("loadingText");
+
+const mineBtn =
+    document.getElementById("mineBtn");
+
+const streakBtn =
+    document.getElementById("streakBtn");
+
+const message =
+    document.getElementById("message");
+
+const nextMine =
+    document.getElementById("nextMine");
+
+const streakStatus =
+    document.getElementById("streakStatus");
+
+const compactStreakStatus =
+    document.getElementById(
+        "compactStreakStatus"
+    );
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+/* =====================================================
+   CURRENT USER
+===================================================== */
+
+let currentUser =
+    null;
+
+let currentData =
+    null;
+
+
+/* =====================================================
    LEVEL
 ===================================================== */
 
 function calculateLevel(xp){
 
     return Math.floor(
-        Number(xp || 0) / XP_PER_LEVEL
+        Number(xp || 0) /
+        XP_PER_LEVEL
     );
 
 }
 
 
 /* =====================================================
-   GET XP
+   XP
 ===================================================== */
 
 function getXP(data){
 
-    if(data.XP !== undefined)
+    if(data.XP !== undefined){
+
         return Number(data.XP) || 0;
 
-    if(data.xp !== undefined)
+    }
+
+    if(data.xp !== undefined){
+
         return Number(data.xp) || 0;
 
-    if(data.experiencePoints !== undefined)
-        return Number(data.experiencePoints) || 0;
+    }
+
+    if(
+        data.experiencePoints !== undefined
+    ){
+
+        return Number(
+            data.experiencePoints
+        ) || 0;
+
+    }
 
     return 0;
 
@@ -1758,22 +1435,33 @@ function getXP(data){
 
 function updateDashboard(data){
 
-    currentData = data;
+    currentData =
+        data;
 
-    const userXP =
+
+    const xp =
         getXP(data);
 
-    const userBalance =
-        Number(data.balance || 0);
 
-    const userStreak =
-        Number(data.streak || 0);
-
-    const userLevel =
-        calculateLevel(userXP);
+    const balance =
+        Number(
+            data.balance || 0
+        );
 
 
-    firstName.textContent =
+    const streak =
+        Number(
+            data.streak || 0
+        );
+
+
+    const level =
+        calculateLevel(xp);
+
+
+    document.getElementById(
+        "firstName"
+    ).textContent =
         data.firstName ||
         data.firstname ||
         data.name ||
@@ -1781,49 +1469,66 @@ function updateDashboard(data){
         "Member";
 
 
-    balance.textContent =
-        userBalance.toFixed(3);
+    document.getElementById(
+        "balance"
+    ).textContent =
+        balance.toFixed(3);
 
 
-    xp.textContent =
-        userXP.toLocaleString();
+    document.getElementById(
+        "xp"
+    ).textContent =
+        xp.toLocaleString();
 
 
-    level.textContent =
-        userLevel;
+    document.getElementById(
+        "level"
+    ).textContent =
+        level;
 
 
-    streak.textContent =
-        "Day " + userStreak;
+    document.getElementById(
+        "streak"
+    ).textContent =
+        "Day " + streak;
 
 
     const currentXP =
-        userXP % XP_PER_LEVEL;
+        xp % XP_PER_LEVEL;
 
 
     const progress =
-        (currentXP / XP_PER_LEVEL) * 100;
+        (
+            currentXP /
+            XP_PER_LEVEL
+        ) * 100;
 
 
     const nextLevel =
-        userLevel + 1;
+        level + 1;
 
 
-    levelName.textContent =
-        "PROGRESS TO LEVEL " + nextLevel;
+    document.getElementById(
+        "levelName"
+    ).textContent =
+        "PROGRESS TO LEVEL " +
+        nextLevel;
 
 
-    levelXP.textContent =
+    document.getElementById(
+        "levelXP"
+    ).textContent =
         currentXP.toLocaleString() +
         " / 2,500 XP";
 
 
-    progressBar.style.width =
-        Math.min(progress,100) + "%";
-
-
-    welcomeBonus.textContent =
-        "🎁 Welcome bonus: 1,000 XP";
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        Math.min(
+            progress,
+            100
+        ) + "%";
 
 
     updateMiningState(data);
@@ -1832,24 +1537,26 @@ function updateDashboard(data){
 
 
 /* =====================================================
-   UPDATE MINING STATE
+   MINING STATE
 ===================================================== */
 
 function updateMiningState(data){
 
     const lastClaim =
-        Number(data.lastClaim || 0);
+        Number(
+            data.lastClaim || 0
+        );
+
 
     const lastStreakClaim =
-        Number(data.lastStreakClaim || 0);
+        Number(
+            data.lastStreakClaim || 0
+        );
+
 
     const now =
         Date.now();
 
-
-    /* ---------------------------------------------
-       NEVER MINED
-    --------------------------------------------- */
 
     if(!lastClaim){
 
@@ -1859,8 +1566,10 @@ function updateMiningState(data){
         mineBtn.textContent =
             "START MINING — +50 ON1";
 
+
         nextMine.textContent =
             "Your 24-hour mining cycle is ready.";
+
 
         streakBtn.disabled =
             true;
@@ -1868,8 +1577,14 @@ function updateMiningState(data){
         streakBtn.textContent =
             "CLAIM STREAK BONUS";
 
+
         streakStatus.textContent =
-            "Start today's mining cycle first.";
+            "Claim today's base mining first.";
+
+
+        compactStreakStatus.textContent =
+            "Ready";
+
 
         return;
 
@@ -1880,10 +1595,6 @@ function updateMiningState(data){
         now - lastClaim;
 
 
-    /* ---------------------------------------------
-       24 HOURS COMPLETED
-    --------------------------------------------- */
-
     if(elapsed >= DAY){
 
         mineBtn.disabled =
@@ -1892,8 +1603,10 @@ function updateMiningState(data){
         mineBtn.textContent =
             "START MINING — +50 ON1";
 
+
         nextMine.textContent =
             "Your next 24-hour mining cycle is ready.";
+
 
         streakBtn.disabled =
             true;
@@ -1901,17 +1614,19 @@ function updateMiningState(data){
         streakBtn.textContent =
             "CLAIM STREAK BONUS";
 
+
         streakStatus.textContent =
             "Start today's mining cycle first.";
+
+
+        compactStreakStatus.textContent =
+            "Ready";
+
 
         return;
 
     }
 
-
-    /* ---------------------------------------------
-       MINING ACTIVE
-    --------------------------------------------- */
 
     mineBtn.disabled =
         true;
@@ -1929,10 +1644,6 @@ function updateMiningState(data){
         formatTime(remaining);
 
 
-    /* ---------------------------------------------
-       STREAK CLAIM STATUS
-    --------------------------------------------- */
-
     const streakAlreadyClaimed =
         lastStreakClaim >= lastClaim;
 
@@ -1945,32 +1656,37 @@ function updateMiningState(data){
         streakBtn.textContent =
             "STREAK BONUS CLAIMED";
 
+
         streakStatus.textContent =
             "Today's streak bonus has already been claimed.";
+
+
+        compactStreakStatus.textContent =
+            "Claimed";
+
 
         return;
 
     }
 
 
-    /* ---------------------------------------------
-       STREAK BONUS
-    --------------------------------------------- */
+    const streak =
+        Number(
+            data.streak || 0
+        );
 
-    const currentStreak =
-        Number(data.streak || 0);
 
     let bonus;
 
 
-    if(currentStreak >= 10){
+    if(streak >= 10){
 
         bonus = 100;
 
     }else{
 
         bonus =
-            currentStreak * 5;
+            streak * 5;
 
     }
 
@@ -1982,6 +1698,9 @@ function updateMiningState(data){
 
         streakStatus.textContent =
             "Complete a mining cycle to unlock the streak bonus.";
+
+        compactStreakStatus.textContent =
+            "Locked";
 
         return;
 
@@ -1996,10 +1715,15 @@ function updateMiningState(data){
         bonus +
         " STREAK BONUS";
 
+
     streakStatus.textContent =
         "Your Day " +
-        currentStreak +
+        streak +
         " streak bonus is ready.";
+
+
+    compactStreakStatus.textContent =
+        "+" + bonus + " ON1";
 
 }
 
@@ -2033,28 +1757,57 @@ function formatTime(milliseconds){
 
 
     return (
-        String(hours).padStart(2,"0") +
-        ":" +
-        String(minutes).padStart(2,"0") +
-        ":" +
-        String(seconds).padStart(2,"0")
+        String(hours)
+        .padStart(2,"0")
+
+        + ":" +
+
+        String(minutes)
+        .padStart(2,"0")
+
+        + ":" +
+
+        String(seconds)
+        .padStart(2,"0")
     );
 
 }
 
 
 /* =====================================================
-   SHOW MESSAGE
+   COUNTDOWN
 ===================================================== */
 
-function showMessage(text,type){
+setInterval(
+    function(){
+
+        if(currentData){
+
+            updateMiningState(
+                currentData
+            );
+
+        }
+
+    },
+    1000
+);
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+    text,
+    type
+){
 
     message.textContent =
         text;
 
     message.className =
-        "message " +
-        type;
+        "message " + type;
 
 }
 
@@ -2074,7 +1827,9 @@ async function loadUser(user){
 
 
     const snapshot =
-        await getDoc(userRef);
+        await getDoc(
+            userRef
+        );
 
 
     if(!snapshot.exists()){
@@ -2099,8 +1854,11 @@ async function loadUser(user){
 
 async function refreshUser(){
 
-    if(!currentUser)
+    if(!currentUser){
+
         return null;
+
+    }
 
 
     const snapshot =
@@ -2135,7 +1893,7 @@ async function refreshUser(){
 
 
 /* =====================================================
-   FIREBASE TOKEN
+   TOKEN
 ===================================================== */
 
 async function getFirebaseToken(){
@@ -2149,7 +1907,9 @@ async function getFirebaseToken(){
     }
 
 
-    return await currentUser.getIdToken(true);
+    return await currentUser.getIdToken(
+        true
+    );
 
 }
 
@@ -2269,7 +2029,7 @@ mineBtn.addEventListener(
 
 
 /* =====================================================
-   CLAIM STREAK
+   STREAK
 ===================================================== */
 
 streakBtn.addEventListener(
@@ -2436,7 +2196,6 @@ onAuthStateChanged(
                 800
             );
 
-
             return;
 
         }
@@ -2493,7 +2252,7 @@ onAuthStateChanged(
 
 
 /* =====================================================
-   AUTH TIMEOUT MESSAGE
+   LOADING FALLBACK
 ===================================================== */
 
 setTimeout(
@@ -2515,5 +2274,7 @@ setTimeout(
 
 </script>
 
+
 </body>
+
 </html>
