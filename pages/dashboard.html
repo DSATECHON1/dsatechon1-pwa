@@ -168,7 +168,6 @@ button{
     border-radius:9px;
 
     background:rgba(8,124,255,.06);
-
     border:1px solid rgba(8,124,255,.14);
 
     color:var(--blue2);
@@ -193,7 +192,6 @@ button{
 
 .card-title{
     font-size:15px;
-
     font-weight:800;
 }
 
@@ -203,7 +201,6 @@ button{
     color:var(--muted);
 
     font-size:9px;
-
     line-height:1.5;
 }
 
@@ -214,8 +211,9 @@ button{
 
 .mining-card{
     position:relative;
-
     overflow:hidden;
+
+    margin-top:14px;
 }
 
 .mining-card::before{
@@ -232,13 +230,13 @@ button{
 
     right:-60px;
     top:-60px;
+
+    pointer-events:none;
 }
 
 .mining-top{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 }
 
@@ -247,7 +245,6 @@ button{
     height:42px;
 
     display:grid;
-
     place-items:center;
 
     border-radius:12px;
@@ -259,7 +256,6 @@ button{
 
 .rate{
     margin-top:13px;
-
     text-align:center;
 }
 
@@ -281,7 +277,7 @@ button{
 
 
 /* =====================================================
-   COMPACT MINING STATUS
+   MINING STATUS
 ===================================================== */
 
 .mining-status-row{
@@ -307,7 +303,6 @@ button{
     display:flex;
 
     align-items:center;
-
     justify-content:space-between;
 
     gap:8px;
@@ -513,7 +508,7 @@ button{
 
 
 /* =====================================================
-   ACCOUNT STATS
+   BALANCE / XP / LEVEL
 ===================================================== */
 
 .stats{
@@ -569,10 +564,10 @@ button{
 
 
 /* =====================================================
-   ADSTERRA AD SECTION
+   ADVERTISEMENT
 ===================================================== */
 
-.adsterra-section{
+.ads-section{
     margin-top:14px;
 
     background:rgba(12,22,36,.94);
@@ -583,13 +578,11 @@ button{
 
     padding:14px;
 
-    text-align:center;
-
     overflow:hidden;
 }
 
-.adsterra-title{
-    margin-bottom:9px;
+.ads-title{
+    margin-bottom:10px;
 
     color:var(--muted);
 
@@ -600,7 +593,14 @@ button{
     letter-spacing:.5px;
 
     text-transform:uppercase;
+
+    text-align:center;
 }
+
+
+/* =====================================================
+   HIGH REVENUE FORMAT / ADSTERRA
+===================================================== */
 
 .adsterra-box{
     width:100%;
@@ -614,40 +614,63 @@ button{
     justify-content:center;
 
     overflow:hidden;
+
+    margin-bottom:14px;
 }
 
-
-/* =====================================================
-   ADSTERRA CODE AREA
-
-   PASTE YOUR REAL ADSTERRA 300x250
-   BANNER CODE INSIDE THIS AREA.
-===================================================== */
-
-.adsterra-placeholder{
+.adsterra-inner{
     width:300px;
 
-    min-height:250px;
-
     max-width:100%;
+
+    min-height:250px;
 
     display:flex;
 
     align-items:center;
 
     justify-content:center;
+}
 
-    border:1px dashed rgba(142,162,184,.18);
+
+/* =====================================================
+   CPX
+===================================================== */
+
+.cpx-title{
+    padding:10px 0;
+
+    color:var(--blue2);
+
+    font-size:10px;
+
+    font-weight:800;
+
+    text-align:center;
+
+    border-top:1px solid var(--border);
+}
+
+.cpx-box{
+    width:100%;
+
+    min-height:300px;
+
+    overflow:hidden;
 
     border-radius:10px;
 
-    color:#50657b;
-
-    font-size:8px;
+    background:#07101b;
 }
 
-.adsterra-placeholder span{
-    padding:10px;
+#cpxFrame{
+    width:100%;
+
+    height:2000px;
+
+    border:0;
+
+    display:block;
 }
 
 
@@ -679,12 +702,7 @@ button{
 
     padding:12px 14px;
 
-    background:
-        linear-gradient(
-            145deg,
-            #101d2d,
-            #09131f
-        );
+    background:rgba(12,22,36,.94);
 
     border:1px solid var(--border);
 
@@ -698,40 +716,18 @@ button{
 
     text-align:center;
 
-    box-shadow:
-        0 5px 0 #03070d,
-        0 8px 18px rgba(0,0,0,.22);
-
     transition:
         border-color .2s ease,
         background .2s ease,
-        transform .2s ease,
-        box-shadow .2s ease;
+        transform .2s ease;
 }
 
 .app-nav-btn:hover{
     border-color:rgba(58,160,255,.55);
 
-    background:
-        linear-gradient(
-            145deg,
-            #15263a,
-            #0b1725
-        );
+    background:rgba(16,29,45,.98);
 
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 7px 0 #03070d,
-        0 11px 20px rgba(0,0,0,.28);
-}
-
-.app-nav-btn:active{
-    transform:translateY(2px);
-
-    box-shadow:
-        0 2px 0 #03070d,
-        0 4px 10px rgba(0,0,0,.2);
+    transform:translateY(-1px);
 }
 
 .app-nav-icon{
@@ -739,10 +735,6 @@ button{
 }
 
 .app-nav-btn.xp{
-    color:var(--blue2);
-}
-
-.app-nav-btn.xp .app-nav-icon{
     color:var(--blue2);
 }
 
@@ -812,20 +804,19 @@ footer{
    MOBILE
 ===================================================== */
 
-@media(max-width:800px){
-
-    .app-nav{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-}
-
-
 @media(max-width:500px){
 
     .page{
         padding:12px;
+    }
+
+    .welcome h1{
+        font-size:21px;
+    }
+
+    .brand img{
+        width:34px;
+        height:34px;
     }
 
     .stats{
@@ -838,15 +829,6 @@ footer{
 
     .stat-value{
         font-size:16px;
-    }
-
-    .welcome h1{
-        font-size:21px;
-    }
-
-    .brand img{
-        width:34px;
-        height:34px;
     }
 
     .app-nav{
@@ -869,12 +851,11 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .adsterra-section{
+    .ads-section{
         padding:10px;
     }
 
 }
-
 
 @media(max-width:350px){
 
@@ -970,11 +951,9 @@ footer{
 <section class="welcome">
 
     <h1>
-
         Welcome,
         <span id="firstName">Member</span>
         👋
-
     </h1>
 
     <p>
@@ -998,7 +977,6 @@ footer{
 
 <section class="card mining-card">
 
-
     <div class="mining-top">
 
         <div>
@@ -1008,14 +986,11 @@ footer{
             </div>
 
             <div class="card-subtitle">
-
                 Claim your 50 ON1Coin base mining
                 reward once every 24 hours.
-
             </div>
 
         </div>
-
 
         <div class="mining-icon">
             ⛏️
@@ -1037,10 +1012,7 @@ footer{
     </div>
 
 
-    <!-- COMPACT STATUS -->
-
     <div class="mining-status-row">
-
 
         <div class="mining-status-box">
 
@@ -1078,8 +1050,6 @@ footer{
     </div>
 
 
-    <!-- BASE MINING -->
-
     <button
         class="mine-btn"
         id="mineBtn">
@@ -1097,8 +1067,6 @@ footer{
 
     </div>
 
-
-    <!-- STREAK BONUS -->
 
     <button
         class="streak-btn"
@@ -1119,15 +1087,11 @@ footer{
     </div>
 
 
-    <!-- MESSAGE -->
-
     <div
         class="message"
         id="message">
     </div>
 
-
-    <!-- LEVEL PROGRESS -->
 
     <div class="level-box">
 
@@ -1163,16 +1127,14 @@ footer{
 
     </div>
 
-
 </section>
 
 
 <!-- =====================================================
-     ACCOUNT SUMMARY
+     BALANCE / XP / LEVEL
 ===================================================== -->
 
 <section class="stats">
-
 
     <div class="stat-card">
 
@@ -1224,52 +1186,63 @@ footer{
 
     </div>
 
-
 </section>
 
 
 <!-- =====================================================
-     ADSTERRA
+     ADVERTISEMENT
 ===================================================== -->
 
-<section class="adsterra-section">
+<section class="ads-section">
 
-
-    <div class="adsterra-title">
+    <div class="ads-title">
         Advertisement
     </div>
 
 
+    <!-- =================================================
+         HIGH REVENUE FORMAT / ADSTERRA 300x250
+    ================================================== -->
+
     <div class="adsterra-box">
 
+        <div class="adsterra-inner">
 
-        <!-- =================================================
-             PASTE YOUR REAL ADSTERRA 300x250 CODE HERE
+            <script>
+                var atOptions = {
+                    'key' : '596737d882e5e2b61fad4b39ff34ce62',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
 
-             Replace ONLY the placeholder below.
-
-             Example:
-
-             <script type="text/javascript">
-                 YOUR ADSTERRA SCRIPT
-             </script>
-
-        ================================================== -->
-
-
-        <div class="adsterra-placeholder">
-
-            <span>
-                Adsterra 300×250 Ad Placement
-            </span>
+            <script
+                src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js">
+            </script>
 
         </div>
 
+    </div>
 
-        <!-- =================================================
-             END ADSTERRA CODE AREA
-        ================================================== -->
 
+    <!-- =================================================
+         CPX RESEARCH
+    ================================================== -->
+
+    <div class="cpx-title">
+        🎯 Survey Solutions — Earn More ON1XP
+    </div>
+
+    <div class="cpx-box">
+
+        <iframe
+            id="cpxFrame"
+            title="CPX Research Surveys"
+            frameborder="0"
+            scrolling="auto">
+        </iframe>
 
     </div>
 
@@ -1277,13 +1250,11 @@ footer{
 
 
 <!-- =====================================================
-     FOUR APP-STYLE NAVIGATION BUTTONS
+     APP NAVIGATION
 ===================================================== -->
 
 <nav class="app-nav">
 
-
-    <!-- WALLET -->
 
     <a
         href="wallet.html"
@@ -1300,8 +1271,6 @@ footer{
     </a>
 
 
-    <!-- PROFILE -->
-
     <a
         href="profile.html"
         class="app-nav-btn">
@@ -1317,8 +1286,6 @@ footer{
     </a>
 
 
-    <!-- REFERRAL -->
-
     <a
         href="referral.html"
         class="app-nav-btn">
@@ -1333,8 +1300,6 @@ footer{
 
     </a>
 
-
-    <!-- EARN XP -->
 
     <a
         href="earn-xp.html"
@@ -1370,28 +1335,31 @@ footer{
 
 <script type="module">
 
-
 /* =====================================================
    FIREBASE IMPORTS
 ===================================================== */
 
 import {
     initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
     getAuth,
     onAuthStateChanged,
     signOut
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
     getFirestore,
     doc,
     getDoc
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* =====================================================
@@ -1428,10 +1396,8 @@ const firebaseConfig = {
 const app =
     initializeApp(firebaseConfig);
 
-
 const auth =
     getAuth(app);
-
 
 const db =
     getFirestore(app);
@@ -1452,7 +1418,6 @@ const MINING_WORKER =
 const DAY =
     24 * 60 * 60 * 1000;
 
-
 const XP_PER_LEVEL =
     2500;
 
@@ -1464,39 +1429,34 @@ const XP_PER_LEVEL =
 const loading =
     document.getElementById("loading");
 
-
 const loadingText =
     document.getElementById("loadingText");
-
 
 const mineBtn =
     document.getElementById("mineBtn");
 
-
 const streakBtn =
     document.getElementById("streakBtn");
-
 
 const message =
     document.getElementById("message");
 
-
 const nextMine =
     document.getElementById("nextMine");
 
-
 const streakStatus =
     document.getElementById("streakStatus");
-
 
 const compactStreakStatus =
     document.getElementById(
         "compactStreakStatus"
     );
 
-
 const logoutBtn =
     document.getElementById("logoutBtn");
+
+const cpxFrame =
+    document.getElementById("cpxFrame");
 
 
 /* =====================================================
@@ -1506,9 +1466,804 @@ const logoutBtn =
 let currentUser =
     null;
 
-
 let currentData =
     null;
+
+
+/* =====================================================
+   CPX MD5
+===================================================== */
+
+function md5(string){
+
+    function rotateLeft(lValue, iShiftBits){
+        return (
+            lValue << iShiftBits
+        ) |
+        (
+            lValue >>> (
+                32 - iShiftBits
+            )
+        );
+    }
+
+    function addUnsigned(lX,lY){
+
+        const lX4 =
+            lX & 0x40000000;
+
+        const lY4 =
+            lY & 0x40000000;
+
+        const lX8 =
+            lX & 0x80000000;
+
+        const lY8 =
+            lY & 0x80000000;
+
+        const lResult =
+            (lX & 0x3fffffff) +
+            (lY & 0x3fffffff);
+
+        if(lX4 & lY4){
+
+            return lResult ^
+                0x80000000 ^
+                lX8 ^
+                lY8;
+
+        }
+
+        if(lX4 | lY4){
+
+            if(lResult & 0x40000000){
+
+                return lResult ^
+                    0xc0000000 ^
+                    lX8 ^
+                    lY8;
+
+            }else{
+
+                return lResult ^
+                    0x40000000 ^
+                    lX8 ^
+                    lY8;
+
+            }
+
+        }else{
+
+            return lResult ^
+                lX8 ^
+                lY8;
+
+        }
+    }
+
+    function F(x,y,z){
+        return (
+            (x & y) |
+            ((~x) & z)
+        );
+    }
+
+    function G(x,y,z){
+        return (
+            (x & z) |
+            (y & (~z))
+        );
+    }
+
+    function H(x,y,z){
+        return x ^ y ^ z;
+    }
+
+    function I(x,y,z){
+        return y ^ (
+            x | (~z)
+        );
+    }
+
+    function FF(a,b,c,d,x,s,ac){
+        a = addUnsigned(
+            a,
+            addUnsigned(
+                addUnsigned(
+                    F(b,c,d),
+                    x
+                ),
+                ac
+            )
+        );
+
+        return addUnsigned(
+            rotateLeft(a,s),
+            b
+        );
+    }
+
+    function GG(a,b,c,d,x,s,ac){
+        a = addUnsigned(
+            a,
+            addUnsigned(
+                addUnsigned(
+                    G(b,c,d),
+                    x
+                ),
+                ac
+            )
+        );
+
+        return addUnsigned(
+            rotateLeft(a,s),
+            b
+        );
+    }
+
+    function HH(a,b,c,d,x,s,ac){
+        a = addUnsigned(
+            a,
+            addUnsigned(
+                addUnsigned(
+                    H(b,c,d),
+                    x
+                ),
+                ac
+            )
+        );
+
+        return addUnsigned(
+            rotateLeft(a,s),
+            b
+        );
+    }
+
+    function II(a,b,c,d,x,s,ac){
+        a = addUnsigned(
+            a,
+            addUnsigned(
+                addUnsigned(
+                    I(b,c,d),
+                    x
+                ),
+                ac
+            )
+        );
+
+        return addUnsigned(
+            rotateLeft(a,s),
+            b
+        );
+    }
+
+    function convertToWordArray(string){
+
+        const lWordCount =
+            (((string.length + 8) >> 6) + 1) * 16;
+
+        const lWordArray =
+            new Array(lWordCount - 1);
+
+        let lBytePosition = 0;
+        let lByteCount = 0;
+
+        while(lByteCount < string.length){
+
+            const lWordPosition =
+                (lByteCount >> 2);
+
+            lWordArray[lWordPosition] =
+                lWordArray[lWordPosition] || 0;
+
+            lWordArray[lWordPosition] |=
+                string.charCodeAt(lByteCount)
+                << (
+                    (lByteCount % 4) * 8
+                );
+
+            lByteCount++;
+        }
+
+        const lWordPosition =
+            (lByteCount >> 2);
+
+        lWordArray[lWordPosition] =
+            lWordArray[lWordPosition] || 0;
+
+        lWordArray[lWordPosition] |=
+            0x80 <<
+            (
+                (lByteCount % 4) * 8
+            );
+
+        lWordArray[lWordCount - 2] =
+            string.length << 3;
+
+        lWordArray[lWordCount - 1] =
+            string.length >>> 29;
+
+        return lWordArray;
+    }
+
+    function wordToHex(lValue){
+
+        let wordToHexValue = "";
+
+        for(
+            let lCount = 0;
+            lCount <= 3;
+            lCount++
+        ){
+
+            const lByte =
+                (lValue >>> (lCount * 8))
+                & 255;
+
+            const word =
+                "0" +
+                lByte.toString(16);
+
+            wordToHexValue +=
+                word.substr(
+                    word.length - 2,
+                    2
+                );
+        }
+
+        return wordToHexValue;
+    }
+
+    let x =
+        convertToWordArray(string);
+
+    let a =
+        0x67452301;
+
+    let b =
+        0xefcdab89;
+
+    let c =
+        0x98badcfe;
+
+    let d =
+        0x10325476;
+
+
+    for(
+        let k = 0;
+        k < x.length;
+        k += 16
+    ){
+
+        const AA = a;
+        const BB = b;
+        const CC = c;
+        const DD = d;
+
+
+        a = FF(
+            a,b,c,d,
+            x[k+0],
+            7,
+            0xd76aa478
+        );
+
+        d = FF(
+            d,a,b,c,
+            x[k+1],
+            12,
+            0xe8c7b756
+        );
+
+        c = FF(
+            c,d,a,b,
+            x[k+2],
+            17,
+            0x242070db
+        );
+
+        b = FF(
+            b,c,d,a,
+            x[k+3],
+            22,
+            0xc1bdceee
+        );
+
+        a = FF(
+            a,b,c,d,
+            x[k+4],
+            7,
+            0xf57c0faf
+        );
+
+        d = FF(
+            d,a,b,c,
+            x[k+5],
+            12,
+            0x4787c62a
+        );
+
+        c = FF(
+            c,d,a,b,
+            x[k+6],
+            17,
+            0xa8304613
+        );
+
+        b = FF(
+            b,c,d,a,
+            x[k+7],
+            22,
+            0xfd469501
+        );
+
+        a = FF(
+            a,b,c,d,
+            x[k+8],
+            7,
+            0x698098d8
+        );
+
+        d = FF(
+            d,a,b,c,
+            x[k+9],
+            12,
+            0x8b44f7af
+        );
+
+        c = FF(
+            c,d,a,b,
+            x[k+10],
+            17,
+            0xffff5bb1
+        );
+
+        b = FF(
+            b,c,d,a,
+            x[k+11],
+            22,
+            0x895cd7be
+        );
+
+        a = FF(
+            a,b,c,d,
+            x[k+12],
+            7,
+            0x6b901122
+        );
+
+        d = FF(
+            d,a,b,c,
+            x[k+13],
+            12,
+            0xfd987193
+        );
+
+        c = FF(
+            c,d,a,b,
+            x[k+14],
+            17,
+            0xa679438e
+        );
+
+        b = FF(
+            b,c,d,a,
+            x[k+15],
+            22,
+            0x49b40821
+        );
+
+
+        a = GG(
+            a,b,c,d,
+            x[k+1],
+            5,
+            0xf61e2562
+        );
+
+        d = GG(
+            d,a,b,c,
+            x[k+6],
+            9,
+            0xc040b340
+        );
+
+        c = GG(
+            c,d,a,b,
+            x[k+11],
+            14,
+            0x265e5a51
+        );
+
+        b = GG(
+            b,c,d,a,
+            x[k+0],
+            20,
+            0xe9b6c7aa
+        );
+
+        a = GG(
+            a,b,c,d,
+            x[k+5],
+            5,
+            0xd62f105d
+        );
+
+        d = GG(
+            d,a,b,c,
+            x[k+10],
+            9,
+            0x02441453
+        );
+
+        c = GG(
+            c,d,a,b,
+            x[k+15],
+            14,
+            0xd8a1e681
+        );
+
+        b = GG(
+            b,c,d,a,
+            x[k+4],
+            20,
+            0xe7d3fbc8
+        );
+
+        a = GG(
+            a,b,c,d,
+            x[k+9],
+            5,
+            0x21e1cde6
+        );
+
+        d = GG(
+            d,a,b,c,
+            x[k+14],
+            9,
+            0xc33707d6
+        );
+
+        c = GG(
+            c,d,a,b,
+            x[k+3],
+            14,
+            0xf4d50d87
+        );
+
+        b = GG(
+            b,c,d,a,
+            x[k+8],
+            20,
+            0x455a14ed
+        );
+
+        a = GG(
+            a,b,c,d,
+            x[k+13],
+            5,
+            0xa9e3e905
+        );
+
+        d = GG(
+            d,a,b,c,
+            x[k+2],
+            9,
+            0xfcefa3f8
+        );
+
+        c = GG(
+            c,d,a,b,
+            x[k+7],
+            14,
+            0x676f02d9
+        );
+
+        b = GG(
+            b,c,d,a,
+            x[k+12],
+            20,
+            0x8d2a4c8a
+        );
+
+
+        a = HH(
+            a,b,c,d,
+            x[k+5],
+            4,
+            0xfffa3942
+        );
+
+        d = HH(
+            d,a,b,c,
+            x[k+8],
+            11,
+            0x8771f681
+        );
+
+        c = HH(
+            c,d,a,b,
+            x[k+11],
+            16,
+            0x6d9d6122
+        );
+
+        b = HH(
+            b,c,d,a,
+            x[k+14],
+            23,
+            0xfde5380c
+        );
+
+        a = HH(
+            a,b,c,d,
+            x[k+1],
+            4,
+            0xa4beea44
+        );
+
+        d = HH(
+            d,a,b,c,
+            x[k+4],
+            11,
+            0x4bdecfa9
+        );
+
+        c = HH(
+            c,d,a,b,
+            x[k+7],
+            16,
+            0xf6bb4b60
+        );
+
+        b = HH(
+            b,c,d,a,
+            x[k+10],
+            23,
+            0xbebfbc70
+        );
+
+        a = HH(
+            a,b,c,d,
+            x[k+13],
+            4,
+            0x289b7ec6
+        );
+
+        d = HH(
+            d,a,b,c,
+            x[k+0],
+            11,
+            0xeaa127fa
+        );
+
+        c = HH(
+            c,d,a,b,
+            x[k+3],
+            16,
+            0xd4ef3085
+        );
+
+        b = HH(
+            b,c,d,a,
+            x[k+6],
+            23,
+            0x04881d05
+        );
+
+        a = HH(
+            a,b,c,d,
+            x[k+9],
+            4,
+            0xd9d4d039
+        );
+
+        d = HH(
+            d,a,b,c,
+            x[k+12],
+            11,
+            0xe6db99e5
+        );
+
+        c = HH(
+            c,d,a,b,
+            x[k+15],
+            16,
+            0x1fa27cf8
+        );
+
+        b = HH(
+            b,c,d,a,
+            x[k+2],
+            23,
+            0xc4ac5665
+        );
+
+
+        a = II(
+            a,b,c,d,
+            x[k+0],
+            6,
+            0xf4292244
+        );
+
+        d = II(
+            d,a,b,c,
+            x[k+7],
+            10,
+            0x432aff97
+        );
+
+        c = II(
+            c,d,a,b,
+            x[k+14],
+            15,
+            0xab9423a7
+        );
+
+        b = II(
+            b,c,d,a,
+            x[k+5],
+            21,
+            0xfc93a039
+        );
+
+        a = II(
+            a,b,c,d,
+            x[k+12],
+            6,
+            0x655b59c3
+        );
+
+        d = II(
+            d,a,b,c,
+            x[k+3],
+            10,
+            0x8f0ccc92
+        );
+
+        c = II(
+            c,d,a,b,
+            x[k+10],
+            15,
+            0xffeff47d
+        );
+
+        b = II(
+            b,c,d,a,
+            x[k+1],
+            21,
+            0x85845dd1
+        );
+
+        a = II(
+            a,b,c,d,
+            x[k+8],
+            6,
+            0x6fa87e4f
+        );
+
+        d = II(
+            d,a,b,c,
+            x[k+15],
+            10,
+            0xfe2ce6e0
+        );
+
+        c = II(
+            c,d,a,b,
+            x[k+6],
+            15,
+            0xa3014314
+        );
+
+        b = II(
+            b,c,d,a,
+            x[k+13],
+            21,
+            0x4e0811a1
+        );
+
+        a = II(
+            a,b,c,d,
+            x[k+4],
+            6,
+            0xf7537e82
+        );
+
+        d = II(
+            d,a,b,c,
+            x[k+11],
+            10,
+            0xbd3af235
+        );
+
+        c = II(
+            c,d,a,b,
+            x[k+2],
+            15,
+            0x2ad7d2bb
+        );
+
+        b = II(
+            b,c,d,a,
+            x[k+9],
+            21,
+            0xeb86d391
+        );
+
+
+        a = addUnsigned(a,AA);
+        b = addUnsigned(b,BB);
+        c = addUnsigned(c,CC);
+        d = addUnsigned(d,DD);
+    }
+
+    return (
+        wordToHex(a) +
+        wordToHex(b) +
+        wordToHex(c) +
+        wordToHex(d)
+    ).toLowerCase();
+}
+
+
+/* =====================================================
+   BUILD CPX URL
+===================================================== */
+
+function setupCPX(data){
+
+    if(!currentUser){
+        return;
+    }
+
+    const userId =
+        currentUser.uid;
+
+    const userName =
+        data.username ||
+        data.userName ||
+        data.name ||
+        data.firstName ||
+        "Member";
+
+    const email =
+        currentUser.email ||
+        data.email ||
+        "";
+
+    /*
+      This is the same secret suffix from
+      the CPX PHP code supplied by you.
+    */
+
+    const secret =
+        "-pOP7nIXmbJWiTUKNvl8wRaVvrY0xKtc5";
+
+    const secureHash =
+        md5(
+            userId + secret
+        );
+
+    const url =
+        "https://offers.cpx-research.com/index.php" +
+        "?app_id=35802" +
+        "&ext_user_id=" +
+        encodeURIComponent(userId) +
+        "&secure_hash=" +
+        encodeURIComponent(secureHash) +
+        "&username=" +
+        encodeURIComponent(userName) +
+        "&email=" +
+        encodeURIComponent(email) +
+        "&subid_1=" +
+        "&subid_2=";
+
+    cpxFrame.src =
+        url;
+}
 
 
 /* =====================================================
@@ -1537,13 +2292,11 @@ function getXP(data){
 
     }
 
-
     if(data.xp !== undefined){
 
         return Number(data.xp) || 0;
 
     }
-
 
     if(
         data.experiencePoints !== undefined
@@ -1555,9 +2308,7 @@ function getXP(data){
 
     }
 
-
     return 0;
-
 }
 
 
@@ -1570,22 +2321,18 @@ function updateDashboard(data){
     currentData =
         data;
 
-
     const xp =
         getXP(data);
-
 
     const balance =
         Number(
             data.balance || 0
         );
 
-
     const streak =
         Number(
             data.streak || 0
         );
-
 
     const level =
         calculateLevel(xp);
@@ -1594,7 +2341,6 @@ function updateDashboard(data){
     document.getElementById(
         "firstName"
     ).textContent =
-
         data.firstName ||
         data.firstname ||
         data.name ||
@@ -1605,28 +2351,24 @@ function updateDashboard(data){
     document.getElementById(
         "balance"
     ).textContent =
-
         balance.toFixed(3);
 
 
     document.getElementById(
         "xp"
     ).textContent =
-
         xp.toLocaleString();
 
 
     document.getElementById(
         "level"
     ).textContent =
-
         level;
 
 
     document.getElementById(
         "streak"
     ).textContent =
-
         "Day " + streak;
 
 
@@ -1648,7 +2390,6 @@ function updateDashboard(data){
     document.getElementById(
         "levelName"
     ).textContent =
-
         "PROGRESS TO LEVEL " +
         nextLevel;
 
@@ -1656,7 +2397,6 @@ function updateDashboard(data){
     document.getElementById(
         "levelXP"
     ).textContent =
-
         currentXP.toLocaleString() +
         " / 2,500 XP";
 
@@ -1664,7 +2404,6 @@ function updateDashboard(data){
     document.getElementById(
         "progressBar"
     ).style.width =
-
         Math.min(
             progress,
             100
@@ -1674,11 +2413,12 @@ function updateDashboard(data){
     document.getElementById(
         "welcomeBonus"
     ).textContent =
-
         "🎁 Welcome bonus: 1,000 XP";
 
 
     updateMiningState(data);
+
+    setupCPX(data);
 
 }
 
@@ -1694,12 +2434,10 @@ function updateMiningState(data){
             data.lastClaim || 0
         );
 
-
     const lastStreakClaim =
         Number(
             data.lastStreakClaim || 0
         );
-
 
     const now =
         Date.now();
@@ -1713,7 +2451,6 @@ function updateMiningState(data){
         mineBtn.textContent =
             "START MINING — +50 ON1";
 
-
         nextMine.textContent =
             "Your 24-hour mining cycle is ready.";
 
@@ -1724,17 +2461,13 @@ function updateMiningState(data){
         streakBtn.textContent =
             "CLAIM STREAK BONUS";
 
-
         streakStatus.textContent =
             "Claim today's base mining first.";
-
 
         compactStreakStatus.textContent =
             "Ready";
 
-
         return;
-
     }
 
 
@@ -1750,7 +2483,6 @@ function updateMiningState(data){
         mineBtn.textContent =
             "START MINING — +50 ON1";
 
-
         nextMine.textContent =
             "Your next 24-hour mining cycle is ready.";
 
@@ -1761,23 +2493,18 @@ function updateMiningState(data){
         streakBtn.textContent =
             "CLAIM STREAK BONUS";
 
-
         streakStatus.textContent =
             "Start today's mining cycle first.";
-
 
         compactStreakStatus.textContent =
             "Ready";
 
-
         return;
-
     }
 
 
     mineBtn.disabled =
         true;
-
 
     mineBtn.textContent =
         "MINING ACTIVE";
@@ -1804,17 +2531,13 @@ function updateMiningState(data){
         streakBtn.textContent =
             "STREAK BONUS CLAIMED";
 
-
         streakStatus.textContent =
             "Today's streak bonus has already been claimed.";
-
 
         compactStreakStatus.textContent =
             "Claimed";
 
-
         return;
-
     }
 
 
@@ -1847,36 +2570,28 @@ function updateMiningState(data){
         streakStatus.textContent =
             "Complete a mining cycle to unlock the streak bonus.";
 
-
         compactStreakStatus.textContent =
             "Locked";
 
-
         return;
-
     }
 
 
     streakBtn.disabled =
         false;
 
-
     streakBtn.textContent =
         "CLAIM +" +
         bonus +
         " STREAK BONUS";
-
 
     streakStatus.textContent =
         "Your Day " +
         streak +
         " streak bonus is ready.";
 
-
     compactStreakStatus.textContent =
-        "+" +
-        bonus +
-        " ON1";
+        "+" + bonus + " ON1";
 
 }
 
@@ -1892,25 +2607,21 @@ function formatTime(milliseconds){
             milliseconds / 1000
         );
 
-
     const hours =
         Math.floor(
             totalSeconds / 3600
         );
-
 
     const minutes =
         Math.floor(
             (totalSeconds % 3600) / 60
         );
 
-
     const seconds =
         totalSeconds % 60;
 
 
     return (
-
         String(hours)
         .padStart(2,"0")
 
@@ -1923,10 +2634,29 @@ function formatTime(milliseconds){
 
         String(seconds)
         .padStart(2,"0")
-
     );
 
 }
+
+
+/* =====================================================
+   LIVE COUNTDOWN
+===================================================== */
+
+setInterval(
+    function(){
+
+        if(currentData){
+
+            updateMiningState(
+                currentData
+            );
+
+        }
+
+    },
+    1000
+);
 
 
 /* =====================================================
@@ -1940,7 +2670,6 @@ function showMessage(
 
     message.textContent =
         text;
-
 
     message.className =
         "message " + type;
@@ -1979,7 +2708,6 @@ async function loadUser(user){
 
     const data =
         snapshot.data();
-
 
     updateDashboard(data);
 
@@ -2044,7 +2772,6 @@ async function getFirebaseToken(){
 
     }
 
-
     return await currentUser.getIdToken(
         true
     );
@@ -2068,13 +2795,11 @@ mineBtn.addEventListener(
             );
 
             return;
-
         }
 
 
         mineBtn.disabled =
             true;
-
 
         mineBtn.textContent =
             "MINING...";
@@ -2096,7 +2821,6 @@ mineBtn.addEventListener(
                 await fetch(
                     MINING_WORKER + "/mine",
                     {
-
                         method:"POST",
 
                         headers:{
@@ -2107,7 +2831,6 @@ mineBtn.addEventListener(
                         body:JSON.stringify({
                             idToken:idToken
                         })
-
                     }
                 );
 
@@ -2185,13 +2908,11 @@ streakBtn.addEventListener(
             );
 
             return;
-
         }
 
 
         streakBtn.disabled =
             true;
-
 
         streakBtn.textContent =
             "CLAIMING...";
@@ -2213,7 +2934,6 @@ streakBtn.addEventListener(
                 await fetch(
                     MINING_WORKER + "/streak",
                     {
-
                         method:"POST",
 
                         headers:{
@@ -2224,7 +2944,6 @@ streakBtn.addEventListener(
                         body:JSON.stringify({
                             idToken:idToken
                         })
-
                     }
                 );
 
@@ -2298,10 +3017,8 @@ logoutBtn.addEventListener(
 
             await signOut(auth);
 
-
             window.location.href =
                 "login.html";
-
 
         }catch(error){
 
@@ -2351,9 +3068,7 @@ onAuthStateChanged(
                 800
             );
 
-
             return;
-
         }
 
 
@@ -2429,6 +3144,7 @@ setTimeout(
 );
 
 </script>
+
 
 </body>
 
