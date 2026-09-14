@@ -180,6 +180,50 @@ button{
 
 
 /* =====================================================
+   BALANCE / XP / LEVEL
+===================================================== */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:14px;
+}
+
+.stat-card{
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:10px 12px;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+.stat-value{
+    margin-top:4px;
+    font-size:18px;
+    font-weight:800;
+}
+
+.stat-value.coin{
+    color:var(--gold);
+}
+
+.stat-value.xp{
+    color:var(--blue2);
+}
+
+.stat-value.level{
+    color:var(--green);
+}
+
+
+/* =====================================================
    MINING
 ===================================================== */
 
@@ -241,7 +285,7 @@ button{
 
 .mining-status-row{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     gap:8px;
     margin-top:12px;
 }
@@ -408,50 +452,6 @@ button{
 
 
 /* =====================================================
-   BALANCE / XP / LEVEL
-===================================================== */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:14px;
-}
-
-.stat-card{
-    background:rgba(12,22,36,.94);
-    border:1px solid var(--border);
-    border-radius:13px;
-    padding:10px 12px;
-}
-
-.stat-label{
-    color:var(--muted);
-    font-size:8px;
-    text-transform:uppercase;
-    letter-spacing:.5px;
-}
-
-.stat-value{
-    margin-top:4px;
-    font-size:18px;
-    font-weight:800;
-}
-
-.stat-value.coin{
-    color:var(--gold);
-}
-
-.stat-value.xp{
-    color:var(--blue2);
-}
-
-.stat-value.level{
-    color:var(--green);
-}
-
-
-/* =====================================================
    ADVERTISEMENT
 ===================================================== */
 
@@ -476,7 +476,7 @@ button{
 
 
 /* =====================================================
-   HIGH REVENUE FORMAT / ADSTERRA
+   REAL ADSTERRA
 ===================================================== */
 
 .adsterra-box{
@@ -565,6 +565,7 @@ button{
 
 /* =====================================================
    APP NAVIGATION
+   EXISTING DESIGN + SUBTLE 3D EFFECT
 ===================================================== */
 
 .app-nav{
@@ -581,23 +582,45 @@ button{
     gap:9px;
     min-height:58px;
     padding:12px 14px;
+
     background:rgba(12,22,36,.94);
     border:1px solid var(--border);
     border-radius:14px;
+
     color:#dce8f5;
     font-size:10px;
     font-weight:800;
     text-align:center;
+
+    /* subtle 3D */
+    box-shadow:
+        0 3px 0 #03070c,
+        0 6px 12px rgba(0,0,0,.18);
+
     transition:
         border-color .2s ease,
         background .2s ease,
-        transform .2s ease;
+        transform .12s ease,
+        box-shadow .12s ease;
 }
 
 .app-nav-btn:hover{
     border-color:rgba(58,160,255,.55);
     background:rgba(16,29,45,.98);
-    transform:translateY(-1px);
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 5px 0 #03070c,
+        0 9px 16px rgba(0,0,0,.25);
+}
+
+.app-nav-btn:active{
+    transform:translateY(2px);
+
+    box-shadow:
+        0 1px 0 #03070c,
+        0 3px 7px rgba(0,0,0,.18);
 }
 
 .app-nav-icon{
@@ -697,10 +720,6 @@ footer{
 
     .app-nav-icon{
         font-size:18px;
-    }
-
-    .mining-status-row{
-        grid-template-columns:1fr;
     }
 
     .ads-section{
@@ -849,6 +868,66 @@ footer{
 
 
 <!-- =====================================================
+     BALANCE / XP / LEVEL
+     MOVED ABOVE MINING
+===================================================== -->
+
+<section class="stats">
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            ON1Coin Balance
+        </div>
+
+        <div
+            class="stat-value coin"
+            id="balance">
+
+            0.000
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Experience Points
+        </div>
+
+        <div
+            class="stat-value xp"
+            id="xp">
+
+            0
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Current Level
+        </div>
+
+        <div
+            class="stat-value level"
+            id="level">
+
+            0
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
      ON1COIN MINING
 ===================================================== -->
 
@@ -889,6 +968,8 @@ footer{
     </div>
 
 
+    <!-- ONLY MINING STREAK REMAINS -->
+
     <div class="mining-status-row">
 
         <div class="mining-status-box">
@@ -902,23 +983,6 @@ footer{
                 id="streak">
 
                 Day 0
-
-            </div>
-
-        </div>
-
-
-        <div class="mining-status-box">
-
-            <div class="mining-status-label">
-                Streak Bonus
-            </div>
-
-            <div
-                class="mining-status-value"
-                id="compactStreakStatus">
-
-                —
 
             </div>
 
@@ -1008,65 +1072,6 @@ footer{
 
 
 <!-- =====================================================
-     BALANCE / XP / LEVEL
-===================================================== -->
-
-<section class="stats">
-
-    <div class="stat-card">
-
-        <div class="stat-label">
-            ON1Coin Balance
-        </div>
-
-        <div
-            class="stat-value coin"
-            id="balance">
-
-            0.000
-
-        </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-        <div class="stat-label">
-            Experience Points
-        </div>
-
-        <div
-            class="stat-value xp"
-            id="xp">
-
-            0
-
-        </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-        <div class="stat-label">
-            Current Level
-        </div>
-
-        <div
-            class="stat-value level"
-            id="level">
-
-            0
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
      ADVERTISEMENT
 ===================================================== -->
 
@@ -1076,10 +1081,6 @@ footer{
         Advertisement
     </div>
 
-
-    <!-- =================================================
-         YOUR EXACT 300x250 AD CODE
-    ================================================== -->
 
     <div class="adsterra-box">
 
@@ -1362,11 +1363,6 @@ const nextMine =
 const streakStatus =
     document.getElementById("streakStatus");
 
-const compactStreakStatus =
-    document.getElementById(
-        "compactStreakStatus"
-    );
-
 const logoutBtn =
     document.getElementById("logoutBtn");
 
@@ -1582,10 +1578,6 @@ function updateMiningState(data){
             "Claim today's base mining first.";
 
 
-        compactStreakStatus.textContent =
-            "Ready";
-
-
         return;
 
     }
@@ -1617,10 +1609,6 @@ function updateMiningState(data){
 
         streakStatus.textContent =
             "Start today's mining cycle first.";
-
-
-        compactStreakStatus.textContent =
-            "Ready";
 
 
         return;
@@ -1661,10 +1649,6 @@ function updateMiningState(data){
             "Today's streak bonus has already been claimed.";
 
 
-        compactStreakStatus.textContent =
-            "Claimed";
-
-
         return;
 
     }
@@ -1699,8 +1683,6 @@ function updateMiningState(data){
         streakStatus.textContent =
             "Complete a mining cycle to unlock the streak bonus.";
 
-        compactStreakStatus.textContent =
-            "Locked";
 
         return;
 
@@ -1720,10 +1702,6 @@ function updateMiningState(data){
         "Your Day " +
         streak +
         " streak bonus is ready.";
-
-
-    compactStreakStatus.textContent =
-        "+" + bonus + " ON1";
 
 }
 
@@ -1757,18 +1735,20 @@ function formatTime(milliseconds){
 
 
     return (
+
         String(hours)
-        .padStart(2,"0")
+            .padStart(2,"0")
 
         + ":" +
 
         String(minutes)
-        .padStart(2,"0")
+            .padStart(2,"0")
 
         + ":" +
 
         String(seconds)
-        .padStart(2,"0")
+            .padStart(2,"0")
+
     );
 
 }
@@ -1807,7 +1787,8 @@ function showMessage(
         text;
 
     message.className =
-        "message " + type;
+        "message " +
+        type;
 
 }
 
@@ -1955,7 +1936,8 @@ mineBtn.addEventListener(
 
             const response =
                 await fetch(
-                    MINING_WORKER + "/mine",
+                    MINING_WORKER +
+                    "/mine",
                     {
                         method:"POST",
 
@@ -2069,7 +2051,8 @@ streakBtn.addEventListener(
 
             const response =
                 await fetch(
-                    MINING_WORKER + "/streak",
+                    MINING_WORKER +
+                    "/streak",
                     {
                         method:"POST",
 
@@ -2161,6 +2144,7 @@ logoutBtn.addEventListener(
 
             console.error(error);
 
+
             showMessage(
                 "Unable to log out. Please try again.",
                 "error"
@@ -2195,6 +2179,7 @@ onAuthStateChanged(
                 },
                 800
             );
+
 
             return;
 
