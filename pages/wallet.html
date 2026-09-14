@@ -1,1288 +1,2196 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ON1 Wallet</title>
+<meta charset="UTF-8">
 
-  <style>
-    :root{
-      --bg:#050b13;
-      --surface:#0c1624;
-      --surface2:#101d2d;
-      --border:#1d3048;
-      --blue:#087cff;
-      --blue2:#3aa0ff;
-      --green:#00df88;
-      --gold:#f5c451;
-      --text:#ffffff;
-      --muted:#8ea2b8;
-      --danger:#ff6075;
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>ON1 Wallet — ON1Ecosystem</title>
+
+<meta name="description"
+      content="View your ON1Coin, ON1XP and ON1Ecosystem account information.">
+
+<style>
+
+/* =====================================================
+   ON1ECOSYSTEM WALLET
+   Dashboard-matched design system
+===================================================== */
+
+:root{
+    --bg:#050b13;
+    --surface:#0c1624;
+    --surface2:#101d2d;
+    --surface3:#07111e;
+    --border:#1d3048;
+
+    --blue:#087cff;
+    --blue2:#3aa0ff;
+
+    --green:#00df88;
+    --gold:#f5c451;
+
+    --text:#ffffff;
+    --muted:#8ea2b8;
+
+    --danger:#ff6075;
+
+    --shadow:
+        0 10px 30px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    background:var(--bg);
+}
+
+body{
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(8,124,255,.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(0,223,136,.055),
+            transparent 28%
+        ),
+        var(--bg);
+
+    color:var(--text);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+    width:100%;
+    max-width:1050px;
+
+    margin:0 auto;
+
+    padding:15px;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
+
+    padding:
+        4px
+        0
+        18px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+}
+
+.brand img{
+    width:43px;
+    height:43px;
+
+    object-fit:contain;
+
+    border-radius:10px;
+}
+
+.brand-name{
+    color:#fff;
+
+    font-size:20px;
+    font-weight:800;
+
+    line-height:1.1;
+}
+
+.brand-sub{
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:1.2px;
+}
+
+
+/* =====================================================
+   DASHBOARD BUTTON
+===================================================== */
+
+.home-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    min-height:40px;
+
+    padding:
+        9px
+        14px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #101d2d,
+            #091523
+        );
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:12px;
+    font-weight:800;
+
+    box-shadow:
+        0 4px 0 #030811,
+        0 7px 14px rgba(0,0,0,.22);
+
+    transition:
+        transform .12s ease,
+        border-color .2s ease,
+        box-shadow .12s ease;
+}
+
+.home-btn:hover{
+
+    border-color:
+        rgba(58,160,255,.65);
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 5px 0 #030811,
+        0 9px 17px rgba(0,0,0,.28);
+}
+
+.home-btn:active{
+
+    transform:
+        translateY(3px);
+
+    box-shadow:
+        0 1px 0 #030811,
+        0 3px 7px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.title-section{
+
+    margin:
+        2px
+        0
+        17px;
+}
+
+.title-section h1{
+
+    font-size:27px;
+    font-weight:900;
+
+    letter-spacing:-.4px;
+}
+
+.title-section p{
+
+    margin-top:6px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+#errorBox{
+
+    display:none;
+
+    margin-bottom:16px;
+
+    padding:13px;
+
+    border:
+        1px solid
+        rgba(255,96,117,.35);
+
+    border-radius:12px;
+
+    background:
+        rgba(255,96,117,.08);
+
+    color:#fff;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   WALLET OVERVIEW
+===================================================== */
+
+.wallet-overview{
+
+    display:grid;
+
+    grid-template-columns:
+        1.25fr
+        .75fr;
+
+    gap:14px;
+
+    margin-bottom:15px;
+}
+
+
+/* =====================================================
+   MAIN BALANCE CARD
+===================================================== */
+
+.main-balance{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:190px;
+
+    padding:21px;
+
+    border:
+        1px solid
+        rgba(58,160,255,.28);
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,34,54,.98),
+            rgba(7,16,28,.99)
+        );
+
+    box-shadow:
+        0 8px 0 #030912,
+        0 18px 35px rgba(0,0,0,.30);
+
+    isolation:isolate;
+}
+
+.main-balance::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    right:-95px;
+    top:-105px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(8,124,255,.20),
+            rgba(8,124,255,0)
+        );
+
+    z-index:-1;
+}
+
+.main-balance::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            var(--blue2)
+        );
+}
+
+
+/* =====================================================
+   BALANCE HEADER
+===================================================== */
+
+.balance-heading{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+.balance-heading-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.coin-icon{
+
+    width:43px;
+    height:43px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:
+        rgba(8,124,255,.13);
+
+    border:
+        1px solid
+        rgba(58,160,255,.28);
+
+    box-shadow:
+        inset 0 0 15px rgba(8,124,255,.06);
+}
+
+.coin-icon img{
+
+    width:29px;
+    height:29px;
+
+    object-fit:contain;
+}
+
+.balance-heading-text{
+
+    color:#fff;
+
+    font-size:13px;
+    font-weight:800;
+}
+
+.balance-heading-sub{
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+
+/* =====================================================
+   BALANCE NUMBER
+===================================================== */
+
+.balance-label{
+
+    color:var(--muted);
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    margin-bottom:7px;
+}
+
+.balance-number-row{
+
+    display:flex;
+
+    align-items:baseline;
+
+    gap:7px;
+}
+
+.balance-number{
+
+    color:#fff;
+
+    font-size:36px;
+    font-weight:900;
+
+    line-height:1;
+
+    letter-spacing:-1px;
+}
+
+.balance-unit{
+
+    color:var(--blue2);
+
+    font-size:13px;
+    font-weight:900;
+}
+
+
+/* =====================================================
+   XP CARD
+===================================================== */
+
+.xp-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:190px;
+
+    padding:20px;
+
+    border:
+        1px solid
+        rgba(245,196,81,.25);
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(36,31,21,.98),
+            rgba(15,17,21,.99)
+        );
+
+    box-shadow:
+        0 8px 0 #030912,
+        0 18px 35px rgba(0,0,0,.25);
+}
+
+.xp-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:160px;
+    height:160px;
+
+    right:-75px;
+    top:-75px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(245,196,81,.16),
+            rgba(245,196,81,0)
+        );
+}
+
+.xp-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c99520,
+            var(--gold)
+        );
+}
+
+.xp-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+.xp-icon{
+
+    width:43px;
+    height:43px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:
+        rgba(245,196,81,.11);
+
+    border:
+        1px solid
+        rgba(245,196,81,.25);
+
+    color:var(--gold);
+
+    font-size:12px;
+    font-weight:900;
+}
+
+.xp-title{
+
+    color:#fff;
+
+    font-size:13px;
+    font-weight:800;
+}
+
+.xp-sub{
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.xp-value{
+
+    display:flex;
+
+    align-items:baseline;
+
+    gap:7px;
+}
+
+.xp-number{
+
+    color:#fff;
+
+    font-size:32px;
+    font-weight:900;
+
+    line-height:1;
+}
+
+.xp-unit{
+
+    color:var(--gold);
+
+    font-size:13px;
+    font-weight:900;
+}
+
+
+/* =====================================================
+   ADVERTISEMENT
+===================================================== */
+
+.ad-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:
+        0
+        0
+        17px;
+
+    padding:
+        12px
+        10px
+        14px;
+
+    border:
+        1px solid
+        rgba(29,48,72,.75);
+
+    border-radius:15px;
+
+    background:
+        rgba(7,14,24,.75);
+}
+
+.ad-label{
+
+    width:100%;
+
+    margin-bottom:9px;
+
+    color:#52667c;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:1.2px;
+
+    text-align:center;
+
+    text-transform:uppercase;
+}
+
+.ad-box{
+
+    width:300px;
+    max-width:100%;
+
+    min-height:250px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section{
+
+    margin-bottom:16px;
+
+    padding:17px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,22,36,.98),
+            rgba(7,16,27,.99)
+        );
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.18);
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.section-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    margin-bottom:14px;
+}
+
+.section-icon{
+
+    width:38px;
+    height:38px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:
+        rgba(8,124,255,.12);
+
+    border:
+        1px solid
+        rgba(8,124,255,.25);
+
+    color:var(--blue2);
+
+    font-size:17px;
+    font-weight:900;
+
+    box-shadow:
+        0 3px 0 #030912;
+}
+
+.xp-section .section-icon{
+
+    background:
+        rgba(245,196,81,.10);
+
+    border-color:
+        rgba(245,196,81,.23);
+
+    color:var(--gold);
+}
+
+.account-section .section-icon{
+
+    background:
+        rgba(0,223,136,.09);
+
+    border-color:
+        rgba(0,223,136,.22);
+
+    color:var(--green);
+}
+
+.section-title{
+
+    color:#fff;
+
+    font-size:16px;
+    font-weight:900;
+}
+
+.section-description{
+
+    margin-top:3px;
+
+    color:var(--muted);
+
+    font-size:10px;
+}
+
+
+/* =====================================================
+   HISTORY EMPTY
+===================================================== */
+
+.history-empty{
+
+    padding:
+        22px
+        12px;
+
+    text-align:center;
+
+    border:
+        1px dashed
+        rgba(29,48,72,.95);
+
+    border-radius:12px;
+
+    background:
+        rgba(5,11,19,.40);
+}
+
+.history-empty-icon{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin:
+        0
+        auto
+        9px;
+
+    border-radius:50%;
+
+    background:
+        rgba(8,124,255,.08);
+
+    color:var(--blue2);
+
+    font-size:18px;
+}
+
+.xp-section .history-empty-icon{
+
+    background:
+        rgba(245,196,81,.08);
+
+    color:var(--gold);
+}
+
+.history-empty strong{
+
+    display:block;
+
+    margin-bottom:5px;
+
+    color:#fff;
+
+    font-size:12px;
+    font-weight:800;
+}
+
+.history-empty span{
+
+    display:block;
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.5;
+}
+
+
+/* =====================================================
+   TRANSACTIONS
+===================================================== */
+
+.transaction{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
+
+    padding:
+        12px
+        2px;
+
+    border-bottom:
+        1px solid
+        rgba(29,48,72,.65);
+}
+
+.transaction:last-child{
+    border-bottom:none;
+}
+
+.transaction-left{
+    min-width:0;
+}
+
+.transaction-title{
+
+    color:#fff;
+
+    font-size:12px;
+    font-weight:800;
+}
+
+.transaction-date{
+
+    margin-top:4px;
+
+    color:var(--muted);
+
+    font-size:9px;
+}
+
+.transaction-amount{
+
+    white-space:nowrap;
+
+    font-size:12px;
+    font-weight:900;
+}
+
+.positive{
+    color:var(--green);
+}
+
+.negative{
+    color:var(--danger);
+}
+
+
+/* =====================================================
+   ACCOUNT INFORMATION
+===================================================== */
+
+.account-row{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    min-height:45px;
+
+    padding:
+        11px
+        2px;
+
+    border-bottom:
+        1px solid
+        rgba(29,48,72,.65);
+}
+
+.account-row:last-child{
+    border-bottom:none;
+}
+
+.account-label{
+
+    color:var(--muted);
+
+    font-size:11px;
+    font-weight:600;
+}
+
+.account-value{
+
+    max-width:65%;
+
+    color:#fff;
+
+    font-size:11px;
+    font-weight:800;
+
+    text-align:right;
+
+    overflow-wrap:anywhere;
+}
+
+
+/* =====================================================
+   WALLET STATUS STRIP
+===================================================== */
+
+.wallet-note{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:16px;
+
+    padding:
+        12px
+        13px;
+
+    border:
+        1px solid
+        rgba(0,223,136,.16);
+
+    border-radius:12px;
+
+    background:
+        rgba(0,223,136,.045);
+}
+
+.wallet-note-icon{
+
+    width:30px;
+    height:30px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:9px;
+
+    background:
+        rgba(0,223,136,.10);
+
+    color:var(--green);
+
+    font-size:13px;
+}
+
+.wallet-note-text{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    line-height:1.45;
+}
+
+.wallet-note-text strong{
+    color:#fff;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+    padding:
+        5px
+        0
+        22px;
+
+    color:#52667c;
+
+    font-size:9px;
+
+    text-align:center;
+}
+
+.footer strong{
+    color:#71869d;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+#loading{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9999;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#050b13;
+}
+
+.loader-box{
+
+    width:90%;
+
+    max-width:250px;
+
+    padding:20px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:15px;
+
+    background:
+        var(--surface);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
+}
+
+.spinner{
+
+    width:38px;
+    height:38px;
+
+    margin:
+        0
+        auto
+        12px;
+
+    border:
+        3px solid
+        #1d3048;
+
+    border-top-color:
+        var(--blue);
+
+    border-radius:50%;
+
+    animation:
+        spin .8s linear infinite;
+}
+
+.loader-text{
+
+    color:var(--muted);
+
+    font-size:11px;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
     }
+}
 
-    *{
-      box-sizing:border-box;
-    }
 
-    html{
-      background:#050b13;
-    }
+/* =====================================================
+   MOBILE
+===================================================== */
 
-    body{
-      margin:0;
-      min-height:100vh;
-      background:
-        radial-gradient(circle at top right, rgba(8,124,255,.10), transparent 32%),
-        radial-gradient(circle at bottom left, rgba(0,223,136,.06), transparent 30%),
-        #050b13;
-      color:var(--text);
-      font-family:Arial,Helvetica,sans-serif;
-    }
+@media(max-width:700px){
 
     .page{
-      width:100%;
-      max-width:1100px;
-      margin:0 auto;
-      padding:15px;
+        padding:13px;
     }
-
-    /* ================= HEADER ================= */
 
     header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:5px 0 20px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
+        padding-bottom:16px;
     }
 
     .brand img{
-      width:43px;
-      height:43px;
-      object-fit:contain;
-      border-radius:10px;
+        width:39px;
+        height:39px;
     }
 
     .brand-name{
-      color:#fff;
-      font-size:20px;
-      font-weight:800;
-      line-height:1.1;
+        font-size:18px;
     }
 
     .brand-sub{
-      color:var(--muted);
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:1px;
-      margin-top:4px;
+        font-size:8px;
     }
 
     .home-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:5px;
+        min-height:38px;
+        padding:
+            8px
+            11px;
 
-      padding:10px 14px;
-
-      border:1px solid var(--border);
-      border-radius:10px;
-
-      background:var(--surface);
-      color:#fff;
-
-      text-decoration:none;
-      font-size:13px;
-      font-weight:700;
-
-      transition:.2s;
-    }
-
-    .home-btn:hover{
-      border-color:var(--blue);
-      background:#10243a;
-    }
-
-    /* ================= TITLE ================= */
-
-    .title-section{
-      margin:3px 0 18px;
+        font-size:10px;
     }
 
     .title-section h1{
-      margin:0;
-      font-size:28px;
-      font-weight:800;
+        font-size:24px;
     }
 
     .title-section p{
-      margin:7px 0 0;
-      color:var(--muted);
-      font-size:13px;
+        font-size:11px;
     }
 
-    /* ================= ERROR ================= */
+    .wallet-overview{
 
-    #errorBox{
-      display:none;
+        grid-template-columns:1fr;
 
-      margin-bottom:18px;
-      padding:14px;
-
-      border:1px solid rgba(255,96,117,.35);
-      border-radius:12px;
-
-      background:rgba(255,96,117,.08);
-      color:#fff;
-
-      font-size:13px;
+        gap:12px;
     }
 
-    /* ================= BALANCE GRID ================= */
+    .main-balance,
+    .xp-card{
 
-    .balance-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:15px;
-      margin-bottom:18px;
+        min-height:165px;
+
+        padding:17px;
     }
 
-    .balance-card{
-      position:relative;
-      overflow:hidden;
-
-      min-height:150px;
-
-      padding:20px;
-
-      border:1px solid var(--border);
-      border-radius:17px;
-
-      background:
-        linear-gradient(145deg,rgba(16,29,45,.98),rgba(8,18,30,.98));
-
-      box-shadow:
-        0 10px 30px rgba(0,0,0,.22);
+    .balance-number{
+        font-size:33px;
     }
 
-    .balance-card::before{
-      content:"";
-
-      position:absolute;
-
-      width:130px;
-      height:130px;
-
-      right:-55px;
-      top:-55px;
-
-      border-radius:50%;
-
-      background:rgba(8,124,255,.10);
+    .xp-number{
+        font-size:30px;
     }
-
-    .balance-card.xp::before{
-      background:rgba(245,196,81,.10);
-    }
-
-    .balance-card::after{
-      content:"";
-
-      position:absolute;
-
-      left:0;
-      right:0;
-      bottom:0;
-
-      height:3px;
-
-      background:var(--blue);
-    }
-
-    .balance-card.xp::after{
-      background:var(--gold);
-    }
-
-    .balance-icon{
-      width:42px;
-      height:42px;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-
-      margin-bottom:13px;
-
-      border-radius:12px;
-
-      background:rgba(8,124,255,.13);
-      border:1px solid rgba(8,124,255,.25);
-
-      color:var(--blue2);
-
-      font-size:21px;
-      font-weight:800;
-    }
-
-    .xp .balance-icon{
-      background:rgba(245,196,81,.12);
-      border-color:rgba(245,196,81,.25);
-      color:var(--gold);
-    }
-
-    .balance-label{
-      color:var(--muted);
-      font-size:12px;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.7px;
-      margin-bottom:7px;
-    }
-
-    .balance-value-row{
-      display:flex;
-      align-items:baseline;
-      gap:6px;
-    }
-
-    .balance-value{
-      color:#fff;
-      font-size:31px;
-      line-height:1;
-      font-weight:900;
-    }
-
-    .balance-unit{
-      color:var(--blue2);
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .xp .balance-unit{
-      color:var(--gold);
-    }
-
-    /* ================= SECTIONS ================= */
 
     .section{
-      margin-bottom:18px;
-
-      padding:18px;
-
-      border:1px solid var(--border);
-      border-radius:16px;
-
-      background:
-        linear-gradient(145deg,rgba(12,22,36,.98),rgba(8,17,29,.98));
-
-      box-shadow:0 8px 25px rgba(0,0,0,.18);
-    }
-
-    .section-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-
-      margin-bottom:14px;
-    }
-
-    .section-title-wrap{
-      display:flex;
-      align-items:center;
-      gap:11px;
-    }
-
-    .section-icon{
-      width:37px;
-      height:37px;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-
-      flex-shrink:0;
-
-      border-radius:10px;
-
-      background:rgba(8,124,255,.12);
-      border:1px solid rgba(8,124,255,.25);
-
-      color:var(--blue2);
-
-      font-size:18px;
-    }
-
-    .xp-section .section-icon{
-      background:rgba(245,196,81,.11);
-      border-color:rgba(245,196,81,.24);
-      color:var(--gold);
+        padding:15px;
     }
 
     .section-title{
-      margin:0;
-      color:#fff;
-      font-size:17px;
-      font-weight:800;
+        font-size:14px;
     }
 
     .section-description{
-      margin:4px 0 0;
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    /* ================= HISTORY ================= */
-
-    .history-empty{
-      padding:22px 12px;
-
-      text-align:center;
-
-      border:1px dashed var(--border);
-      border-radius:12px;
-
-      background:rgba(5,11,19,.35);
-    }
-
-    .history-empty-icon{
-      font-size:25px;
-      margin-bottom:8px;
-      opacity:.8;
-    }
-
-    .history-empty strong{
-      display:block;
-      color:#fff;
-      font-size:13px;
-      margin-bottom:5px;
-    }
-
-    .history-empty span{
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    .transaction{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:12px;
-
-      padding:13px 2px;
-
-      border-bottom:1px solid rgba(29,48,72,.65);
-    }
-
-    .transaction:last-child{
-      border-bottom:none;
-    }
-
-    .transaction-left{
-      min-width:0;
-    }
-
-    .transaction-title{
-      color:#fff;
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .transaction-date{
-      margin-top:4px;
-      color:var(--muted);
-      font-size:10px;
-    }
-
-    .transaction-amount{
-      white-space:nowrap;
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .positive{
-      color:var(--green);
-    }
-
-    .negative{
-      color:var(--danger);
-    }
-
-    /* ================= ACCOUNT ================= */
-
-    .account-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:15px;
-
-      padding:13px 2px;
-
-      border-bottom:1px solid rgba(29,48,72,.65);
-    }
-
-    .account-row:last-child{
-      border-bottom:none;
-    }
-
-    .account-label{
-      color:var(--muted);
-      font-size:12px;
+        font-size:9px;
     }
 
     .account-value{
-      max-width:65%;
+        max-width:58%;
+    }
+}
 
-      text-align:right;
 
-      color:#fff;
+/* =====================================================
+   SMALL PHONES
+===================================================== */
 
-      font-size:12px;
-      font-weight:700;
+@media(max-width:380px){
 
-      overflow-wrap:anywhere;
+    .page{
+        padding:11px;
     }
 
-    /* ================= FOOTER ================= */
-
-    .footer{
-      padding:8px 0 20px;
-
-      text-align:center;
-
-      color:#52667c;
-
-      font-size:10px;
+    .brand-name{
+        font-size:16px;
     }
 
-    /* ================= LOADING ================= */
-
-    #loading{
-      position:fixed;
-      inset:0;
-
-      z-index:9999;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
-
-      background:#050b13;
+    .home-btn{
+        padding:
+            8px
+            9px;
     }
 
-    .loader-box{
-      text-align:center;
+    .title-section h1{
+        font-size:22px;
     }
 
-    .spinner{
-      width:40px;
-      height:40px;
-
-      margin:0 auto 12px;
-
-      border:3px solid #1d3048;
-      border-top-color:#087cff;
-
-      border-radius:50%;
-
-      animation:spin .8s linear infinite;
+    .balance-number{
+        font-size:30px;
     }
 
-    .loader-text{
-      color:#8ea2b8;
-      font-size:12px;
+    .xp-number{
+        font-size:28px;
     }
 
-    @keyframes spin{
-      to{
-        transform:rotate(360deg);
-      }
-    }
-
-    /* ================= MOBILE ================= */
-
-    @media(max-width:650px){
-
-      .page{
+    .section{
         padding:13px;
-      }
-
-      header{
-        padding-bottom:17px;
-      }
-
-      .brand img{
-        width:39px;
-        height:39px;
-      }
-
-      .brand-name{
-        font-size:18px;
-      }
-
-      .brand-sub{
-        font-size:9px;
-      }
-
-      .home-btn{
-        padding:9px 11px;
-        font-size:11px;
-      }
-
-      .title-section h1{
-        font-size:24px;
-      }
-
-      .title-section p{
-        font-size:12px;
-      }
-
-      .balance-grid{
-        grid-template-columns:1fr;
-        gap:12px;
-      }
-
-      .balance-card{
-        min-height:138px;
-        padding:17px;
-      }
-
-      .balance-value{
-        font-size:29px;
-      }
-
-      .section{
-        padding:15px;
-      }
-
-      .section-title{
-        font-size:15px;
-      }
-
-      .account-value{
-        max-width:60%;
-      }
     }
-  </style>
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <!-- ================= LOADING ================= -->
 
-  <div id="loading">
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div id="loading">
+
     <div class="loader-box">
-      <div class="spinner"></div>
-      <div class="loader-text">
-        Loading your ON1 Wallet...
-      </div>
+
+        <div class="spinner"></div>
+
+        <div class="loader-text">
+            Loading your ON1 Wallet...
+        </div>
+
     </div>
-  </div>
+
+</div>
 
 
-  <div class="page">
+<div class="page">
 
-    <!-- ================= HEADER ================= -->
 
-    <header>
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-      <div class="brand">
+<header>
+
+    <div class="brand">
 
         <img
-          src="../logo.png"
-          alt="ON1Ecosystem"
+            src="../logo.png"
+            alt="ON1Ecosystem"
         >
 
         <div>
-          <div class="brand-name">
-            ON1Ecosystem
-          </div>
 
-          <div class="brand-sub">
-            MEMBER WALLET
-          </div>
+            <div class="brand-name">
+                ON1Ecosystem
+            </div>
+
+            <div class="brand-sub">
+                MEMBER WALLET
+            </div>
+
         </div>
 
-      </div>
+    </div>
 
-      <a
+
+    <a
         class="home-btn"
         href="dashboard.html"
-      >
+    >
         ← Dashboard
-      </a>
+    </a>
 
-    </header>
+</header>
 
 
-    <!-- ================= TITLE ================= -->
+<!-- =====================================================
+     TITLE
+===================================================== -->
 
-    <section class="title-section">
+<section class="title-section">
 
-      <h1>
+    <h1>
         My Wallet
-      </h1>
+    </h1>
 
-      <p>
-        Manage and view your ON1Coin and ON1XP balances.
-      </p>
+    <p>
+        Your ON1Coin and ON1XP balances, activity and account details.
+    </p>
 
-    </section>
-
-
-    <!-- ================= ERROR ================= -->
-
-    <div id="errorBox"></div>
+</section>
 
 
-    <!-- ================= BALANCES ================= -->
+<!-- =====================================================
+     ERROR
+===================================================== -->
 
-    <div class="balance-grid">
+<div id="errorBox"></div>
 
-      <!-- ON1COIN -->
 
-      <div class="balance-card">
+<!-- =====================================================
+     WALLET OVERVIEW
+===================================================== -->
 
-        <div class="balance-icon">
-          ₿
+<div class="wallet-overview">
+
+
+    <!-- =================================================
+         ON1COIN MAIN BALANCE
+    ================================================== -->
+
+    <div class="main-balance">
+
+        <div class="balance-heading">
+
+            <div class="balance-heading-left">
+
+                <div class="coin-icon">
+
+                    <img
+                        src="../on1coin.png"
+                        alt="ON1Coin"
+                    >
+
+                </div>
+
+                <div>
+
+                    <div class="balance-heading-text">
+                        ON1Coin
+                    </div>
+
+                    <div class="balance-heading-sub">
+                        Digital service coin
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
+
 
         <div class="balance-label">
-          ON1Coin Balance
+            Available Balance
         </div>
 
-        <div class="balance-value-row">
 
-          <span
-            class="balance-value"
-            id="balance"
-          >
-            —
-          </span>
+        <div class="balance-number-row">
 
-          <span class="balance-unit">
-            ON1
-          </span>
+            <span
+                class="balance-number"
+                id="balance"
+            >
+                —
+            </span>
 
-        </div>
-
-      </div>
-
-
-      <!-- XP -->
-
-      <div class="balance-card xp">
-
-        <div class="balance-icon">
-          XP
-        </div>
-
-        <div class="balance-label">
-          ON1XP Balance
-        </div>
-
-        <div class="balance-value-row">
-
-          <span
-            class="balance-value"
-            id="xp"
-          >
-            —
-          </span>
-
-          <span class="balance-unit">
-            XP
-          </span>
+            <span class="balance-unit">
+                ON1
+            </span>
 
         </div>
-
-      </div>
 
     </div>
 
 
-    <!-- ================= ON1COIN HISTORY ================= -->
+    <!-- =================================================
+         XP BALANCE
+    ================================================== -->
 
-    <section class="section">
+    <div class="xp-card">
 
-      <div class="section-header">
+        <div class="xp-top">
 
-        <div class="section-title-wrap">
+            <div class="xp-icon">
+                XP
+            </div>
 
-          <div class="section-icon">
-            ₿
-          </div>
+            <div>
 
-          <div>
+                <div class="xp-title">
+                    ON1XP
+                </div>
+
+                <div class="xp-sub">
+                    Participation experience
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="balance-label">
+            Experience Balance
+        </div>
+
+
+        <div class="xp-value">
+
+            <span
+                class="xp-number"
+                id="xp"
+            >
+                —
+            </span>
+
+            <span class="xp-unit">
+                XP
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     WALLET STATUS
+===================================================== -->
+
+<div class="wallet-note">
+
+    <div class="wallet-note-icon">
+        ✓
+    </div>
+
+    <div class="wallet-note-text">
+
+        <strong>Your wallet is connected.</strong>
+        Your balances are loaded directly from your ON1Ecosystem member account.
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ADVERTISEMENT
+===================================================== -->
+
+<div class="ad-section">
+
+    <div class="ad-label">
+        Advertisement
+    </div>
+
+    <div class="ad-box">
+
+        <!-- Adsterra 300x250 -->
+        <script>
+          var atOptions = {
+            'key' : '596737d882e5e2b61fad4b39ff34ce62',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+          };
+        </script>
+
+        <script
+          src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js">
+        </script>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     ON1COIN HISTORY
+===================================================== -->
+
+<section class="section">
+
+    <div class="section-header">
+
+        <div class="section-icon">
+
+            <img
+                src="../on1coin.png"
+                alt="ON1Coin"
+                style="
+                    width:23px;
+                    height:23px;
+                    object-fit:contain;
+                "
+            >
+
+        </div>
+
+        <div>
 
             <h2 class="section-title">
-              ON1Coin History
+                ON1Coin History
             </h2>
 
             <p class="section-description">
-              Your ON1Coin transaction activity
+                Your ON1Coin transaction activity
             </p>
-
-          </div>
 
         </div>
 
-      </div>
+    </div>
 
 
-      <div id="coinHistory">
+    <div id="coinHistory">
 
         <div class="history-empty">
 
-          <div class="history-empty-icon">
-            📊
-          </div>
+            <div class="history-empty-icon">
+                ↗
+            </div>
 
-          <strong>
-            Transaction history
-          </strong>
+            <strong>
+                Transaction history
+            </strong>
 
-          <span>
-            Your verified ON1Coin transactions will appear here.
-          </span>
+            <span>
+                Your verified ON1Coin transactions will appear here.
+            </span>
 
         </div>
 
-      </div>
+    </div>
 
-    </section>
+</section>
 
 
-    <!-- ================= XP HISTORY ================= -->
+<!-- =====================================================
+     XP HISTORY
+===================================================== -->
 
-    <section class="section xp-section">
+<section class="section xp-section">
 
-      <div class="section-header">
+    <div class="section-header">
 
-        <div class="section-title-wrap">
-
-          <div class="section-icon">
+        <div class="section-icon">
             XP
-          </div>
+        </div>
 
-          <div>
+        <div>
 
             <h2 class="section-title">
-              ON1XP History
+                ON1XP History
             </h2>
 
             <p class="section-description">
-              Your XP earning activity
+                Your XP earning activity
             </p>
-
-          </div>
 
         </div>
 
-      </div>
+    </div>
 
 
-      <div id="xpHistory">
+    <div id="xpHistory">
 
         <div class="history-empty">
 
-          <div class="history-empty-icon">
-            ⭐
-          </div>
+            <div class="history-empty-icon">
+                ★
+            </div>
 
-          <strong>
-            XP activity
-          </strong>
+            <strong>
+                XP activity
+            </strong>
 
-          <span>
-            Your verified XP activity will appear here.
-          </span>
+            <span>
+                Your verified XP activity will appear here.
+            </span>
 
         </div>
 
-      </div>
+    </div>
 
-    </section>
+</section>
 
 
-    <!-- ================= ACCOUNT INFORMATION ================= -->
+<!-- =====================================================
+     ACCOUNT INFORMATION
+===================================================== -->
 
-    <section class="section">
+<section class="section account-section">
 
-      <div class="section-header">
+    <div class="section-header">
 
-        <div class="section-title-wrap">
-
-          <div class="section-icon">
+        <div class="section-icon">
             👤
-          </div>
+        </div>
 
-          <div>
+        <div>
 
             <h2 class="section-title">
-              Account Information
+                Account Information
             </h2>
 
             <p class="section-description">
-              Your ON1Ecosystem account details
+                Your ON1Ecosystem member details
             </p>
-
-          </div>
 
         </div>
 
-      </div>
-
-
-      <div class="account-row">
-
-        <span class="account-label">
-          Username
-        </span>
-
-        <span
-          class="account-value"
-          id="username"
-        >
-          —
-        </span>
-
-      </div>
-
-
-      <div class="account-row">
-
-        <span class="account-label">
-          Email
-        </span>
-
-        <span
-          class="account-value"
-          id="email"
-        >
-          —
-        </span>
-
-      </div>
-
-
-      <div class="account-row">
-
-        <span class="account-label">
-          ON1 ID
-        </span>
-
-        <span
-          class="account-value"
-          id="on1Id"
-        >
-          —
-        </span>
-
-      </div>
-
-    </section>
-
-
-    <div class="footer">
-      ON1Ecosystem · Member Wallet
     </div>
 
-  </div>
+
+    <div class="account-row">
+
+        <span class="account-label">
+            Username
+        </span>
+
+        <span
+            class="account-value"
+            id="username"
+        >
+            —
+        </span>
+
+    </div>
 
 
-  <!-- ================= FIREBASE ================= -->
+    <div class="account-row">
 
-  <script type="module">
+        <span class="account-label">
+            Email
+        </span>
 
-    import {
-      initializeApp
-    }
-    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+        <span
+            class="account-value"
+            id="email"
+        >
+            —
+        </span>
 
-
-    import {
-      getAuth,
-      onAuthStateChanged
-    }
-    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
-    import {
-      getFirestore,
-      doc,
-      getDoc
-    }
-    from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+    </div>
 
 
-    /* =========================================
-       SAME FIREBASE CONFIG AS WORKING DASHBOARD
-       ========================================= */
+    <div class="account-row">
 
-    const firebaseConfig = {
+        <span class="account-label">
+            ON1 ID
+        </span>
 
-      apiKey:
+        <span
+            class="account-value"
+            id="on1Id"
+        >
+            —
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<div class="footer">
+
+    <strong>ON1Ecosystem</strong>
+    · Member Wallet
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE IMPORTS
+===================================================== */
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+   SAME CONFIG AS WORKING DASHBOARD
+===================================================== */
+
+const firebaseConfig = {
+
+    apiKey:
         "AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
 
-      authDomain:
+    authDomain:
         "dsatechon1-c8b41.firebaseapp.com",
 
-      projectId:
+    projectId:
         "dsatechon1-c8b41",
 
-      storageBucket:
+    storageBucket:
         "dsatechon1-c8b41.firebasestorage.app",
 
-      messagingSenderId:
+    messagingSenderId:
         "5740594058",
 
-      appId:
+    appId:
         "1:5740594058:web:23fbbca5392f12db863e73"
 
-    };
+};
 
 
-    /* =========================================
-       INITIALIZE
-       ========================================= */
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
-    const app =
-      initializeApp(firebaseConfig);
-
-    const auth =
-      getAuth(app);
-
-    const db =
-      getFirestore(app);
+const app =
+    initializeApp(firebaseConfig);
 
 
-    /* =========================================
-       ELEMENTS
-       ========================================= */
-
-    const loading =
-      document.getElementById("loading");
-
-    const errorBox =
-      document.getElementById("errorBox");
-
-    const balanceEl =
-      document.getElementById("balance");
-
-    const xpEl =
-      document.getElementById("xp");
-
-    const usernameEl =
-      document.getElementById("username");
-
-    const emailEl =
-      document.getElementById("email");
-
-    const on1IdEl =
-      document.getElementById("on1Id");
+const auth =
+    getAuth(app);
 
 
-    /* =========================================
-       XP READER
-       ========================================= */
+const db =
+    getFirestore(app);
 
-    function getXP(data){
 
-      return Number(
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loading =
+    document.getElementById("loading");
+
+
+const errorBox =
+    document.getElementById("errorBox");
+
+
+const balanceEl =
+    document.getElementById("balance");
+
+
+const xpEl =
+    document.getElementById("xp");
+
+
+const usernameEl =
+    document.getElementById("username");
+
+
+const emailEl =
+    document.getElementById("email");
+
+
+const on1IdEl =
+    document.getElementById("on1Id");
+
+
+/* =====================================================
+   XP READER
+===================================================== */
+
+function getXP(data){
+
+    return Number(
 
         data.XP ??
         data.xp ??
         data.experiencePoints ??
         0
 
-      );
+    );
 
-    }
+}
 
 
-    /* =========================================
-       ON1 ID READER
-       ========================================= */
+/* =====================================================
+   ON1 ID READER
+===================================================== */
 
-    function getON1Id(data,user){
+function getON1Id(data,user){
 
-      const possibleId =
+    const possibleId =
 
         data.on1Id ||
         data.ON1Id ||
         data.on1ID;
 
 
-      if(
+    if(
 
         typeof possibleId === "string" &&
 
         /^ON1[A-Z0-9]{7}$/.test(
-          possibleId
+            possibleId
         )
 
-      ){
+    ){
 
         return possibleId;
 
-      }
+    }
 
 
-      const uidPart =
+    const uidPart =
 
         String(user.uid)
-          .toUpperCase()
-          .replace(
-            /[^A-Z0-9]/g,
-            ""
-          )
-          .slice(0,7);
+            .toUpperCase()
+            .replace(
+                /[^A-Z0-9]/g,
+                ""
+            )
+            .slice(0,7);
 
 
-      return "ON1" + uidPart;
+    return "ON1" + uidPart;
 
-    }
+}
 
 
-    /* =========================================
-       NUMBER FORMAT
-       ========================================= */
+/* =====================================================
+   NUMBER FORMAT
+===================================================== */
 
-    function formatNumber(number){
+function formatNumber(number){
 
-      return Number(
+    return Number(
         number || 0
-      ).toLocaleString(
+    ).toLocaleString(
         undefined,
         {
-          maximumFractionDigits:3
+            maximumFractionDigits:3
         }
-      );
+    );
 
-    }
+}
 
 
-    /* =========================================
-       ERROR
-       ========================================= */
+/* =====================================================
+   ERROR
+===================================================== */
 
-    function showError(message){
+function showError(message){
 
-      errorBox.textContent =
+    errorBox.textContent =
         message;
 
-      errorBox.style.display =
+    errorBox.style.display =
         "block";
 
-    }
+}
 
 
-    /* =========================================
-       LOAD USER
-       ========================================= */
+/* =====================================================
+   LOAD USER
+===================================================== */
 
-    async function loadUser(user){
+async function loadUser(user){
 
-      try{
+    try{
 
         /*
-         IMPORTANT:
+         =================================================
+         IMPORTANT
 
          THIS PAGE ONLY READS FIRESTORE.
 
          IT DOES NOT:
+
          - RESET BALANCE
          - CHANGE XP
          - CHANGE ON1COIN
          - CHANGE MINING
          - CHANGE REFERRALS
-         */
+         =================================================
+        */
+
 
         const userRef =
-          doc(
-            db,
-            "users",
-            user.uid
-          );
+            doc(
+                db,
+                "users",
+                user.uid
+            );
 
 
         const snapshot =
-          await getDoc(userRef);
+            await getDoc(userRef);
 
 
         if(!snapshot.exists()){
 
-          throw new Error(
-            "Your ON1 profile could not be found."
-          );
+            throw new Error(
+                "Your ON1 profile could not be found."
+            );
 
         }
 
 
         const data =
-          snapshot.data();
+            snapshot.data();
 
 
-        /* =========================
+        /* =================================================
            REAL ON1 BALANCE
-           ========================= */
+        ================================================= */
 
         const balance =
-          Number(
-            data.balance ?? 0
-          );
+            Number(
+                data.balance ?? 0
+            );
 
 
-        /* =========================
+        /* =================================================
            REAL XP
-           ========================= */
+        ================================================= */
 
         const xp =
-          getXP(data);
+            getXP(data);
 
 
         balanceEl.textContent =
-          formatNumber(balance);
+            formatNumber(balance);
 
 
         xpEl.textContent =
-          formatNumber(xp);
+            formatNumber(xp);
 
 
-        /* =========================
+        /* =================================================
            USERNAME
-           ========================= */
+        ================================================= */
 
         usernameEl.textContent =
 
-          data.username ||
-          data.userName ||
-          data.Username ||
-          user.displayName ||
-          "Member";
+            data.username ||
+            data.userName ||
+            data.Username ||
+            user.displayName ||
+            "Member";
 
 
-        /* =========================
+        /* =================================================
            EMAIL
-           ========================= */
+        ================================================= */
 
         emailEl.textContent =
 
-          data.email ||
-          user.email ||
-          "—";
+            data.email ||
+            user.email ||
+            "—";
 
 
-        /* =========================
+        /* =================================================
            ON1 ID
-           ========================= */
+        ================================================= */
 
         on1IdEl.textContent =
-          getON1Id(
-            data,
-            user
-          );
+            getON1Id(
+                data,
+                user
+            );
 
 
-      }catch(error){
+    }catch(error){
 
         console.error(
-          "Wallet loading error:",
-          error
+            "Wallet loading error:",
+            error
         );
 
 
         showError(
 
-          error.message ||
-          "Unable to load your wallet."
+            error.message ||
+            "Unable to load your wallet."
 
         );
 
-      }finally{
+    }finally{
 
         loading.style.display =
-          "none";
-
-      }
+            "none";
 
     }
 
+}
 
-    /* =========================================
-       AUTH STATE
-       ========================================= */
 
-    onAuthStateChanged(
+/* =====================================================
+   AUTH STATE
+===================================================== */
 
-      auth,
+onAuthStateChanged(
 
-      async user => {
+    auth,
+
+    async user => {
 
         if(!user){
 
-          window.location.href =
-            "login.html";
+            window.location.href =
+                "login.html";
 
-          return;
+            return;
 
         }
 
 
         await loadUser(user);
 
-      }
+    }
 
-    );
+);
 
 
-    /* =========================================
-       LOADING SAFETY
-       ========================================= */
+/* =====================================================
+   LOADING SAFETY
+===================================================== */
 
-    setTimeout(
+setTimeout(
 
-      () => {
+    () => {
 
         if(
 
-          loading &&
+            loading &&
 
-          loading.style.display !==
-            "none"
+            loading.style.display !==
+                "none"
 
         ){
 
-          loading.style.display =
-            "none";
+            loading.style.display =
+                "none";
 
 
-          showError(
+            showError(
 
-            "The wallet is taking too long to load. Please return to the dashboard and try again."
+                "The wallet is taking too long to load. Please return to the dashboard and try again."
 
-          );
+            );
 
         }
 
-      },
+    },
 
-      10000
+    10000
 
-    );
+);
 
-  </script>
+</script>
+
 
 </body>
 </html>
