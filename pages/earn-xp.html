@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Earn More ON1XP — ON1Ecosystem</title>
+
+<meta name="description"
+      content="Explore ways to earn more ON1XP through participation, activities and future opportunities on ON1Ecosystem.">
+
+<meta name="theme-color"
+      content="#06101d">
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    background:#050b13;
+    color:#ffffff;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    line-height:1.5;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font-family:inherit;
+}
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root{
+    --bg:#050b13;
+    --surface:#0c1624;
+    --surface2:#101d2d;
+    --border:#1d3048;
+    --blue:#087cff;
+    --blue2:#3aa0ff;
+    --green:#00df88;
+    --gold:#f5c451;
+    --text:#ffffff;
+    --muted:#8ea2b8;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    width:100%;
+    background:rgba(5,11,19,.96);
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:100;
+    backdrop-filter:blur(10px);
+}
+
+.header-inner{
+    max-width:900px;
+    margin:auto;
+    min-height:64px;
+    padding:10px 16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+}
+
+.brand img{
+    width:36px;
+    height:36px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
+.brand-text{
+    min-width:0;
+}
+
+.brand-name{
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:.3px;
+}
+
+.brand-sub{
+    margin-top:1px;
+    color:var(--muted);
+    font-size:8px;
+    font-weight:800;
+    letter-spacing:1.4px;
+}
+
+.back-btn{
+    padding:8px 11px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--surface);
+    color:#dce8f5;
+    font-size:10px;
+    font-weight:800;
+    transition:.2s ease;
+}
+
+.back-btn:hover{
+    border-color:rgba(58,160,255,.6);
+    background:var(--surface2);
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:22px 15px 35px;
+}
+
+
+/* =====================================================
+   PAGE HERO
+===================================================== */
+
+.page-hero{
+    padding:22px 18px;
+    margin-bottom:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,29,45,.98),
+            rgba(8,20,34,.98)
+        );
+
+    border:1px solid var(--border);
+    border-radius:18px;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.22);
+}
+
+.eyebrow{
+    color:var(--green);
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    margin-bottom:7px;
+}
+
+.page-title{
+    font-size:25px;
+    line-height:1.15;
+    font-weight:900;
+}
+
+.page-description{
+    margin-top:9px;
+    max-width:650px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+
+/* =====================================================
+   XP HIGHLIGHT
+===================================================== */
+
+.xp-highlight{
+    margin-top:17px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+
+    padding:14px 15px;
+
+    background:rgba(0,223,136,.055);
+    border:1px solid rgba(0,223,136,.18);
+    border-radius:13px;
+}
+
+.xp-left{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.xp-icon{
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(0,223,136,.1);
+    border:1px solid rgba(0,223,136,.22);
+
+    color:var(--green);
+    font-size:17px;
+    font-weight:900;
+}
+
+.xp-label{
+    color:var(--muted);
+    font-size:9px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+}
+
+.xp-value{
+    margin-top:2px;
+    color:#ffffff;
+    font-size:17px;
+    font-weight:900;
+}
+
+
+/* =====================================================
+   AD SECTION
+===================================================== */
+
+.section{
+    margin-top:16px;
+}
+
+.section-title{
+    margin-bottom:9px;
+    padding-left:2px;
+
+    color:#dce8f5;
+    font-size:12px;
+    font-weight:900;
+}
+
+.ad-card{
+    min-height:285px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:15px;
+
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+
+    overflow:hidden;
+}
+
+.ad-label{
+    position:absolute;
+}
+
+
+/* =====================================================
+   EARNING OPTIONS
+===================================================== */
+
+.earning-card{
+    padding:17px;
+
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+}
+
+.earning-intro{
+    color:var(--muted);
+    font-size:11px;
+    margin-bottom:14px;
+}
+
+.earning-option{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:13px;
+
+    background:rgba(16,29,45,.75);
+    border:1px solid var(--border);
+    border-radius:13px;
+
+    margin-bottom:10px;
+}
+
+.earning-option:last-child{
+    margin-bottom:0;
+}
+
+.option-icon{
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:11px;
+
+    background:#0a1727;
+    border:1px solid #203750;
+
+    font-size:17px;
+}
+
+.option-content{
+    min-width:0;
+}
+
+.option-title{
+    color:#ffffff;
+    font-size:11px;
+    font-weight:900;
+}
+
+.option-text{
+    margin-top:2px;
+    color:var(--muted);
+    font-size:9px;
+    line-height:1.45;
+}
+
+.option-status{
+    margin-left:auto;
+    flex-shrink:0;
+
+    padding:5px 7px;
+
+    border-radius:7px;
+
+    background:rgba(245,196,81,.08);
+    border:1px solid rgba(245,196,81,.2);
+
+    color:var(--gold);
+    font-size:7px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+
+/* =====================================================
+   INFORMATION CARD
+===================================================== */
+
+.info-card{
+    padding:17px;
+
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+}
+
+.info-card h2{
+    font-size:13px;
+    margin-bottom:8px;
+}
+
+.info-card p{
+    color:var(--muted);
+    font-size:10px;
+    line-height:1.7;
+}
+
+.info-list{
+    margin-top:12px;
+    display:grid;
+    gap:8px;
+}
+
+.info-item{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+
+    color:#b9c9d9;
+    font-size:10px;
+}
+
+.info-check{
+    color:var(--green);
+    font-weight:900;
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.page-actions{
+    margin-top:16px;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.action-btn{
+    min-height:56px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    padding:11px;
+
+    background:rgba(12,22,36,.94);
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    color:#dce8f5;
+    font-size:10px;
+    font-weight:900;
+    text-align:center;
+
+    box-shadow:
+        0 5px 0 #07101b,
+        0 8px 14px rgba(0,0,0,.28);
+
+    transform:translateY(0);
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        transform .12s ease,
+        box-shadow .12s ease;
+}
+
+.action-btn:hover{
+    border-color:rgba(58,160,255,.55);
+    background:rgba(16,29,45,.98);
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 7px 0 #07101b,
+        0 11px 18px rgba(0,0,0,.32);
+}
+
+.action-btn:active{
+    transform:translateY(3px);
+
+    box-shadow:
+        0 2px 0 #07101b,
+        0 4px 8px rgba(0,0,0,.25);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+    max-width:900px;
+    margin:10px auto 0;
+
+    padding:18px 15px 25px;
+
+    border-top:1px solid var(--border);
+
+    text-align:center;
+
+    color:#657b91;
+    font-size:9px;
+}
+
+.footer strong{
+    color:#8ea2b8;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:500px){
+
+    .main{
+        padding:17px 12px 30px;
+    }
+
+    .page-hero{
+        padding:19px 15px;
+    }
+
+    .page-title{
+        font-size:22px;
+    }
+
+    .xp-highlight{
+        padding:12px;
+    }
+
+    .ad-card{
+        min-height:275px;
+    }
+
+    .page-actions{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:360px){
+
+    .page-actions{
+        grid-template-columns:1fr;
+    }
+
+    .xp-value{
+        font-size:15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <a href="dashboard.html"
+           class="brand">
+
+            <img src="../logo.png"
+                 alt="DSATECHON1 Logo">
+
+            <div class="brand-text">
+
+                <div class="brand-name">
+                    ON1Ecosystem
+                </div>
+
+                <div class="brand-sub">
+                    DIGITAL ECOSYSTEM
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a href="dashboard.html"
+           class="back-btn">
+
+            ← Dashboard
+
+        </a>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- PAGE HERO -->
+
+    <section class="page-hero">
+
+        <div class="eyebrow">
+            ON1XP OPPORTUNITIES
+        </div>
+
+        <h1 class="page-title">
+            Earn More ON1XP
+        </h1>
+
+        <p class="page-description">
+            Discover participation opportunities that can help
+            you grow your ON1XP and progress within the
+            ON1Ecosystem.
+        </p>
+
+
+        <div class="xp-highlight">
+
+            <div class="xp-left">
+
+                <div class="xp-icon">
+                    XP
+                </div>
+
+                <div>
+
+                    <div class="xp-label">
+                        Your ON1XP
+                    </div>
+
+                    <div class="xp-value"
+                         id="xpBalance">
+                        Loading...
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ADSTERra
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Featured Opportunity
+        </div>
+
+        <div class="ad-card">
+
+            <script>
+              var atOptions = {
+                'key' : '596737d882e5e2b61fad4b39ff34ce62',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+              };
+            </script>
+
+            <script src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js"></script>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         EARNING OPTIONS
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="section-title">
+            Ways to Earn
+        </div>
+
+
+        <div class="earning-card">
+
+            <p class="earning-intro">
+                ON1Ecosystem is being developed step by step.
+                More ON1XP participation opportunities will be
+                introduced as the ecosystem grows.
+            </p>
+
+
+            <div class="earning-option">
+
+                <div class="option-icon">
+                    ⛏
+                </div>
+
+                <div class="option-content">
+
+                    <div class="option-title">
+                        ON1Coin Mining
+                    </div>
+
+                    <div class="option-text">
+                        Participate in the daily ON1Coin mining
+                        system and build your activity streak.
+                    </div>
+
+                </div>
+
+                <div class="option-status">
+                    Active
+                </div>
+
+            </div>
+
+
+            <div class="earning-option">
+
+                <div class="option-icon">
+                    🤝
+                </div>
+
+                <div class="option-content">
+
+                    <div class="option-title">
+                        Referral Participation
+                    </div>
+
+                    <div class="option-text">
+                        Invite people to ON1Ecosystem and help
+                        grow the community.
+                    </div>
+
+                </div>
+
+                <div class="option-status">
+                    Active
+                </div>
+
+            </div>
+
+
+            <div class="earning-option">
+
+                <div class="option-icon">
+                    🎯
+                </div>
+
+                <div class="option-content">
+
+                    <div class="option-title">
+                        Future Activities
+                    </div>
+
+                    <div class="option-text">
+                        Additional activities, campaigns and
+                        participation opportunities are planned.
+                    </div>
+
+                </div>
+
+                <div class="option-status">
+                    Coming
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ABOUT XP
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="info-card">
+
+            <h2>
+                About ON1XP
+            </h2>
+
+            <p>
+                ON1XP represents participation and experience
+                within the ON1Ecosystem. Your activity and
+                participation can contribute to your progress
+                as the ecosystem develops.
+            </p>
+
+
+            <div class="info-list">
+
+                <div class="info-item">
+
+                    <span class="info-check">
+                        ✓
+                    </span>
+
+                    <span>
+                        Participate consistently.
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-check">
+                        ✓
+                    </span>
+
+                    <span>
+                        Complete available ecosystem activities.
+                    </span>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-check">
+                        ✓
+                    </span>
+
+                    <span>
+                        Watch for new ON1XP opportunities.
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PAGE NAVIGATION
+    ================================================== -->
+
+    <section class="page-actions">
+
+        <a href="wallet.html"
+           class="action-btn">
+
+            💰 Wallet
+
+        </a>
+
+
+        <a href="profile.html"
+           class="action-btn">
+
+            👤 Your Profile
+
+        </a>
+
+
+        <a href="referral.html"
+           class="action-btn">
+
+            🤝 Referral Program
+
+        </a>
+
+
+        <a href="dashboard.html"
+           class="action-btn">
+
+            🏠 Dashboard
+
+        </a>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <strong>
+        ON1Ecosystem
+    </strong>
+
+    <br>
+
+    One Ecosystem. Multiple Solutions.
+
+    <br><br>
+
+    A DSATECHON1 initiative.
+
+</footer>
+
+
+
+<!-- =====================================================
+     FIREBASE — READ ONLY XP DISPLAY
+===================================================== -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+/* =====================================================
+   FIREBASE CONFIG
+===================================================== */
+
+const firebaseConfig = {
+    apiKey:"AIzaSyCmmOlfLVPs3oPCmFLSl8trLKNqWlo9YKs",
+    authDomain:"dsatechon1-c8b41.firebaseapp.com",
+    projectId:"dsatechon1-c8b41",
+    storageBucket:"dsatechon1-c8b41.firebasestorage.app",
+    messagingSenderId:"5740594058",
+    appId:"1:5740594058:web:23fbbca5392f12db863e73"
+};
+
+
+/* =====================================================
+   INITIALIZE FIREBASE
+===================================================== */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const xpBalance =
+    document.getElementById("xpBalance");
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+onAuthStateChanged(auth, async (user) => {
+
+    if(!user){
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    try{
+
+        const userRef =
+            doc(db,"users",user.uid);
+
+        const snapshot =
+            await getDoc(userRef);
+
+
+        if(snapshot.exists()){
+
+            const data =
+                snapshot.data();
+
+
+            const xp =
+                Number(data.xp ?? 1000);
+
+
+            xpBalance.textContent =
+                xp.toLocaleString() + " XP";
+
+        }else{
+
+            xpBalance.textContent =
+                "1,000 XP";
+
+        }
+
+
+    }catch(error){
+
+        console.error(
+            "Unable to load ON1XP:",
+            error
+        );
+
+        xpBalance.textContent =
+            "— XP";
+
+    }
+
+});
+
+</script>
+
+
+</body>
+
+</html>
