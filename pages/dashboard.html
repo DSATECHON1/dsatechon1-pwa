@@ -1,31 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>ON1 Dashboard</title>
-
-<meta name="theme-color"
-      content="#06101d">
-
-<!-- =====================================================
-     MONETAG MULTITAG
-     Verified website: dsatechon1.github.io
-     Monetag zone: 282827
-===================================================== -->
-
-<script
-    src="https://quge5.com/88/tag.min.js"
-    data-zone="282827"
-    async
-    data-cfasync="false">
-</script>
-
+<title>ON1 Dashboard</title><meta name="theme-color"
+content="#06101d">
 
 <style>
 
@@ -778,491 +755,414 @@ footer{
 
 }
 
-</style>
-
-</head>
-
-
-<body>
-
-
-<!-- =====================================================
+</style></head><body><!-- =====================================================
      LOADING
-===================================================== -->
+===================================================== --><div class="loading" id="loading"><div class="loading-box">
 
-<div class="loading" id="loading">
+    <div style="font-size:27px;">
+        ◉
+    </div>
 
-    <div class="loading-box">
+    <strong>
+        Loading ON1 Dashboard
+    </strong>
 
-        <div style="font-size:27px;">
-            ◉
-        </div>
+    <p id="loadingText">
+        Connecting to your account...
+    </p>
+
+</div>
+
+</div><div class="page"><!-- =====================================================
+     HEADER
+===================================================== --><header class="header"><a href="../index.html"
+   class="brand">
+
+    <img
+        src="../logo.png"
+        alt="ON1Ecosystem">
+
+    <div>
 
         <strong>
-            Loading ON1 Dashboard
+            ON1<span>Ecosystem</span>
         </strong>
 
-        <p id="loadingText">
-            Connecting to your account...
-        </p>
+        <small>
+            MEMBER DASHBOARD
+        </small>
+
+    </div>
+
+</a>
+
+
+<button
+    class="logout"
+    id="logoutBtn">
+
+    LOGOUT
+
+</button>
+
+</header><!-- =====================================================
+     WELCOME
+===================================================== --><section class="welcome"><h1>
+    Welcome,
+    <span id="firstName">Member</span>
+    👋
+</h1>
+
+<p>
+    Your ON1Ecosystem account and activities.
+</p>
+
+<div
+    class="welcome-bonus"
+    id="welcomeBonus">
+
+    🎁 Welcome bonus: 1,000 XP
+
+</div>
+
+</section><!-- =====================================================
+     BALANCE / XP / LEVEL
+===================================================== --><section class="stats"><div class="stat-card">
+
+    <div class="stat-label">
+        ON1Coin Balance
+    </div>
+
+    <div
+        class="stat-value coin"
+        id="balance">
+
+        0.000
 
     </div>
 
 </div>
 
 
-<div class="page">
+<div class="stat-card">
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="header">
-
-    <a href="../index.html"
-       class="brand">
-
-        <img
-            src="../logo.png"
-            alt="ON1Ecosystem">
-
-        <div>
-
-            <strong>
-                ON1<span>Ecosystem</span>
-            </strong>
-
-            <small>
-                MEMBER DASHBOARD
-            </small>
-
-        </div>
-
-    </a>
-
-
-    <button
-        class="logout"
-        id="logoutBtn">
-
-        LOGOUT
-
-    </button>
-
-</header>
-
-
-<!-- =====================================================
-     WELCOME
-===================================================== -->
-
-<section class="welcome">
-
-    <h1>
-        Welcome,
-        <span id="firstName">Member</span>
-        👋
-    </h1>
-
-    <p>
-        Your ON1Ecosystem account and activities.
-    </p>
+    <div class="stat-label">
+        Experience Points
+    </div>
 
     <div
-        class="welcome-bonus"
-        id="welcomeBonus">
+        class="stat-value xp"
+        id="xp">
 
-        🎁 Welcome bonus: 1,000 XP
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     BALANCE / XP / LEVEL
-     MOVED ABOVE MINING
-===================================================== -->
-
-<section class="stats">
-
-    <div class="stat-card">
-
-        <div class="stat-label">
-            ON1Coin Balance
-        </div>
-
-        <div
-            class="stat-value coin"
-            id="balance">
-
-            0.000
-
-        </div>
+        0
 
     </div>
 
+</div>
 
-    <div class="stat-card">
 
-        <div class="stat-label">
-            Experience Points
-        </div>
+<div class="stat-card">
 
-        <div
-            class="stat-value xp"
-            id="xp">
+    <div class="stat-label">
+        Current Level
+    </div>
 
-            0
+    <div
+        class="stat-value level"
+        id="level">
 
-        </div>
+        0
 
     </div>
 
+</div>
 
-    <div class="stat-card">
-
-        <div class="stat-label">
-            Current Level
-        </div>
-
-        <div
-            class="stat-value level"
-            id="level">
-
-            0
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
+</section><!-- =====================================================
      ON1COIN MINING
-===================================================== -->
+===================================================== --><section class="card mining-card"><div class="mining-top">
 
-<section class="card mining-card">
+    <div>
 
-    <div class="mining-top">
-
-        <div>
-
-            <div class="card-title">
-                ON1Coin Mining
-            </div>
-
-            <div class="card-subtitle">
-                Claim your 50 ON1Coin base mining
-                reward once every 24 hours.
-            </div>
-
+        <div class="card-title">
+            ON1Coin Mining
         </div>
 
-        <div class="mining-icon">
-            ⛏️
+        <div class="card-subtitle">
+            Claim your 50 ON1Coin base mining
+            reward once every 24 hours.
         </div>
 
     </div>
 
-
-    <div class="rate">
-
-        <div class="rate-number">
-            50.000
-        </div>
-
-        <div class="rate-label">
-            ON1Coin base reward / 24 hours
-        </div>
-
+    <div class="mining-icon">
+        ⛏️
     </div>
 
+</div>
 
-    <!-- ONLY MINING STREAK REMAINS -->
 
-    <div class="mining-status-row">
+<div class="rate">
 
-        <div class="mining-status-box">
+    <div class="rate-number">
+        50.000
+    </div>
 
-            <div class="mining-status-label">
-                Mining Streak
-            </div>
+    <div class="rate-label">
+        ON1Coin base reward / 24 hours
+    </div>
 
-            <div
-                class="mining-status-value"
-                id="streak">
+</div>
 
-                Day 0
 
-            </div>
+<div class="mining-status-row">
+
+    <div class="mining-status-box">
+
+        <div class="mining-status-label">
+            Mining Streak
+        </div>
+
+        <div
+            class="mining-status-value"
+            id="streak">
+
+            Day 0
 
         </div>
 
     </div>
 
-
-    <button
-        class="mine-btn"
-        id="mineBtn">
-
-        START MINING — +50 ON1
-
-    </button>
+</div>
 
 
-    <div
-        class="next-mine"
-        id="nextMine">
+<button
+    class="mine-btn"
+    id="mineBtn">
 
-        Your 24-hour mining cycle is ready.
+    START MINING — +50 ON1
 
-    </div>
-
-
-    <button
-        class="streak-btn"
-        id="streakBtn"
-        disabled>
-
-        CLAIM STREAK BONUS
-
-    </button>
+</button>
 
 
-    <div
-        class="streak-status"
-        id="streakStatus">
+<div
+    class="next-mine"
+    id="nextMine">
 
-        Claim today's base mining first.
+    Your 24-hour mining cycle is ready.
 
-    </div>
-
-
-    <div
-        class="message"
-        id="message">
-    </div>
+</div>
 
 
-    <div class="level-box">
+<button
+    class="streak-btn"
+    id="streakBtn"
+    disabled>
 
-        <div class="level-head">
+    CLAIM STREAK BONUS
 
-            <div
-                class="level-name"
-                id="levelName">
+</button>
 
-                PROGRESS TO LEVEL 1
 
-            </div>
+<div
+    class="streak-status"
+    id="streakStatus">
 
-            <div
-                class="level-xp"
-                id="levelXP">
+    Claim today's base mining first.
 
-                0 / 2,500 XP
+</div>
 
-            </div>
+
+<div
+    class="message"
+    id="message">
+</div>
+
+
+<div class="level-box">
+
+    <div class="level-head">
+
+        <div
+            class="level-name"
+            id="levelName">
+
+            PROGRESS TO LEVEL 1
 
         </div>
 
+        <div
+            class="level-xp"
+            id="levelXP">
 
-        <div class="progress">
-
-            <div
-                class="progress-bar"
-                id="progressBar">
-            </div>
+            0 / 2,500 XP
 
         </div>
 
     </div>
 
-</section>
 
+    <div class="progress">
 
-<!-- =====================================================
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
+
+    </div>
+
+</div>
+
+</section><!-- =====================================================
      ADVERTISEMENT
-===================================================== -->
-
-<section class="ads-section">
-
-    <div class="ads-title">
-        Advertisement
-    </div>
+===================================================== --><section class="ads-section"><div class="ads-title">
+    Advertisement
+</div>
 
 
-    <div class="adsterra-box">
+<div class="adsterra-box">
 
-        <div class="adsterra-inner">
+    <div class="adsterra-inner">
 
-            <script>
+        <script>
 
-                var atOptions = {
+            var atOptions = {
 
-                    'key' :
-                    '596737d882e5e2b61fad4b39ff34ce62',
+                'key' :
+                '596737d882e5e2b61fad4b39ff34ce62',
 
-                    'format' :
-                    'iframe',
+                'format' :
+                'iframe',
 
-                    'height' :
-                    250,
+                'height' :
+                250,
 
-                    'width' :
-                    300,
+                'width' :
+                300,
 
-                    'params' :
-                    {}
+                'params' :
+                {}
 
-                };
+            };
 
-            </script>
+        </script>
 
 
-            <script
-                src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js">
-            </script>
-
-        </div>
+        <script
+            src="https://www.highrevenueformat.com/596737d882e5e2b61fad4b39ff34ce62/invoke.js">
+        </script>
 
     </div>
 
+</div>
 
-    <!-- =================================================
-         COMPACT CPX
-    ================================================== -->
 
-    <div class="cpx-title">
-        🎯 Earn More ON1XP
+<!-- =================================================
+     COMPACT CPX
+================================================== -->
+
+<div class="cpx-title">
+    🎯 Earn More ON1XP
+</div>
+
+
+<div class="cpx-compact">
+
+    <div class="cpx-compact-icon">
+        🎯
     </div>
 
 
-    <div class="cpx-compact">
+    <div class="cpx-compact-content">
 
-        <div class="cpx-compact-icon">
-            🎯
-        </div>
-
-
-        <div class="cpx-compact-content">
-
-            <strong>
-                Surveys & Offers
-            </strong>
-
-            <span>
-                Complete available surveys and earn ON1XP.
-            </span>
-
-        </div>
-
-
-        <a
-            href="earn-xp.html"
-            class="cpx-compact-btn">
-
-            EARN ON1XP
-
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     APP NAVIGATION
-===================================================== -->
-
-<nav class="app-nav">
-
-
-    <a
-        href="wallet.html"
-        class="app-nav-btn">
-
-        <span class="app-nav-icon">
-            💰
-        </span>
+        <strong>
+            Surveys & Offers
+        </strong>
 
         <span>
-            Wallet
+            Complete available surveys and earn ON1XP.
         </span>
 
-    </a>
-
-
-    <a
-        href="profile.html"
-        class="app-nav-btn">
-
-        <span class="app-nav-icon">
-            👤
-        </span>
-
-        <span>
-            Your Profile
-        </span>
-
-    </a>
-
-
-    <a
-        href="referral.html"
-        class="app-nav-btn">
-
-        <span class="app-nav-icon">
-            🤝
-        </span>
-
-        <span>
-            Referral Program
-        </span>
-
-    </a>
+    </div>
 
 
     <a
         href="earn-xp.html"
-        class="app-nav-btn xp">
+        class="cpx-compact-btn">
 
-        <span class="app-nav-icon">
-            🎯
-        </span>
-
-        <span>
-            Earn More ON1XP
-        </span>
+        EARN ON1XP
 
     </a>
 
-
-</nav>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    ON1Ecosystem — One Ecosystem. Multiple Solutions.
-
-</footer>
-
-
 </div>
 
+</section><!-- =====================================================
+     APP NAVIGATION
+===================================================== --><nav class="app-nav"><a
+    href="wallet.html"
+    class="app-nav-btn">
 
-<!-- =====================================================
+    <span class="app-nav-icon">
+        💰
+    </span>
+
+    <span>
+        Wallet
+    </span>
+
+</a>
+
+
+<a
+    href="profile.html"
+    class="app-nav-btn">
+
+    <span class="app-nav-icon">
+        👤
+    </span>
+
+    <span>
+        Your Profile
+    </span>
+
+</a>
+
+
+<a
+    href="referral.html"
+    class="app-nav-btn">
+
+    <span class="app-nav-icon">
+        🤝
+    </span>
+
+    <span>
+        Referral Program
+    </span>
+
+</a>
+
+
+<a
+    href="earn-xp.html"
+    class="app-nav-btn xp">
+
+    <span class="app-nav-icon">
+        🎯
+    </span>
+
+    <span>
+        Earn More ON1XP
+    </span>
+
+</a>
+
+</nav><!-- =====================================================
+     FOOTER
+===================================================== --><footer>ON1Ecosystem — One Ecosystem. Multiple Solutions.
+
+</footer></div><!-- =====================================================
      FIREBASE
-===================================================== -->
-
-<script type="module">
+===================================================== --><script type="module">
 
 /* =====================================================
    FIREBASE IMPORTS
@@ -2270,9 +2170,4 @@ setTimeout(
     10000
 );
 
-</script>
-
-
-</body>
-
-</html>
+</script></body></html>
